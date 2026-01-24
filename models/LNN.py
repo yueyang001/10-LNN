@@ -1,3 +1,7 @@
+import warnings
+warnings.filterwarnings('ignore')
+
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -693,7 +697,7 @@ class AutoNCP(NCP):
         units,
         output_size,
         sparsity_level=0.5,
-        seed=22222,
+        seed=7,
     ):
         """只需指定神经元总数和输出数量即可实例化 NCP 接线
 
@@ -734,94 +738,201 @@ class AutoNCP(NCP):
         )
 
 
-class AudioCfC(torch.nn.Module):
-    def __init__(self, num_classes=4):
+# 注意力统计池化 (Attentive Statistics Pooling, ASP)
+class AttentiveStatisticsPooling(nn.Module):
+    def __init__(self, input_dim, bottleneck_dim=32):
+        super().__init__()
+        self.statistical_attention = nn.Sequential(
+            nn.Conv1d(input_dim, bottleneck_dim, kernel_size=1),
+            nn.Tanh(),
+            nn.Conv1d(bottleneck_dim, input_dim, kernel_size=1),
+            nn.Softmax(dim=2)
+        )
+
+    # Input: (B, C, T) / Output: (B, 2*C)
+    def forward(self, x):
+        alpha = self.statistical_attention(x)
+        mean = torch.sum(alpha * x, dim=2)
+        residuals = x - mean.unsqueeze(2)
+        standard_deviation = torch.sum(alpha * (residuals ** 2), dim=2)
+        std = torch.sqrt(torch.clamp(standard_deviation, min=1e-6))
+        return torch.cat([mean, std], dim=1)
+
+
+# 双分辨率池化 (Dual-Resolution Pooling, DRASP)
+class DRASP(nn.Module):
+    def __init__(self, input_dim, segment_len=5):
+        super().__init__()
+        self.input_dim = input_dim
+        self.segment_len = segment_len
+        # Global Branch: Focus on overall acoustic features
+        self.global_asp = AttentiveStatisticsPooling(input_dim)
+        # Local Branch: Focus on transient events
+        self.local_asp = AttentiveStatisticsPooling(input_dim, bottleneck_dim=16)
+
+    # Input: (B, C, T) / Output: (B, 4*C)
+    def forward(self, x):
+        B, C, T = x.shape
+        # Global Stats (B, 2C)
+        global_stats = self.global_asp(x)
+        # Local Stats (B, 2C)
+        pad_len = (self.segment_len - (T % self.segment_len)) % self.segment_len
+        x_pad = F.pad(x, (0, pad_len)) if pad_len > 0 else x
+        # Segmentation: (B, C, T_pad) -> (B, C, N_seg, Seg_Len) -> (B * N_seg, C, Seg_Len)
+        x_segmented = x_pad.view(B, C, -1, self.segment_len).permute(0, 2, 1, 3).reshape(-1, C, self.segment_len)
+        # Apply ASP to each segment -> (B * N_seg, 2C)
+        local_stats_all = self.local_asp(x_segmented)
+        # Aggregation: (B, N_seg, 2C)
+        local_stats_view = local_stats_all.view(B, -1, 2 * C)
+        # Max Pooling: Extract the most prominent segment features (highlight moments)
+        local_stats_max, _ = torch.max(local_stats_view, dim=1)
+        return torch.cat([global_stats, local_stats_max], dim=1)
+
+
+# 双向并行交叉切片CfC (Bidirectional Parallel Cross-Slice CfC, BPCSCfC)
+class BiParallelCrossSliceCfC(nn.Module):
+    def __init__(self, input_size, wiring_units, output_size, seq_len, window_size):
+        super(BiParallelCrossSliceCfC, self).__init__()
+        self.seq_len = seq_len
+        self.window_size = window_size
+        self.num_windows = seq_len // window_size
+        # AutoNCP: automatically generate sparse connections
+        self.fwd_local_wiring = AutoNCP(wiring_units, output_size)
+        self.fwd_local_cfc = CfC(input_size, self.fwd_local_wiring, return_sequences=True, batch_first=True)
+        self.fwd_global_wiring = AutoNCP(wiring_units, output_size)
+        self.fwd_global_cfc = CfC(input_size, self.fwd_global_wiring, return_sequences=True, batch_first=True)
+        self.bwd_local_wiring = AutoNCP(wiring_units, output_size)
+        self.bwd_local_cfc = CfC(input_size, self.bwd_local_wiring, return_sequences=True, batch_first=True)
+        self.bwd_global_wiring = AutoNCP(wiring_units, output_size)
+        self.bwd_global_cfc = CfC(input_size, self.bwd_global_wiring, return_sequences=True, batch_first=True)
+        # Temporal fusion: [forward local, forward global, backward local, backward global]
+        self.fusion = nn.Linear(output_size * 4, output_size)
+        self.layer_norm = nn.LayerNorm(output_size)
+        self.act = nn.GELU()
+
+    def _process_stream(self, x, local_cfc, global_cfc):
+        B, L, C = x.shape
+        W, N = self.window_size, self.num_windows
+        # Local Branch
+        x_local = x.view(B, N, W, C).reshape(B * N, W, C)
+        out_local, _ = local_cfc(x_local)
+        out_local = out_local.reshape(B, N, W, -1).view(B, L, -1)
+        # Global Branch
+        x_global = x.view(B, N, W, C).permute(0, 2, 1, 3).reshape(B * W, N, C)
+        out_global, _ = global_cfc(x_global)
+        out_global = out_global.reshape(B, W, N, -1).permute(0, 2, 1, 3).reshape(B, L, -1)
+        return out_local, out_global
+
+    def forward(self, x):
+        x_flipped = torch.flip(x, [1])
+        fwd_local, fwd_global = self._process_stream(x, self.fwd_local_cfc, self.fwd_global_cfc)
+        bwd_local_flipped, bwd_global_flipped = self._process_stream(x_flipped, self.bwd_local_cfc, self.bwd_global_cfc)
+        bwd_local = torch.flip(bwd_local_flipped, [1])
+        bwd_global = torch.flip(bwd_global_flipped, [1])
+        merged = torch.cat([fwd_local, fwd_global, bwd_local, bwd_global], dim=-1)
+        return self.act(self.layer_norm(self.fusion(merged)))    
+
+
+# Audio Student
+class AudioCfC(nn.Module):
+    def __init__(self, num_classes=5):
         super(AudioCfC, self).__init__()
         self.audio_encoder = nn.Sequential(
             nn.BatchNorm1d(1),
             nn.Conv1d(1, 32, kernel_size=7, stride=3, padding=3),
-            nn.BatchNorm1d(32),
-            nn.LeakyReLU(negative_slope=0.1, inplace=True),
-            nn.MaxPool1d(2),
+            nn.BatchNorm1d(32), nn.LeakyReLU(0.1, True), nn.AvgPool1d(2),
             nn.Conv1d(32, 64, kernel_size=5, stride=2, padding=2),
-            nn.BatchNorm1d(64),
-            nn.LeakyReLU(negative_slope=0.1, inplace=True),
-            nn.MaxPool1d(4),
+            nn.BatchNorm1d(64), nn.LeakyReLU(0.1, True), nn.AvgPool1d(3),
+            nn.Conv1d(64, 64, kernel_size=3, stride=2, padding=1),
+            nn.BatchNorm1d(64), nn.LeakyReLU(0.1, True), nn.AvgPool1d(4),
+            nn.Conv1d(64, 64, kernel_size=3, stride=2, padding=1),
+            nn.BatchNorm1d(64), nn.LeakyReLU(0.1, True), nn.AvgPool1d(5),
             nn.Conv1d(64, 64, kernel_size=3, stride=1, padding=1),
-            nn.BatchNorm1d(64),
-            nn.LeakyReLU(negative_slope=0.1, inplace=True),
-            nn.MaxPool1d(4),
-            nn.Conv1d(64, 64, kernel_size=3, stride=1, padding=1),
-            nn.BatchNorm1d(64),
-            nn.LeakyReLU(negative_slope=0.1, inplace=True),
+            nn.BatchNorm1d(64), nn.LeakyReLU(0.1, True))
+        
+        self.encoder_out_dim = 64
+        self.seq_len=16
+        self.window_size=4
+        self.p_encoder=0.2
+        self.p_classifier=0.3
+        
+        self.encoder_dropout = nn.Dropout(self.p_encoder)
+        
+        # Bidirectional Parallel Cross-Slice CfC
+        self.bi_parallel_cfc = BiParallelCrossSliceCfC(
+            input_size=self.encoder_out_dim,
+            wiring_units=self.encoder_out_dim * 2,
+            output_size=self.encoder_out_dim,
+            seq_len=self.seq_len,
+            window_size=self.window_size
         )
         
-        self.dropout = nn.Dropout(0.2)
-
-        wiring1 = AutoNCP(128, 64)
-        self.rnn1 = CfC(64, wiring1, return_sequences=True)
-        # 'last', 'mean', 'max'
-        self.pooling = 'mean'  
+        # Dual-Resolution Pooling
+        self.drasp = DRASP(input_dim=self.encoder_out_dim, segment_len=self.window_size)
         
-        self.head = nn.Sequential(
-            nn.Linear(64, 16),
-            nn.ReLU(inplace=True),
-            nn.Dropout(0.2),
-            nn.Linear(16, num_classes)
-        )
+        self.classifier = nn.Sequential(
+            nn.Linear(self.encoder_out_dim * 4, 64),
+            nn.LayerNorm(64), nn.GELU(), nn.Dropout(self.p_classifier),
+            nn.Linear(64, num_classes))
 
     def forward(self, x):
-        # (B, 1, 48000) -> (B, 64, 250)
-        x = self.audio_encoder(x)
-        # (B, 64, 250) -> (B, 250, 64) [batch, seq_len, features]
-        x = x.permute(0, 2, 1)
-        
-        x = self.dropout(x)
-        
-        # (B, 250, 64) -> (B, 250, 64)
-        h0 = torch.zeros(x.size(0), self.rnn1.state_size, device=x.device)
-        sequence_output, hidden_ = self.rnn1(x, h0)
-        
-        # (B, 250, 64) -> (B, 64)
-        if self.pooling == 'last':
-            out = sequence_output[:, -1, :] 
-        elif self.pooling == 'mean':
-            out = sequence_output.mean(dim=1)
-        elif self.pooling == 'max':
-            out = sequence_output.max(dim=1)[0] 
-        
-        # (B, 64) -> (B, num_classes)
-        out = self.head(out)
-        
-        # 从WiredCfC获取所有层的隐藏状态
-        all_layer_hidden_states = None
-        if hasattr(self.rnn1.rnn_cell, '_layers'):
-            # 对于WiredCfC，获取每一层的隐藏状态
-            # 由于我们在每个时间步都记录了隐藏状态，所以需要从最终状态重构
-            wired_cell = self.rnn1.rnn_cell
-            # 获取层数
-            num_layers = wired_cell.num_layers
-            layer_sizes = wired_cell.layer_sizes
-            
-            # 从最终的hidden_状态分解出各层的隐藏状态
-            # hidden_的形状是 [B, total_hidden_size]，我们需要按层分解
-            layer_hidden_states = torch.split(hidden_, layer_sizes, dim=1)
-            
-            # 由于各层隐藏状态大小可能不同，将它们作为列表返回而不是堆叠
-            # 这样可以保持每层的真实结构
-            all_layer_hidden_states = layer_hidden_states
-        
-        return out, sequence_output, all_layer_hidden_states
+        # x: (B, 1, 48000)
+        x = self.audio_encoder(x) # -> (B, 16, 64)
+        x = x.permute(0, 2, 1) # -> (B, 64, 16)
+        x = self.encoder_dropout(x)
+        seq_features = self.bi_parallel_cfc(x) 
+        pooled_features = self.drasp(seq_features.permute(0, 2, 1))
+        out = self.classifier(pooled_features)
+        return out, seq_features
 
 
 if __name__ == "__main__":
     model = AudioCfC()
     x = torch.randn(1, 1, 48000)  # (batch, time, features)
-    output, hn, all_layer_hidden_states = model(x)
+    output, hn = model(x)
     print(f"输入形状: {x.shape}")
     print(f"输出形状: {output.shape}")
     print(f"最终隐藏状态形状: {hn.shape}")
-    if all_layer_hidden_states is not None:
-        print(f"所有层隐藏状态形状: {all_layer_hidden_states.shape}")  # [num_layers, B, hidden_size_per_layer]
-    else:
-        print("所有层隐藏状态: None")
+    
+    model.eval()
+    from ptflops import get_model_complexity_info
+    input_res = (1,48000)
+    macs, params = get_model_complexity_info(model, input_res, as_strings=True, print_per_layer_stat=False)
+    print(f"模型 FLOPs: {macs}")
+    print(f"模型参数量: {params}")
+    print('#'*80)
+    import fvcore
+    from fvcore.nn import FlopCountAnalysis,parameter_count_table,parameter_count
+    input_res = torch.randn(1,1,48000)
+    # 计算 FLOPs
+    flops = FlopCountAnalysis(model, input_res)
+    print("FLOPs: ", flops.total())
+    print(f"FLOPs: {flops.total() / 1e9:.2f} G")
+    flops_m = flops.total() / 1e6
+    print(f"FLOPs: {flops_m:.2f} M")
+    
+    # 计算参数量
+    params = parameter_count_table(model)
+    total_params = parameter_count(model)['']
+    params_k = total_params / 1e3
+    print(f"Params: {params_k:.2f} K")
+
+    import time
+    device = torch.device("cuda:4")
+    model.to(device)
+    input_tensor = torch.randn(1,1,48000).to(device)
+    num_runs = 100
+    total_time = 0
+    for _ in range(10):
+        _ = model(input_tensor)
+    torch.cuda.synchronize()  
+    start_time = time.time()
+    for _ in range(num_runs):
+        _ = model(input_tensor)
+    torch.cuda.synchronize()  
+    end_time = time.time()
+    total_time = end_time - start_time
+    average_infer_time = total_time / num_runs
+    print(f"Average inference time: {average_infer_time * 1000:.2f} ms")
+
+
