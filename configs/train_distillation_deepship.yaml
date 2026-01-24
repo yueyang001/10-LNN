@@ -1,0 +1,52 @@
+# 训练配置
+training:
+  num_epochs: 100
+  batch_size: 32
+  # batch_size: 4
+  lr: 1e-3
+  weight_decay: 0.01
+  seed: 42
+  log_interval: 20
+
+# 蒸馏配置
+distillation:
+  temperature: 2.0
+  alpha: 0.3
+  learnable_alpha: true
+  # distill_type: 'kl'
+  distill_type: 'base'
+  weight_type: 'uniform'
+
+# 模型配置
+model:
+  num_classes: 4
+  # 教师网络 (Wav2Vec2)
+  teacher:
+    pretrained: true
+    freeze: true
+    checkpoint_path: '/media/hdd1/fubohan/Code/UATR/models/Audio_Teacher_DeepShip_622/checkpoints/Student.pth'
+    # checkpoint_path: '/media/hdd1/fubohan/Code/UATR/models/Audio_Teacher_ShipsEar_622/checkpoints/Student.pth'
+  # 学生网络 (LNN AudioCfC) - 使用默认参数
+
+# 数据集配置 (与 train.py 保持一致)
+dataset:
+  data_dir: '/media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip_622'
+  # data_dir: '/media/hdd1/chuxiaohui/AI4Ocean_UATR/ShipsEar_622'
+  data_type: 'wav_s@wav_t'  # wav / mel / cqt / wav@mel@cqt
+  num_workers: 4
+  # 4 个“子进程”并行工作
+
+# 分布式配置
+distributed:
+  master_addr: 'localhost'
+  master_port: '12359'
+  backend: 'nccl'
+  gpu_ids: [4,5, 6, 7]  # 默认使用的 GPU
+
+# 保存配置
+save:
+  # save_dir: 'checkpoints/DeepShip/distillation_weighted_sum'
+  # save_dir: 'checkpoints/ShipsEar/distillation_weighted_sum'
+  # save_dir: 'checkpoints/DeepShip/distillation_base'
+  save_dir: 'checkpoints/DeepShip/distillation_base_1'
+  save_interval: 10

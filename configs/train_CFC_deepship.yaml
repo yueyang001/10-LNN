@@ -1,0 +1,32 @@
+# 数据集配置
+dataset:
+  data_dir: '/media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip_622'
+  data_type: 'wav'  # wav / mel / cqt / wav@mel@cqt
+  num_workers: 4
+
+# 模型配置
+model:
+  input_dim: 1
+  num_classes: 4
+
+# 训练配置
+train:
+  batch_size: 32
+  epochs: 50
+  lr: 1.0e-4
+  weight_decay: 1.0e-4
+  log_interval: 10
+  step_size: 10
+  gamma: 0.01
+
+# 分布式训练配置
+distributed:
+  master_addr: 'localhost'
+  master_port: '12355'
+  backend: 'nccl'
+  gpu_ids: [4, 5, 6, 7]
+
+# 保存配置
+save:
+  save_dir: 'checkpoints/Audio_con1d_encoder_deepship'
+  save_interval: 10
