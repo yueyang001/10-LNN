@@ -13,7 +13,7 @@ class CfC(nn.Module):
     def __init__(
         self,
         input_size: Union[int, "Wiring"],
-        units,
+        units,# unit=self.fwd_local_wiring
         proj_size: Optional[int] = None,
         return_sequences: bool = True,
         batch_first: bool = True,
@@ -393,7 +393,7 @@ class CfCCell(nn.Module):
                 * ff1
                 + self.A
             )
-        else:
+        else:# default
             # CfC 模式
             if self.sparsity_mask is not None:
                 ff2 = F.linear(x, self.ff2.weight * self.sparsity_mask, self.ff2.bias)
@@ -406,7 +406,7 @@ class CfCCell(nn.Module):
             t_interp = self.sigmoid(t_a * ts + t_b)
             if self.mode == "no_gate":
                 new_hidden = ff1 + t_interp * ff2
-            else:
+            else:# self.mode == "default":
                 new_hidden = ff1 * (1.0 - t_interp) + t_interp * ff2
         return new_hidden, new_hidden
 
@@ -798,7 +798,7 @@ class BiParallelCrossSliceCfC(nn.Module):
         self.num_windows = seq_len // window_size
         # AutoNCP: automatically generate sparse connections
         self.fwd_local_wiring = AutoNCP(wiring_units, output_size)
-        self.fwd_local_cfc = CfC(input_size, self.fwd_local_wiring, return_sequences=True, batch_first=True)
+        self.fwd_local_cfc = CfC(input_size, self.fwd_local_wiring, return_sequences=True, batch_first=True) # 把布线模式放到 CfC 里
         self.fwd_global_wiring = AutoNCP(wiring_units, output_size)
         self.fwd_global_cfc = CfC(input_size, self.fwd_global_wiring, return_sequences=True, batch_first=True)
         self.bwd_local_wiring = AutoNCP(wiring_units, output_size)
@@ -836,11 +836,12 @@ class BiParallelCrossSliceCfC(nn.Module):
 # Audio Student
 class AudioCfC(nn.Module):
     def __init__(self, num_classes=5):
+        # num_classes 指定最终分类的数量（默认为 5 类）
         super(AudioCfC, self).__init__()
-        self.audio_encoder = nn.Sequential(
-            nn.BatchNorm1d(1),
-            nn.Conv1d(1, 32, kernel_size=7, stride=3, padding=3),
-            nn.BatchNorm1d(32), nn.LeakyReLU(0.1, True), nn.AvgPool1d(2),
+        self.audio_encoder = nn.Sequential(# nn.Sequential 模块用于将多个层组合在一起，自动按照顺序forward
+            nn.BatchNorm1d(1),# 对输入的单声道音频进行归一化
+            nn.Conv1d(1, 32, kernel_size=7, stride=3, padding=3),# 将通道数从1提升为32，实现一次下采样
+            nn.BatchNorm1d(32), nn.LeakyReLU(0.1, True), nn.AvgPool1d(2),# 对32维特征归一化，激活保留负值，AvgPool1d(2)平均池化将序列长度减半
             nn.Conv1d(32, 64, kernel_size=5, stride=2, padding=2),
             nn.BatchNorm1d(64), nn.LeakyReLU(0.1, True), nn.AvgPool1d(3),
             nn.Conv1d(64, 64, kernel_size=3, stride=2, padding=1),
@@ -850,13 +851,13 @@ class AudioCfC(nn.Module):
             nn.Conv1d(64, 64, kernel_size=3, stride=1, padding=1),
             nn.BatchNorm1d(64), nn.LeakyReLU(0.1, True))
         
-        self.encoder_out_dim = 64
-        self.seq_len=16
-        self.window_size=4
-        self.p_encoder=0.2
-        self.p_classifier=0.3
+        self.encoder_out_dim = 64 # 编码器输出维度为64
+        self.seq_len=16 # 序列长度为16
+        self.window_size=4 # 每个窗口包含4个时间步
+        self.p_encoder=0.2 # 编码器的 dropout 概率
+        self.p_classifier=0.3 # 分类器的 dropout 概率
         
-        self.encoder_dropout = nn.Dropout(self.p_encoder)
+        self.encoder_dropout = nn.Dropout(self.p_encoder) # 编码器的 dropout 层
         
         # Bidirectional Parallel Cross-Slice CfC
         self.bi_parallel_cfc = BiParallelCrossSliceCfC(
@@ -878,7 +879,8 @@ class AudioCfC(nn.Module):
     def forward(self, x):
         # x: (B, 1, 48000)
         x = self.audio_encoder(x) # -> (B, 16, 64)
-        x = x.permute(0, 2, 1) # -> (B, 64, 16)
+        print(f"编码器输出形状: {x.shape}") # -> (B, 64, 16)
+        x = x.permute(0, 2, 1) # -> (B, 64, 16) -> (B, 16, 64)
         x = self.encoder_dropout(x)
         seq_features = self.bi_parallel_cfc(x) 
         pooled_features = self.drasp(seq_features.permute(0, 2, 1))
@@ -901,7 +903,7 @@ if __name__ == "__main__":
     print(f"模型 FLOPs: {macs}")
     print(f"模型参数量: {params}")
     print('#'*80)
-    import fvcore
+    # import fvcore
     from fvcore.nn import FlopCountAnalysis,parameter_count_table,parameter_count
     input_res = torch.randn(1,1,48000)
     # 计算 FLOPs
