@@ -872,9 +872,9 @@ class AudioCfC(nn.Module):
         self.drasp = DRASP(input_dim=self.encoder_out_dim, segment_len=self.window_size)
         
         self.classifier = nn.Sequential(
-            nn.Linear(self.encoder_out_dim * 4, 64),
-            nn.LayerNorm(64), nn.GELU(), nn.Dropout(self.p_classifier),
-            nn.Linear(64, num_classes))
+            nn.Linear(self.encoder_out_dim * 4, 64),# 256->64
+            nn.LayerNorm(64), nn.GELU(), nn.Dropout(self.p_classifier), # 激活
+            nn.Linear(64, num_classes)) # 64->5 num_classes=51
 
     def forward(self, x):
         # x: (B, 1, 48000)
