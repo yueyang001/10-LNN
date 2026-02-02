@@ -14,6 +14,7 @@ from torch.utils.data.distributed import DistributedSampler
 
 # from models.CFC import AudioCfC
 from models.Audio_TeacherNet import build_Audio_TeacherNet
+# from models.LNN import AudioCfC
 from utils.distillation_loss import DistillationLoss
 from datasets.audio_dataset import AudioDataset, train_transform, validation_test_transform
 from models.distillation import AudioDistillationModel
@@ -170,7 +171,8 @@ class DistillationTrainer:
             #     inputs = torch.nan_to_num(inputs, nan=0.0, posinf=1.0, neginf=-1.0)
             
             # 前向传播
-            student_logits, stu_seq_logits, teacher_logits = self.model(inputs)
+            # student_logits, stu_seq_logits, teacher_logits = self.model(inputs)
+            student_logits, stu_seq_logits, fl, fg, bl, bg, x_encoder, teacher_logits, output_cnn_features, teacher_all_hidden_states = self.model(inputs)
             
             # 检查输出是否有异常值
             if torch.isnan(student_logits).any() or torch.isinf(student_logits).any():
@@ -178,8 +180,9 @@ class DistillationTrainer:
                 continue
             
             # 计算损失
-            loss, hard_loss, soft_loss, alpha, beta = self.criterion(
-                student_logits, stu_seq_logits, teacher_logits, labels
+            loss, hard_loss, soft_loss, alpha, beta, memkd_weight = self.criterion(
+                # student_logits, stu_seq_logits, teacher_logits, labels
+                student_logits, stu_seq_logits, fl, fg, bl, bg, x_encoder, teacher_logits, output_cnn_features, labels, teacher_all_hidden_states
             )
             
             # 检查 loss 是否有异常值
@@ -213,7 +216,8 @@ class DistillationTrainer:
                     Loss: {loss.item():.4f}, Hard: {hard_loss.item():.4f}, Soft: {soft_loss.item():.4f} \
                     Acc: {100.*correct/total:.2f}% LR: {current_lr:.6f} \
                     Alpha: {alpha} \
-                    Beta: {beta} '
+                    Beta: {beta} \
+                    MemKD: {memkd_weight}'
                 )
         
         metrics = {
@@ -255,7 +259,8 @@ class DistillationTrainer:
                 if torch.isnan(inputs).any() or torch.isinf(inputs).any():
                     inputs = torch.nan_to_num(inputs, nan=0.0, posinf=1.0, neginf=-1.0)
             # 仅使用学生网络
-            student_logits, _, _ = self.model(inputs)
+            # student_logits, _, _ = self.model(inputs)
+            student_logits, stu_seq_logits, fl, fg, bl, bg, x_encoder, teacher_logits, output_cnn_features,teacher_all_hidden_states = self.model(inputs)
             
             # 检查输出
             if torch.isnan(student_logits).any() or torch.isinf(student_logits).any():
@@ -446,7 +451,8 @@ def main_worker(rank: int, world_size: int, config: dict, gpu_ids: list):
         learnable_alpha=config['distillation'].get('learnable_alpha', False),
         weight_type=config['distillation'].get('weight_type', 'uniform'),
         distill_type=config['distillation'].get('distill_type', 'kl'),
-        seq_len=config['model'].get('stu_seq_len', 250),
+        # seq_len=config['model'].get('stu_seq_len', 250),
+        seq_len=config['model'].get('stu_seq_len', 16),
         # yaml写了就用yaml的值，没写就使用这里默认的值
     ).to(device)
     
