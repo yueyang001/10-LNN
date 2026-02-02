@@ -476,11 +476,28 @@ class DistillationLoss(nn.Module):
         return weights
     
     def _compute_kl_loss(self, student_logits, teacher_logits):
-        """计算 KL 散度损失"""
-        soft_teacher = F.softmax(teacher_logits / self.temperature, dim=-1)
-        soft_student = F.log_softmax(student_logits / self.temperature, dim=-1)
+        """
+        应用 Logit Standardization (Norm-KD) 后的 KL 散度计算
+        注意：此时不再使用 self.temperature
+        """
+        # 1. 对教师和学生 Logit 分别进行标准化 (Z-score)
+        # dim=-1 表示在类别（num_classes）维度上计算
+        def logit_std(x):
+            return (x - x.mean(dim=-1, keepdim=True)) / (x.std(dim=-1, keepdim=True) + 1e-5)
+
+        std_student = logit_std(student_logits)
+        std_teacher = logit_std(teacher_logits)
+
+        # 2. 计算 Softmax (标准化过程已隐含了自适应温度控制)
+        soft_teacher = F.softmax(std_teacher, dim=-1)
+        soft_student = F.log_softmax(std_student, dim=-1)
+
+        # 3. 计算 KL 散度
         kl_loss = F.kl_div(soft_student, soft_teacher, reduction='batchmean')
-        return kl_loss * (self.temperature ** 2)
+
+        # 4. 关键点：不再乘 (self.temperature ** 2)
+        # 论文实验表明，标准化后量级已对齐，通常直接返回 kl_loss 即可
+        return kl_loss
     
     def _compute_mse_loss(self, student_logits, teacher_logits):
         """计算 MSE 损失"""
@@ -537,6 +554,15 @@ class DistillationLoss(nn.Module):
         
         return loss
     
+    def _logit_standardization(self, logits, dim=-1):
+        """
+        Logit Standardization (Z-score) 预处理
+        公式: (x - mean) / std
+        """
+        mean = logits.mean(dim=dim, keepdim=True)
+        std = logits.std(dim=dim, keepdim=True) + 1e-5  # 防止除以 0
+        return (logits - mean) / std
+
     def forward(self, student_logits, stu_sequence_logits, fl, fg, bl, bg, x_encoder, teacher_logits, output_cnn_features,labels, teacher_all_hidden_states=None):
         _, seq_len, _ = stu_sequence_logits.shape
     
@@ -545,35 +571,49 @@ class DistillationLoss(nn.Module):
         
         if self.distill_type == 'kl':
             # ============ 时序 KL 散度方法 ================
+            # [新增这一行] 给 memkd_weight 一个默认值，防止 return 报错
+            memkd_weight = torch.tensor(0.0).to(stu_sequence_logits.device)
             """
             stu_sequence_logits:[batch,seq_len,num_classes] [B, 16, 5]
             teacher_logits: [batch, num_classes] 
             """
-            soft_teacher = F.softmax(teacher_logits / self.temperature, dim=-1) # -> [B, C]
-            soft_teacher_expanded = soft_teacher.unsqueeze(1).expand(-1, seq_len, -1) # -> [B, T, C] (通过广播机制扩展，每一帧都对齐同一个教师标签)
-            soft_student_seq = F.log_softmax(stu_sequence_logits / self.temperature, dim=-1) # ->[B, T, C]
+            # ============ 应用 Logit Standardization ============
+            # 对教师 Logit 进行标准化
+            std_teacher_logits = self._logit_standardization(teacher_logits) # [B, C]
             
+            # 对学生时序 Logit 进行标准化 (在类别维度上)
+            std_stu_seq_logits = self._logit_standardization(stu_sequence_logits) # [B, T, C]
+
+            # 计算 Softmax (此时不再需要除以固定的 self.temperature)
+            soft_teacher = F.softmax(std_teacher_logits, dim=-1) # -> [B, C]
+            soft_teacher_expanded = soft_teacher.unsqueeze(1).expand(-1, seq_len, -1) # -> [B, T, C]
+            
+            # 学生端使用 log_softmax
+            soft_student_seq = F.log_softmax(std_stu_seq_logits, dim=-1) # -> [B, T, C]
+
+            # ===== time weights =====
+            time_weights_truncated = self.time_weights[:seq_len]  # [T] 
+
+            # ============ 计算 KL 散度 ============
             kl_per_step = F.kl_div(
-                soft_student_seq, soft_teacher_expanded, reduction='none' # [B, T, C]
+                soft_student_seq, soft_teacher_expanded, reduction='none' 
             ).sum(dim=-1) # [B, T]
             
-            # 确保权重与实际序列长度匹配
-            batch_size, actual_seq_len = kl_per_step.shape
-            # print(f"  权重截取前 kl_per_step.shape: {kl_per_step.shape}") # ->[4, 16]
-            # time_weights_truncated = self.time_weights[:actual_seq_len]
-            # time_weights_truncated = self.time_weights
-            # print(f"  截取后 time_weights_truncated.shape: {time_weights_truncated.shape}") # ->[16]
-
             weighted_kl = (kl_per_step * time_weights_truncated).sum(dim=-1)
-            seq_loss = weighted_kl.mean() * (self.temperature ** 2)
+            # 注意：使用标准化后，论文建议不再乘以 temperature^2，或直接设为 1
+            seq_loss = weighted_kl.mean() 
             
-            # 最终输出的 KL
-            final_loss = self._compute_kl_loss(student_logits, teacher_logits)
+            # 同样对最终输出 final_loss 应用标准化 
+            final_loss = self._compute_kl_loss(
+                self._logit_standardization(student_logits), 
+                std_teacher_logits
+            )
+            
             soft_loss = self.beta * seq_loss + (1 - self.beta) * final_loss
         
         elif self.distill_type == 'Tser':
         # ============ 特征对齐与时序 KL 蒸馏 ================
-        # [新增这一行] 给 memkd_weight 一个默认值，防止 return 报错
+            # [新增这一行] 给 memkd_weight 一个默认值，防止 return 报错
             memkd_weight = torch.tensor(0.0).to(stu_sequence_logits.device)
             # 教师特征 teacher_all_hidden_states: [B, 149, 1024]
             # 学生序列 stu_sequence_logits: [B, 16, 5]
