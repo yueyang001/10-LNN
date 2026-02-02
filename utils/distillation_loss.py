@@ -769,7 +769,77 @@ class DistillationLoss(nn.Module):
                 # 方案2：使用固定权重（推荐，避免过多的可学习参数）
                 soft_loss = 0.5 * memkd_loss + 0.5 * kl_loss
                 # print(f"MTSKD Fixed - MemKD loss: {memkd_loss:.4f}, KL loss: {kl_loss:.4f}, Combined: {soft_loss:.4f}")
+        elif self.distill_type == 'MTSKD_Temp':
+            # ============ MTSKD_Temp (MemKD + KL_Temp) 混合蒸馏方法 ============
+            """
+            MTSKD_Temp 方法结合:
+            1. MemKD: 通过内存差异学习细粒度时序特征
+            2. KL_Temp: 通过分布匹配学习类别间关系
+            综合这两个损失可以更全面地指导学生网络学习
+            """
             
+            # ---- 方法1: MemKD 部分 ----
+            # 1. 计算短程内存差异损失 (z=1)
+            memkd_loss_short = self._compute_memkd_loss(x_encoder, output_cnn_features, z=1)
+            
+            # 2. 计算远程内存差异损失 (z > 1)
+            T_max = x_encoder.size(1) # 16
+            z_random = random.randint(2, T_max // 2) # 在 2 到 8 之间随机选一个跨度
+            memkd_loss_long = self._compute_memkd_loss(x_encoder, output_cnn_features, z=z_random)
+            
+            # MemKD 损失 (与原始MemKD相同的权重)
+            memkd_loss = 0.5 * memkd_loss_short + 1.0 * memkd_loss_long
+            
+            # ---- 方法2: KL_Temp 部分 ----
+            # ============ 应用 Logit Standardization ============
+            # 对教师 Logit 进行标准化
+            std_teacher_logits = self._logit_standardization(teacher_logits) # [B, C]
+            
+            # 对学生时序 Logit 进行标准化 (在类别维度上)
+            std_stu_seq_logits = self._logit_standardization(stu_sequence_logits) # [B, T, C]
+
+            # 计算 Softmax (此时不再需要除以固定的 self.temperature)
+            soft_teacher = F.softmax(std_teacher_logits, dim=-1) # -> [B, C]
+            soft_teacher_expanded = soft_teacher.unsqueeze(1).expand(-1, seq_len, -1) # -> [B, T, C]
+            
+            # 学生端使用 log_softmax
+            soft_student_seq = F.log_softmax(std_stu_seq_logits, dim=-1) # -> [B, T, C]
+
+            # ===== time weights =====
+            time_weights_truncated = self.time_weights[:seq_len]  # [T] 
+
+            # ============ 计算 KL 散度 ============
+            kl_per_step = F.kl_div(
+                soft_student_seq, soft_teacher_expanded, reduction='none' 
+            ).sum(dim=-1) # [B, T]
+            
+            weighted_kl = (kl_per_step * time_weights_truncated).sum(dim=-1)
+            # 注意：使用标准化后，论文建议不再乘以 temperature^2，或直接设为 1
+            seq_loss = weighted_kl.mean() 
+            
+            # 同样对最终输出 final_loss 应用标准化 
+            final_loss = self._compute_kl_loss(
+                self._logit_standardization(student_logits), 
+                std_teacher_logits
+            )
+            
+            kl_loss = self.beta * seq_loss + (1 - self.beta) * final_loss
+            
+            # ---- MTSKD 融合 ----
+            # 将 MemKD 和 KL 损失加权组合
+            
+            # 方案选择：
+            USE_LEARNABLE_WEIGHT = True  # 可以设置为True体验可学习权重
+            
+            if USE_LEARNABLE_WEIGHT:
+                # 方案1：使用可学习权重
+                memkd_weight = torch.sigmoid(self.mtskd_weight)
+                kl_weight = 1.0 - memkd_weight
+                soft_loss = memkd_weight * memkd_loss + kl_weight * kl_loss
+                
+            else:
+                # 方案2：使用固定权重（推荐，避免过多的可学习参数）
+                soft_loss = 0.5 * memkd_loss + 0.5 * kl_loss        
         
         # 结合序列损失和最终输出损失
         # soft_loss = 0.5 * seq_loss + 0.5 * final_loss
