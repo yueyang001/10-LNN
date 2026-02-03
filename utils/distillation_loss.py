@@ -597,11 +597,11 @@ class DistillationLoss(nn.Module):
             # ============ 计算 KL 散度 ============
             kl_per_step = F.kl_div(
                 soft_student_seq, soft_teacher_expanded, reduction='none' 
-            ).sum(dim=-1) # [B, T]
+            ).sum(dim=-1) # [B, T] 广播相乘后的加权KL
             
-            weighted_kl = (kl_per_step * time_weights_truncated).sum(dim=-1)
+            weighted_kl = (kl_per_step * time_weights_truncated).sum(dim=-1) # [B]
             # 注意：使用标准化后，论文建议不再乘以 temperature^2，或直接设为 1
-            seq_loss = weighted_kl.mean() 
+            seq_loss = weighted_kl.mean() # 标量
             
             # 同样对最终输出 final_loss 应用标准化 
             final_loss = self._compute_kl_loss(
@@ -846,7 +846,7 @@ class DistillationLoss(nn.Module):
         
         # 组合损失
         alpha = torch.sigmoid(self.alpha)
-        total_loss = alpha * soft_loss + (1 - alpha) * hard_loss
+        total_loss = soft_loss + hard_loss
         
         return total_loss, hard_loss, soft_loss, alpha.item(), self.beta.item(), memkd_weight.item()
 

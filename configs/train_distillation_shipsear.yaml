@@ -12,7 +12,7 @@ training:
 distillation:
   temperature: 2.0
   alpha: 0.3
-  learnable_alpha: true
+  learnable_alpha: false
   distill_type: 'kl'
   # distill_type: 'base'
   weight_type: 'uniform'
