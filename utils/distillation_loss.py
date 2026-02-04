@@ -367,7 +367,7 @@ class DistillationLoss(nn.Module):
             
             if USE_LEARNABLE_WEIGHT:
                 # 方案1：使用可学习权重
-                memkd_weight = torch.sigmoid(self.mtskd_weight)
+                # memkd_weight = torch.sigmoid(self.mtskd_weight)
                 kl_weight = 1.0 - memkd_weight
                 soft_loss = memkd_weight * memkd_loss + kl_weight * kl_loss
                 # print(f"MTSKD Learnable - MemKD loss: {memkd_loss:.4f}, KL loss: {kl_loss:.4f}")
@@ -441,7 +441,7 @@ class DistillationLoss(nn.Module):
             
             if USE_LEARNABLE_WEIGHT:
                 # 方案1：使用可学习权重
-                memkd_weight = torch.sigmoid(self.mtskd_weight)
+                # memkd_weight = torch.sigmoid(self.mtskd_weight)
                 kl_weight = 1.0 - memkd_weight
                 soft_loss = memkd_weight * memkd_loss + kl_weight * kl_loss
                 
