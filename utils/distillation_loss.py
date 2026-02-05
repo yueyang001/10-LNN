@@ -1,27 +1,9 @@
+from sympy import beta
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import random
-import logging
-import os
-# 在类/模块最上方（或 __init__ 中）初始化 logger
-logger = logging.getLogger("MemKD_magnitude")
-logger.setLevel(logging.INFO)
 
-# 只在第一次运行时添加 handler（避免重复输出）
-if not logger.handlers:
-    # 可以输出到文件 + 控制台
-    log_dir = "logs/memkd"
-    os.makedirs(log_dir, exist_ok=True)
-    
-    file_handler = logging.FileHandler(os.path.join(log_dir, "magnitude_track.log"), mode='a')
-    file_handler.setFormatter(logging.Formatter('%(asctime)s | %(message)s'))
-    
-    console_handler = logging.StreamHandler()
-    console_handler.setFormatter(logging.Formatter('%(message)s'))
-    
-    logger.addHandler(file_handler)
-    logger.addHandler(console_handler)
 class DistillationLoss(nn.Module):
     """知识蒸馏损失函数 - 支持 KL 和 MSE 两种模式"""
     def __init__(self, temperature=4.0, alpha=0.5, learnable_alpha=True, 
@@ -45,7 +27,10 @@ class DistillationLoss(nn.Module):
         self.beta = nn.Parameter(torch.tensor(0.0)) # 0.5
         
         # MTSKD 可学习权重 (只在MTSKD模式时使用)
-        self.mtskd_weight = nn.Parameter(torch.tensor(0.0))  # MemKD权重，KL权重为(1-mtskd_weight) 0.5
+        # self.mtskd_weight = nn.Parameter(torch.tensor(0.0))  # MemKD权重，KL权重为(1-mtskd_weight) 0.5
+        # self.mtskd_weight = nn.Parameter(torch.tensor(-1.0))  # sigmoid ≈ 0.27
+        self.mtskd_weight = nn.Parameter(torch.tensor(0.0))
+
         
         weights = self._create_weights(seq_len, weight_type) # weight: torch.Size([16])
         # print(f"weight: {weights.shape}")
@@ -368,8 +353,9 @@ class DistillationLoss(nn.Module):
             if USE_LEARNABLE_WEIGHT:
                 # 方案1：使用可学习权重
                 # memkd_weight = torch.sigmoid(self.mtskd_weight)
-                kl_weight = 1.0 - memkd_weight
-                soft_loss = memkd_weight * memkd_loss + kl_weight * kl_loss
+                # kl_weight = 1.0 - self.memkd_weight
+                # soft_loss = self.memkd_weight * memkd_loss + kl_weight * kl_loss
+                soft_loss = self.mtskd_weight * memkd_loss + (1 - self.mtskd_weight) * kl_loss
                 # print(f"MTSKD Learnable - MemKD loss: {memkd_loss:.4f}, KL loss: {kl_loss:.4f}")
                 # print(f"MTSKD Learnable - MemKD weight: {memkd_weight:.4f}, KL weight: {kl_weight:.4f}")
                 # print(f"MTSKD Learnable - Combined: {soft_loss:.4f}")
@@ -430,7 +416,8 @@ class DistillationLoss(nn.Module):
                 self._logit_standardization(student_logits), 
                 std_teacher_logits
             )
-            
+            # sigmoid_beta = torch.sigmoid(self.beta)
+            # kl_loss = sigmoid_beta * seq_loss + (1 - sigmoid_beta) * final_loss
             kl_loss = self.beta * seq_loss + (1 - self.beta) * final_loss
             
             # ---- MTSKD 融合 ----
@@ -441,9 +428,10 @@ class DistillationLoss(nn.Module):
             
             if USE_LEARNABLE_WEIGHT:
                 # 方案1：使用可学习权重
-                # memkd_weight = torch.sigmoid(self.mtskd_weight)
-                kl_weight = 1.0 - memkd_weight
+                memkd_weight = torch.sigmoid(self.mtskd_weight)
+                kl_weight = 1.0 - torch.sigmoid(self.mtskd_weight)
                 soft_loss = memkd_weight * memkd_loss + kl_weight * kl_loss
+                # soft_loss = self.mtskd_weight * memkd_loss + (1 - self.mtskd_weight) * kl_loss
                 
             else:
                 # 方案2：使用固定权重（推荐，避免过多的可学习参数）
@@ -458,3 +446,4 @@ class DistillationLoss(nn.Module):
         total_loss = soft_loss + hard_loss
         
         return total_loss, hard_loss, soft_loss, alpha.item(), self.beta.item(), memkd_weight.item()
+        # return total_loss, hard_loss, soft_loss, alpha.item(), self.beta.item(), self.mtskd_weight.item()
