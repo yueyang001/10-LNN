@@ -146,6 +146,11 @@ class DistillationTrainer:
     def train_epoch(self, train_loader: DataLoader, epoch: int) -> dict:
         """训练一个 epoch"""
         self.model.train()
+
+        # ===== 通知 loss 当前 epoch（用于动态蒸馏）=====
+        if hasattr(self.criterion, "set_epoch"):
+            total_epochs = self.config['training']['num_epochs']
+            self.criterion.set_epoch(epoch, total_epochs)
         
         # 教师网络保持 eval 模式
         if isinstance(self.model, DDP):

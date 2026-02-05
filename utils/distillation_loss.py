@@ -10,7 +10,7 @@ class DistillationLoss(nn.Module):
                  seq_len=16, weight_type='uniform', distill_type='base', num_classes=4):
         """
         Args:
-            distill_type: 'kl' 或 'mse'或 'MemKD' 或 'MTSKD'
+            distill_type: 'kl' 或 'mse'或 'MemKD' 或 'MTSKD' 或 'MTSKD_Temp'
         """
         super().__init__()
         self.temperature = temperature
@@ -49,7 +49,12 @@ class DistillationLoss(nn.Module):
             nn.ReLU(),
             nn.Linear(256, 5)
         )
-    
+        self.current_epoch = 0
+        self.total_epoch = 100  # 默认，可从外部传
+    def set_epoch(self, epoch, total_epoch):
+        self.current_epoch = epoch
+        self.total_epoch = total_epoch
+
     def _create_weights(self, seq_len, weight_type):
         if weight_type == 'linear':
             weights = torch.arange(1, seq_len + 1, dtype=torch.float32)
@@ -443,7 +448,21 @@ class DistillationLoss(nn.Module):
         # 组合损失
         alpha = torch.sigmoid(self.alpha)
         # total_loss = alpha * soft_loss + (1 - alpha) * hard_loss
-        total_loss = soft_loss + hard_loss
+        # total_loss = soft_loss + hard_loss
+        # ========= 动态蒸馏权重 =========
+        progress = self.current_epoch / self.total_epoch
+
+        if progress < 0.2:
+            kd_weight = 0.0          # 前期：只学CE
+        elif progress < 0.6:
+            kd_weight = (progress-0.2)/0.4   # 中期：逐渐增加
+        else:
+            kd_weight = 1.0          # 后期：强蒸馏
+
+        ce_weight = 1.0 - 0.3 * kd_weight   # CE慢慢减弱
+
+        total_loss = ce_weight * hard_loss + kd_weight * soft_loss
+    
         
         return total_loss, hard_loss, soft_loss, alpha.item(), self.beta.item(), memkd_weight.item()
         # return total_loss, hard_loss, soft_loss, alpha.item(), self.beta.item(), self.mtskd_weight.item()
