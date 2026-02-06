@@ -109,6 +109,42 @@ def save_checkpoint(model: nn.Module, optimizer, scheduler, epoch: int,
         best_path = os.path.join(os.path.dirname(save_path), 'best_student.pth')
         torch.save({'student_state_dict': student_state, 'best_acc': best_acc}, best_path)
 
+def auto_resume_if_possible(model, optimizer, scheduler, save_dir, logger):
+    """
+    自动检测并恢复最近checkpoint
+    """
+    import glob
+    
+    ckpts = glob.glob(os.path.join(save_dir, "checkpoint_epoch_*.pth"))
+    if len(ckpts) == 0:
+        logger.info("No checkpoint found, start from scratch")
+        return 1, 0.0
+
+    # 找最大epoch
+    ckpts.sort(key=lambda x: int(x.split("_")[-1].split(".")[0]))
+    latest_ckpt = ckpts[-1]
+
+    logger.info(f"🔥 Resume from: {latest_ckpt}")
+
+    checkpoint = torch.load(latest_ckpt, map_location="cpu")
+
+    # 加载学生网络
+    if isinstance(model, DDP):
+        model.module.student.load_state_dict(checkpoint['student_state_dict'])
+    else:
+        model.student.load_state_dict(checkpoint['student_state_dict'])
+
+    optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+    scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
+
+    start_epoch = checkpoint['epoch'] + 1
+    best_acc = checkpoint.get('best_acc', 0.0)
+
+    logger.info(f"Resume epoch: {start_epoch}")
+    logger.info(f"Best acc: {best_acc}")
+
+    return start_epoch, best_acc
+
 def get_inputs(input_data, data_type, device):
     """根据数据类型获取输入"""
     if '@' not in data_type:
@@ -311,7 +347,17 @@ class DistillationTrainer:
         
         os.makedirs(save_dir, exist_ok=True)
         
-        for epoch in range(1, num_epochs + 1):
+        ###############自动resume##############
+        start_epoch, self.best_acc = auto_resume_if_possible(
+            self.model,
+            self.optimizer,
+            self.scheduler,
+            save_dir,
+            self.logger
+        )
+
+        # for epoch in range(1, num_epochs + 1):
+        for epoch in range(start_epoch, num_epochs + 1):
             # DDP: 设置 epoch 以确保每个 epoch 的 shuffle 不同
             if hasattr(train_loader.sampler, 'set_epoch'):
                 train_loader.sampler.set_epoch(epoch)
