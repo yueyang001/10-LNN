@@ -152,11 +152,19 @@ class DistillationTrainer:
             total_epochs = self.config['training']['num_epochs']
             self.criterion.set_epoch(epoch, total_epochs)
         
-        # 教师网络保持 eval 模式
-        if isinstance(self.model, DDP):
-            self.model.module.teacher.eval()
-        else:
-            self.model.teacher.eval()
+        # # 教师网络保持 eval 模式
+        # if isinstance(self.model, DDP):
+        #     self.model.module.teacher.eval()
+        # else:
+        #     self.model.teacher.eval()
+        # 教师网络训练模式控制
+        is_teacher_training = self.config['model']['teacher'].get('freeze', True) == False
+        if not is_teacher_training:
+            # 教师网络保持 eval 模式
+            if isinstance(self.model, DDP):
+                self.model.module.teacher.eval()
+            else:
+                self.model.teacher.eval()
         
         total_loss = 0.0
         total_hard_loss = 0.0
