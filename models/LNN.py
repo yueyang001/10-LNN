@@ -13,7 +13,7 @@ class CfC(nn.Module):
     def __init__(
         self,
         input_size: Union[int, "Wiring"],
-        units,# unit=self.fwd_local_wiring
+        units,
         proj_size: Optional[int] = None,
         return_sequences: bool = True,
         batch_first: bool = True,
@@ -125,6 +125,7 @@ class CfC(nn.Module):
                 c_state = c_state.unsqueeze(0) if c_state is not None else None
 
         output_sequence = []
+        # 核心循环：逐时间步处理序列
         for t in range(seq_len):
             if self.batch_first:
                 inputs = input[:, t]
@@ -135,6 +136,7 @@ class CfC(nn.Module):
 
             if self.use_mixed:
                 h_state, c_state = self.lstm(inputs, (h_state, c_state))
+            # 通过 RNN cell 处理
             h_out, h_state = self.rnn_cell.forward(inputs, h_state, ts)
             if self.return_sequences:
                 output_sequence.append(self.fc(h_out))
@@ -393,7 +395,7 @@ class CfCCell(nn.Module):
                 * ff1
                 + self.A
             )
-        else:# default
+        else:
             # CfC 模式
             if self.sparsity_mask is not None:
                 ff2 = F.linear(x, self.ff2.weight * self.sparsity_mask, self.ff2.bias)
@@ -406,7 +408,7 @@ class CfCCell(nn.Module):
             t_interp = self.sigmoid(t_a * ts + t_b)
             if self.mode == "no_gate":
                 new_hidden = ff1 + t_interp * ff2
-            else:# self.mode == "default":
+            else:
                 new_hidden = ff1 * (1.0 - t_interp) + t_interp * ff2
         return new_hidden, new_hidden
 
@@ -739,7 +741,16 @@ class AutoNCP(NCP):
 
 
 # 注意力统计池化 (Attentive Statistics Pooling, ASP)
+
 class AttentiveStatisticsPooling(nn.Module):
+    '''
+    输入: (B, C, T)
+    输出: (B, 2*C)
+    对输入的时序特征序列（如语音帧特征）进行加权池化
+    不仅计算加权均值，还计算加权标准差
+    使用注意力机制自动学习每个时间步的重要性权重
+    将均值和标准差拼接作为输出特征
+    '''
     def __init__(self, input_dim, bottleneck_dim=32):
         super().__init__()
         self.statistical_attention = nn.Sequential(
@@ -747,16 +758,16 @@ class AttentiveStatisticsPooling(nn.Module):
             nn.Tanh(),
             nn.Conv1d(bottleneck_dim, input_dim, kernel_size=1),
             nn.Softmax(dim=2)
-        )
+        ) # 计算注意力权重
 
     # Input: (B, C, T) / Output: (B, 2*C)
     def forward(self, x):
-        alpha = self.statistical_attention(x)
-        mean = torch.sum(alpha * x, dim=2)
-        residuals = x - mean.unsqueeze(2)
-        standard_deviation = torch.sum(alpha * (residuals ** 2), dim=2)
-        std = torch.sqrt(torch.clamp(standard_deviation, min=1e-6))
-        return torch.cat([mean, std], dim=1)
+        alpha = self.statistical_attention(x) # 计算注意力权重 # 形状: (B, C, T)
+        mean = torch.sum(alpha * x, dim=2) # 计算加权均值 # 形状: (B, C)
+        residuals = x - mean.unsqueeze(2) # 计算残差 # 形状: (B, C, T)
+        standard_deviation = torch.sum(alpha * (residuals ** 2), dim=2) # 计算方差 # 形状: (B, C)
+        std = torch.sqrt(torch.clamp(standard_deviation, min=1e-6)) # 计算标准差 # 形状: (B, C)
+        return torch.cat([mean, std], dim=1) # 拼接均值和标准差 # 形状: (B, 2*C)
 
 
 # 双分辨率池化 (Dual-Resolution Pooling, DRASP)
@@ -798,7 +809,7 @@ class BiParallelCrossSliceCfC(nn.Module):
         self.num_windows = seq_len // window_size
         # AutoNCP: automatically generate sparse connections
         self.fwd_local_wiring = AutoNCP(wiring_units, output_size)
-        self.fwd_local_cfc = CfC(input_size, self.fwd_local_wiring, return_sequences=True, batch_first=True) # 把布线模式放到 CfC 里
+        self.fwd_local_cfc = CfC(input_size, self.fwd_local_wiring, return_sequences=True, batch_first=True)
         self.fwd_global_wiring = AutoNCP(wiring_units, output_size)
         self.fwd_global_cfc = CfC(input_size, self.fwd_global_wiring, return_sequences=True, batch_first=True)
         self.bwd_local_wiring = AutoNCP(wiring_units, output_size)
@@ -824,24 +835,30 @@ class BiParallelCrossSliceCfC(nn.Module):
         return out_local, out_global
 
     def forward(self, x):
-        x_flipped = torch.flip(x, [1])
+        x_flipped = torch.flip(x, [1]) # 在time维度翻转
         fwd_local, fwd_global = self._process_stream(x, self.fwd_local_cfc, self.fwd_global_cfc)
+        # print("fwd_local.shape: ", fwd_local.shape) # [B, 16, 64]
+        # print("fwd_global.shape: ", fwd_global.shape) # [B, 16, 64]
         bwd_local_flipped, bwd_global_flipped = self._process_stream(x_flipped, self.bwd_local_cfc, self.bwd_global_cfc)
         bwd_local = torch.flip(bwd_local_flipped, [1])
         bwd_global = torch.flip(bwd_global_flipped, [1])
-        merged = torch.cat([fwd_local, fwd_global, bwd_local, bwd_global], dim=-1)
-        return self.act(self.layer_norm(self.fusion(merged)))    
+        # print(f"backword_local.shape: {bwd_local.shape}") # [B, 16, 64]
+        # print(f"backword_global.shape: {bwd_global.shape}") # [B, 16, 64]
+        merged = torch.cat([fwd_local, fwd_global, bwd_local, bwd_global], dim=-1) # (B, 16, 256)
+        # print(f"merged.shape: {merged.shape}")
+        fused = self.act(self.layer_norm(self.fusion(merged)))   
+        # 同时返回融合结果 + 四个原始特征 
+        return fused, fwd_local, fwd_global, bwd_local, bwd_global
 
 
 # Audio Student
 class AudioCfC(nn.Module):
-    def __init__(self, num_classes=5):
-        # num_classes 指定最终分类的数量（默认为 5 类）
+    def __init__(self, num_classes=5,  p_encoder=0.2, p_classifier=0.3):
         super(AudioCfC, self).__init__()
-        self.audio_encoder = nn.Sequential(# nn.Sequential 模块用于将多个层组合在一起，自动按照顺序forward
-            nn.BatchNorm1d(1),# 对输入的单声道音频进行归一化
-            nn.Conv1d(1, 32, kernel_size=7, stride=3, padding=3),# 将通道数从1提升为32，实现一次下采样
-            nn.BatchNorm1d(32), nn.LeakyReLU(0.1, True), nn.AvgPool1d(2),# 对32维特征归一化，激活保留负值，AvgPool1d(2)平均池化将序列长度减半
+        self.audio_encoder = nn.Sequential(
+            nn.BatchNorm1d(1),
+            nn.Conv1d(1, 32, kernel_size=7, stride=3, padding=3),
+            nn.BatchNorm1d(32), nn.LeakyReLU(0.1, True), nn.AvgPool1d(2),
             nn.Conv1d(32, 64, kernel_size=5, stride=2, padding=2),
             nn.BatchNorm1d(64), nn.LeakyReLU(0.1, True), nn.AvgPool1d(3),
             nn.Conv1d(64, 64, kernel_size=3, stride=2, padding=1),
@@ -851,13 +868,17 @@ class AudioCfC(nn.Module):
             nn.Conv1d(64, 64, kernel_size=3, stride=1, padding=1),
             nn.BatchNorm1d(64), nn.LeakyReLU(0.1, True))
         
-        self.encoder_out_dim = 64 # 编码器输出维度为64
-        self.seq_len=16 # 序列长度为16
-        self.window_size=4 # 每个窗口包含4个时间步
-        self.p_encoder=0.2 # 编码器的 dropout 概率
-        self.p_classifier=0.3 # 分类器的 dropout 概率
+        self.encoder_out_dim = 64
+        self.seq_len=16
+        self.window_size=4
+        self.p_encoder = p_encoder
+        self.p_classifier = p_classifier
+        # self.p_encoder=0.5
+        # self.p_classifier=0.4
+        # self.p_encoder=0.2
+        # self.p_classifier=0.3
         
-        self.encoder_dropout = nn.Dropout(self.p_encoder) # 编码器的 dropout 层
+        self.encoder_dropout = nn.Dropout(self.p_encoder)
         
         # Bidirectional Parallel Cross-Slice CfC
         self.bi_parallel_cfc = BiParallelCrossSliceCfC(
@@ -872,29 +893,31 @@ class AudioCfC(nn.Module):
         self.drasp = DRASP(input_dim=self.encoder_out_dim, segment_len=self.window_size)
         
         self.classifier = nn.Sequential(
-            nn.Linear(self.encoder_out_dim * 4, 64),# 256->64
-            nn.LayerNorm(64), nn.GELU(), nn.Dropout(self.p_classifier), # 激活
-            nn.Linear(64, num_classes)) # 64->5 num_classes=51
+            nn.Linear(self.encoder_out_dim * 4, 64),
+            nn.LayerNorm(64), nn.GELU(), nn.Dropout(self.p_classifier),
+            nn.Linear(64, num_classes))
 
     def forward(self, x):
         # x: (B, 1, 48000)
-        x = self.audio_encoder(x) # -> (B, 16, 64)
-        print(f"编码器输出形状: {x.shape}") # -> (B, 64, 16)
-        x = x.permute(0, 2, 1) # -> (B, 64, 16) -> (B, 16, 64)
-        x = self.encoder_dropout(x)
-        seq_features = self.bi_parallel_cfc(x) 
-        pooled_features = self.drasp(seq_features.permute(0, 2, 1))
+        x_encoder = self.audio_encoder(x) # -> (B, 16, 64) batch,time,features  
+        # print(f"编码器输出形状: {x.shape}") # -> (B, 64, 16)
+        x_encoder = x_encoder.permute(0, 2, 1) # -> (B, 64, 16) batch,features,time
+        x_encoder = self.encoder_dropout(x_encoder)
+        seq_features, fl, fg, bl, bg = self.bi_parallel_cfc(x_encoder) # seq_features: (B, 64, 16)
+        pooled_features = self.drasp(seq_features.permute(0, 2, 1)) # (B,time,features)
         out = self.classifier(pooled_features)
-        return out, seq_features
+        return out, seq_features, fl, fg, bl, bg, x_encoder
 
 
 if __name__ == "__main__":
     model = AudioCfC()
     x = torch.randn(1, 1, 48000)  # (batch, time, features)
-    output, hn = model(x)
-    print(f"输入形状: {x.shape}")
-    print(f"输出形状: {output.shape}")
-    print(f"最终隐藏状态形状: {hn.shape}")
+    output, seq_features, fl, fg, bl, bg, x_encoder = model(x)
+    print(f"输入形状x: {x.shape}") # (batch,time,features) (b,1,48000)
+    print(f"输出形状output: {output.shape}") # (batch,features) (b,5)
+    print(f"最终隐藏状态形状seq_features: {seq_features.shape}") # [1, 16, 64] [batch,time,features]
+    print(f"经过CNN的x_encoder.shape: {x_encoder.shape}") # [B, 16, 64] [batch,time,features]
+    # (b,64,16) [batchsize,features,time]
     
     model.eval()
     from ptflops import get_model_complexity_info
@@ -903,7 +926,7 @@ if __name__ == "__main__":
     print(f"模型 FLOPs: {macs}")
     print(f"模型参数量: {params}")
     print('#'*80)
-    # import fvcore
+    import fvcore
     from fvcore.nn import FlopCountAnalysis,parameter_count_table,parameter_count
     input_res = torch.randn(1,1,48000)
     # 计算 FLOPs
