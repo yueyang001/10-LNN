@@ -1,0 +1,21 @@
+2026-02-12 21:34:16,773 - INFO - ==================================================
+2026-02-12 21:34:16,774 - INFO - Distillation Training Configuration
+2026-02-12 21:34:16,774 - INFO - ==================================================
+2026-02-12 21:34:16,774 - INFO - GPUs: [4, 5, 6, 7]
+2026-02-12 21:34:16,774 - INFO - World size: 4
+2026-02-12 21:34:16,774 - INFO - Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip_622
+2026-02-12 21:34:16,774 - INFO - Data type: wav_s@wav_t
+2026-02-12 21:34:16,774 - INFO - Batch size: 16
+2026-02-12 21:34:16,774 - INFO - Epochs: 100
+2026-02-12 21:34:16,774 - INFO - Learning rate: 0.0005
+2026-02-12 21:34:16,774 - INFO - Temperature: 2.0
+2026-02-12 21:34:16,774 - INFO - Alpha: 0.3
+2026-02-12 21:34:16,774 - INFO - Save dir: checkpoints/grid_deepship_0/num_epochs100_weight_decay0.0001_batch_size16_lr0.0005_distill_typeMemKD_freezeTrue_USE_DYNAMIC_DISTILL_WEIGHTTrue_p_encoder0.3_p_classifier0.5
+2026-02-12 21:34:16,774 - INFO - ==================================================
+2026-02-12 21:34:17,036 - INFO - Train dataset size: 31892
+2026-02-12 21:34:17,036 - INFO - Validation dataset size: 10631
+2026-02-12 21:34:18,278 - INFO - Student params: 316,234 (0.32M)
+2026-02-12 21:34:18,278 - INFO - Teacher params: 164,415,748 (164.42M)
+2026-02-12 21:34:18,279 - INFO - Trainable params: 271,242 (0.27M)
+2026-02-12 21:34:18,846 - INFO - Start training...
+2026-02-12 21:34:18,847 - INFO - No checkpoint found, start from scratch

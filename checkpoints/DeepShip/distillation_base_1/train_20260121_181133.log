@@ -1,0 +1,33 @@
+2026-01-21 18:11:33,157 - INFO - ==================================================
+2026-01-21 18:11:33,157 - INFO - Distillation Training Configuration
+2026-01-21 18:11:33,157 - INFO - ==================================================
+2026-01-21 18:11:33,157 - INFO - GPUs: [4, 5, 6, 7]
+2026-01-21 18:11:33,157 - INFO - World size: 4
+2026-01-21 18:11:33,157 - INFO - Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip_622
+2026-01-21 18:11:33,157 - INFO - Data type: wav_s@wav_t
+2026-01-21 18:11:33,157 - INFO - Batch size: 32
+2026-01-21 18:11:33,157 - INFO - Epochs: 100
+2026-01-21 18:11:33,157 - INFO - Learning rate: 0.001
+2026-01-21 18:11:33,157 - INFO - Temperature: 2.0
+2026-01-21 18:11:33,157 - INFO - Alpha: 0.3
+2026-01-21 18:11:33,157 - INFO - Save dir: checkpoints/DeepShip/distillation_base_1
+2026-01-21 18:11:33,157 - INFO - ==================================================
+2026-01-21 18:11:33,541 - INFO - Train dataset size: 31892
+2026-01-21 18:11:33,541 - INFO - Validation dataset size: 10631
+2026-01-21 18:11:36,096 - INFO - Student params: 93,899 (0.09M)
+2026-01-21 18:11:36,096 - INFO - Teacher params: 164,415,748 (164.42M)
+2026-01-21 18:11:36,096 - INFO - Trainable params: 82,586 (0.08M)
+2026-01-21 18:11:37,036 - INFO - Start training...
+2026-01-21 18:12:01,170 - INFO - Epoch [1] Batch [0/249] Loss: 3.4550, Hard: 1.3876, Soft: 5.5224 Acc: 28.12% LR: 0.001000 Alpha: 0.5000
+2026-01-21 18:12:23,428 - INFO - Epoch [1] Batch [20/249] Loss: 3.5727, Hard: 1.5234, Soft: 5.6633 Acc: 29.02% LR: 0.001000 Alpha: 0.4950
+2026-01-21 18:12:45,980 - INFO - Epoch [1] Batch [40/249] Loss: 2.8586, Hard: 1.1152, Soft: 4.6722 Acc: 35.98% LR: 0.001000 Alpha: 0.4901
+2026-01-21 18:13:08,943 - INFO - Epoch [1] Batch [60/249] Loss: 2.7038, Hard: 1.0285, Soft: 4.4799 Acc: 38.99% LR: 0.001000 Alpha: 0.4854
+2026-01-21 18:13:31,759 - INFO - Epoch [1] Batch [80/249] Loss: 3.0485, Hard: 1.2636, Soft: 4.9771 Acc: 40.32% LR: 0.001000 Alpha: 0.4806
+2026-01-21 18:13:54,283 - INFO - Epoch [1] Batch [100/249] Loss: 2.7019, Hard: 1.0552, Soft: 4.5157 Acc: 41.40% LR: 0.001000 Alpha: 0.4759
+2026-01-21 18:14:17,394 - INFO - Epoch [1] Batch [120/249] Loss: 2.6657, Hard: 1.1024, Soft: 4.4207 Acc: 42.20% LR: 0.001000 Alpha: 0.4711
+2026-01-21 18:14:39,750 - INFO - Epoch [1] Batch [140/249] Loss: 3.0132, Hard: 1.3345, Soft: 4.9337 Acc: 42.62% LR: 0.001000 Alpha: 0.4664
+2026-01-21 18:15:02,030 - INFO - Epoch [1] Batch [160/249] Loss: 2.8002, Hard: 1.2375, Soft: 4.6228 Acc: 43.26% LR: 0.001000 Alpha: 0.4616
+2026-01-21 18:15:25,416 - INFO - Epoch [1] Batch [180/249] Loss: 2.8509, Hard: 1.2375, Soft: 4.7689 Acc: 43.47% LR: 0.001000 Alpha: 0.4569
+2026-01-21 18:15:47,487 - INFO - Epoch [1] Batch [200/249] Loss: 2.6175, Hard: 1.0757, Soft: 4.4859 Acc: 43.72% LR: 0.001000 Alpha: 0.4521
+2026-01-21 18:16:09,366 - INFO - Epoch [1] Batch [220/249] Loss: 2.5609, Hard: 1.0548, Soft: 4.4208 Acc: 44.02% LR: 0.001000 Alpha: 0.4474
+2026-01-21 18:16:32,167 - INFO - Epoch [1] Batch [240/249] Loss: 2.2143, Hard: 0.8957, Soft: 3.8733 Acc: 44.67% LR: 0.001000 Alpha: 0.4428

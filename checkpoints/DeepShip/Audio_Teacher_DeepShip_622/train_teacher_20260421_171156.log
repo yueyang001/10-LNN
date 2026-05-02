@@ -1,0 +1,18 @@
+2026-04-21 17:11:56,512 - INFO - ==================================================
+2026-04-21 17:11:56,512 - INFO - Teacher Model Training Configuration
+2026-04-21 17:11:56,512 - INFO - ==================================================
+2026-04-21 17:11:56,512 - INFO - GPUs: [4, 5, 6, 7]
+2026-04-21 17:11:56,512 - INFO - World size: 4
+2026-04-21 17:11:56,512 - INFO - Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip_622
+2026-04-21 17:11:56,512 - INFO - Data type: wav_t
+2026-04-21 17:11:56,512 - INFO - Batch size: 32
+2026-04-21 17:11:56,512 - INFO - Epochs: 100
+2026-04-21 17:11:56,512 - INFO - Learning rate: 0.0001
+2026-04-21 17:11:56,512 - INFO - Weight decay: 0.0001
+2026-04-21 17:11:56,512 - INFO - Save dir: checkpoints/DeepShip/Audio_Teacher_DeepShip_622
+2026-04-21 17:11:56,512 - INFO - ==================================================
+2026-04-21 17:11:57,067 - INFO - Train dataset size: 31892
+2026-04-21 17:11:57,067 - INFO - Validation dataset size: 10631
+2026-04-21 17:11:58,243 - INFO - Total parameters: 164.42M
+2026-04-21 17:11:58,243 - INFO - Trainable parameters: 164.42M
+2026-04-21 17:11:58,245 - INFO - Start training...

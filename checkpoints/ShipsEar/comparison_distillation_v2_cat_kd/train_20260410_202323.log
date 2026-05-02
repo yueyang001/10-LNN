@@ -1,0 +1,691 @@
+2026-04-10 20:23:23,052 - INFO - ==================================================
+2026-04-10 20:23:23,053 - INFO - Comparison Distillation Training V2 (基于参考实现)
+2026-04-10 20:23:23,053 - INFO - ==================================================
+2026-04-10 20:23:23,053 - INFO - GPUs: [4, 5, 6, 7]
+2026-04-10 20:23:23,053 - INFO - World size: 4
+2026-04-10 20:23:23,053 - INFO - Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/ShipsEar_622
+2026-04-10 20:23:23,053 - INFO - Distillation method: cat_kd
+2026-04-10 20:23:23,053 - INFO - Temperature: 4.0
+2026-04-10 20:23:23,053 - INFO - Alpha: 0.5
+2026-04-10 20:23:23,053 - INFO - Save dir: /media/hdd1/fubohan/Code/UATR/checkpoints/ShipsEar/comparison_distillation_v2_cat_kd
+2026-04-10 20:23:23,053 - INFO - ==================================================
+2026-04-10 20:23:23,084 - INFO - Train dataset size: 2240
+2026-04-10 20:23:23,084 - INFO - Validation dataset size: 749
+2026-04-10 20:23:25,004 - INFO - Student params: 316,299 (0.32M)
+2026-04-10 20:23:25,005 - INFO - Teacher params: 164,415,877 (164.42M)
+2026-04-10 20:23:25,608 - INFO - Start training with method: cat_kd...
+2026-04-10 20:23:25,608 - INFO - No checkpoint found, start from scratch
+2026-04-10 20:23:50,300 - ERROR - Error computing loss for cat_kd at epoch 1, batch 0: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:50,301 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:23:50,468 - ERROR - Error computing loss for cat_kd at epoch 1, batch 1: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:50,468 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:23:50,618 - ERROR - Error computing loss for cat_kd at epoch 1, batch 2: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:50,619 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:23:50,731 - ERROR - Error computing loss for cat_kd at epoch 1, batch 3: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:50,732 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:23:50,853 - ERROR - Error computing loss for cat_kd at epoch 1, batch 4: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:50,854 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:23:50,966 - ERROR - Error computing loss for cat_kd at epoch 1, batch 5: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:50,967 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:23:51,079 - ERROR - Error computing loss for cat_kd at epoch 1, batch 6: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:51,080 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:23:51,192 - ERROR - Error computing loss for cat_kd at epoch 1, batch 7: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:51,193 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:23:51,304 - ERROR - Error computing loss for cat_kd at epoch 1, batch 8: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:51,305 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:23:51,416 - ERROR - Error computing loss for cat_kd at epoch 1, batch 9: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:51,417 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:23:51,533 - ERROR - Error computing loss for cat_kd at epoch 1, batch 10: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:51,538 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:23:51,647 - ERROR - Error computing loss for cat_kd at epoch 1, batch 11: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:51,647 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:23:51,753 - ERROR - Error computing loss for cat_kd at epoch 1, batch 12: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:51,754 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:23:51,862 - ERROR - Error computing loss for cat_kd at epoch 1, batch 13: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:51,863 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:23:51,980 - ERROR - Error computing loss for cat_kd at epoch 1, batch 14: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:51,981 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:23:52,093 - ERROR - Error computing loss for cat_kd at epoch 1, batch 15: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:52,093 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:23:52,198 - ERROR - Error computing loss for cat_kd at epoch 1, batch 16: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:52,199 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:23:52,325 - ERROR - Error computing loss for cat_kd at epoch 1, batch 17: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:52,326 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:23:52,450 - ERROR - Error computing loss for cat_kd at epoch 1, batch 18: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:52,451 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:23:52,563 - ERROR - Error computing loss for cat_kd at epoch 1, batch 19: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:52,564 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:23:52,684 - ERROR - Error computing loss for cat_kd at epoch 1, batch 20: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:52,685 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:23:52,800 - ERROR - Error computing loss for cat_kd at epoch 1, batch 21: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:52,801 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:23:52,913 - ERROR - Error computing loss for cat_kd at epoch 1, batch 22: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:52,913 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:23:53,021 - ERROR - Error computing loss for cat_kd at epoch 1, batch 23: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:53,022 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:23:53,255 - ERROR - Error computing loss for cat_kd at epoch 1, batch 24: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:53,256 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:23:53,354 - ERROR - Error computing loss for cat_kd at epoch 1, batch 25: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:53,355 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:23:53,453 - ERROR - Error computing loss for cat_kd at epoch 1, batch 26: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:53,454 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:23:53,610 - ERROR - Error computing loss for cat_kd at epoch 1, batch 27: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:23:53,611 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:20,491 - INFO - Epoch [1/200] Train Loss: 0.0000, Train Acc: 0.00%, Val Loss: 1.6591, Val Acc: 21.68%, Val AUC: 43.62%, Val F1: 7.13%
+2026-04-10 20:24:20,492 - INFO - Best model saved! Acc: 21.68%, AUC: 43.62%, F1: 7.13%
+2026-04-10 20:24:42,690 - ERROR - Error computing loss for cat_kd at epoch 2, batch 0: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:42,690 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:42,867 - ERROR - Error computing loss for cat_kd at epoch 2, batch 1: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:42,868 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:43,036 - ERROR - Error computing loss for cat_kd at epoch 2, batch 2: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:43,037 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:43,188 - ERROR - Error computing loss for cat_kd at epoch 2, batch 3: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:43,189 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:43,302 - ERROR - Error computing loss for cat_kd at epoch 2, batch 4: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:43,302 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:44,445 - ERROR - Error computing loss for cat_kd at epoch 2, batch 5: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:44,446 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:44,569 - ERROR - Error computing loss for cat_kd at epoch 2, batch 6: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:44,569 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:44,689 - ERROR - Error computing loss for cat_kd at epoch 2, batch 7: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:44,689 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:44,804 - ERROR - Error computing loss for cat_kd at epoch 2, batch 8: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:44,804 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:44,924 - ERROR - Error computing loss for cat_kd at epoch 2, batch 9: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:44,924 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:45,039 - ERROR - Error computing loss for cat_kd at epoch 2, batch 10: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:45,039 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:45,151 - ERROR - Error computing loss for cat_kd at epoch 2, batch 11: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:45,151 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:45,265 - ERROR - Error computing loss for cat_kd at epoch 2, batch 12: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:45,266 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:45,412 - ERROR - Error computing loss for cat_kd at epoch 2, batch 13: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:45,413 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:45,581 - ERROR - Error computing loss for cat_kd at epoch 2, batch 14: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:45,582 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:45,748 - ERROR - Error computing loss for cat_kd at epoch 2, batch 15: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:45,749 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:45,920 - ERROR - Error computing loss for cat_kd at epoch 2, batch 16: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:45,921 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:46,104 - ERROR - Error computing loss for cat_kd at epoch 2, batch 17: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:46,104 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:46,250 - ERROR - Error computing loss for cat_kd at epoch 2, batch 18: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:46,250 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:46,370 - ERROR - Error computing loss for cat_kd at epoch 2, batch 19: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:46,371 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:46,485 - ERROR - Error computing loss for cat_kd at epoch 2, batch 20: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:46,485 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:46,595 - ERROR - Error computing loss for cat_kd at epoch 2, batch 21: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:46,596 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:46,704 - ERROR - Error computing loss for cat_kd at epoch 2, batch 22: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:46,704 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:46,810 - ERROR - Error computing loss for cat_kd at epoch 2, batch 23: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:46,811 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:46,923 - ERROR - Error computing loss for cat_kd at epoch 2, batch 24: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:46,925 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:47,039 - ERROR - Error computing loss for cat_kd at epoch 2, batch 25: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:47,040 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:47,147 - ERROR - Error computing loss for cat_kd at epoch 2, batch 26: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:47,148 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+
+2026-04-10 20:24:47,256 - ERROR - Error computing loss for cat_kd at epoch 2, batch 27: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+2026-04-10 20:24:47,257 - ERROR - Traceback (most recent call last):
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 346, in train_epoch
+    loss, hard_loss, soft_loss = self._compute_channel_distillation_loss(
+  File "/media/hdd1/fubohan/Code/UATR/run_20_distillation_methods_v2.py", line 513, in _compute_channel_distillation_loss
+    soft_loss = F.mse_loss(student_4d, teacher_4d)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/nn/functional.py", line 3884, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/fubohan/anaconda3/envs/UATR/lib/python3.10/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (64) must match the size of tensor b (512) at non-singleton dimension 1
+

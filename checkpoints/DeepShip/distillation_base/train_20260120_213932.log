@@ -1,0 +1,368 @@
+2026-01-20 21:39:32,072 - INFO - ==================================================
+2026-01-20 21:39:32,072 - INFO - Distillation Training Configuration
+2026-01-20 21:39:32,072 - INFO - ==================================================
+2026-01-20 21:39:32,072 - INFO - GPUs: [4, 5, 6, 7]
+2026-01-20 21:39:32,073 - INFO - World size: 4
+2026-01-20 21:39:32,073 - INFO - Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip_622
+2026-01-20 21:39:32,073 - INFO - Data type: wav
+2026-01-20 21:39:32,073 - INFO - Batch size: 32
+2026-01-20 21:39:32,073 - INFO - Epochs: 100
+2026-01-20 21:39:32,073 - INFO - Learning rate: 0.001
+2026-01-20 21:39:32,073 - INFO - Temperature: 2.0
+2026-01-20 21:39:32,073 - INFO - Alpha: 0.3
+2026-01-20 21:39:32,073 - INFO - Save dir: checkpoints/DeepShip/distillation_base
+2026-01-20 21:39:32,073 - INFO - ==================================================
+2026-01-20 21:39:32,507 - INFO - Train dataset size: 31892
+2026-01-20 21:39:32,507 - INFO - Validation dataset size: 10631
+2026-01-20 21:39:34,441 - INFO - Student params: 93,899 (0.09M)
+2026-01-20 21:39:34,442 - INFO - Teacher params: 164,415,748 (164.42M)
+2026-01-20 21:39:34,442 - INFO - Trainable params: 82,586 (0.08M)
+2026-01-20 21:39:35,630 - INFO - Start training...
+2026-01-20 21:40:03,599 - INFO - Epoch [1] Batch [0/249] Loss: 3.4621, Hard: 1.3876, Soft: 5.5365 Acc: 28.12% LR: 0.001000 Alpha: 0.5000
+2026-01-20 21:40:26,977 - INFO - Epoch [1] Batch [20/249] Loss: 3.4989, Hard: 1.4817, Soft: 5.5568 Acc: 24.11% LR: 0.001000 Alpha: 0.4950
+2026-01-20 21:40:50,957 - INFO - Epoch [1] Batch [40/249] Loss: 3.3575, Hard: 1.5883, Soft: 5.1980 Acc: 20.27% LR: 0.001000 Alpha: 0.4901
+2026-01-20 21:41:14,621 - INFO - Epoch [1] Batch [60/249] Loss: 3.1739, Hard: 1.6146, Soft: 4.8266 Acc: 18.80% LR: 0.001000 Alpha: 0.4855
+2026-01-20 21:41:37,208 - INFO - Epoch [1] Batch [80/249] Loss: 3.2748, Hard: 1.5607, Soft: 5.1252 Acc: 18.29% LR: 0.001000 Alpha: 0.4809
+2026-01-20 21:42:00,343 - INFO - Epoch [1] Batch [100/249] Loss: 3.5049, Hard: 1.7070, Soft: 5.4824 Acc: 17.57% LR: 0.001000 Alpha: 0.4762
+2026-01-20 21:42:23,502 - INFO - Epoch [1] Batch [120/249] Loss: 3.0087, Hard: 1.4340, Soft: 4.7734 Acc: 17.41% LR: 0.001000 Alpha: 0.4716
+2026-01-20 21:42:46,104 - INFO - Epoch [1] Batch [140/249] Loss: 3.2493, Hard: 1.6495, Soft: 5.0761 Acc: 17.60% LR: 0.001000 Alpha: 0.4669
+2026-01-20 21:43:09,253 - INFO - Epoch [1] Batch [160/249] Loss: 3.0381, Hard: 1.4580, Soft: 4.8776 Acc: 18.30% LR: 0.001000 Alpha: 0.4621
+2026-01-20 21:43:32,603 - INFO - Epoch [1] Batch [180/249] Loss: 2.9728, Hard: 1.4685, Soft: 4.7583 Acc: 18.61% LR: 0.001000 Alpha: 0.4573
+2026-01-20 21:43:55,119 - INFO - Epoch [1] Batch [200/249] Loss: 3.0295, Hard: 1.4838, Soft: 4.8997 Acc: 18.78% LR: 0.001000 Alpha: 0.4525
+2026-01-20 21:44:18,017 - INFO - Epoch [1] Batch [220/249] Loss: 2.9204, Hard: 1.5630, Soft: 4.5941 Acc: 18.82% LR: 0.001000 Alpha: 0.4478
+2026-01-20 21:44:41,544 - INFO - Epoch [1] Batch [240/249] Loss: 3.2764, Hard: 1.7222, Soft: 5.2300 Acc: 19.00% LR: 0.001000 Alpha: 0.4431
+2026-01-20 21:45:50,704 - INFO - Epoch [1/100] Train Loss: 3.1418, Train Acc: 18.88%, Val Loss: 1.3883, Val Acc: 22.66%
+2026-01-20 21:45:50,704 - INFO - Best model saved with accuracy: 22.66%
+2026-01-20 21:46:14,752 - INFO - Epoch [2] Batch [0/249] Loss: 3.1645, Hard: 1.6046, Soft: 5.1423 Acc: 28.12% LR: 0.001000 Alpha: 0.4409
+2026-01-20 21:46:37,732 - INFO - Epoch [2] Batch [20/249] Loss: 3.0804, Hard: 1.4828, Soft: 5.1453 Acc: 20.54% LR: 0.001000 Alpha: 0.4362
+2026-01-20 21:47:01,111 - INFO - Epoch [2] Batch [40/249] Loss: 2.6497, Hard: 1.4049, Soft: 4.2898 Acc: 19.59% LR: 0.001000 Alpha: 0.4315
+2026-01-20 21:47:23,734 - INFO - Epoch [2] Batch [60/249] Loss: 2.9134, Hard: 1.3331, Soft: 5.0352 Acc: 19.42% LR: 0.001000 Alpha: 0.4269
+2026-01-20 21:47:46,927 - INFO - Epoch [2] Batch [80/249] Loss: 2.8188, Hard: 1.4792, Soft: 4.6526 Acc: 19.95% LR: 0.001000 Alpha: 0.4221
+2026-01-20 21:48:09,329 - INFO - Epoch [2] Batch [100/249] Loss: 2.8997, Hard: 1.3817, Soft: 5.0171 Acc: 19.83% LR: 0.001000 Alpha: 0.4176
+2026-01-20 21:48:32,586 - INFO - Epoch [2] Batch [120/249] Loss: 2.9910, Hard: 1.4054, Soft: 5.2448 Acc: 19.11% LR: 0.001000 Alpha: 0.4130
+2026-01-20 21:48:55,520 - INFO - Epoch [2] Batch [140/249] Loss: 2.7620, Hard: 1.3022, Soft: 4.8771 Acc: 19.19% LR: 0.001000 Alpha: 0.4083
+2026-01-20 21:49:17,500 - INFO - Epoch [2] Batch [160/249] Loss: 2.7888, Hard: 1.4357, Soft: 4.7865 Acc: 19.18% LR: 0.001000 Alpha: 0.4038
+2026-01-20 21:49:39,495 - INFO - Epoch [2] Batch [180/249] Loss: 2.6819, Hard: 1.4011, Soft: 4.6097 Acc: 19.73% LR: 0.001000 Alpha: 0.3992
+2026-01-20 21:50:02,286 - INFO - Epoch [2] Batch [200/249] Loss: 2.8705, Hard: 1.4866, Soft: 4.9943 Acc: 19.95% LR: 0.001000 Alpha: 0.3945
+2026-01-20 21:50:24,862 - INFO - Epoch [2] Batch [220/249] Loss: 2.6801, Hard: 1.3716, Soft: 4.7277 Acc: 20.18% LR: 0.001000 Alpha: 0.3899
+2026-01-20 21:50:47,125 - INFO - Epoch [2] Batch [240/249] Loss: 3.0832, Hard: 1.7307, Soft: 5.2399 Acc: 20.47% LR: 0.001000 Alpha: 0.3854
+2026-01-20 21:51:52,601 - INFO - Epoch [2/100] Train Loss: 2.8165, Train Acc: 20.71%, Val Loss: 1.3367, Val Acc: 19.93%
+2026-01-20 21:52:17,319 - INFO - Epoch [3] Batch [0/249] Loss: 2.8206, Hard: 1.4742, Soft: 4.9863 Acc: 18.75% LR: 0.000999 Alpha: 0.3834
+2026-01-20 21:52:40,170 - INFO - Epoch [3] Batch [20/249] Loss: 2.6218, Hard: 1.2506, Soft: 4.8698 Acc: 29.61% LR: 0.000999 Alpha: 0.3789
+2026-01-20 21:53:01,650 - INFO - Epoch [3] Batch [40/249] Loss: 2.4912, Hard: 1.2853, Soft: 4.5062 Acc: 26.22% LR: 0.000999 Alpha: 0.3744
+2026-01-20 21:53:23,514 - INFO - Epoch [3] Batch [60/249] Loss: 2.6546, Hard: 1.4205, Soft: 4.7562 Acc: 26.90% LR: 0.000999 Alpha: 0.3700
+2026-01-20 21:53:44,510 - INFO - Epoch [3] Batch [80/249] Loss: 2.7786, Hard: 1.4604, Soft: 5.0672 Acc: 27.66% LR: 0.000999 Alpha: 0.3655
+2026-01-20 21:54:06,667 - INFO - Epoch [3] Batch [100/249] Loss: 2.8508, Hard: 1.4519, Soft: 5.3272 Acc: 28.87% LR: 0.000999 Alpha: 0.3610
+2026-01-20 21:54:28,812 - INFO - Epoch [3] Batch [120/249] Loss: 2.5106, Hard: 1.2503, Soft: 4.7848 Acc: 29.65% LR: 0.000999 Alpha: 0.3566
+2026-01-20 21:54:50,822 - INFO - Epoch [3] Batch [140/249] Loss: 2.4985, Hard: 1.3011, Soft: 4.7011 Acc: 29.61% LR: 0.000999 Alpha: 0.3522
+2026-01-20 21:55:12,531 - INFO - Epoch [3] Batch [160/249] Loss: 2.4469, Hard: 1.1971, Soft: 4.7904 Acc: 30.22% LR: 0.000999 Alpha: 0.3478
+2026-01-20 21:55:33,920 - INFO - Epoch [3] Batch [180/249] Loss: 2.4140, Hard: 1.2872, Soft: 4.5674 Acc: 30.94% LR: 0.000999 Alpha: 0.3435
+2026-01-20 21:55:56,110 - INFO - Epoch [3] Batch [200/249] Loss: 2.3082, Hard: 1.1580, Soft: 4.5487 Acc: 31.45% LR: 0.000999 Alpha: 0.3392
+2026-01-20 21:56:18,489 - INFO - Epoch [3] Batch [220/249] Loss: 2.5977, Hard: 1.3399, Soft: 5.0951 Acc: 31.74% LR: 0.000999 Alpha: 0.3349
+2026-01-20 21:56:39,584 - INFO - Epoch [3] Batch [240/249] Loss: 2.4003, Hard: 1.2959, Soft: 4.6355 Acc: 32.03% LR: 0.000999 Alpha: 0.3307
+2026-01-20 21:57:45,976 - INFO - Epoch [3/100] Train Loss: 2.5274, Train Acc: 32.08%, Val Loss: 1.2809, Val Acc: 47.07%
+2026-01-20 21:57:45,976 - INFO - Best model saved with accuracy: 47.07%
+2026-01-20 21:58:10,236 - INFO - Epoch [4] Batch [0/249] Loss: 2.3628, Hard: 1.1921, Soft: 4.7520 Acc: 40.62% LR: 0.000998 Alpha: 0.3289
+2026-01-20 21:58:33,116 - INFO - Epoch [4] Batch [20/249] Loss: 2.4862, Hard: 1.1991, Soft: 5.1637 Acc: 43.15% LR: 0.000998 Alpha: 0.3247
+2026-01-20 21:58:55,455 - INFO - Epoch [4] Batch [40/249] Loss: 2.5048, Hard: 1.3672, Soft: 4.9173 Acc: 43.06% LR: 0.000998 Alpha: 0.3205
+2026-01-20 21:59:18,050 - INFO - Epoch [4] Batch [60/249] Loss: 2.0647, Hard: 1.0317, Soft: 4.2966 Acc: 42.42% LR: 0.000998 Alpha: 0.3164
+2026-01-20 21:59:40,854 - INFO - Epoch [4] Batch [80/249] Loss: 2.4347, Hard: 1.3038, Soft: 4.9244 Acc: 42.05% LR: 0.000998 Alpha: 0.3123
+2026-01-20 22:00:03,225 - INFO - Epoch [4] Batch [100/249] Loss: 2.3554, Hard: 1.2031, Soft: 4.9408 Acc: 43.78% LR: 0.000998 Alpha: 0.3083
+2026-01-20 22:00:25,740 - INFO - Epoch [4] Batch [120/249] Loss: 2.2997, Hard: 1.1926, Soft: 4.8309 Acc: 45.45% LR: 0.000998 Alpha: 0.3043
+2026-01-20 22:00:48,348 - INFO - Epoch [4] Batch [140/249] Loss: 2.0352, Hard: 1.0030, Soft: 4.4395 Acc: 45.79% LR: 0.000998 Alpha: 0.3003
+2026-01-20 22:01:10,945 - INFO - Epoch [4] Batch [160/249] Loss: 2.1535, Hard: 1.0442, Soft: 4.7854 Acc: 46.70% LR: 0.000998 Alpha: 0.2965
+2026-01-20 22:01:34,186 - INFO - Epoch [4] Batch [180/249] Loss: 2.0826, Hard: 0.9935, Soft: 4.7146 Acc: 47.93% LR: 0.000998 Alpha: 0.2927
+2026-01-20 22:01:56,478 - INFO - Epoch [4] Batch [200/249] Loss: 2.2320, Hard: 1.2176, Soft: 4.7284 Acc: 48.40% LR: 0.000998 Alpha: 0.2889
+2026-01-20 22:02:19,437 - INFO - Epoch [4] Batch [220/249] Loss: 2.1231, Hard: 1.0770, Soft: 4.7468 Acc: 48.83% LR: 0.000998 Alpha: 0.2851
+2026-01-20 22:02:41,902 - INFO - Epoch [4] Batch [240/249] Loss: 2.1465, Hard: 1.0492, Soft: 4.9502 Acc: 49.60% LR: 0.000998 Alpha: 0.2813
+2026-01-20 22:03:48,676 - INFO - Epoch [4/100] Train Loss: 2.2981, Train Acc: 49.91%, Val Loss: 1.2580, Val Acc: 54.33%
+2026-01-20 22:03:48,676 - INFO - Best model saved with accuracy: 54.33%
+2026-01-20 22:04:13,722 - INFO - Epoch [5] Batch [0/249] Loss: 2.1076, Hard: 1.1523, Soft: 4.5685 Acc: 68.75% LR: 0.000996 Alpha: 0.2796
+2026-01-20 22:04:37,109 - INFO - Epoch [5] Batch [20/249] Loss: 2.2799, Hard: 1.1199, Soft: 5.3226 Acc: 55.80% LR: 0.000996 Alpha: 0.2760
+2026-01-20 22:05:00,589 - INFO - Epoch [5] Batch [40/249] Loss: 2.3113, Hard: 1.1992, Soft: 5.2826 Acc: 57.24% LR: 0.000996 Alpha: 0.2723
+2026-01-20 22:05:23,042 - INFO - Epoch [5] Batch [60/249] Loss: 2.2298, Hard: 1.1650, Soft: 5.1272 Acc: 57.94% LR: 0.000996 Alpha: 0.2687
+2026-01-20 22:05:45,917 - INFO - Epoch [5] Batch [80/249] Loss: 1.9880, Hard: 1.0144, Soft: 4.6867 Acc: 59.61% LR: 0.000996 Alpha: 0.2651
+2026-01-20 22:06:09,045 - INFO - Epoch [5] Batch [100/249] Loss: 2.0520, Hard: 1.0717, Soft: 4.8192 Acc: 59.99% LR: 0.000996 Alpha: 0.2616
+2026-01-20 22:06:32,485 - INFO - Epoch [5] Batch [120/249] Loss: 2.4823, Hard: 1.4193, Soft: 5.5380 Acc: 60.36% LR: 0.000996 Alpha: 0.2581
+2026-01-20 22:06:55,567 - INFO - Epoch [5] Batch [140/249] Loss: 2.2167, Hard: 1.2473, Soft: 5.0551 Acc: 60.04% LR: 0.000996 Alpha: 0.2546
+2026-01-20 22:07:18,690 - INFO - Epoch [5] Batch [160/249] Loss: 1.9072, Hard: 0.9565, Soft: 4.7415 Acc: 60.07% LR: 0.000996 Alpha: 0.2512
+2026-01-20 22:07:41,205 - INFO - Epoch [5] Batch [180/249] Loss: 2.2014, Hard: 1.2786, Soft: 5.0033 Acc: 60.07% LR: 0.000996 Alpha: 0.2477
+2026-01-20 22:08:03,873 - INFO - Epoch [5] Batch [200/249] Loss: 1.8924, Hard: 0.9735, Soft: 4.7334 Acc: 60.26% LR: 0.000996 Alpha: 0.2444
+2026-01-20 22:08:27,622 - INFO - Epoch [5] Batch [220/249] Loss: 2.3133, Hard: 1.3051, Soft: 5.4878 Acc: 60.72% LR: 0.000996 Alpha: 0.2410
+2026-01-20 22:08:50,270 - INFO - Epoch [5] Batch [240/249] Loss: 1.8663, Hard: 0.9268, Soft: 4.8789 Acc: 60.85% LR: 0.000996 Alpha: 0.2377
+2026-01-20 22:09:57,435 - INFO - Epoch [5/100] Train Loss: 2.1062, Train Acc: 60.91%, Val Loss: 1.0804, Val Acc: 65.90%
+2026-01-20 22:09:57,436 - INFO - Best model saved with accuracy: 65.90%
+2026-01-20 22:10:22,183 - INFO - Epoch [6] Batch [0/249] Loss: 2.2525, Hard: 1.2793, Soft: 5.3984 Acc: 59.38% LR: 0.000994 Alpha: 0.2363
+2026-01-20 22:10:45,792 - INFO - Epoch [6] Batch [20/249] Loss: 2.0030, Hard: 1.1071, Soft: 4.9510 Acc: 65.33% LR: 0.000994 Alpha: 0.2331
+2026-01-20 22:11:08,682 - INFO - Epoch [6] Batch [40/249] Loss: 1.8862, Hard: 0.8896, Soft: 5.2252 Acc: 63.41% LR: 0.000994 Alpha: 0.2299
+2026-01-20 22:11:31,984 - INFO - Epoch [6] Batch [60/249] Loss: 1.8967, Hard: 1.1182, Soft: 4.5519 Acc: 64.29% LR: 0.000994 Alpha: 0.2267
+2026-01-20 22:11:54,780 - INFO - Epoch [6] Batch [80/249] Loss: 1.8934, Hard: 0.9576, Soft: 5.1411 Acc: 64.74% LR: 0.000994 Alpha: 0.2237
+2026-01-20 22:12:18,136 - INFO - Epoch [6] Batch [100/249] Loss: 1.7938, Hard: 0.9459, Soft: 4.7899 Acc: 65.97% LR: 0.000994 Alpha: 0.2206
+2026-01-20 22:12:40,728 - INFO - Epoch [6] Batch [120/249] Loss: 1.9317, Hard: 0.9947, Soft: 5.3018 Acc: 66.58% LR: 0.000994 Alpha: 0.2175
+2026-01-20 22:13:03,513 - INFO - Epoch [6] Batch [140/249] Loss: 1.9671, Hard: 1.1318, Soft: 5.0250 Acc: 66.84% LR: 0.000994 Alpha: 0.2145
+2026-01-20 22:13:27,028 - INFO - Epoch [6] Batch [160/249] Loss: 2.1193, Hard: 1.1719, Soft: 5.6487 Acc: 66.93% LR: 0.000994 Alpha: 0.2116
+2026-01-20 22:13:49,680 - INFO - Epoch [6] Batch [180/249] Loss: 2.1168, Hard: 1.2400, Soft: 5.4425 Acc: 66.80% LR: 0.000994 Alpha: 0.2086
+2026-01-20 22:14:12,802 - INFO - Epoch [6] Batch [200/249] Loss: 1.9657, Hard: 1.0463, Soft: 5.5148 Acc: 66.90% LR: 0.000994 Alpha: 0.2058
+2026-01-20 22:14:35,608 - INFO - Epoch [6] Batch [220/249] Loss: 1.7686, Hard: 0.9540, Soft: 4.9682 Acc: 67.18% LR: 0.000994 Alpha: 0.2029
+2026-01-20 22:14:58,668 - INFO - Epoch [6] Batch [240/249] Loss: 1.8299, Hard: 0.9738, Soft: 5.2517 Acc: 67.03% LR: 0.000994 Alpha: 0.2001
+2026-01-20 22:16:06,415 - INFO - Epoch [6/100] Train Loss: 1.9235, Train Acc: 66.97%, Val Loss: 0.9482, Val Acc: 68.94%
+2026-01-20 22:16:06,415 - INFO - Best model saved with accuracy: 68.94%
+2026-01-20 22:16:30,583 - INFO - Epoch [7] Batch [0/249] Loss: 1.8450, Hard: 0.9918, Soft: 5.2817 Acc: 78.12% LR: 0.000991 Alpha: 0.1989
+2026-01-20 22:16:54,100 - INFO - Epoch [7] Batch [20/249] Loss: 1.6972, Hard: 0.8959, Soft: 4.9806 Acc: 68.90% LR: 0.000991 Alpha: 0.1962
+2026-01-20 22:17:17,215 - INFO - Epoch [7] Batch [40/249] Loss: 1.7500, Hard: 0.8533, Soft: 5.4865 Acc: 71.42% LR: 0.000991 Alpha: 0.1935
+2026-01-20 22:17:39,675 - INFO - Epoch [7] Batch [60/249] Loss: 1.7065, Hard: 1.0302, Soft: 4.5729 Acc: 70.18% LR: 0.000991 Alpha: 0.1909
+2026-01-20 22:18:02,924 - INFO - Epoch [7] Batch [80/249] Loss: 1.7750, Hard: 0.9231, Soft: 5.4483 Acc: 69.48% LR: 0.000991 Alpha: 0.1883
+2026-01-20 22:18:25,524 - INFO - Epoch [7] Batch [100/249] Loss: 1.7722, Hard: 0.9822, Soft: 5.2386 Acc: 69.77% LR: 0.000991 Alpha: 0.1856
+2026-01-20 22:18:48,349 - INFO - Epoch [7] Batch [120/249] Loss: 1.7545, Hard: 0.9297, Soft: 5.4342 Acc: 70.14% LR: 0.000991 Alpha: 0.1831
+2026-01-20 22:19:11,549 - INFO - Epoch [7] Batch [140/249] Loss: 1.6998, Hard: 0.8909, Soft: 5.3687 Acc: 70.59% LR: 0.000991 Alpha: 0.1806
+2026-01-20 22:19:34,156 - INFO - Epoch [7] Batch [160/249] Loss: 1.6347, Hard: 0.8968, Soft: 5.0385 Acc: 70.46% LR: 0.000991 Alpha: 0.1782
+2026-01-20 22:19:57,206 - INFO - Epoch [7] Batch [180/249] Loss: 1.6440, Hard: 0.8397, Soft: 5.4165 Acc: 70.65% LR: 0.000991 Alpha: 0.1757
+2026-01-20 22:20:20,299 - INFO - Epoch [7] Batch [200/249] Loss: 1.7147, Hard: 0.9357, Soft: 5.4301 Acc: 70.62% LR: 0.000991 Alpha: 0.1733
+2026-01-20 22:20:43,671 - INFO - Epoch [7] Batch [220/249] Loss: 1.6865, Hard: 0.9933, Soft: 5.0480 Acc: 70.40% LR: 0.000991 Alpha: 0.1710
+2026-01-20 22:21:07,217 - INFO - Epoch [7] Batch [240/249] Loss: 1.5023, Hard: 0.7499, Soft: 5.2117 Acc: 70.66% LR: 0.000991 Alpha: 0.1686
+2026-01-20 22:22:13,044 - INFO - Epoch [7/100] Train Loss: 1.7343, Train Acc: 70.72%, Val Loss: 0.9196, Val Acc: 70.55%
+2026-01-20 22:22:13,045 - INFO - Best model saved with accuracy: 70.55%
+2026-01-20 22:22:37,266 - INFO - Epoch [8] Batch [0/249] Loss: 1.5366, Hard: 0.7809, Soft: 5.2901 Acc: 78.12% LR: 0.000988 Alpha: 0.1676
+2026-01-20 22:22:59,717 - INFO - Epoch [8] Batch [20/249] Loss: 1.7133, Hard: 0.9843, Soft: 5.3944 Acc: 66.67% LR: 0.000988 Alpha: 0.1653
+2026-01-20 22:23:23,135 - INFO - Epoch [8] Batch [40/249] Loss: 1.6941, Hard: 0.9451, Soft: 5.5371 Acc: 68.45% LR: 0.000988 Alpha: 0.1631
+2026-01-20 22:23:45,709 - INFO - Epoch [8] Batch [60/249] Loss: 1.7336, Hard: 1.0574, Soft: 5.2596 Acc: 69.57% LR: 0.000988 Alpha: 0.1609
+2026-01-20 22:24:08,695 - INFO - Epoch [8] Batch [80/249] Loss: 1.7721, Hard: 1.0393, Soft: 5.6550 Acc: 70.06% LR: 0.000988 Alpha: 0.1588
+2026-01-20 22:24:30,477 - INFO - Epoch [8] Batch [100/249] Loss: 1.7011, Hard: 1.0078, Soft: 5.4340 Acc: 69.86% LR: 0.000988 Alpha: 0.1566
+2026-01-20 22:24:52,864 - INFO - Epoch [8] Batch [120/249] Loss: 1.7028, Hard: 0.9443, Soft: 5.8532 Acc: 70.43% LR: 0.000988 Alpha: 0.1545
+2026-01-20 22:25:15,599 - INFO - Epoch [8] Batch [140/249] Loss: 1.5047, Hard: 0.8498, Soft: 5.1444 Acc: 70.92% LR: 0.000988 Alpha: 0.1525
+2026-01-20 22:25:38,357 - INFO - Epoch [8] Batch [160/249] Loss: 1.5987, Hard: 0.9243, Soft: 5.4080 Acc: 70.50% LR: 0.000988 Alpha: 0.1504
+2026-01-20 22:26:00,938 - INFO - Epoch [8] Batch [180/249] Loss: 1.7001, Hard: 1.0359, Soft: 5.5119 Acc: 70.91% LR: 0.000988 Alpha: 0.1484
+2026-01-20 22:26:24,232 - INFO - Epoch [8] Batch [200/249] Loss: 1.5714, Hard: 0.8990, Soft: 5.4926 Acc: 70.94% LR: 0.000988 Alpha: 0.1464
+2026-01-20 22:26:47,262 - INFO - Epoch [8] Batch [220/249] Loss: 1.4951, Hard: 0.8414, Soft: 5.3681 Acc: 70.93% LR: 0.000988 Alpha: 0.1444
+2026-01-20 22:27:10,192 - INFO - Epoch [8] Batch [240/249] Loss: 1.4206, Hard: 0.7870, Soft: 5.2342 Acc: 70.99% LR: 0.000988 Alpha: 0.1425
+2026-01-20 22:28:17,136 - INFO - Epoch [8/100] Train Loss: 1.6020, Train Acc: 71.08%, Val Loss: 0.8536, Val Acc: 70.80%
+2026-01-20 22:28:17,137 - INFO - Best model saved with accuracy: 70.80%
+2026-01-20 22:28:42,275 - INFO - Epoch [9] Batch [0/249] Loss: 1.6437, Hard: 0.9489, Soft: 5.8553 Acc: 71.88% LR: 0.000984 Alpha: 0.1416
+2026-01-20 22:29:05,593 - INFO - Epoch [9] Batch [20/249] Loss: 1.6183, Hard: 0.9350, Soft: 5.8247 Acc: 72.17% LR: 0.000984 Alpha: 0.1397
+2026-01-20 22:29:28,047 - INFO - Epoch [9] Batch [40/249] Loss: 1.3423, Hard: 0.7275, Soft: 5.1866 Acc: 71.34% LR: 0.000984 Alpha: 0.1379
+2026-01-20 22:29:51,088 - INFO - Epoch [9] Batch [60/249] Loss: 1.3534, Hard: 0.6799, Soft: 5.6293 Acc: 71.82% LR: 0.000984 Alpha: 0.1361
+2026-01-20 22:30:13,612 - INFO - Epoch [9] Batch [80/249] Loss: 1.3580, Hard: 0.7295, Soft: 5.4107 Acc: 72.49% LR: 0.000984 Alpha: 0.1343
+2026-01-20 22:30:36,403 - INFO - Epoch [9] Batch [100/249] Loss: 1.3747, Hard: 0.7791, Soft: 5.2744 Acc: 72.49% LR: 0.000984 Alpha: 0.1325
+2026-01-20 22:30:59,607 - INFO - Epoch [9] Batch [120/249] Loss: 1.3887, Hard: 0.7373, Soft: 5.7185 Acc: 72.60% LR: 0.000984 Alpha: 0.1308
+2026-01-20 22:31:22,883 - INFO - Epoch [9] Batch [140/249] Loss: 1.3571, Hard: 0.7748, Soft: 5.2876 Acc: 72.63% LR: 0.000984 Alpha: 0.1290
+2026-01-20 22:31:45,871 - INFO - Epoch [9] Batch [160/249] Loss: 1.5565, Hard: 0.9676, Soft: 5.5914 Acc: 72.61% LR: 0.000984 Alpha: 0.1274
+2026-01-20 22:32:09,028 - INFO - Epoch [9] Batch [180/249] Loss: 1.5426, Hard: 0.8976, Soft: 6.0294 Acc: 72.67% LR: 0.000984 Alpha: 0.1257
+2026-01-20 22:32:31,775 - INFO - Epoch [9] Batch [200/249] Loss: 1.4674, Hard: 0.8449, Soft: 5.8628 Acc: 72.71% LR: 0.000984 Alpha: 0.1241
+2026-01-20 22:32:55,260 - INFO - Epoch [9] Batch [220/249] Loss: 1.5314, Hard: 0.9959, Soft: 5.3698 Acc: 72.77% LR: 0.000984 Alpha: 0.1224
+2026-01-20 22:33:17,381 - INFO - Epoch [9] Batch [240/249] Loss: 1.3000, Hard: 0.7018, Soft: 5.6517 Acc: 73.07% LR: 0.000984 Alpha: 0.1208
+2026-01-20 22:34:24,813 - INFO - Epoch [9/100] Train Loss: 1.4591, Train Acc: 72.94%, Val Loss: 0.8809, Val Acc: 69.94%
+2026-01-20 22:34:48,582 - INFO - Epoch [10] Batch [0/249] Loss: 1.3632, Hard: 0.7511, Soft: 5.8465 Acc: 81.25% LR: 0.000980 Alpha: 0.1201
+2026-01-20 22:35:11,365 - INFO - Epoch [10] Batch [20/249] Loss: 1.5086, Hard: 0.9550, Soft: 5.6243 Acc: 73.36% LR: 0.000980 Alpha: 0.1186
+2026-01-20 22:35:33,915 - INFO - Epoch [10] Batch [40/249] Loss: 1.3777, Hard: 0.7876, Soft: 5.8302 Acc: 73.25% LR: 0.000980 Alpha: 0.1170
+2026-01-20 22:35:56,982 - INFO - Epoch [10] Batch [60/249] Loss: 1.3759, Hard: 0.8264, Soft: 5.5823 Acc: 73.62% LR: 0.000980 Alpha: 0.1155
+2026-01-20 22:36:19,763 - INFO - Epoch [10] Batch [80/249] Loss: 1.2992, Hard: 0.7929, Soft: 5.2318 Acc: 73.69% LR: 0.000980 Alpha: 0.1141
+2026-01-20 22:36:42,311 - INFO - Epoch [10] Batch [100/249] Loss: 1.5099, Hard: 0.9347, Soft: 6.0405 Acc: 74.01% LR: 0.000980 Alpha: 0.1126
+2026-01-20 22:37:04,664 - INFO - Epoch [10] Batch [120/249] Loss: 1.3176, Hard: 0.7720, Soft: 5.6787 Acc: 74.23% LR: 0.000980 Alpha: 0.1112
+2026-01-20 22:37:27,296 - INFO - Epoch [10] Batch [140/249] Loss: 1.3941, Hard: 0.8612, Soft: 5.7160 Acc: 74.14% LR: 0.000980 Alpha: 0.1098
+2026-01-20 22:37:49,785 - INFO - Epoch [10] Batch [160/249] Loss: 1.6999, Hard: 1.1480, Soft: 6.2409 Acc: 73.78% LR: 0.000980 Alpha: 0.1084
+2026-01-20 22:38:12,058 - INFO - Epoch [10] Batch [180/249] Loss: 1.6594, Hard: 1.1461, Soft: 5.9448 Acc: 73.60% LR: 0.000980 Alpha: 0.1070
+2026-01-20 22:38:34,717 - INFO - Epoch [10] Batch [200/249] Loss: 1.3497, Hard: 0.8189, Soft: 5.8457 Acc: 73.49% LR: 0.000980 Alpha: 0.1056
+2026-01-20 22:38:57,349 - INFO - Epoch [10] Batch [220/249] Loss: 1.2807, Hard: 0.7759, Soft: 5.6170 Acc: 73.54% LR: 0.000980 Alpha: 0.1043
+2026-01-20 22:39:19,943 - INFO - Epoch [10] Batch [240/249] Loss: 1.1392, Hard: 0.6040, Soft: 5.8021 Acc: 73.64% LR: 0.000980 Alpha: 0.1030
+2026-01-20 22:40:24,032 - INFO - Epoch [10/100] Train Loss: 1.3490, Train Acc: 73.80%, Val Loss: 0.7598, Val Acc: 74.00%
+2026-01-20 22:40:24,032 - INFO - Best model saved with accuracy: 74.00%
+2026-01-20 22:40:24,050 - INFO - Checkpoint saved at epoch 10
+2026-01-20 22:40:47,878 - INFO - Epoch [11] Batch [0/249] Loss: 1.3121, Hard: 0.7646, Soft: 6.1134 Acc: 75.00% LR: 0.000976 Alpha: 0.1024
+2026-01-20 22:41:10,501 - INFO - Epoch [11] Batch [20/249] Loss: 1.3006, Hard: 0.8143, Soft: 5.6260 Acc: 75.30% LR: 0.000976 Alpha: 0.1011
+2026-01-20 22:41:33,240 - INFO - Epoch [11] Batch [40/249] Loss: 1.3970, Hard: 0.8667, Soft: 6.1802 Acc: 75.61% LR: 0.000976 Alpha: 0.0998
+2026-01-20 22:41:56,171 - INFO - Epoch [11] Batch [60/249] Loss: 1.3157, Hard: 0.8748, Soft: 5.3478 Acc: 75.87% LR: 0.000976 Alpha: 0.0986
+2026-01-20 22:42:18,828 - INFO - Epoch [11] Batch [80/249] Loss: 1.3170, Hard: 0.8177, Soft: 5.9454 Acc: 75.69% LR: 0.000976 Alpha: 0.0974
+2026-01-20 22:42:41,700 - INFO - Epoch [11] Batch [100/249] Loss: 1.1267, Hard: 0.7117, Soft: 5.0269 Acc: 74.97% LR: 0.000976 Alpha: 0.0962
+2026-01-20 22:43:04,286 - INFO - Epoch [11] Batch [120/249] Loss: 1.0576, Hard: 0.5683, Soft: 5.7186 Acc: 74.23% LR: 0.000976 Alpha: 0.0950
+2026-01-20 22:43:26,951 - INFO - Epoch [11] Batch [140/249] Loss: 1.2229, Hard: 0.7480, Soft: 5.8094 Acc: 74.27% LR: 0.000976 Alpha: 0.0938
+2026-01-20 22:43:50,093 - INFO - Epoch [11] Batch [160/249] Loss: 1.3616, Hard: 0.8546, Soft: 6.3248 Acc: 74.59% LR: 0.000976 Alpha: 0.0927
+2026-01-20 22:44:12,731 - INFO - Epoch [11] Batch [180/249] Loss: 1.1272, Hard: 0.6590, Soft: 5.7724 Acc: 74.55% LR: 0.000976 Alpha: 0.0916
+2026-01-20 22:44:35,725 - INFO - Epoch [11] Batch [200/249] Loss: 1.0873, Hard: 0.6147, Soft: 5.8402 Acc: 74.58% LR: 0.000976 Alpha: 0.0904
+2026-01-20 22:44:57,828 - INFO - Epoch [11] Batch [220/249] Loss: 1.0638, Hard: 0.6545, Soft: 5.2358 Acc: 75.06% LR: 0.000976 Alpha: 0.0893
+2026-01-20 22:45:20,176 - INFO - Epoch [11] Batch [240/249] Loss: 1.0446, Hard: 0.5893, Soft: 5.7495 Acc: 75.04% LR: 0.000976 Alpha: 0.0882
+2026-01-20 22:46:26,280 - INFO - Epoch [11/100] Train Loss: 1.2356, Train Acc: 75.08%, Val Loss: 0.6985, Val Acc: 76.15%
+2026-01-20 22:46:26,280 - INFO - Best model saved with accuracy: 76.15%
+2026-01-20 22:46:50,869 - INFO - Epoch [12] Batch [0/249] Loss: 1.1665, Hard: 0.6996, Soft: 6.0207 Acc: 78.12% LR: 0.000970 Alpha: 0.0878
+2026-01-20 22:47:13,617 - INFO - Epoch [12] Batch [20/249] Loss: 1.2736, Hard: 0.8451, Soft: 5.7881 Acc: 74.11% LR: 0.000970 Alpha: 0.0867
+2026-01-20 22:47:36,314 - INFO - Epoch [12] Batch [40/249] Loss: 1.0044, Hard: 0.5477, Soft: 5.8806 Acc: 77.06% LR: 0.000970 Alpha: 0.0856
+2026-01-20 22:47:59,162 - INFO - Epoch [12] Batch [60/249] Loss: 1.1184, Hard: 0.6772, Soft: 5.8934 Acc: 76.95% LR: 0.000970 Alpha: 0.0846
+2026-01-20 22:48:22,140 - INFO - Epoch [12] Batch [80/249] Loss: 1.1365, Hard: 0.6936, Soft: 5.9960 Acc: 77.20% LR: 0.000970 Alpha: 0.0835
+2026-01-20 22:48:44,661 - INFO - Epoch [12] Batch [100/249] Loss: 1.2265, Hard: 0.8062, Soft: 5.8992 Acc: 76.83% LR: 0.000970 Alpha: 0.0825
+2026-01-20 22:49:06,942 - INFO - Epoch [12] Batch [120/249] Loss: 1.3613, Hard: 0.9656, Soft: 5.8192 Acc: 76.70% LR: 0.000970 Alpha: 0.0815
+2026-01-20 22:49:29,677 - INFO - Epoch [12] Batch [140/249] Loss: 1.1802, Hard: 0.7696, Soft: 5.8671 Acc: 76.75% LR: 0.000970 Alpha: 0.0806
+2026-01-20 22:49:51,613 - INFO - Epoch [12] Batch [160/249] Loss: 1.3036, Hard: 0.8963, Soft: 6.0140 Acc: 76.49% LR: 0.000970 Alpha: 0.0796
+2026-01-20 22:50:14,078 - INFO - Epoch [12] Batch [180/249] Loss: 1.2116, Hard: 0.7771, Soft: 6.3011 Acc: 76.43% LR: 0.000970 Alpha: 0.0786
+2026-01-20 22:50:36,663 - INFO - Epoch [12] Batch [200/249] Loss: 1.0203, Hard: 0.6260, Soft: 5.6996 Acc: 76.21% LR: 0.000970 Alpha: 0.0777
+2026-01-20 22:50:58,986 - INFO - Epoch [12] Batch [220/249] Loss: 1.2420, Hard: 0.8735, Soft: 5.6718 Acc: 76.12% LR: 0.000970 Alpha: 0.0768
+2026-01-20 22:51:21,528 - INFO - Epoch [12] Batch [240/249] Loss: 1.0781, Hard: 0.6653, Soft: 6.1035 Acc: 76.02% LR: 0.000970 Alpha: 0.0759
+2026-01-20 22:52:27,421 - INFO - Epoch [12/100] Train Loss: 1.1545, Train Acc: 75.94%, Val Loss: 0.7061, Val Acc: 74.79%
+2026-01-20 22:52:52,262 - INFO - Epoch [13] Batch [0/249] Loss: 1.2044, Hard: 0.8008, Soft: 6.1464 Acc: 68.75% LR: 0.000965 Alpha: 0.0755
+2026-01-20 22:53:15,491 - INFO - Epoch [13] Batch [20/249] Loss: 0.9239, Hard: 0.4845, Soft: 6.3735 Acc: 79.61% LR: 0.000965 Alpha: 0.0746
+2026-01-20 22:53:38,264 - INFO - Epoch [13] Batch [40/249] Loss: 0.8649, Hard: 0.4708, Soft: 5.8153 Acc: 78.05% LR: 0.000965 Alpha: 0.0737
+2026-01-20 22:54:01,021 - INFO - Epoch [13] Batch [60/249] Loss: 1.0674, Hard: 0.6493, Soft: 6.3863 Acc: 78.18% LR: 0.000965 Alpha: 0.0729
+2026-01-20 22:54:23,528 - INFO - Epoch [13] Batch [80/249] Loss: 1.2201, Hard: 0.8308, Soft: 6.2358 Acc: 77.85% LR: 0.000965 Alpha: 0.0720
+2026-01-20 22:54:45,653 - INFO - Epoch [13] Batch [100/249] Loss: 1.0767, Hard: 0.6924, Soft: 6.0913 Acc: 77.57% LR: 0.000965 Alpha: 0.0712
+2026-01-20 22:55:08,394 - INFO - Epoch [13] Batch [120/249] Loss: 0.9917, Hard: 0.5846, Soft: 6.3714 Acc: 77.58% LR: 0.000965 Alpha: 0.0703
+2026-01-20 22:55:30,727 - INFO - Epoch [13] Batch [140/249] Loss: 1.0894, Hard: 0.7053, Soft: 6.2291 Acc: 77.86% LR: 0.000965 Alpha: 0.0695
+2026-01-20 22:55:53,565 - INFO - Epoch [13] Batch [160/249] Loss: 1.1362, Hard: 0.7443, Soft: 6.4463 Acc: 77.37% LR: 0.000965 Alpha: 0.0687
+2026-01-20 22:56:16,157 - INFO - Epoch [13] Batch [180/249] Loss: 1.1069, Hard: 0.7201, Soft: 6.4135 Acc: 77.37% LR: 0.000965 Alpha: 0.0679
+2026-01-20 22:56:38,961 - INFO - Epoch [13] Batch [200/249] Loss: 1.1095, Hard: 0.7221, Soft: 6.4909 Acc: 77.08% LR: 0.000965 Alpha: 0.0672
+2026-01-20 22:57:01,652 - INFO - Epoch [13] Batch [220/249] Loss: 0.8994, Hard: 0.5329, Soft: 6.0561 Acc: 76.89% LR: 0.000965 Alpha: 0.0664
+2026-01-20 22:57:24,326 - INFO - Epoch [13] Batch [240/249] Loss: 1.2468, Hard: 0.9041, Soft: 6.1281 Acc: 76.87% LR: 0.000965 Alpha: 0.0656
+2026-01-20 22:58:29,299 - INFO - Epoch [13/100] Train Loss: 1.0955, Train Acc: 76.97%, Val Loss: 0.8169, Val Acc: 71.65%
+2026-01-20 22:58:53,481 - INFO - Epoch [14] Batch [0/249] Loss: 0.8748, Hard: 0.5079, Soft: 6.1303 Acc: 84.38% LR: 0.000959 Alpha: 0.0653
+2026-01-20 22:59:16,448 - INFO - Epoch [14] Batch [20/249] Loss: 0.9711, Hard: 0.6056, Soft: 6.2726 Acc: 76.04% LR: 0.000959 Alpha: 0.0645
+2026-01-20 22:59:38,959 - INFO - Epoch [14] Batch [40/249] Loss: 0.9445, Hard: 0.5898, Soft: 6.1521 Acc: 76.83% LR: 0.000959 Alpha: 0.0638
+2026-01-20 23:00:01,753 - INFO - Epoch [14] Batch [60/249] Loss: 0.8528, Hard: 0.4905, Soft: 6.2389 Acc: 77.46% LR: 0.000959 Alpha: 0.0630
+2026-01-20 23:00:24,527 - INFO - Epoch [14] Batch [80/249] Loss: 1.3131, Hard: 0.9680, Soft: 6.5048 Acc: 77.62% LR: 0.000959 Alpha: 0.0623
+2026-01-20 23:00:47,090 - INFO - Epoch [14] Batch [100/249] Loss: 1.2576, Hard: 0.9355, Soft: 6.1622 Acc: 77.48% LR: 0.000959 Alpha: 0.0616
+2026-01-20 23:01:09,859 - INFO - Epoch [14] Batch [120/249] Loss: 1.0878, Hard: 0.7413, Soft: 6.4290 Acc: 77.27% LR: 0.000959 Alpha: 0.0609
+2026-01-20 23:01:32,598 - INFO - Epoch [14] Batch [140/249] Loss: 1.0252, Hard: 0.7088, Soft: 5.9613 Acc: 76.86% LR: 0.000959 Alpha: 0.0602
+2026-01-20 23:01:55,545 - INFO - Epoch [14] Batch [160/249] Loss: 0.9144, Hard: 0.5925, Soft: 5.9967 Acc: 76.90% LR: 0.000959 Alpha: 0.0596
+2026-01-20 23:02:18,494 - INFO - Epoch [14] Batch [180/249] Loss: 0.7614, Hard: 0.4372, Soft: 5.9389 Acc: 76.74% LR: 0.000959 Alpha: 0.0589
+2026-01-20 23:02:41,145 - INFO - Epoch [14] Batch [200/249] Loss: 0.9773, Hard: 0.6854, Soft: 5.6944 Acc: 76.83% LR: 0.000959 Alpha: 0.0583
+2026-01-20 23:03:04,149 - INFO - Epoch [14] Batch [220/249] Loss: 1.0694, Hard: 0.7716, Soft: 5.9399 Acc: 76.85% LR: 0.000959 Alpha: 0.0576
+2026-01-20 23:03:27,597 - INFO - Epoch [14] Batch [240/249] Loss: 0.8980, Hard: 0.5661, Soft: 6.3925 Acc: 76.88% LR: 0.000959 Alpha: 0.0570
+2026-01-20 23:04:37,896 - INFO - Epoch [14/100] Train Loss: 1.0210, Train Acc: 76.90%, Val Loss: 0.6450, Val Acc: 76.70%
+2026-01-20 23:04:37,896 - INFO - Best model saved with accuracy: 76.70%
+2026-01-20 23:05:02,478 - INFO - Epoch [15] Batch [0/249] Loss: 1.0016, Hard: 0.6777, Soft: 6.3906 Acc: 78.12% LR: 0.000952 Alpha: 0.0567
+2026-01-20 23:05:26,074 - INFO - Epoch [15] Batch [20/249] Loss: 1.0344, Hard: 0.6950, Soft: 6.7474 Acc: 74.85% LR: 0.000952 Alpha: 0.0561
+2026-01-20 23:05:49,277 - INFO - Epoch [15] Batch [40/249] Loss: 0.9658, Hard: 0.6649, Soft: 6.0912 Acc: 76.22% LR: 0.000952 Alpha: 0.0554
+2026-01-20 23:06:13,155 - INFO - Epoch [15] Batch [60/249] Loss: 1.1436, Hard: 0.8091, Soft: 6.9076 Acc: 76.38% LR: 0.000952 Alpha: 0.0548
+2026-01-20 23:06:35,785 - INFO - Epoch [15] Batch [80/249] Loss: 1.0261, Hard: 0.6767, Soft: 7.1196 Acc: 76.58% LR: 0.000952 Alpha: 0.0542
+2026-01-20 23:06:58,944 - INFO - Epoch [15] Batch [100/249] Loss: 0.8688, Hard: 0.5548, Soft: 6.4099 Acc: 76.92% LR: 0.000952 Alpha: 0.0536
+2026-01-20 23:07:22,082 - INFO - Epoch [15] Batch [120/249] Loss: 0.8540, Hard: 0.5448, Soft: 6.3755 Acc: 77.09% LR: 0.000952 Alpha: 0.0530
+2026-01-20 23:07:45,327 - INFO - Epoch [15] Batch [140/249] Loss: 0.9102, Hard: 0.5832, Soft: 6.8167 Acc: 77.17% LR: 0.000952 Alpha: 0.0525
+2026-01-20 23:08:08,341 - INFO - Epoch [15] Batch [160/249] Loss: 0.9644, Hard: 0.6639, Soft: 6.4552 Acc: 77.23% LR: 0.000952 Alpha: 0.0519
+2026-01-20 23:08:31,428 - INFO - Epoch [15] Batch [180/249] Loss: 1.1347, Hard: 0.8139, Soft: 7.0647 Acc: 77.28% LR: 0.000952 Alpha: 0.0513
+2026-01-20 23:08:55,013 - INFO - Epoch [15] Batch [200/249] Loss: 1.0706, Hard: 0.7727, Soft: 6.6411 Acc: 77.36% LR: 0.000952 Alpha: 0.0508
+2026-01-20 23:09:18,051 - INFO - Epoch [15] Batch [220/249] Loss: 0.9189, Hard: 0.6135, Soft: 6.6992 Acc: 77.02% LR: 0.000952 Alpha: 0.0502
+2026-01-20 23:09:41,765 - INFO - Epoch [15] Batch [240/249] Loss: 0.8070, Hard: 0.5135, Soft: 6.4256 Acc: 76.98% LR: 0.000952 Alpha: 0.0496
+2026-01-20 23:10:51,069 - INFO - Epoch [15/100] Train Loss: 0.9662, Train Acc: 77.05%, Val Loss: 0.7067, Val Acc: 74.54%
+2026-01-20 23:11:15,680 - INFO - Epoch [16] Batch [0/249] Loss: 0.8639, Hard: 0.5681, Soft: 6.5587 Acc: 78.12% LR: 0.000946 Alpha: 0.0494
+2026-01-20 23:11:39,082 - INFO - Epoch [16] Batch [20/249] Loss: 0.7272, Hard: 0.4296, Soft: 6.5214 Acc: 75.74% LR: 0.000946 Alpha: 0.0489
+2026-01-20 23:12:02,522 - INFO - Epoch [16] Batch [40/249] Loss: 1.1288, Hard: 0.8513, Soft: 6.5920 Acc: 76.37% LR: 0.000946 Alpha: 0.0483
+2026-01-20 23:12:26,011 - INFO - Epoch [16] Batch [60/249] Loss: 0.7533, Hard: 0.4457, Soft: 6.8811 Acc: 77.77% LR: 0.000946 Alpha: 0.0478
+2026-01-20 23:12:49,509 - INFO - Epoch [16] Batch [80/249] Loss: 0.9083, Hard: 0.6398, Soft: 6.3163 Acc: 77.24% LR: 0.000946 Alpha: 0.0473
+2026-01-20 23:13:12,613 - INFO - Epoch [16] Batch [100/249] Loss: 1.2000, Hard: 0.9304, Soft: 6.6919 Acc: 77.13% LR: 0.000946 Alpha: 0.0468
+2026-01-20 23:13:35,624 - INFO - Epoch [16] Batch [120/249] Loss: 0.7723, Hard: 0.4839, Soft: 6.7130 Acc: 77.56% LR: 0.000946 Alpha: 0.0463
+2026-01-20 23:13:58,813 - INFO - Epoch [16] Batch [140/249] Loss: 0.9651, Hard: 0.6942, Soft: 6.6068 Acc: 77.35% LR: 0.000946 Alpha: 0.0458
+2026-01-20 23:14:21,289 - INFO - Epoch [16] Batch [160/249] Loss: 0.8341, Hard: 0.5729, Soft: 6.3342 Acc: 77.66% LR: 0.000946 Alpha: 0.0453
+2026-01-20 23:14:44,125 - INFO - Epoch [16] Batch [180/249] Loss: 0.6287, Hard: 0.3453, Soft: 6.6645 Acc: 77.95% LR: 0.000946 Alpha: 0.0448
+2026-01-20 23:15:07,320 - INFO - Epoch [16] Batch [200/249] Loss: 1.0734, Hard: 0.8309, Soft: 6.3003 Acc: 77.88% LR: 0.000946 Alpha: 0.0443
+2026-01-20 23:15:30,428 - INFO - Epoch [16] Batch [220/249] Loss: 0.9375, Hard: 0.6660, Soft: 6.8527 Acc: 77.81% LR: 0.000946 Alpha: 0.0439
+2026-01-20 23:15:53,694 - INFO - Epoch [16] Batch [240/249] Loss: 0.8972, Hard: 0.6337, Soft: 6.7027 Acc: 78.10% LR: 0.000946 Alpha: 0.0434
+2026-01-20 23:17:03,349 - INFO - Epoch [16/100] Train Loss: 0.9024, Train Acc: 78.14%, Val Loss: 0.7215, Val Acc: 72.96%
+2026-01-20 23:17:28,303 - INFO - Epoch [17] Batch [0/249] Loss: 1.0449, Hard: 0.7755, Soft: 7.0093 Acc: 68.75% LR: 0.000938 Alpha: 0.0432
+2026-01-20 23:17:50,805 - INFO - Epoch [17] Batch [20/249] Loss: 0.7621, Hard: 0.5073, Soft: 6.4672 Acc: 76.64% LR: 0.000938 Alpha: 0.0428
+2026-01-20 23:18:15,193 - INFO - Epoch [17] Batch [40/249] Loss: 0.8333, Hard: 0.5572, Soft: 7.0829 Acc: 77.59% LR: 0.000938 Alpha: 0.0423
+2026-01-20 23:18:37,814 - INFO - Epoch [17] Batch [60/249] Loss: 0.8274, Hard: 0.5794, Soft: 6.5027 Acc: 77.20% LR: 0.000938 Alpha: 0.0419
+2026-01-20 23:19:00,700 - INFO - Epoch [17] Batch [80/249] Loss: 0.7767, Hard: 0.5356, Soft: 6.3514 Acc: 77.04% LR: 0.000938 Alpha: 0.0415
+2026-01-20 23:19:23,480 - INFO - Epoch [17] Batch [100/249] Loss: 0.8237, Hard: 0.5644, Soft: 6.8857 Acc: 77.44% LR: 0.000938 Alpha: 0.0410
+2026-01-20 23:19:46,234 - INFO - Epoch [17] Batch [120/249] Loss: 0.5762, Hard: 0.3373, Soft: 6.2234 Acc: 77.53% LR: 0.000938 Alpha: 0.0406
+2026-01-20 23:20:09,290 - INFO - Epoch [17] Batch [140/249] Loss: 1.0580, Hard: 0.8282, Soft: 6.5469 Acc: 78.17% LR: 0.000938 Alpha: 0.0402
+2026-01-20 23:20:32,470 - INFO - Epoch [17] Batch [160/249] Loss: 0.9762, Hard: 0.7501, Soft: 6.4375 Acc: 78.45% LR: 0.000938 Alpha: 0.0398
+2026-01-20 23:20:55,319 - INFO - Epoch [17] Batch [180/249] Loss: 0.6736, Hard: 0.4156, Soft: 6.9726 Acc: 78.26% LR: 0.000938 Alpha: 0.0394
+2026-01-20 23:21:17,973 - INFO - Epoch [17] Batch [200/249] Loss: 0.7675, Hard: 0.4977, Soft: 7.4231 Acc: 78.42% LR: 0.000938 Alpha: 0.0389
+2026-01-20 23:21:40,350 - INFO - Epoch [17] Batch [220/249] Loss: 0.8712, Hard: 0.6231, Soft: 7.0598 Acc: 78.38% LR: 0.000938 Alpha: 0.0385
+2026-01-20 23:22:03,233 - INFO - Epoch [17] Batch [240/249] Loss: 0.9719, Hard: 0.7543, Soft: 6.4569 Acc: 78.46% LR: 0.000938 Alpha: 0.0381
+2026-01-20 23:23:12,105 - INFO - Epoch [17/100] Train Loss: 0.8617, Train Acc: 78.58%, Val Loss: 0.6495, Val Acc: 76.48%
+2026-01-20 23:23:37,678 - INFO - Epoch [18] Batch [0/249] Loss: 0.5865, Hard: 0.3266, Soft: 7.1700 Acc: 90.62% LR: 0.000930 Alpha: 0.0380
+2026-01-20 23:24:00,953 - INFO - Epoch [18] Batch [20/249] Loss: 0.7121, Hard: 0.4599, Soft: 7.1699 Acc: 79.76% LR: 0.000930 Alpha: 0.0376
+2026-01-20 23:24:23,388 - INFO - Epoch [18] Batch [40/249] Loss: 0.7991, Hard: 0.5727, Soft: 6.6597 Acc: 79.65% LR: 0.000930 Alpha: 0.0372
+2026-01-20 23:24:47,462 - INFO - Epoch [18] Batch [60/249] Loss: 0.9134, Hard: 0.6775, Soft: 7.0864 Acc: 78.79% LR: 0.000930 Alpha: 0.0368
+2026-01-20 23:25:10,700 - INFO - Epoch [18] Batch [80/249] Loss: 0.9364, Hard: 0.7049, Soft: 7.0574 Acc: 78.86% LR: 0.000930 Alpha: 0.0364
+2026-01-20 23:25:33,827 - INFO - Epoch [18] Batch [100/249] Loss: 0.7647, Hard: 0.5266, Soft: 7.1269 Acc: 79.12% LR: 0.000930 Alpha: 0.0361
+2026-01-20 23:25:57,412 - INFO - Epoch [18] Batch [120/249] Loss: 0.7582, Hard: 0.5127, Soft: 7.3859 Acc: 79.42% LR: 0.000930 Alpha: 0.0357
+2026-01-20 23:26:20,652 - INFO - Epoch [18] Batch [140/249] Loss: 0.8560, Hard: 0.6350, Soft: 6.8862 Acc: 79.54% LR: 0.000930 Alpha: 0.0353
+2026-01-20 23:26:43,592 - INFO - Epoch [18] Batch [160/249] Loss: 1.1432, Hard: 0.9481, Soft: 6.5236 Acc: 79.43% LR: 0.000930 Alpha: 0.0350
+2026-01-20 23:27:07,013 - INFO - Epoch [18] Batch [180/249] Loss: 0.8735, Hard: 0.6615, Soft: 6.7787 Acc: 78.97% LR: 0.000930 Alpha: 0.0346
+2026-01-20 23:27:29,753 - INFO - Epoch [18] Batch [200/249] Loss: 0.8275, Hard: 0.6137, Soft: 6.8462 Acc: 78.96% LR: 0.000930 Alpha: 0.0343
+2026-01-20 23:27:52,589 - INFO - Epoch [18] Batch [220/249] Loss: 0.7682, Hard: 0.5502, Soft: 6.9699 Acc: 79.11% LR: 0.000930 Alpha: 0.0339
+2026-01-20 23:28:15,837 - INFO - Epoch [18] Batch [240/249] Loss: 0.8629, Hard: 0.6468, Soft: 7.0776 Acc: 79.18% LR: 0.000930 Alpha: 0.0336
+2026-01-20 23:29:24,026 - INFO - Epoch [18/100] Train Loss: 0.8183, Train Acc: 79.19%, Val Loss: 0.5799, Val Acc: 78.90%
+2026-01-20 23:29:24,027 - INFO - Best model saved with accuracy: 78.90%
+2026-01-20 23:29:49,379 - INFO - Epoch [19] Batch [0/249] Loss: 0.7433, Hard: 0.5358, Soft: 6.7387 Acc: 78.12% LR: 0.000922 Alpha: 0.0335
+2026-01-20 23:30:12,868 - INFO - Epoch [19] Batch [20/249] Loss: 0.6908, Hard: 0.4852, Soft: 6.6935 Acc: 83.78% LR: 0.000922 Alpha: 0.0331
+2026-01-20 23:30:36,103 - INFO - Epoch [19] Batch [40/249] Loss: 0.7249, Hard: 0.5081, Soft: 7.1183 Acc: 80.79% LR: 0.000922 Alpha: 0.0328
+2026-01-20 23:30:58,834 - INFO - Epoch [19] Batch [60/249] Loss: 0.8402, Hard: 0.6439, Soft: 6.6905 Acc: 79.97% LR: 0.000922 Alpha: 0.0325
+2026-01-20 23:31:21,792 - INFO - Epoch [19] Batch [80/249] Loss: 0.7792, Hard: 0.5662, Soft: 7.1902 Acc: 79.51% LR: 0.000922 Alpha: 0.0321
+2026-01-20 23:31:45,602 - INFO - Epoch [19] Batch [100/249] Loss: 0.8212, Hard: 0.6135, Soft: 7.1398 Acc: 79.83% LR: 0.000922 Alpha: 0.0318
+2026-01-20 23:32:08,476 - INFO - Epoch [19] Batch [120/249] Loss: 0.9949, Hard: 0.7842, Soft: 7.4706 Acc: 79.60% LR: 0.000922 Alpha: 0.0315
+2026-01-20 23:32:31,796 - INFO - Epoch [19] Batch [140/249] Loss: 0.8065, Hard: 0.6017, Soft: 7.1667 Acc: 79.61% LR: 0.000922 Alpha: 0.0312
+2026-01-20 23:32:55,326 - INFO - Epoch [19] Batch [160/249] Loss: 0.7070, Hard: 0.5110, Soft: 6.8578 Acc: 79.66% LR: 0.000922 Alpha: 0.0309
+2026-01-20 23:33:19,339 - INFO - Epoch [19] Batch [180/249] Loss: 0.8096, Hard: 0.6263, Soft: 6.6205 Acc: 79.52% LR: 0.000922 Alpha: 0.0306
+2026-01-20 23:33:43,445 - INFO - Epoch [19] Batch [200/249] Loss: 0.9980, Hard: 0.8126, Soft: 6.9366 Acc: 79.46% LR: 0.000922 Alpha: 0.0303
+2026-01-20 23:34:06,615 - INFO - Epoch [19] Batch [220/249] Loss: 0.8008, Hard: 0.6233, Soft: 6.5427 Acc: 79.48% LR: 0.000922 Alpha: 0.0300
+2026-01-20 23:34:30,813 - INFO - Epoch [19] Batch [240/249] Loss: 0.6342, Hard: 0.4372, Soft: 7.0715 Acc: 79.51% LR: 0.000922 Alpha: 0.0297
+2026-01-20 23:35:41,142 - INFO - Epoch [19/100] Train Loss: 0.7779, Train Acc: 79.58%, Val Loss: 0.8235, Val Acc: 70.45%
+2026-01-20 23:36:06,720 - INFO - Epoch [20] Batch [0/249] Loss: 0.7179, Hard: 0.5192, Soft: 7.2402 Acc: 78.12% LR: 0.000914 Alpha: 0.0296
+2026-01-20 23:36:30,292 - INFO - Epoch [20] Batch [20/249] Loss: 1.0091, Hard: 0.8098, Soft: 7.6192 Acc: 78.27% LR: 0.000914 Alpha: 0.0293
+2026-01-20 23:36:53,058 - INFO - Epoch [20] Batch [40/249] Loss: 0.7945, Hard: 0.6088, Soft: 7.0143 Acc: 78.28% LR: 0.000914 Alpha: 0.0290
+2026-01-20 23:37:16,370 - INFO - Epoch [20] Batch [60/249] Loss: 0.5607, Hard: 0.3765, Soft: 6.7967 Acc: 79.30% LR: 0.000914 Alpha: 0.0287
+2026-01-20 23:37:38,948 - INFO - Epoch [20] Batch [80/249] Loss: 0.8755, Hard: 0.7120, Soft: 6.4653 Acc: 79.32% LR: 0.000914 Alpha: 0.0284
+2026-01-20 23:38:02,259 - INFO - Epoch [20] Batch [100/249] Loss: 0.7837, Hard: 0.6053, Soft: 6.9463 Acc: 79.12% LR: 0.000914 Alpha: 0.0281
+2026-01-20 23:38:24,908 - INFO - Epoch [20] Batch [120/249] Loss: 0.8496, Hard: 0.6736, Soft: 6.9899 Acc: 79.03% LR: 0.000914 Alpha: 0.0279
+2026-01-20 23:38:48,772 - INFO - Epoch [20] Batch [140/249] Loss: 0.8464, Hard: 0.6548, Soft: 7.5964 Acc: 79.12% LR: 0.000914 Alpha: 0.0276
+2026-01-20 23:39:11,991 - INFO - Epoch [20] Batch [160/249] Loss: 0.8165, Hard: 0.6182, Soft: 7.8765 Acc: 79.19% LR: 0.000914 Alpha: 0.0273
+2026-01-20 23:39:34,997 - INFO - Epoch [20] Batch [180/249] Loss: 0.9177, Hard: 0.7484, Soft: 7.0044 Acc: 79.25% LR: 0.000914 Alpha: 0.0271
+2026-01-20 23:39:58,489 - INFO - Epoch [20] Batch [200/249] Loss: 1.0608, Hard: 0.8777, Soft: 7.7094 Acc: 79.62% LR: 0.000914 Alpha: 0.0268
+2026-01-20 23:40:21,107 - INFO - Epoch [20] Batch [220/249] Loss: 0.7069, Hard: 0.5337, Soft: 7.0612 Acc: 79.92% LR: 0.000914 Alpha: 0.0265
+2026-01-20 23:40:43,746 - INFO - Epoch [20] Batch [240/249] Loss: 0.7250, Hard: 0.5577, Soft: 6.9234 Acc: 79.95% LR: 0.000914 Alpha: 0.0263
+2026-01-20 23:41:53,021 - INFO - Epoch [20/100] Train Loss: 0.7373, Train Acc: 79.97%, Val Loss: 0.6640, Val Acc: 76.55%
+2026-01-20 23:41:53,040 - INFO - Checkpoint saved at epoch 20
+2026-01-20 23:42:18,762 - INFO - Epoch [21] Batch [0/249] Loss: 0.5827, Hard: 0.4202, Soft: 6.6276 Acc: 84.38% LR: 0.000905 Alpha: 0.0262
+2026-01-20 23:42:42,663 - INFO - Epoch [21] Batch [20/249] Loss: 0.5821, Hard: 0.4174, Soft: 6.7695 Acc: 81.55% LR: 0.000905 Alpha: 0.0259
+2026-01-20 23:43:05,922 - INFO - Epoch [21] Batch [40/249] Loss: 0.8612, Hard: 0.6896, Soft: 7.3708 Acc: 81.02% LR: 0.000905 Alpha: 0.0257
+2026-01-20 23:43:29,517 - INFO - Epoch [21] Batch [60/249] Loss: 0.4860, Hard: 0.3178, Soft: 6.9290 Acc: 80.23% LR: 0.000905 Alpha: 0.0254
+2026-01-20 23:43:52,534 - INFO - Epoch [21] Batch [80/249] Loss: 0.7380, Hard: 0.5729, Soft: 7.1266 Acc: 80.09% LR: 0.000905 Alpha: 0.0252
+2026-01-20 23:44:15,974 - INFO - Epoch [21] Batch [100/249] Loss: 0.7671, Hard: 0.6183, Soft: 6.5816 Acc: 80.11% LR: 0.000905 Alpha: 0.0250
+2026-01-20 23:44:39,304 - INFO - Epoch [21] Batch [120/249] Loss: 0.6519, Hard: 0.4912, Soft: 6.9896 Acc: 79.88% LR: 0.000905 Alpha: 0.0247
+2026-01-20 23:45:02,369 - INFO - Epoch [21] Batch [140/249] Loss: 0.8132, Hard: 0.6490, Soft: 7.3510 Acc: 80.08% LR: 0.000905 Alpha: 0.0245
+2026-01-20 23:45:25,598 - INFO - Epoch [21] Batch [160/249] Loss: 0.7594, Hard: 0.6090, Soft: 6.8116 Acc: 79.93% LR: 0.000905 Alpha: 0.0243
+2026-01-20 23:45:48,975 - INFO - Epoch [21] Batch [180/249] Loss: 0.5925, Hard: 0.4314, Soft: 7.1342 Acc: 80.06% LR: 0.000905 Alpha: 0.0240
+2026-01-20 23:46:11,581 - INFO - Epoch [21] Batch [200/249] Loss: 0.5642, Hard: 0.4089, Soft: 6.9354 Acc: 80.04% LR: 0.000905 Alpha: 0.0238
+2026-01-20 23:46:35,077 - INFO - Epoch [21] Batch [220/249] Loss: 0.6864, Hard: 0.5267, Soft: 7.3028 Acc: 80.08% LR: 0.000905 Alpha: 0.0236
+2026-01-20 23:46:58,702 - INFO - Epoch [21] Batch [240/249] Loss: 0.7986, Hard: 0.6283, Soft: 7.9205 Acc: 80.16% LR: 0.000905 Alpha: 0.0233
+2026-01-20 23:48:08,181 - INFO - Epoch [21/100] Train Loss: 0.7200, Train Acc: 80.21%, Val Loss: 0.5707, Val Acc: 77.56%
+2026-01-20 23:48:33,820 - INFO - Epoch [22] Batch [0/249] Loss: 1.0424, Hard: 0.9010, Soft: 6.9821 Acc: 78.12% LR: 0.000895 Alpha: 0.0232
+2026-01-20 23:48:56,802 - INFO - Epoch [22] Batch [20/249] Loss: 0.6056, Hard: 0.4390, Soft: 7.6736 Acc: 81.55% LR: 0.000895 Alpha: 0.0230
+2026-01-20 23:49:19,554 - INFO - Epoch [22] Batch [40/249] Loss: 0.7766, Hard: 0.6306, Soft: 7.0336 Acc: 79.88% LR: 0.000895 Alpha: 0.0228
+2026-01-20 23:49:42,549 - INFO - Epoch [22] Batch [60/249] Loss: 0.4984, Hard: 0.3465, Soft: 7.0693 Acc: 80.43% LR: 0.000895 Alpha: 0.0226
+2026-01-20 23:50:05,551 - INFO - Epoch [22] Batch [80/249] Loss: 0.6090, Hard: 0.4586, Soft: 7.1804 Acc: 80.52% LR: 0.000895 Alpha: 0.0224
+2026-01-20 23:50:28,820 - INFO - Epoch [22] Batch [100/249] Loss: 0.8211, Hard: 0.6808, Soft: 7.0089 Acc: 80.26% LR: 0.000895 Alpha: 0.0222
+2026-01-20 23:50:52,246 - INFO - Epoch [22] Batch [120/249] Loss: 0.6690, Hard: 0.5181, Soft: 7.3834 Acc: 80.37% LR: 0.000895 Alpha: 0.0220
+2026-01-20 23:51:15,013 - INFO - Epoch [22] Batch [140/249] Loss: 0.6045, Hard: 0.4403, Soft: 7.9828 Acc: 80.47% LR: 0.000895 Alpha: 0.0218
+2026-01-20 23:51:38,258 - INFO - Epoch [22] Batch [160/249] Loss: 0.9090, Hard: 0.7502, Soft: 8.1104 Acc: 80.22% LR: 0.000895 Alpha: 0.0216
+2026-01-20 23:52:01,213 - INFO - Epoch [22] Batch [180/249] Loss: 0.6222, Hard: 0.4587, Soft: 8.1118 Acc: 80.28% LR: 0.000895 Alpha: 0.0214
+2026-01-20 23:52:23,976 - INFO - Epoch [22] Batch [200/249] Loss: 0.6749, Hard: 0.5409, Soft: 6.8709 Acc: 80.49% LR: 0.000895 Alpha: 0.0212
+2026-01-20 23:52:46,945 - INFO - Epoch [22] Batch [220/249] Loss: 0.6583, Hard: 0.5163, Soft: 7.2852 Acc: 80.59% LR: 0.000895 Alpha: 0.0210
+2026-01-20 23:53:10,144 - INFO - Epoch [22] Batch [240/249] Loss: 0.5462, Hard: 0.3960, Soft: 7.6232 Acc: 80.59% LR: 0.000895 Alpha: 0.0208
+2026-01-20 23:54:19,472 - INFO - Epoch [22/100] Train Loss: 0.6921, Train Acc: 80.50%, Val Loss: 0.5274, Val Acc: 80.04%
+2026-01-20 23:54:19,473 - INFO - Best model saved with accuracy: 80.04%
+2026-01-20 23:54:44,104 - INFO - Epoch [23] Batch [0/249] Loss: 0.7220, Hard: 0.5725, Soft: 7.7941 Acc: 84.38% LR: 0.000885 Alpha: 0.0207
+2026-01-20 23:55:07,810 - INFO - Epoch [23] Batch [20/249] Loss: 0.5867, Hard: 0.4399, Soft: 7.5998 Acc: 82.44% LR: 0.000885 Alpha: 0.0205
+2026-01-20 23:55:30,373 - INFO - Epoch [23] Batch [40/249] Loss: 0.7845, Hard: 0.6318, Soft: 8.1468 Acc: 81.55% LR: 0.000885 Alpha: 0.0203
+2026-01-20 23:55:52,629 - INFO - Epoch [23] Batch [60/249] Loss: 0.7254, Hard: 0.6041, Soft: 6.6283 Acc: 81.61% LR: 0.000885 Alpha: 0.0201
+2026-01-20 23:56:15,718 - INFO - Epoch [23] Batch [80/249] Loss: 0.6530, Hard: 0.5107, Soft: 7.6455 Acc: 80.94% LR: 0.000885 Alpha: 0.0199
+2026-01-20 23:56:38,747 - INFO - Epoch [23] Batch [100/249] Loss: 0.5679, Hard: 0.4236, Soft: 7.7234 Acc: 81.10% LR: 0.000885 Alpha: 0.0198
+2026-01-20 23:57:01,556 - INFO - Epoch [23] Batch [120/249] Loss: 0.5018, Hard: 0.3617, Soft: 7.5110 Acc: 81.20% LR: 0.000885 Alpha: 0.0196
+2026-01-20 23:57:25,396 - INFO - Epoch [23] Batch [140/249] Loss: 0.5294, Hard: 0.3946, Soft: 7.3389 Acc: 81.09% LR: 0.000885 Alpha: 0.0194
+2026-01-20 23:57:47,806 - INFO - Epoch [23] Batch [160/249] Loss: 0.6989, Hard: 0.5586, Soft: 7.8509 Acc: 81.00% LR: 0.000885 Alpha: 0.0192
+2026-01-20 23:58:10,537 - INFO - Epoch [23] Batch [180/249] Loss: 0.5725, Hard: 0.4317, Soft: 7.8208 Acc: 80.58% LR: 0.000885 Alpha: 0.0191
+2026-01-20 23:58:33,867 - INFO - Epoch [23] Batch [200/249] Loss: 0.8690, Hard: 0.7451, Soft: 7.3095 Acc: 80.52% LR: 0.000885 Alpha: 0.0189
+2026-01-20 23:58:56,505 - INFO - Epoch [23] Batch [220/249] Loss: 0.7558, Hard: 0.6323, Soft: 7.2281 Acc: 80.64% LR: 0.000885 Alpha: 0.0187
+2026-01-20 23:59:19,097 - INFO - Epoch [23] Batch [240/249] Loss: 0.7063, Hard: 0.5831, Soft: 7.2228 Acc: 80.67% LR: 0.000885 Alpha: 0.0186
+2026-01-21 00:00:28,230 - INFO - Epoch [23/100] Train Loss: 0.6564, Train Acc: 80.87%, Val Loss: 0.5170, Val Acc: 80.76%
+2026-01-21 00:00:28,231 - INFO - Best model saved with accuracy: 80.76%
+2026-01-21 00:00:53,393 - INFO - Epoch [24] Batch [0/249] Loss: 0.8303, Hard: 0.7129, Soft: 7.0671 Acc: 68.75% LR: 0.000875 Alpha: 0.0185
+2026-01-21 00:01:16,474 - INFO - Epoch [24] Batch [20/249] Loss: 0.6069, Hard: 0.4746, Soft: 7.6988 Acc: 82.44% LR: 0.000875 Alpha: 0.0183
+2026-01-21 00:01:38,488 - INFO - Epoch [24] Batch [40/249] Loss: 0.6579, Hard: 0.5294, Soft: 7.6110 Acc: 82.85% LR: 0.000875 Alpha: 0.0181
+2026-01-21 00:02:00,879 - INFO - Epoch [24] Batch [60/249] Loss: 0.7133, Hard: 0.5934, Soft: 7.2656 Acc: 82.22% LR: 0.000875 Alpha: 0.0180
+2026-01-21 00:02:24,763 - INFO - Epoch [24] Batch [80/249] Loss: 0.4576, Hard: 0.3278, Soft: 7.6095 Acc: 82.37% LR: 0.000875 Alpha: 0.0178
+2026-01-21 00:02:47,753 - INFO - Epoch [24] Batch [100/249] Loss: 0.4840, Hard: 0.3561, Soft: 7.5943 Acc: 82.09% LR: 0.000875 Alpha: 0.0177
+2026-01-21 00:03:11,085 - INFO - Epoch [24] Batch [120/249] Loss: 0.6157, Hard: 0.4989, Soft: 7.1667 Acc: 82.18% LR: 0.000875 Alpha: 0.0175
+2026-01-21 00:03:33,910 - INFO - Epoch [24] Batch [140/249] Loss: 0.5914, Hard: 0.4540, Soft: 8.3705 Acc: 81.94% LR: 0.000875 Alpha: 0.0174
+2026-01-21 00:03:57,119 - INFO - Epoch [24] Batch [160/249] Loss: 0.5710, Hard: 0.4429, Soft: 7.8926 Acc: 81.56% LR: 0.000875 Alpha: 0.0172
+2026-01-21 00:04:19,534 - INFO - Epoch [24] Batch [180/249] Loss: 0.6383, Hard: 0.5193, Soft: 7.4977 Acc: 81.54% LR: 0.000875 Alpha: 0.0170
+2026-01-21 00:04:43,337 - INFO - Epoch [24] Batch [200/249] Loss: 0.7895, Hard: 0.6716, Soft: 7.6538 Acc: 81.65% LR: 0.000875 Alpha: 0.0169

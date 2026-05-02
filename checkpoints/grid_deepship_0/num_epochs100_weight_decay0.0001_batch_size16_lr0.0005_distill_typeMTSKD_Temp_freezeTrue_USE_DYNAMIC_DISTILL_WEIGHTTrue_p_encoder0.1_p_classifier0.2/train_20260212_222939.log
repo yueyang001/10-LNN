@@ -1,0 +1,47 @@
+2026-02-12 22:29:39,193 - INFO - ==================================================
+2026-02-12 22:29:39,193 - INFO - Distillation Training Configuration
+2026-02-12 22:29:39,193 - INFO - ==================================================
+2026-02-12 22:29:39,193 - INFO - GPUs: [4, 5, 6, 7]
+2026-02-12 22:29:39,193 - INFO - World size: 4
+2026-02-12 22:29:39,193 - INFO - Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip_622
+2026-02-12 22:29:39,193 - INFO - Data type: wav_s@wav_t
+2026-02-12 22:29:39,193 - INFO - Batch size: 16
+2026-02-12 22:29:39,193 - INFO - Epochs: 100
+2026-02-12 22:29:39,193 - INFO - Learning rate: 0.0005
+2026-02-12 22:29:39,193 - INFO - Temperature: 2.0
+2026-02-12 22:29:39,193 - INFO - Alpha: 0.3
+2026-02-12 22:29:39,193 - INFO - Save dir: checkpoints/grid_deepship_0/num_epochs100_weight_decay0.0001_batch_size16_lr0.0005_distill_typeMTSKD_Temp_freezeTrue_USE_DYNAMIC_DISTILL_WEIGHTTrue_p_encoder0.1_p_classifier0.2
+2026-02-12 22:29:39,194 - INFO - ==================================================
+2026-02-12 22:29:39,480 - INFO - Train dataset size: 31892
+2026-02-12 22:29:39,481 - INFO - Validation dataset size: 10631
+2026-02-12 22:29:40,729 - INFO - Student params: 316,234 (0.32M)
+2026-02-12 22:29:40,729 - INFO - Teacher params: 164,415,748 (164.42M)
+2026-02-12 22:29:40,729 - INFO - Trainable params: 271,242 (0.27M)
+2026-02-12 22:29:41,257 - INFO - Start training...
+2026-02-12 22:29:41,258 - INFO - 🔥 Resume from: checkpoints/grid_deepship_0/num_epochs100_weight_decay0.0001_batch_size16_lr0.0005_distill_typeMTSKD_Temp_freezeTrue_USE_DYNAMIC_DISTILL_WEIGHTTrue_p_encoder0.1_p_classifier0.2/checkpoint_epoch_15.pth
+2026-02-12 22:29:41,336 - INFO - Resume epoch: 16
+2026-02-12 22:29:41,336 - INFO - Best acc: 72.7614747930775
+2026-02-12 22:30:04,390 - INFO - Epoch [16] Batch [0/498]                     Loss: 0.6375, Hard: 0.6375, Soft: 0.1717                     Acc: 68.75% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5
+2026-02-12 22:30:07,416 - INFO - Epoch [16] Batch [20/498]                     Loss: 0.2943, Hard: 0.2943, Soft: 0.0985                     Acc: 77.98% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5
+2026-02-12 22:30:10,549 - INFO - Epoch [16] Batch [40/498]                     Loss: 0.5611, Hard: 0.5611, Soft: 0.1533                     Acc: 76.98% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5
+2026-02-12 22:30:14,183 - INFO - Epoch [16] Batch [60/498]                     Loss: 0.4257, Hard: 0.4257, Soft: 0.1527                     Acc: 78.07% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5
+2026-02-12 22:30:18,199 - INFO - Epoch [16] Batch [80/498]                     Loss: 0.4699, Hard: 0.4699, Soft: 0.1400                     Acc: 76.85% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5
+2026-02-12 22:30:21,922 - INFO - Epoch [16] Batch [100/498]                     Loss: 0.5429, Hard: 0.5429, Soft: 0.1509                     Acc: 76.18% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5
+2026-02-12 22:30:25,141 - INFO - Epoch [16] Batch [120/498]                     Loss: 0.6560, Hard: 0.6560, Soft: 0.1573                     Acc: 75.46% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5
+2026-02-12 22:30:28,293 - INFO - Epoch [16] Batch [140/498]                     Loss: 0.6898, Hard: 0.6898, Soft: 0.1427                     Acc: 75.49% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5
+2026-02-12 22:30:31,401 - INFO - Epoch [16] Batch [160/498]                     Loss: 0.5727, Hard: 0.5727, Soft: 0.1408                     Acc: 75.12% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5
+2026-02-12 22:30:34,500 - INFO - Epoch [16] Batch [180/498]                     Loss: 0.8941, Hard: 0.8941, Soft: 0.2192                     Acc: 74.83% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5
+2026-02-12 22:30:37,602 - INFO - Epoch [16] Batch [200/498]                     Loss: 0.4633, Hard: 0.4633, Soft: 0.1602                     Acc: 74.63% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5
+2026-02-12 22:30:40,682 - INFO - Epoch [16] Batch [220/498]                     Loss: 0.4764, Hard: 0.4764, Soft: 0.1372                     Acc: 74.69% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5
+2026-02-12 22:30:44,251 - INFO - Epoch [16] Batch [240/498]                     Loss: 0.4604, Hard: 0.4604, Soft: 0.1487                     Acc: 74.59% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5
+2026-02-12 22:30:48,302 - INFO - Epoch [16] Batch [260/498]                     Loss: 0.5310, Hard: 0.5310, Soft: 0.1510                     Acc: 74.35% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5
+2026-02-12 22:30:51,382 - INFO - Epoch [16] Batch [280/498]                     Loss: 0.5658, Hard: 0.5658, Soft: 0.1525                     Acc: 74.42% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5
+2026-02-12 22:30:54,480 - INFO - Epoch [16] Batch [300/498]                     Loss: 0.3802, Hard: 0.3802, Soft: 0.1223                     Acc: 74.13% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5
+2026-02-12 22:30:57,543 - INFO - Epoch [16] Batch [320/498]                     Loss: 0.9931, Hard: 0.9931, Soft: 0.2289                     Acc: 74.38% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5
+2026-02-12 22:31:00,737 - INFO - Epoch [16] Batch [340/498]                     Loss: 0.4540, Hard: 0.4540, Soft: 0.1465                     Acc: 74.40% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5
+2026-02-12 22:31:03,891 - INFO - Epoch [16] Batch [360/498]                     Loss: 0.9965, Hard: 0.9965, Soft: 0.1731                     Acc: 74.45% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5
+2026-02-12 22:31:07,295 - INFO - Epoch [16] Batch [380/498]                     Loss: 0.3331, Hard: 0.3331, Soft: 0.1256                     Acc: 74.28% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5
+2026-02-12 22:31:11,314 - INFO - Epoch [16] Batch [400/498]                     Loss: 0.8675, Hard: 0.8675, Soft: 0.2166                     Acc: 74.28% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5
+2026-02-12 22:31:15,026 - INFO - Epoch [16] Batch [420/498]                     Loss: 0.3860, Hard: 0.3860, Soft: 0.1686                     Acc: 74.32% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5
+2026-02-12 22:31:18,466 - INFO - Epoch [16] Batch [440/498]                     Loss: 0.5836, Hard: 0.5836, Soft: 0.1508                     Acc: 74.38% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5
+2026-02-12 22:31:21,507 - INFO - Epoch [16] Batch [460/498]                     Loss: 0.5049, Hard: 0.5049, Soft: 0.1745                     Acc: 74.54% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5

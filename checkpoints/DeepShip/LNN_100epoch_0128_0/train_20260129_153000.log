@@ -1,0 +1,18 @@
+2026-01-29 15:30:00,488 - INFO - ==================================================
+2026-01-29 15:30:00,488 - INFO - Training Configuration
+2026-01-29 15:30:00,488 - INFO - ==================================================
+2026-01-29 15:30:00,488 - INFO - GPUs: [4, 5, 6, 7]
+2026-01-29 15:30:00,488 - INFO - World size: 4
+2026-01-29 15:30:00,488 - INFO - Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip_622
+2026-01-29 15:30:00,489 - INFO - Data type: wav
+2026-01-29 15:30:00,489 - INFO - Batch size: 32
+2026-01-29 15:30:00,489 - INFO - Epochs: 100
+2026-01-29 15:30:00,489 - INFO - Learning rate: 0.001
+2026-01-29 15:30:00,489 - INFO - Weight decay: 0.0005
+2026-01-29 15:30:00,489 - INFO - Save dir: /media/hdd1/fubohan/Code/UATR/checkpoints/DeepShip/LNN_100epoch_0128_0
+2026-01-29 15:30:00,489 - INFO - ==================================================
+2026-01-29 15:30:00,924 - INFO - Train dataset size: 31892
+2026-01-29 15:30:00,924 - INFO - Validation dataset size: 10631
+2026-01-29 15:30:01,540 - INFO - Total parameters: 0.32M
+2026-01-29 15:30:01,540 - INFO - Trainable parameters: 0.27M
+2026-01-29 15:30:01,541 - INFO - Start training...

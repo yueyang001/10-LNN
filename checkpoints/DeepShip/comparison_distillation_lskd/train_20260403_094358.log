@@ -1,0 +1,11 @@
+2026-04-03 09:43:58,182 - INFO - ==================================================
+2026-04-03 09:43:58,182 - INFO - Comparison Distillation Training (DeepShip)
+2026-04-03 09:43:58,182 - INFO - ==================================================
+2026-04-03 09:43:58,182 - INFO - GPUs: [4, 5, 6, 7]
+2026-04-03 09:43:58,182 - INFO - World size: 4
+2026-04-03 09:43:58,182 - INFO - Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip622
+2026-04-03 09:43:58,182 - INFO - Distillation method: lskd
+2026-04-03 09:43:58,182 - INFO - Temperature: 4.0
+2026-04-03 09:43:58,182 - INFO - Alpha: 0.5
+2026-04-03 09:43:58,182 - INFO - Save dir: /media/hdd1/fubohan/Code/UATR/checkpoints/DeepShip/comparison_distillation_lskd
+2026-04-03 09:43:58,182 - INFO - ==================================================

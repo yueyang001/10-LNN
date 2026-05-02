@@ -1,0 +1,470 @@
+2026-02-23 03:47:14,766 - INFO - ==================================================
+2026-02-23 03:47:14,766 - INFO - Distillation Training Configuration
+2026-02-23 03:47:14,767 - INFO - ==================================================
+2026-02-23 03:47:14,767 - INFO - GPUs: [0, 1, 2, 3, 4, 5, 6, 7]
+2026-02-23 03:47:14,767 - INFO - World size: 8
+2026-02-23 03:47:14,767 - INFO - Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/ShipsEar_622
+2026-02-23 03:47:14,767 - INFO - Data type: wav_s@wav_t
+2026-02-23 03:47:14,767 - INFO - Batch size: 16
+2026-02-23 03:47:14,767 - INFO - Epochs: 200
+2026-02-23 03:47:14,767 - INFO - Learning rate: 0.0005
+2026-02-23 03:47:14,767 - INFO - Temperature: 2.0
+2026-02-23 03:47:14,767 - INFO - Alpha: 0.3
+2026-02-23 03:47:14,767 - INFO - Save dir: checkpoints/grid_shipsear_v2/num_epochs200_weight_decay0.0003_batch_size16_lr0.0005_distill_typeMTSKD_Temp_freezeTrue_USE_DYNAMIC_DISTILL_WEIGHTFalse_p_encoder0.355_p_classifier0.26
+2026-02-23 03:47:14,767 - INFO - ==================================================
+2026-02-23 03:47:14,805 - INFO - Train dataset size: 2240
+2026-02-23 03:47:14,805 - INFO - Validation dataset size: 749
+2026-02-23 03:47:18,271 - INFO - Student params: 316,299 (0.32M)
+2026-02-23 03:47:18,272 - INFO - Teacher params: 164,415,877 (164.42M)
+2026-02-23 03:47:18,272 - INFO - Trainable params: 271,372 (0.27M)
+2026-02-23 03:47:18,875 - INFO - Start training...
+2026-02-23 03:47:18,876 - INFO - No checkpoint found, start from scratch
+2026-02-23 03:47:40,444 - INFO - Epoch [1] Batch [0/17]                     Loss: 2.3778, Hard: 1.8066, Soft: 0.5713                     Acc: 12.50% LR: 0.000500                     Alpha: 0.5744425058364868                     Beta: 0.0                     MemKD: 0.5
+2026-02-23 03:48:09,896 - INFO - Epoch [1/200] Train Loss: 1.7629, Train Acc: 41.91%, Val Loss: 1.5180, Val Acc: 37.63%
+2026-02-23 03:48:09,897 - INFO - Best model saved with accuracy: 37.63%
+2026-02-23 03:48:32,614 - INFO - Epoch [2] Batch [0/17]                     Loss: 1.6610, Hard: 1.3677, Soft: 0.2934                     Acc: 43.75% LR: 0.000500                     Alpha: 0.5744425058364868                     Beta: -0.006007776595652103                     MemKD: 0.5019600987434387
+2026-02-23 03:49:01,626 - INFO - Epoch [2/200] Train Loss: 1.5242, Train Acc: 48.90%, Val Loss: 1.3455, Val Acc: 46.68%
+2026-02-23 03:49:01,627 - INFO - Best model saved with accuracy: 46.68%
+2026-02-23 03:49:24,464 - INFO - Epoch [3] Batch [0/17]                     Loss: 1.2525, Hard: 1.0811, Soft: 0.1714                     Acc: 56.25% LR: 0.000500                     Alpha: 0.5744425058364868                     Beta: -0.014238559640944004                     MemKD: 0.5036866664886475
+2026-02-23 03:49:53,877 - INFO - Epoch [3/200] Train Loss: 1.5178, Train Acc: 43.75%, Val Loss: 1.2085, Val Acc: 48.01%
+2026-02-23 03:49:53,877 - INFO - Best model saved with accuracy: 48.01%
+2026-02-23 03:50:17,115 - INFO - Epoch [4] Batch [0/17]                     Loss: 1.4349, Hard: 1.2317, Soft: 0.2032                     Acc: 37.50% LR: 0.000500                     Alpha: 0.5744425058364868                     Beta: -0.022698309272527695                     MemKD: 0.5054296851158142
+2026-02-23 03:50:44,641 - INFO - Epoch [4/200] Train Loss: 1.3985, Train Acc: 48.90%, Val Loss: 1.0945, Val Acc: 54.39%
+2026-02-23 03:50:44,641 - INFO - Best model saved with accuracy: 54.39%
+2026-02-23 03:51:07,031 - INFO - Epoch [5] Batch [0/17]                     Loss: 1.3999, Hard: 1.2034, Soft: 0.1965                     Acc: 62.50% LR: 0.000500                     Alpha: 0.5744425058364868                     Beta: -0.031515251845121384                     MemKD: 0.5070556998252869
+2026-02-23 03:51:35,780 - INFO - Epoch [5/200] Train Loss: 1.3264, Train Acc: 52.21%, Val Loss: 1.0487, Val Acc: 59.44%
+2026-02-23 03:51:35,780 - INFO - Best model saved with accuracy: 59.44%
+2026-02-23 03:51:58,298 - INFO - Epoch [6] Batch [0/17]                     Loss: 1.1975, Hard: 1.0567, Soft: 0.1407                     Acc: 62.50% LR: 0.000499                     Alpha: 0.5744425058364868                     Beta: -0.04130319133400917                     MemKD: 0.5086058378219604
+2026-02-23 03:52:27,576 - INFO - Epoch [6/200] Train Loss: 1.3031, Train Acc: 53.68%, Val Loss: 1.0285, Val Acc: 58.64%
+2026-02-23 03:52:48,466 - INFO - Epoch [7] Batch [0/17]                     Loss: 1.3547, Hard: 1.1761, Soft: 0.1787                     Acc: 43.75% LR: 0.000499                     Alpha: 0.5744425058364868                     Beta: -0.05114268511533737                     MemKD: 0.5100637674331665
+2026-02-23 03:53:16,684 - INFO - Epoch [7/200] Train Loss: 1.2417, Train Acc: 56.62%, Val Loss: 1.0261, Val Acc: 59.97%
+2026-02-23 03:53:16,684 - INFO - Best model saved with accuracy: 59.97%
+2026-02-23 03:53:39,128 - INFO - Epoch [8] Batch [0/17]                     Loss: 1.1747, Hard: 1.0224, Soft: 0.1523                     Acc: 62.50% LR: 0.000498                     Alpha: 0.5744425058364868                     Beta: -0.06012498214840889                     MemKD: 0.5115288496017456
+2026-02-23 03:54:07,031 - INFO - Epoch [8/200] Train Loss: 1.2818, Train Acc: 52.57%, Val Loss: 1.0093, Val Acc: 57.45%
+2026-02-23 03:54:29,621 - INFO - Epoch [9] Batch [0/17]                     Loss: 1.0767, Hard: 0.9444, Soft: 0.1323                     Acc: 62.50% LR: 0.000498                     Alpha: 0.5744425058364868                     Beta: -0.06898879259824753                     MemKD: 0.5130170583724976
+2026-02-23 03:54:58,840 - INFO - Epoch [9/200] Train Loss: 1.2858, Train Acc: 56.99%, Val Loss: 0.9101, Val Acc: 66.76%
+2026-02-23 03:54:58,840 - INFO - Best model saved with accuracy: 66.76%
+2026-02-23 03:55:21,853 - INFO - Epoch [10] Batch [0/17]                     Loss: 1.2298, Hard: 1.0528, Soft: 0.1771                     Acc: 68.75% LR: 0.000498                     Alpha: 0.5744425058364868                     Beta: -0.07813659310340881                     MemKD: 0.5144848823547363
+2026-02-23 03:55:49,996 - INFO - Epoch [10/200] Train Loss: 1.0522, Train Acc: 62.13%, Val Loss: 0.9199, Val Acc: 62.90%
+2026-02-23 03:55:50,045 - INFO - Checkpoint saved at epoch 10
+2026-02-23 03:56:11,581 - INFO - Epoch [11] Batch [0/17]                     Loss: 0.7539, Hard: 0.6786, Soft: 0.0753                     Acc: 87.50% LR: 0.000497                     Alpha: 0.5744425058364868                     Beta: -0.08856429904699326                     MemKD: 0.5157068967819214
+2026-02-23 03:56:39,316 - INFO - Epoch [11/200] Train Loss: 1.0824, Train Acc: 62.13%, Val Loss: 1.0149, Val Acc: 62.10%
+2026-02-23 03:57:01,713 - INFO - Epoch [12] Batch [0/17]                     Loss: 1.1416, Hard: 0.9973, Soft: 0.1443                     Acc: 56.25% LR: 0.000496                     Alpha: 0.5744425058364868                     Beta: -0.09973170608282089                     MemKD: 0.5166643261909485
+2026-02-23 03:57:31,525 - INFO - Epoch [12/200] Train Loss: 1.0317, Train Acc: 64.34%, Val Loss: 0.8878, Val Acc: 67.95%
+2026-02-23 03:57:31,525 - INFO - Best model saved with accuracy: 67.95%
+2026-02-23 03:57:54,655 - INFO - Epoch [13] Batch [0/17]                     Loss: 0.9188, Hard: 0.8411, Soft: 0.0777                     Acc: 75.00% LR: 0.000496                     Alpha: 0.5744425058364868                     Beta: -0.11061377078294754                     MemKD: 0.5176723003387451
+2026-02-23 03:58:23,848 - INFO - Epoch [13/200] Train Loss: 1.1503, Train Acc: 59.56%, Val Loss: 0.8674, Val Acc: 67.15%
+2026-02-23 03:58:46,313 - INFO - Epoch [14] Batch [0/17]                     Loss: 0.7424, Hard: 0.6912, Soft: 0.0512                     Acc: 81.25% LR: 0.000495                     Alpha: 0.5744425058364868                     Beta: -0.12142202258110046                     MemKD: 0.5188242793083191
+2026-02-23 03:59:13,206 - INFO - Epoch [14/200] Train Loss: 1.0293, Train Acc: 65.44%, Val Loss: 0.8618, Val Acc: 65.43%
+2026-02-23 03:59:34,223 - INFO - Epoch [15] Batch [0/17]                     Loss: 0.9846, Hard: 0.9093, Soft: 0.0753                     Acc: 62.50% LR: 0.000494                     Alpha: 0.5744425058364868                     Beta: -0.13255000114440918                     MemKD: 0.5197712182998657
+2026-02-23 04:00:03,474 - INFO - Epoch [15/200] Train Loss: 0.9377, Train Acc: 66.54%, Val Loss: 0.7975, Val Acc: 69.95%
+2026-02-23 04:00:03,474 - INFO - Best model saved with accuracy: 69.95%
+2026-02-23 04:00:26,225 - INFO - Epoch [16] Batch [0/17]                     Loss: 1.1046, Hard: 1.0122, Soft: 0.0924                     Acc: 56.25% LR: 0.000493                     Alpha: 0.5744425058364868                     Beta: -0.14420285820960999                     MemKD: 0.5203733444213867
+2026-02-23 04:00:55,296 - INFO - Epoch [16/200] Train Loss: 0.9124, Train Acc: 69.49%, Val Loss: 0.7926, Val Acc: 70.08%
+2026-02-23 04:00:55,297 - INFO - Best model saved with accuracy: 70.08%
+2026-02-23 04:01:17,575 - INFO - Epoch [17] Batch [0/17]                     Loss: 0.8571, Hard: 0.8106, Soft: 0.0465                     Acc: 75.00% LR: 0.000492                     Alpha: 0.5744425058364868                     Beta: -0.15597891807556152                     MemKD: 0.5207798480987549
+2026-02-23 04:01:45,330 - INFO - Epoch [17/200] Train Loss: 0.9245, Train Acc: 66.18%, Val Loss: 1.0626, Val Acc: 61.04%
+2026-02-23 04:02:08,009 - INFO - Epoch [18] Batch [0/17]                     Loss: 0.7569, Hard: 0.7118, Soft: 0.0451                     Acc: 81.25% LR: 0.000491                     Alpha: 0.5744425058364868                     Beta: -0.1675369292497635                     MemKD: 0.5210446119308472
+2026-02-23 04:02:36,785 - INFO - Epoch [18/200] Train Loss: 0.8716, Train Acc: 71.69%, Val Loss: 0.7695, Val Acc: 72.07%
+2026-02-23 04:02:36,786 - INFO - Best model saved with accuracy: 72.07%
+2026-02-23 04:02:59,845 - INFO - Epoch [19] Batch [0/17]                     Loss: 0.7516, Hard: 0.7527, Soft: -0.0011                     Acc: 62.50% LR: 0.000490                     Alpha: 0.5744425058364868                     Beta: -0.17892664670944214                     MemKD: 0.5211287140846252
+2026-02-23 04:03:29,740 - INFO - Epoch [19/200] Train Loss: 0.9036, Train Acc: 68.75%, Val Loss: 0.7053, Val Acc: 72.34%
+2026-02-23 04:03:29,741 - INFO - Best model saved with accuracy: 72.34%
+2026-02-23 04:03:53,234 - INFO - Epoch [20] Batch [0/17]                     Loss: 0.4593, Hard: 0.5150, Soft: -0.0557                     Acc: 81.25% LR: 0.000489                     Alpha: 0.5744425058364868                     Beta: -0.19000479578971863                     MemKD: 0.5211690664291382
+2026-02-23 04:04:22,791 - INFO - Epoch [20/200] Train Loss: 0.8692, Train Acc: 66.91%, Val Loss: 0.8027, Val Acc: 68.35%
+2026-02-23 04:04:22,860 - INFO - Checkpoint saved at epoch 20
+2026-02-23 04:04:46,620 - INFO - Epoch [21] Batch [0/17]                     Loss: 0.9200, Hard: 0.8907, Soft: 0.0293                     Acc: 68.75% LR: 0.000488                     Alpha: 0.5744425058364868                     Beta: -0.20112541317939758                     MemKD: 0.5210658311843872
+2026-02-23 04:05:13,050 - INFO - Epoch [21/200] Train Loss: 0.9091, Train Acc: 65.81%, Val Loss: 0.7420, Val Acc: 73.80%
+2026-02-23 04:05:13,050 - INFO - Best model saved with accuracy: 73.80%
+2026-02-23 04:05:35,481 - INFO - Epoch [22] Batch [0/17]                     Loss: 0.7556, Hard: 0.7456, Soft: 0.0100                     Acc: 68.75% LR: 0.000487                     Alpha: 0.5744425058364868                     Beta: -0.21200208365917206                     MemKD: 0.5208477973937988
+2026-02-23 04:06:04,255 - INFO - Epoch [22/200] Train Loss: 0.8137, Train Acc: 72.06%, Val Loss: 0.7044, Val Acc: 73.94%
+2026-02-23 04:06:04,256 - INFO - Best model saved with accuracy: 73.94%
+2026-02-23 04:06:27,143 - INFO - Epoch [23] Batch [0/17]                     Loss: 0.5086, Hard: 0.5485, Soft: -0.0399                     Acc: 75.00% LR: 0.000485                     Alpha: 0.5744425058364868                     Beta: -0.22282177209854126                     MemKD: 0.5203861594200134
+2026-02-23 04:06:56,054 - INFO - Epoch [23/200] Train Loss: 0.7706, Train Acc: 69.49%, Val Loss: 1.0528, Val Acc: 60.11%
+2026-02-23 04:07:19,086 - INFO - Epoch [24] Batch [0/17]                     Loss: 0.3705, Hard: 0.4314, Soft: -0.0610                     Acc: 93.75% LR: 0.000484                     Alpha: 0.5744425058364868                     Beta: -0.23360933363437653                     MemKD: 0.5196977257728577
+2026-02-23 04:07:47,618 - INFO - Epoch [24/200] Train Loss: 0.7834, Train Acc: 69.49%, Val Loss: 0.7315, Val Acc: 71.81%
+2026-02-23 04:08:08,292 - INFO - Epoch [25] Batch [0/17]                     Loss: 0.7532, Hard: 0.7467, Soft: 0.0065                     Acc: 75.00% LR: 0.000482                     Alpha: 0.5744425058364868                     Beta: -0.24445313215255737                     MemKD: 0.518738865852356
+2026-02-23 04:08:37,279 - INFO - Epoch [25/200] Train Loss: 0.8493, Train Acc: 70.96%, Val Loss: 0.7167, Val Acc: 74.47%
+2026-02-23 04:08:37,279 - INFO - Best model saved with accuracy: 74.47%
+2026-02-23 04:08:59,863 - INFO - Epoch [26] Batch [0/17]                     Loss: 0.6503, Hard: 0.6892, Soft: -0.0389                     Acc: 81.25% LR: 0.000481                     Alpha: 0.5744425058364868                     Beta: -0.25478824973106384                     MemKD: 0.5179075002670288
+2026-02-23 04:09:28,693 - INFO - Epoch [26/200] Train Loss: 0.7314, Train Acc: 73.16%, Val Loss: 0.6265, Val Acc: 77.53%
+2026-02-23 04:09:28,694 - INFO - Best model saved with accuracy: 77.53%
+2026-02-23 04:09:50,671 - INFO - Epoch [27] Batch [0/17]                     Loss: 0.5290, Hard: 0.6031, Soft: -0.0740                     Acc: 68.75% LR: 0.000479                     Alpha: 0.5744425058364868                     Beta: -0.2648676037788391                     MemKD: 0.5170001983642578
+2026-02-23 04:10:20,447 - INFO - Epoch [27/200] Train Loss: 0.7919, Train Acc: 66.91%, Val Loss: 0.8102, Val Acc: 69.02%
+2026-02-23 04:10:43,566 - INFO - Epoch [28] Batch [0/17]                     Loss: 0.8029, Hard: 0.7997, Soft: 0.0033                     Acc: 75.00% LR: 0.000478                     Alpha: 0.5744425058364868                     Beta: -0.2750946879386902                     MemKD: 0.5157303810119629
+2026-02-23 04:11:10,641 - INFO - Epoch [28/200] Train Loss: 0.6262, Train Acc: 75.74%, Val Loss: 0.7199, Val Acc: 72.47%
+2026-02-23 04:11:32,708 - INFO - Epoch [29] Batch [0/17]                     Loss: 0.6249, Hard: 0.6814, Soft: -0.0565                     Acc: 68.75% LR: 0.000476                     Alpha: 0.5744425058364868                     Beta: -0.2854035198688507                     MemKD: 0.5141000151634216
+2026-02-23 04:12:01,630 - INFO - Epoch [29/200] Train Loss: 0.6719, Train Acc: 73.53%, Val Loss: 0.7408, Val Acc: 69.55%
+2026-02-23 04:12:25,587 - INFO - Epoch [30] Batch [0/17]                     Loss: 0.8777, Hard: 0.8687, Soft: 0.0090                     Acc: 68.75% LR: 0.000475                     Alpha: 0.5744425058364868                     Beta: -0.29557710886001587                     MemKD: 0.5123735666275024
+2026-02-23 04:12:55,007 - INFO - Epoch [30/200] Train Loss: 0.6607, Train Acc: 73.53%, Val Loss: 0.6840, Val Acc: 74.07%
+2026-02-23 04:12:55,049 - INFO - Checkpoint saved at epoch 30
+2026-02-23 04:13:18,349 - INFO - Epoch [31] Batch [0/17]                     Loss: 0.8365, Hard: 0.8390, Soft: -0.0024                     Acc: 68.75% LR: 0.000473                     Alpha: 0.5744425058364868                     Beta: -0.3057580590248108                     MemKD: 0.510478138923645
+2026-02-23 04:13:46,403 - INFO - Epoch [31/200] Train Loss: 0.6395, Train Acc: 72.43%, Val Loss: 0.6225, Val Acc: 76.86%
+2026-02-23 04:14:08,875 - INFO - Epoch [32] Batch [0/17]                     Loss: 0.4483, Hard: 0.5555, Soft: -0.1072                     Acc: 75.00% LR: 0.000471                     Alpha: 0.5744425058364868                     Beta: -0.31583401560783386                     MemKD: 0.5084757804870605
+2026-02-23 04:14:37,087 - INFO - Epoch [32/200] Train Loss: 0.6284, Train Acc: 73.90%, Val Loss: 0.5649, Val Acc: 80.72%
+2026-02-23 04:14:37,088 - INFO - Best model saved with accuracy: 80.72%
+2026-02-23 04:14:58,431 - INFO - Epoch [33] Batch [0/17]                     Loss: 0.3328, Hard: 0.4718, Soft: -0.1390                     Acc: 87.50% LR: 0.000469                     Alpha: 0.5744425058364868                     Beta: -0.3259085714817047                     MemKD: 0.5062829256057739
+2026-02-23 04:15:26,121 - INFO - Epoch [33/200] Train Loss: 0.6666, Train Acc: 72.43%, Val Loss: 0.5966, Val Acc: 76.99%
+2026-02-23 04:15:48,982 - INFO - Epoch [34] Batch [0/17]                     Loss: 0.3892, Hard: 0.5301, Soft: -0.1410                     Acc: 81.25% LR: 0.000467                     Alpha: 0.5744425058364868                     Beta: -0.33584097027778625                     MemKD: 0.5039960145950317
+2026-02-23 04:16:18,253 - INFO - Epoch [34/200] Train Loss: 0.5823, Train Acc: 73.53%, Val Loss: 0.5820, Val Acc: 78.59%
+2026-02-23 04:16:40,790 - INFO - Epoch [35] Batch [0/17]                     Loss: 0.5964, Hard: 0.6804, Soft: -0.0841                     Acc: 81.25% LR: 0.000465                     Alpha: 0.5744425058364868                     Beta: -0.3455718755722046                     MemKD: 0.5017147660255432
+2026-02-23 04:17:06,858 - INFO - Epoch [35/200] Train Loss: 0.7284, Train Acc: 68.01%, Val Loss: 0.7460, Val Acc: 71.68%
+2026-02-23 04:17:29,526 - INFO - Epoch [36] Batch [0/17]                     Loss: 0.3618, Hard: 0.5161, Soft: -0.1543                     Acc: 81.25% LR: 0.000463                     Alpha: 0.5744425058364868                     Beta: -0.3550317883491516                     MemKD: 0.49958330392837524
+2026-02-23 04:17:57,865 - INFO - Epoch [36/200] Train Loss: 0.4407, Train Acc: 78.68%, Val Loss: 0.7635, Val Acc: 70.88%
+2026-02-23 04:18:20,920 - INFO - Epoch [37] Batch [0/17]                     Loss: 0.6797, Hard: 0.7539, Soft: -0.0742                     Acc: 81.25% LR: 0.000461                     Alpha: 0.5744425058364868                     Beta: -0.3648681342601776                     MemKD: 0.4970225691795349
+2026-02-23 04:18:51,379 - INFO - Epoch [37/200] Train Loss: 0.3837, Train Acc: 81.25%, Val Loss: 0.6375, Val Acc: 75.80%
+2026-02-23 04:19:15,121 - INFO - Epoch [38] Batch [0/17]                     Loss: 0.4436, Hard: 0.5664, Soft: -0.1228                     Acc: 75.00% LR: 0.000459                     Alpha: 0.5744425058364868                     Beta: -0.3750366270542145                     MemKD: 0.49402669072151184
+2026-02-23 04:19:43,134 - INFO - Epoch [38/200] Train Loss: 0.6315, Train Acc: 75.00%, Val Loss: 0.6451, Val Acc: 76.46%
+2026-02-23 04:20:05,310 - INFO - Epoch [39] Batch [0/17]                     Loss: 0.0996, Hard: 0.2898, Soft: -0.1902                     Acc: 93.75% LR: 0.000457                     Alpha: 0.5744425058364868                     Beta: -0.38468796014785767                     MemKD: 0.49137070775032043
+2026-02-23 04:20:33,874 - INFO - Epoch [39/200] Train Loss: 0.3775, Train Acc: 82.72%, Val Loss: 0.6897, Val Acc: 74.73%
+2026-02-23 04:20:56,353 - INFO - Epoch [40] Batch [0/17]                     Loss: 0.1039, Hard: 0.3313, Soft: -0.2274                     Acc: 93.75% LR: 0.000455                     Alpha: 0.5744425058364868                     Beta: -0.39446622133255005                     MemKD: 0.48847541213035583
+2026-02-23 04:21:25,735 - INFO - Epoch [40/200] Train Loss: 0.5796, Train Acc: 71.69%, Val Loss: 0.6719, Val Acc: 75.80%
+2026-02-23 04:21:25,778 - INFO - Checkpoint saved at epoch 40
+2026-02-23 04:21:49,347 - INFO - Epoch [41] Batch [0/17]                     Loss: 0.0734, Hard: 0.2950, Soft: -0.2216                     Acc: 87.50% LR: 0.000452                     Alpha: 0.5744425058364868                     Beta: -0.403920978307724                     MemKD: 0.48578718304634094
+2026-02-23 04:22:17,611 - INFO - Epoch [41/200] Train Loss: 0.5236, Train Acc: 76.10%, Val Loss: 0.5430, Val Acc: 78.86%
+2026-02-23 04:22:39,595 - INFO - Epoch [42] Batch [0/17]                     Loss: 0.7914, Hard: 0.9101, Soft: -0.1187                     Acc: 62.50% LR: 0.000450                     Alpha: 0.5744425058364868                     Beta: -0.4133172929286957                     MemKD: 0.4830814599990845
+2026-02-23 04:23:08,511 - INFO - Epoch [42/200] Train Loss: 0.4103, Train Acc: 77.57%, Val Loss: 0.5417, Val Acc: 80.19%
+2026-02-23 04:23:30,944 - INFO - Epoch [43] Batch [0/17]                     Loss: 0.3146, Hard: 0.5129, Soft: -0.1983                     Acc: 75.00% LR: 0.000448                     Alpha: 0.5744425058364868                     Beta: -0.4227963387966156                     MemKD: 0.48023244738578796
+2026-02-23 04:23:59,786 - INFO - Epoch [43/200] Train Loss: 0.4994, Train Acc: 73.90%, Val Loss: 0.7585, Val Acc: 73.40%
+2026-02-23 04:24:22,218 - INFO - Epoch [44] Batch [0/17]                     Loss: 0.2940, Hard: 0.4887, Soft: -0.1947                     Acc: 87.50% LR: 0.000445                     Alpha: 0.5744425058364868                     Beta: -0.4320980906486511                     MemKD: 0.477514386177063
+2026-02-23 04:24:51,810 - INFO - Epoch [44/200] Train Loss: 0.3455, Train Acc: 80.51%, Val Loss: 0.6256, Val Acc: 75.53%
+2026-02-23 04:25:15,551 - INFO - Epoch [45] Batch [0/17]                     Loss: 0.1963, Hard: 0.4330, Soft: -0.2367                     Acc: 87.50% LR: 0.000443                     Alpha: 0.5744425058364868                     Beta: -0.4414995610713959                     MemKD: 0.47462159395217896
+2026-02-23 04:25:42,602 - INFO - Epoch [45/200] Train Loss: 0.4116, Train Acc: 78.68%, Val Loss: 0.6467, Val Acc: 75.80%
+2026-02-23 04:26:05,433 - INFO - Epoch [46] Batch [0/17]                     Loss: 0.3476, Hard: 0.5352, Soft: -0.1877                     Acc: 87.50% LR: 0.000440                     Alpha: 0.5744425058364868                     Beta: -0.45098966360092163                     MemKD: 0.47159481048583984
+2026-02-23 04:26:34,466 - INFO - Epoch [46/200] Train Loss: 0.3931, Train Acc: 75.37%, Val Loss: 0.6184, Val Acc: 76.20%
+2026-02-23 04:26:57,693 - INFO - Epoch [47] Batch [0/17]                     Loss: 1.4506, Hard: 1.4757, Soft: -0.0251                     Acc: 43.75% LR: 0.000438                     Alpha: 0.5744425058364868                     Beta: -0.46010053157806396                     MemKD: 0.4688316583633423
+2026-02-23 04:27:26,787 - INFO - Epoch [47/200] Train Loss: 0.4211, Train Acc: 76.47%, Val Loss: 0.5388, Val Acc: 79.79%
+2026-02-23 04:27:49,634 - INFO - Epoch [48] Batch [0/17]                     Loss: 0.9109, Hard: 1.0404, Soft: -0.1295                     Acc: 62.50% LR: 0.000435                     Alpha: 0.5744425058364868                     Beta: -0.46910619735717773                     MemKD: 0.4660862982273102
+2026-02-23 04:28:17,991 - INFO - Epoch [48/200] Train Loss: 0.3872, Train Acc: 78.31%, Val Loss: 0.5397, Val Acc: 79.92%
+2026-02-23 04:28:39,197 - INFO - Epoch [49] Batch [0/17]                     Loss: 0.3115, Hard: 0.5557, Soft: -0.2442                     Acc: 81.25% LR: 0.000432                     Alpha: 0.5744425058364868                     Beta: -0.4782366156578064                     MemKD: 0.46319183707237244
+2026-02-23 04:29:08,359 - INFO - Epoch [49/200] Train Loss: 0.4317, Train Acc: 77.21%, Val Loss: 0.6173, Val Acc: 76.86%
+2026-02-23 04:29:30,987 - INFO - Epoch [50] Batch [0/17]                     Loss: 0.3879, Hard: 0.6218, Soft: -0.2339                     Acc: 75.00% LR: 0.000430                     Alpha: 0.5744425058364868                     Beta: -0.4871993958950043                     MemKD: 0.4603966176509857
+2026-02-23 04:30:00,246 - INFO - Epoch [50/200] Train Loss: 0.3392, Train Acc: 76.84%, Val Loss: 0.5394, Val Acc: 78.99%
+2026-02-23 04:30:00,288 - INFO - Checkpoint saved at epoch 50
+2026-02-23 04:30:23,094 - INFO - Epoch [51] Batch [0/17]                     Loss: 0.4244, Hard: 0.6503, Soft: -0.2259                     Acc: 68.75% LR: 0.000427                     Alpha: 0.5744425058364868                     Beta: -0.4961770474910736                     MemKD: 0.457562118768692
+2026-02-23 04:30:52,990 - INFO - Epoch [51/200] Train Loss: 0.3463, Train Acc: 77.94%, Val Loss: 0.5684, Val Acc: 78.59%
+2026-02-23 04:31:15,975 - INFO - Epoch [52] Batch [0/17]                     Loss: -0.0993, Hard: 0.2451, Soft: -0.3444                     Acc: 93.75% LR: 0.000424                     Alpha: 0.5744425058364868                     Beta: -0.505159318447113                     MemKD: 0.45470085740089417
+2026-02-23 04:31:44,441 - INFO - Epoch [52/200] Train Loss: 0.2555, Train Acc: 76.84%, Val Loss: 0.5408, Val Acc: 78.59%
+2026-02-23 04:32:06,896 - INFO - Epoch [53] Batch [0/17]                     Loss: 0.1422, Hard: 0.4203, Soft: -0.2780                     Acc: 87.50% LR: 0.000421                     Alpha: 0.5744425058364868                     Beta: -0.5141988396644592                     MemKD: 0.451757550239563
+2026-02-23 04:32:36,062 - INFO - Epoch [53/200] Train Loss: 0.2106, Train Acc: 83.09%, Val Loss: 0.5918, Val Acc: 77.79%
+2026-02-23 04:32:59,459 - INFO - Epoch [54] Batch [0/17]                     Loss: -0.0139, Hard: 0.3313, Soft: -0.3452                     Acc: 87.50% LR: 0.000418                     Alpha: 0.5744425058364868                     Beta: -0.5231814384460449                     MemKD: 0.44882234930992126
+2026-02-23 04:33:27,938 - INFO - Epoch [54/200] Train Loss: 0.1989, Train Acc: 80.88%, Val Loss: 0.5589, Val Acc: 78.59%
+2026-02-23 04:33:50,792 - INFO - Epoch [55] Batch [0/17]                     Loss: -0.0310, Hard: 0.3281, Soft: -0.3591                     Acc: 81.25% LR: 0.000415                     Alpha: 0.5744425058364868                     Beta: -0.5321667790412903                     MemKD: 0.4458901584148407
+2026-02-23 04:34:17,191 - INFO - Epoch [55/200] Train Loss: 0.2854, Train Acc: 79.04%, Val Loss: 0.5156, Val Acc: 79.79%
+2026-02-23 04:34:39,013 - INFO - Epoch [56] Batch [0/17]                     Loss: -0.0774, Hard: 0.2867, Soft: -0.3641                     Acc: 93.75% LR: 0.000412                     Alpha: 0.5744425058364868                     Beta: -0.540863037109375                     MemKD: 0.4431118965148926
+2026-02-23 04:35:08,438 - INFO - Epoch [56/200] Train Loss: 0.2247, Train Acc: 79.78%, Val Loss: 0.5788, Val Acc: 76.46%
+2026-02-23 04:35:30,797 - INFO - Epoch [57] Batch [0/17]                     Loss: 0.3790, Hard: 0.6781, Soft: -0.2990                     Acc: 75.00% LR: 0.000409                     Alpha: 0.5744425058364868                     Beta: -0.5494329333305359                     MemKD: 0.4403945803642273
+2026-02-23 04:35:59,683 - INFO - Epoch [57/200] Train Loss: 0.2344, Train Acc: 79.78%, Val Loss: 0.6458, Val Acc: 75.13%
+2026-02-23 04:36:21,612 - INFO - Epoch [58] Batch [0/17]                     Loss: -0.0873, Hard: 0.2816, Soft: -0.3689                     Acc: 93.75% LR: 0.000406                     Alpha: 0.5744425058364868                     Beta: -0.558030366897583                     MemKD: 0.4376576244831085
+2026-02-23 04:36:50,870 - INFO - Epoch [58/200] Train Loss: 0.2234, Train Acc: 78.31%, Val Loss: 0.8210, Val Acc: 69.41%
+2026-02-23 04:37:12,115 - INFO - Epoch [59] Batch [0/17]                     Loss: 0.3363, Hard: 0.6345, Soft: -0.2982                     Acc: 87.50% LR: 0.000403                     Alpha: 0.5744425058364868                     Beta: -0.5663856267929077                     MemKD: 0.4350544214248657
+2026-02-23 04:37:40,376 - INFO - Epoch [59/200] Train Loss: 0.1522, Train Acc: 83.09%, Val Loss: 0.6661, Val Acc: 75.66%
+2026-02-23 04:38:02,461 - INFO - Epoch [60] Batch [0/17]                     Loss: 0.5192, Hard: 0.7550, Soft: -0.2358                     Acc: 68.75% LR: 0.000400                     Alpha: 0.5744425058364868                     Beta: -0.5747860670089722                     MemKD: 0.4324195384979248
+2026-02-23 04:38:31,664 - INFO - Epoch [60/200] Train Loss: 0.1390, Train Acc: 81.99%, Val Loss: 0.5461, Val Acc: 77.93%
+2026-02-23 04:38:31,722 - INFO - Checkpoint saved at epoch 60
+2026-02-23 04:38:54,061 - INFO - Epoch [61] Batch [0/17]                     Loss: -0.0404, Hard: 0.3820, Soft: -0.4225                     Acc: 93.75% LR: 0.000397                     Alpha: 0.5744425058364868                     Beta: -0.5832513570785522                     MemKD: 0.42973804473876953
+2026-02-23 04:39:23,377 - INFO - Epoch [61/200] Train Loss: 0.3619, Train Acc: 75.74%, Val Loss: 0.5903, Val Acc: 76.73%
+2026-02-23 04:39:46,231 - INFO - Epoch [62] Batch [0/17]                     Loss: -0.1397, Hard: 0.3026, Soft: -0.4423                     Acc: 93.75% LR: 0.000394                     Alpha: 0.5744425058364868                     Beta: -0.5914597511291504                     MemKD: 0.4271974563598633
+2026-02-23 04:40:14,189 - INFO - Epoch [62/200] Train Loss: 0.2260, Train Acc: 80.51%, Val Loss: 0.4964, Val Acc: 82.18%
+2026-02-23 04:40:14,189 - INFO - Best model saved with accuracy: 82.18%
+2026-02-23 04:40:35,067 - INFO - Epoch [63] Batch [0/17]                     Loss: -0.0060, Hard: 0.3969, Soft: -0.4029                     Acc: 81.25% LR: 0.000391                     Alpha: 0.5744425058364868                     Beta: -0.599461555480957                     MemKD: 0.4247525632381439
+2026-02-23 04:41:03,178 - INFO - Epoch [63/200] Train Loss: 0.1177, Train Acc: 80.51%, Val Loss: 0.5606, Val Acc: 79.12%
+2026-02-23 04:41:26,663 - INFO - Epoch [64] Batch [0/17]                     Loss: 0.7385, Hard: 0.9498, Soft: -0.2113                     Acc: 62.50% LR: 0.000387                     Alpha: 0.5744425058364868                     Beta: -0.607424795627594                     MemKD: 0.4223078489303589
+2026-02-23 04:41:55,696 - INFO - Epoch [64/200] Train Loss: 0.1655, Train Acc: 81.62%, Val Loss: 0.8128, Val Acc: 73.14%
+2026-02-23 04:42:18,141 - INFO - Epoch [65] Batch [0/17]                     Loss: -0.1739, Hard: 0.2636, Soft: -0.4375                     Acc: 93.75% LR: 0.000384                     Alpha: 0.5744425058364868                     Beta: -0.6154633164405823                     MemKD: 0.4198237657546997
+2026-02-23 04:42:47,561 - INFO - Epoch [65/200] Train Loss: 0.1861, Train Acc: 80.88%, Val Loss: 0.5335, Val Acc: 79.39%
+2026-02-23 04:43:10,209 - INFO - Epoch [66] Batch [0/17]                     Loss: -0.0335, Hard: 0.3873, Soft: -0.4208                     Acc: 87.50% LR: 0.000381                     Alpha: 0.5744425058364868                     Beta: -0.6234117746353149                     MemKD: 0.41737449169158936
+2026-02-23 04:43:36,756 - INFO - Epoch [66/200] Train Loss: 0.0456, Train Acc: 83.46%, Val Loss: 0.5042, Val Acc: 82.98%
+2026-02-23 04:43:36,757 - INFO - Best model saved with accuracy: 82.98%
+2026-02-23 04:43:59,630 - INFO - Epoch [67] Batch [0/17]                     Loss: -0.2291, Hard: 0.2686, Soft: -0.4978                     Acc: 93.75% LR: 0.000377                     Alpha: 0.5744425058364868                     Beta: -0.6314513087272644                     MemKD: 0.4148719906806946
+2026-02-23 04:44:28,840 - INFO - Epoch [67/200] Train Loss: 0.1167, Train Acc: 81.62%, Val Loss: 0.6391, Val Acc: 76.99%
+2026-02-23 04:44:51,805 - INFO - Epoch [68] Batch [0/17]                     Loss: 0.2222, Hard: 0.5561, Soft: -0.3340                     Acc: 75.00% LR: 0.000374                     Alpha: 0.5744425058364868                     Beta: -0.6392082571983337                     MemKD: 0.4125111401081085
+2026-02-23 04:45:21,025 - INFO - Epoch [68/200] Train Loss: -0.0671, Train Acc: 87.13%, Val Loss: 0.4429, Val Acc: 83.11%
+2026-02-23 04:45:21,026 - INFO - Best model saved with accuracy: 83.11%
+2026-02-23 04:45:43,990 - INFO - Epoch [69] Batch [0/17]                     Loss: -0.3412, Hard: 0.1837, Soft: -0.5250                     Acc: 100.00% LR: 0.000370                     Alpha: 0.5744425058364868                     Beta: -0.647104024887085                     MemKD: 0.41004809737205505
+2026-02-23 04:46:12,320 - INFO - Epoch [69/200] Train Loss: 0.1394, Train Acc: 78.31%, Val Loss: 0.6724, Val Acc: 76.33%
+2026-02-23 04:46:33,233 - INFO - Epoch [70] Batch [0/17]                     Loss: 0.4049, Hard: 0.7455, Soft: -0.3406                     Acc: 68.75% LR: 0.000367                     Alpha: 0.5744425058364868                     Beta: -0.6548290848731995                     MemKD: 0.407678484916687
+2026-02-23 04:47:01,221 - INFO - Epoch [70/200] Train Loss: 0.0623, Train Acc: 83.46%, Val Loss: 0.8334, Val Acc: 72.87%
+2026-02-23 04:47:01,278 - INFO - Checkpoint saved at epoch 70
+2026-02-23 04:47:23,482 - INFO - Epoch [71] Batch [0/17]                     Loss: -0.0748, Hard: 0.3862, Soft: -0.4610                     Acc: 81.25% LR: 0.000363                     Alpha: 0.5744425058364868                     Beta: -0.6622608304023743                     MemKD: 0.40548959374427795
+2026-02-23 04:47:52,291 - INFO - Epoch [71/200] Train Loss: 0.0043, Train Acc: 82.72%, Val Loss: 0.5896, Val Acc: 77.13%
+2026-02-23 04:48:15,194 - INFO - Epoch [72] Batch [0/17]                     Loss: 0.2720, Hard: 0.6535, Soft: -0.3815                     Acc: 75.00% LR: 0.000360                     Alpha: 0.5744425058364868                     Beta: -0.6698591709136963                     MemKD: 0.40319356322288513
+2026-02-23 04:48:42,741 - INFO - Epoch [72/200] Train Loss: 0.0803, Train Acc: 81.62%, Val Loss: 0.5085, Val Acc: 79.92%
+2026-02-23 04:49:04,351 - INFO - Epoch [73] Batch [0/17]                     Loss: 0.1316, Hard: 0.5602, Soft: -0.4287                     Acc: 75.00% LR: 0.000356                     Alpha: 0.5744425058364868                     Beta: -0.6773175001144409                     MemKD: 0.4009604752063751
+2026-02-23 04:49:32,138 - INFO - Epoch [73/200] Train Loss: -0.1167, Train Acc: 86.76%, Val Loss: 0.5257, Val Acc: 79.26%
+2026-02-23 04:49:54,201 - INFO - Epoch [74] Batch [0/17]                     Loss: -0.1568, Hard: 0.3182, Soft: -0.4750                     Acc: 87.50% LR: 0.000353                     Alpha: 0.5744425058364868                     Beta: -0.6847954988479614                     MemKD: 0.39869892597198486
+2026-02-23 04:50:22,414 - INFO - Epoch [74/200] Train Loss: -0.0792, Train Acc: 84.56%, Val Loss: 0.4189, Val Acc: 84.31%
+2026-02-23 04:50:22,415 - INFO - Best model saved with accuracy: 84.31%
+2026-02-23 04:50:44,393 - INFO - Epoch [75] Batch [0/17]                     Loss: -0.3842, Hard: 0.1890, Soft: -0.5732                     Acc: 93.75% LR: 0.000349                     Alpha: 0.5744425058364868                     Beta: -0.6923336982727051                     MemKD: 0.39640843868255615
+2026-02-23 04:51:13,246 - INFO - Epoch [75/200] Train Loss: -0.1537, Train Acc: 88.24%, Val Loss: 0.6460, Val Acc: 77.93%
+2026-02-23 04:51:36,295 - INFO - Epoch [76] Batch [0/17]                     Loss: -0.1410, Hard: 0.3555, Soft: -0.4965                     Acc: 93.75% LR: 0.000346                     Alpha: 0.5744425058364868                     Beta: -0.69974285364151                     MemKD: 0.39417538046836853
+2026-02-23 04:52:03,683 - INFO - Epoch [76/200] Train Loss: -0.1180, Train Acc: 86.40%, Val Loss: 0.4186, Val Acc: 86.30%
+2026-02-23 04:52:03,683 - INFO - Best model saved with accuracy: 86.30%
+2026-02-23 04:52:25,662 - INFO - Epoch [77] Batch [0/17]                     Loss: -0.2455, Hard: 0.3096, Soft: -0.5551                     Acc: 87.50% LR: 0.000342                     Alpha: 0.5744425058364868                     Beta: -0.7069924473762512                     MemKD: 0.39200934767723083
+2026-02-23 04:52:54,907 - INFO - Epoch [77/200] Train Loss: -0.1064, Train Acc: 84.19%, Val Loss: 0.5904, Val Acc: 78.59%
+2026-02-23 04:53:16,813 - INFO - Epoch [78] Batch [0/17]                     Loss: -0.2235, Hard: 0.3691, Soft: -0.5927                     Acc: 87.50% LR: 0.000338                     Alpha: 0.5744425058364868                     Beta: -0.714157223701477                     MemKD: 0.38987284898757935
+2026-02-23 04:53:45,167 - INFO - Epoch [78/200] Train Loss: -0.1870, Train Acc: 88.24%, Val Loss: 0.5931, Val Acc: 78.72%
+2026-02-23 04:54:07,849 - INFO - Epoch [79] Batch [0/17]                     Loss: 0.1241, Hard: 0.5823, Soft: -0.4582                     Acc: 75.00% LR: 0.000335                     Alpha: 0.5744425058364868                     Beta: -0.7212437987327576                     MemKD: 0.38777080178260803
+2026-02-23 04:54:36,178 - INFO - Epoch [79/200] Train Loss: 0.0043, Train Acc: 82.72%, Val Loss: 0.4403, Val Acc: 84.84%
+2026-02-23 04:54:57,988 - INFO - Epoch [80] Batch [0/17]                     Loss: -0.1787, Hard: 0.3960, Soft: -0.5747                     Acc: 81.25% LR: 0.000331                     Alpha: 0.5744425058364868                     Beta: -0.7281451225280762                     MemKD: 0.3857753276824951
+2026-02-23 04:55:26,011 - INFO - Epoch [80/200] Train Loss: -0.0248, Train Acc: 84.56%, Val Loss: 0.4534, Val Acc: 82.85%
+2026-02-23 04:55:26,056 - INFO - Checkpoint saved at epoch 80
+2026-02-23 04:55:48,610 - INFO - Epoch [81] Batch [0/17]                     Loss: 0.1054, Hard: 0.6046, Soft: -0.4992                     Acc: 81.25% LR: 0.000327                     Alpha: 0.5744425058364868                     Beta: -0.7348518371582031                     MemKD: 0.3838666081428528
+2026-02-23 04:56:19,080 - INFO - Epoch [81/200] Train Loss: -0.1068, Train Acc: 83.82%, Val Loss: 0.4691, Val Acc: 83.24%
+2026-02-23 04:56:42,771 - INFO - Epoch [82] Batch [0/17]                     Loss: -0.3809, Hard: 0.2165, Soft: -0.5974                     Acc: 93.75% LR: 0.000324                     Alpha: 0.5744425058364868                     Beta: -0.7414262294769287                     MemKD: 0.38199400901794434
+2026-02-23 04:57:12,389 - INFO - Epoch [82/200] Train Loss: -0.1937, Train Acc: 84.19%, Val Loss: 0.5660, Val Acc: 79.65%
+2026-02-23 04:57:34,722 - INFO - Epoch [83] Batch [0/17]                     Loss: -0.2174, Hard: 0.3263, Soft: -0.5437                     Acc: 81.25% LR: 0.000320                     Alpha: 0.5744425058364868                     Beta: -0.7480890154838562                     MemKD: 0.38007256388664246
+2026-02-23 04:58:02,604 - INFO - Epoch [83/200] Train Loss: -0.1590, Train Acc: 84.56%, Val Loss: 0.6840, Val Acc: 75.27%
+2026-02-23 04:58:25,485 - INFO - Epoch [84] Batch [0/17]                     Loss: 0.1198, Hard: 0.5868, Soft: -0.4670                     Acc: 81.25% LR: 0.000316                     Alpha: 0.5744425058364868                     Beta: -0.7546669244766235                     MemKD: 0.3781978487968445
+2026-02-23 04:58:54,544 - INFO - Epoch [84/200] Train Loss: -0.0762, Train Acc: 81.25%, Val Loss: 0.5592, Val Acc: 79.39%
+2026-02-23 04:59:18,596 - INFO - Epoch [85] Batch [0/17]                     Loss: 0.1858, Hard: 0.6320, Soft: -0.4462                     Acc: 81.25% LR: 0.000312                     Alpha: 0.5744425058364868                     Beta: -0.7610992789268494                     MemKD: 0.37638550996780396
+2026-02-23 04:59:48,694 - INFO - Epoch [85/200] Train Loss: -0.1184, Train Acc: 84.93%, Val Loss: 0.4664, Val Acc: 82.45%
+2026-02-23 05:00:10,075 - INFO - Epoch [86] Batch [0/17]                     Loss: -0.2166, Hard: 0.3700, Soft: -0.5866                     Acc: 87.50% LR: 0.000308                     Alpha: 0.5744425058364868                     Beta: -0.7673732042312622                     MemKD: 0.37463414669036865
+2026-02-23 05:00:39,215 - INFO - Epoch [86/200] Train Loss: -0.1357, Train Acc: 84.56%, Val Loss: 0.5823, Val Acc: 78.46%
+2026-02-23 05:01:00,370 - INFO - Epoch [87] Batch [0/17]                     Loss: -0.2215, Hard: 0.3734, Soft: -0.5950                     Acc: 81.25% LR: 0.000305                     Alpha: 0.5744425058364868                     Beta: -0.7736160159111023                     MemKD: 0.3728887140750885
+2026-02-23 05:01:29,424 - INFO - Epoch [87/200] Train Loss: -0.1403, Train Acc: 84.93%, Val Loss: 0.4518, Val Acc: 82.98%
+2026-02-23 05:01:51,042 - INFO - Epoch [88] Batch [0/17]                     Loss: -0.2150, Hard: 0.3628, Soft: -0.5778                     Acc: 87.50% LR: 0.000301                     Alpha: 0.5744425058364868                     Beta: -0.7797528505325317                     MemKD: 0.3711840510368347
+2026-02-23 05:02:21,224 - INFO - Epoch [88/200] Train Loss: -0.2890, Train Acc: 86.76%, Val Loss: 0.4988, Val Acc: 82.71%
+2026-02-23 05:02:43,594 - INFO - Epoch [89] Batch [0/17]                     Loss: -0.3510, Hard: 0.2681, Soft: -0.6190                     Acc: 93.75% LR: 0.000297                     Alpha: 0.5744425058364868                     Beta: -0.7859369516372681                     MemKD: 0.36944299936294556
+2026-02-23 05:03:12,351 - INFO - Epoch [89/200] Train Loss: -0.2426, Train Acc: 86.03%, Val Loss: 0.5085, Val Acc: 82.31%
+2026-02-23 05:03:35,326 - INFO - Epoch [90] Batch [0/17]                     Loss: -0.4268, Hard: 0.2690, Soft: -0.6958                     Acc: 81.25% LR: 0.000293                     Alpha: 0.5744425058364868                     Beta: -0.7920405864715576                     MemKD: 0.36773014068603516
+2026-02-23 05:04:02,953 - INFO - Epoch [90/200] Train Loss: -0.2289, Train Acc: 85.66%, Val Loss: 0.5606, Val Acc: 78.72%
+2026-02-23 05:04:03,011 - INFO - Checkpoint saved at epoch 90
+2026-02-23 05:04:24,955 - INFO - Epoch [91] Batch [0/17]                     Loss: -0.1377, Hard: 0.4942, Soft: -0.6319                     Acc: 81.25% LR: 0.000289                     Alpha: 0.5744425058364868                     Beta: -0.7980801463127136                     MemKD: 0.3660457730293274
+2026-02-23 05:04:54,595 - INFO - Epoch [91/200] Train Loss: -0.2361, Train Acc: 85.66%, Val Loss: 0.6367, Val Acc: 76.99%
+2026-02-23 05:05:18,206 - INFO - Epoch [92] Batch [0/17]                     Loss: -0.4424, Hard: 0.2207, Soft: -0.6631                     Acc: 93.75% LR: 0.000285                     Alpha: 0.5744425058364868                     Beta: -0.8039313554763794                     MemKD: 0.36444035172462463
+2026-02-23 05:05:48,035 - INFO - Epoch [92/200] Train Loss: -0.2809, Train Acc: 88.60%, Val Loss: 0.4982, Val Acc: 82.45%
+2026-02-23 05:06:10,902 - INFO - Epoch [93] Batch [0/17]                     Loss: -0.5329, Hard: 0.1622, Soft: -0.6951                     Acc: 93.75% LR: 0.000281                     Alpha: 0.5744425058364868                     Beta: -0.8097829818725586                     MemKD: 0.36282792687416077
+2026-02-23 05:06:38,444 - INFO - Epoch [93/200] Train Loss: -0.2657, Train Acc: 89.71%, Val Loss: 0.4268, Val Acc: 84.04%
+2026-02-23 05:07:00,455 - INFO - Epoch [94] Batch [0/17]                     Loss: -0.4567, Hard: 0.2234, Soft: -0.6801                     Acc: 93.75% LR: 0.000277                     Alpha: 0.5744425058364868                     Beta: -0.8155428171157837                     MemKD: 0.3612428307533264
+2026-02-23 05:07:28,846 - INFO - Epoch [94/200] Train Loss: -0.3051, Train Acc: 86.40%, Val Loss: 0.4830, Val Acc: 80.05%
+2026-02-23 05:07:51,076 - INFO - Epoch [95] Batch [0/17]                     Loss: 0.0695, Hard: 0.5289, Soft: -0.4594                     Acc: 81.25% LR: 0.000274                     Alpha: 0.5744425058364868                     Beta: -0.8211934566497803                     MemKD: 0.35969868302345276
+2026-02-23 05:08:18,508 - INFO - Epoch [95/200] Train Loss: -0.2978, Train Acc: 86.03%, Val Loss: 0.3901, Val Acc: 86.30%
+2026-02-23 05:08:41,675 - INFO - Epoch [96] Batch [0/17]                     Loss: -0.5973, Hard: 0.1454, Soft: -0.7428                     Acc: 100.00% LR: 0.000270                     Alpha: 0.5744425058364868                     Beta: -0.8267412185668945                     MemKD: 0.35818344354629517
+2026-02-23 05:09:10,645 - INFO - Epoch [96/200] Train Loss: -0.3556, Train Acc: 88.24%, Val Loss: 0.5423, Val Acc: 80.85%
+2026-02-23 05:09:33,031 - INFO - Epoch [97] Batch [0/17]                     Loss: 0.1700, Hard: 0.6875, Soft: -0.5175                     Acc: 68.75% LR: 0.000266                     Alpha: 0.5744425058364868                     Beta: -0.8322148323059082                     MemKD: 0.3566983640193939
+2026-02-23 05:10:00,355 - INFO - Epoch [97/200] Train Loss: -0.2969, Train Acc: 84.19%, Val Loss: 0.4661, Val Acc: 83.11%
+2026-02-23 05:10:21,591 - INFO - Epoch [98] Batch [0/17]                     Loss: -0.3724, Hard: 0.2395, Soft: -0.6119                     Acc: 93.75% LR: 0.000262                     Alpha: 0.5744425058364868                     Beta: -0.8376506567001343                     MemKD: 0.3552296459674835
+2026-02-23 05:10:49,927 - INFO - Epoch [98/200] Train Loss: -0.3205, Train Acc: 86.40%, Val Loss: 0.5302, Val Acc: 81.65%
+2026-02-23 05:11:12,031 - INFO - Epoch [99] Batch [0/17]                     Loss: -0.3546, Hard: 0.3429, Soft: -0.6975                     Acc: 81.25% LR: 0.000258                     Alpha: 0.5744425058364868                     Beta: -0.842919647693634                     MemKD: 0.353820264339447
+2026-02-23 05:11:41,282 - INFO - Epoch [99/200] Train Loss: -0.4431, Train Acc: 90.07%, Val Loss: 0.4174, Val Acc: 84.57%
+2026-02-23 05:12:04,315 - INFO - Epoch [100] Batch [0/17]                     Loss: -0.6624, Hard: 0.1317, Soft: -0.7941                     Acc: 93.75% LR: 0.000254                     Alpha: 0.5744425058364868                     Beta: -0.8482396006584167                     MemKD: 0.35239019989967346
+2026-02-23 05:12:32,768 - INFO - Epoch [100/200] Train Loss: -0.2646, Train Acc: 83.82%, Val Loss: 0.4399, Val Acc: 84.04%
+2026-02-23 05:12:32,803 - INFO - Checkpoint saved at epoch 100
+2026-02-23 05:12:55,272 - INFO - Epoch [101] Batch [0/17]                     Loss: -0.3055, Hard: 0.4054, Soft: -0.7109                     Acc: 87.50% LR: 0.000250                     Alpha: 0.5744425058364868                     Beta: -0.8533890843391418                     MemKD: 0.35102275013923645
+2026-02-23 05:13:23,254 - INFO - Epoch [101/200] Train Loss: -0.4081, Train Acc: 91.18%, Val Loss: 0.5544, Val Acc: 79.26%
+2026-02-23 05:13:45,101 - INFO - Epoch [102] Batch [0/17]                     Loss: -0.6281, Hard: 0.1385, Soft: -0.7666                     Acc: 93.75% LR: 0.000246                     Alpha: 0.5744425058364868                     Beta: -0.8584635257720947                     MemKD: 0.3496811091899872
+2026-02-23 05:14:13,494 - INFO - Epoch [102/200] Train Loss: -0.3401, Train Acc: 84.93%, Val Loss: 0.4681, Val Acc: 80.98%
+2026-02-23 05:14:35,331 - INFO - Epoch [103] Batch [0/17]                     Loss: -0.5497, Hard: 0.2290, Soft: -0.7786                     Acc: 93.75% LR: 0.000242                     Alpha: 0.5744425058364868                     Beta: -0.8633949756622314                     MemKD: 0.3483825922012329
+2026-02-23 05:15:04,516 - INFO - Epoch [103/200] Train Loss: -0.3438, Train Acc: 87.87%, Val Loss: 0.4343, Val Acc: 82.98%
+2026-02-23 05:15:26,958 - INFO - Epoch [104] Batch [0/17]                     Loss: -0.6457, Hard: 0.1599, Soft: -0.8056                     Acc: 93.75% LR: 0.000238                     Alpha: 0.5744425058364868                     Beta: -0.8682190775871277                     MemKD: 0.34711530804634094
+2026-02-23 05:15:53,505 - INFO - Epoch [104/200] Train Loss: -0.3169, Train Acc: 85.29%, Val Loss: 0.4526, Val Acc: 83.51%
+2026-02-23 05:16:15,604 - INFO - Epoch [105] Batch [0/17]                     Loss: -0.3794, Hard: 0.3637, Soft: -0.7431                     Acc: 87.50% LR: 0.000234                     Alpha: 0.5744425058364868                     Beta: -0.8729580044746399                     MemKD: 0.34589117765426636
+2026-02-23 05:16:45,306 - INFO - Epoch [105/200] Train Loss: -0.2806, Train Acc: 84.19%, Val Loss: 0.4196, Val Acc: 84.71%
+2026-02-23 05:17:06,884 - INFO - Epoch [106] Batch [0/17]                     Loss: -0.4921, Hard: 0.2563, Soft: -0.7483                     Acc: 93.75% LR: 0.000230                     Alpha: 0.5744425058364868                     Beta: -0.8776267170906067                     MemKD: 0.34469303488731384
+2026-02-23 05:17:36,336 - INFO - Epoch [106/200] Train Loss: -0.3934, Train Acc: 88.60%, Val Loss: 0.4640, Val Acc: 83.38%
+2026-02-23 05:17:58,875 - INFO - Epoch [107] Batch [0/17]                     Loss: -0.2876, Hard: 0.4084, Soft: -0.6960                     Acc: 87.50% LR: 0.000226                     Alpha: 0.5744425058364868                     Beta: -0.8822044134140015                     MemKD: 0.3435201942920685
+2026-02-23 05:18:25,911 - INFO - Epoch [107/200] Train Loss: -0.4038, Train Acc: 87.87%, Val Loss: 0.4154, Val Acc: 84.71%
+2026-02-23 05:18:47,026 - INFO - Epoch [108] Batch [0/17]                     Loss: -0.6058, Hard: 0.2108, Soft: -0.8166                     Acc: 100.00% LR: 0.000223                     Alpha: 0.5744425058364868                     Beta: -0.8867132663726807                     MemKD: 0.3423657715320587
+2026-02-23 05:19:15,617 - INFO - Epoch [108/200] Train Loss: -0.4876, Train Acc: 90.44%, Val Loss: 0.4120, Val Acc: 85.24%
+2026-02-23 05:19:38,159 - INFO - Epoch [109] Batch [0/17]                     Loss: -0.3919, Hard: 0.3838, Soft: -0.7757                     Acc: 93.75% LR: 0.000219                     Alpha: 0.5744425058364868                     Beta: -0.8912269473075867                     MemKD: 0.34119272232055664
+2026-02-23 05:20:07,351 - INFO - Epoch [109/200] Train Loss: -0.4943, Train Acc: 88.60%, Val Loss: 0.4348, Val Acc: 83.38%
+2026-02-23 05:20:31,107 - INFO - Epoch [110] Batch [0/17]                     Loss: -0.7862, Hard: 0.0722, Soft: -0.8583                     Acc: 100.00% LR: 0.000215                     Alpha: 0.5744425058364868                     Beta: -0.8956411480903625                     MemKD: 0.34005358815193176
+2026-02-23 05:21:00,433 - INFO - Epoch [110/200] Train Loss: -0.5181, Train Acc: 90.44%, Val Loss: 0.4773, Val Acc: 82.31%
+2026-02-23 05:21:00,481 - INFO - Checkpoint saved at epoch 110
+2026-02-23 05:21:24,319 - INFO - Epoch [111] Batch [0/17]                     Loss: -0.3518, Hard: 0.3549, Soft: -0.7068                     Acc: 81.25% LR: 0.000211                     Alpha: 0.5744425058364868                     Beta: -0.8999808430671692                     MemKD: 0.33893731236457825
+2026-02-23 05:21:50,959 - INFO - Epoch [111/200] Train Loss: -0.4908, Train Acc: 87.87%, Val Loss: 0.4112, Val Acc: 84.44%
+2026-02-23 05:22:14,696 - INFO - Epoch [112] Batch [0/17]                     Loss: -0.6290, Hard: 0.1697, Soft: -0.7987                     Acc: 93.75% LR: 0.000207                     Alpha: 0.5744425058364868                     Beta: -0.9042342305183411                     MemKD: 0.33784857392311096
+2026-02-23 05:22:44,238 - INFO - Epoch [112/200] Train Loss: -0.4071, Train Acc: 86.76%, Val Loss: 0.5138, Val Acc: 80.45%
+2026-02-23 05:23:06,964 - INFO - Epoch [113] Batch [0/17]                     Loss: -0.7600, Hard: 0.1244, Soft: -0.8843                     Acc: 100.00% LR: 0.000203                     Alpha: 0.5744425058364868                     Beta: -0.9083473086357117                     MemKD: 0.3368053734302521
+2026-02-23 05:23:36,843 - INFO - Epoch [113/200] Train Loss: -0.3955, Train Acc: 86.76%, Val Loss: 0.4273, Val Acc: 84.31%
+2026-02-23 05:24:01,056 - INFO - Epoch [114] Batch [0/17]                     Loss: -0.6527, Hard: 0.1742, Soft: -0.8269                     Acc: 93.75% LR: 0.000199                     Alpha: 0.5744425058364868                     Beta: -0.9123296141624451                     MemKD: 0.3358125388622284
+2026-02-23 05:24:28,425 - INFO - Epoch [114/200] Train Loss: -0.4299, Train Acc: 87.13%, Val Loss: 0.5076, Val Acc: 81.25%
+2026-02-23 05:24:49,987 - INFO - Epoch [115] Batch [0/17]                     Loss: -0.5299, Hard: 0.2773, Soft: -0.8071                     Acc: 93.75% LR: 0.000195                     Alpha: 0.5744425058364868                     Beta: -0.9162479639053345                     MemKD: 0.3348289430141449
+2026-02-23 05:25:18,623 - INFO - Epoch [115/200] Train Loss: -0.4332, Train Acc: 87.87%, Val Loss: 0.4400, Val Acc: 83.11%
+2026-02-23 05:25:40,328 - INFO - Epoch [116] Batch [0/17]                     Loss: -0.0670, Hard: 0.5759, Soft: -0.6430                     Acc: 68.75% LR: 0.000192                     Alpha: 0.5744425058364868                     Beta: -0.9200941324234009                     MemKD: 0.33386462926864624
+2026-02-23 05:26:09,462 - INFO - Epoch [116/200] Train Loss: -0.4655, Train Acc: 87.13%, Val Loss: 0.4342, Val Acc: 84.04%
+2026-02-23 05:26:31,472 - INFO - Epoch [117] Batch [0/17]                     Loss: -0.3959, Hard: 0.3721, Soft: -0.7680                     Acc: 87.50% LR: 0.000188                     Alpha: 0.5744425058364868                     Beta: -0.923848032951355                     MemKD: 0.33292773365974426
+2026-02-23 05:27:01,553 - INFO - Epoch [117/200] Train Loss: -0.4904, Train Acc: 88.60%, Val Loss: 0.4027, Val Acc: 84.97%
+2026-02-23 05:27:23,475 - INFO - Epoch [118] Batch [0/17]                     Loss: -0.0577, Hard: 0.6291, Soft: -0.6868                     Acc: 81.25% LR: 0.000184                     Alpha: 0.5744425058364868                     Beta: -0.9275146722793579                     MemKD: 0.332013875246048
+2026-02-23 05:27:50,890 - INFO - Epoch [118/200] Train Loss: -0.5122, Train Acc: 86.76%, Val Loss: 0.4572, Val Acc: 83.64%
+2026-02-23 05:28:13,722 - INFO - Epoch [119] Batch [0/17]                     Loss: -0.5785, Hard: 0.2888, Soft: -0.8673                     Acc: 87.50% LR: 0.000180                     Alpha: 0.5744425058364868                     Beta: -0.931135892868042                     MemKD: 0.3311116397380829
+2026-02-23 05:28:42,165 - INFO - Epoch [119/200] Train Loss: -0.5685, Train Acc: 90.07%, Val Loss: 0.5148, Val Acc: 80.19%
+2026-02-23 05:29:04,082 - INFO - Epoch [120] Batch [0/17]                     Loss: -0.6743, Hard: 0.2167, Soft: -0.8910                     Acc: 93.75% LR: 0.000176                     Alpha: 0.5744425058364868                     Beta: -0.9347037076950073                     MemKD: 0.33022254705429077
+2026-02-23 05:29:33,631 - INFO - Epoch [120/200] Train Loss: -0.5380, Train Acc: 88.97%, Val Loss: 0.5126, Val Acc: 82.71%
+2026-02-23 05:29:33,690 - INFO - Checkpoint saved at epoch 120
+2026-02-23 05:29:57,464 - INFO - Epoch [121] Batch [0/17]                     Loss: -0.6926, Hard: 0.2178, Soft: -0.9104                     Acc: 87.50% LR: 0.000173                     Alpha: 0.5744425058364868                     Beta: -0.9382041096687317                     MemKD: 0.3293520212173462
+2026-02-23 05:30:25,485 - INFO - Epoch [121/200] Train Loss: -0.5424, Train Acc: 87.87%, Val Loss: 0.4504, Val Acc: 83.64%
+2026-02-23 05:30:47,027 - INFO - Epoch [122] Batch [0/17]                     Loss: -0.5371, Hard: 0.2776, Soft: -0.8146                     Acc: 93.75% LR: 0.000169                     Alpha: 0.5744425058364868                     Beta: -0.9416211843490601                     MemKD: 0.32850563526153564
+2026-02-23 05:31:16,607 - INFO - Epoch [122/200] Train Loss: -0.5271, Train Acc: 91.54%, Val Loss: 0.4748, Val Acc: 81.52%
+2026-02-23 05:31:39,712 - INFO - Epoch [123] Batch [0/17]                     Loss: -0.1329, Hard: 0.5408, Soft: -0.6736                     Acc: 81.25% LR: 0.000165                     Alpha: 0.5744425058364868                     Beta: -0.9449331760406494                     MemKD: 0.327690064907074
+2026-02-23 05:32:09,533 - INFO - Epoch [123/200] Train Loss: -0.4309, Train Acc: 86.03%, Val Loss: 0.4728, Val Acc: 84.31%
+2026-02-23 05:32:32,708 - INFO - Epoch [124] Batch [0/17]                     Loss: -0.6837, Hard: 0.1866, Soft: -0.8703                     Acc: 93.75% LR: 0.000162                     Alpha: 0.5744425058364868                     Beta: -0.9481186866760254                     MemKD: 0.32691532373428345
+2026-02-23 05:33:02,083 - INFO - Epoch [124/200] Train Loss: -0.4863, Train Acc: 88.24%, Val Loss: 0.4858, Val Acc: 81.25%
+2026-02-23 05:33:24,299 - INFO - Epoch [125] Batch [0/17]                     Loss: -0.3231, Hard: 0.4531, Soft: -0.7763                     Acc: 87.50% LR: 0.000158                     Alpha: 0.5744425058364868                     Beta: -0.9512137174606323                     MemKD: 0.3261669874191284
+2026-02-23 05:33:50,493 - INFO - Epoch [125/200] Train Loss: -0.4700, Train Acc: 86.76%, Val Loss: 0.3879, Val Acc: 86.70%
+2026-02-23 05:33:50,494 - INFO - Best model saved with accuracy: 86.70%
+2026-02-23 05:34:12,515 - INFO - Epoch [126] Batch [0/17]                     Loss: -0.5309, Hard: 0.3223, Soft: -0.8532                     Acc: 75.00% LR: 0.000154                     Alpha: 0.5744425058364868                     Beta: -0.9542165398597717                     MemKD: 0.32544538378715515
+2026-02-23 05:34:41,429 - INFO - Epoch [126/200] Train Loss: -0.5430, Train Acc: 87.87%, Val Loss: 0.4099, Val Acc: 85.51%
+2026-02-23 05:35:04,996 - INFO - Epoch [127] Batch [0/17]                     Loss: -0.3817, Hard: 0.4168, Soft: -0.7985                     Acc: 87.50% LR: 0.000151                     Alpha: 0.5744425058364868                     Beta: -0.9571945071220398                     MemKD: 0.32472336292266846
+2026-02-23 05:35:34,285 - INFO - Epoch [127/200] Train Loss: -0.5368, Train Acc: 90.44%, Val Loss: 0.4284, Val Acc: 84.44%
+2026-02-23 05:35:57,612 - INFO - Epoch [128] Batch [0/17]                     Loss: -0.5072, Hard: 0.3579, Soft: -0.8651                     Acc: 93.75% LR: 0.000147                     Alpha: 0.5744425058364868                     Beta: -0.9601047039031982                     MemKD: 0.32402271032333374
+2026-02-23 05:36:24,939 - INFO - Epoch [128/200] Train Loss: -0.5960, Train Acc: 89.71%, Val Loss: 0.4680, Val Acc: 81.12%
+2026-02-23 05:36:45,526 - INFO - Epoch [129] Batch [0/17]                     Loss: -0.3397, Hard: 0.4239, Soft: -0.7636                     Acc: 81.25% LR: 0.000144                     Alpha: 0.5744425058364868                     Beta: -0.9629868865013123                     MemKD: 0.3233208656311035
+2026-02-23 05:37:14,079 - INFO - Epoch [129/200] Train Loss: -0.5783, Train Acc: 88.97%, Val Loss: 0.3735, Val Acc: 85.64%
+2026-02-23 05:37:36,862 - INFO - Epoch [130] Batch [0/17]                     Loss: -0.7745, Hard: 0.1320, Soft: -0.9065                     Acc: 100.00% LR: 0.000140                     Alpha: 0.5744425058364868                     Beta: -0.9657697677612305                     MemKD: 0.32264944911003113
+2026-02-23 05:38:05,987 - INFO - Epoch [130/200] Train Loss: -0.5605, Train Acc: 90.44%, Val Loss: 0.4276, Val Acc: 85.51%
+2026-02-23 05:38:06,033 - INFO - Checkpoint saved at epoch 130
+2026-02-23 05:38:28,400 - INFO - Epoch [131] Batch [0/17]                     Loss: -0.3440, Hard: 0.4058, Soft: -0.7498                     Acc: 87.50% LR: 0.000137                     Alpha: 0.5744425058364868                     Beta: -0.9685041308403015                     MemKD: 0.3219901919364929
+2026-02-23 05:38:57,227 - INFO - Epoch [131/200] Train Loss: -0.5555, Train Acc: 88.60%, Val Loss: 0.3957, Val Acc: 86.30%
+2026-02-23 05:39:20,190 - INFO - Epoch [132] Batch [0/17]                     Loss: -0.5122, Hard: 0.3284, Soft: -0.8406                     Acc: 87.50% LR: 0.000133                     Alpha: 0.5744425058364868                     Beta: -0.9711369872093201                     MemKD: 0.32135874032974243
+2026-02-23 05:39:47,827 - INFO - Epoch [132/200] Train Loss: -0.5811, Train Acc: 88.97%, Val Loss: 0.4481, Val Acc: 84.44%
+2026-02-23 05:40:09,779 - INFO - Epoch [133] Batch [0/17]                     Loss: -0.8591, Hard: 0.1098, Soft: -0.9688                     Acc: 100.00% LR: 0.000130                     Alpha: 0.5744425058364868                     Beta: -0.9736935496330261                     MemKD: 0.320745587348938
+2026-02-23 05:40:39,338 - INFO - Epoch [133/200] Train Loss: -0.5703, Train Acc: 88.97%, Val Loss: 0.4601, Val Acc: 84.04%
+2026-02-23 05:41:02,447 - INFO - Epoch [134] Batch [0/17]                     Loss: -0.5654, Hard: 0.2846, Soft: -0.8500                     Acc: 81.25% LR: 0.000126                     Alpha: 0.5744425058364868                     Beta: -0.9761925935745239                     MemKD: 0.3201495110988617
+2026-02-23 05:41:32,280 - INFO - Epoch [134/200] Train Loss: -0.6128, Train Acc: 88.60%, Val Loss: 0.4315, Val Acc: 83.78%
+2026-02-23 05:41:54,961 - INFO - Epoch [135] Batch [0/17]                     Loss: -0.6556, Hard: 0.2533, Soft: -0.9089                     Acc: 87.50% LR: 0.000123                     Alpha: 0.5744425058364868                     Beta: -0.9786186814308167                     MemKD: 0.3195731043815613
+2026-02-23 05:42:23,965 - INFO - Epoch [135/200] Train Loss: -0.5813, Train Acc: 87.13%, Val Loss: 0.4141, Val Acc: 84.04%
+2026-02-23 05:42:45,863 - INFO - Epoch [136] Batch [0/17]                     Loss: -0.4530, Hard: 0.3874, Soft: -0.8405                     Acc: 75.00% LR: 0.000119                     Alpha: 0.5744425058364868                     Beta: -0.9810012578964233                     MemKD: 0.31900662183761597
+2026-02-23 05:43:15,468 - INFO - Epoch [136/200] Train Loss: -0.6198, Train Acc: 90.44%, Val Loss: 0.3891, Val Acc: 86.44%
+2026-02-23 05:43:38,634 - INFO - Epoch [137] Batch [0/17]                     Loss: -0.7364, Hard: 0.1879, Soft: -0.9243                     Acc: 93.75% LR: 0.000116                     Alpha: 0.5744425058364868                     Beta: -0.9832746386528015                     MemKD: 0.31846940517425537
+2026-02-23 05:44:07,231 - INFO - Epoch [137/200] Train Loss: -0.6091, Train Acc: 89.34%, Val Loss: 0.3706, Val Acc: 86.97%
+2026-02-23 05:44:07,231 - INFO - Best model saved with accuracy: 86.97%
+2026-02-23 05:44:29,208 - INFO - Epoch [138] Batch [0/17]                     Loss: -0.7257, Hard: 0.2076, Soft: -0.9333                     Acc: 87.50% LR: 0.000113                     Alpha: 0.5744425058364868                     Beta: -0.985496461391449                     MemKD: 0.3179425895214081
+2026-02-23 05:44:59,462 - INFO - Epoch [138/200] Train Loss: -0.6130, Train Acc: 88.97%, Val Loss: 0.3527, Val Acc: 88.30%
+2026-02-23 05:44:59,463 - INFO - Best model saved with accuracy: 88.30%
+2026-02-23 05:45:22,521 - INFO - Epoch [139] Batch [0/17]                     Loss: -0.7289, Hard: 0.2031, Soft: -0.9320                     Acc: 93.75% LR: 0.000109                     Alpha: 0.5744425058364868                     Beta: -0.9876397252082825                     MemKD: 0.31743741035461426
+2026-02-23 05:45:49,337 - INFO - Epoch [139/200] Train Loss: -0.6285, Train Acc: 88.60%, Val Loss: 0.4071, Val Acc: 85.51%
+2026-02-23 05:46:12,041 - INFO - Epoch [140] Batch [0/17]                     Loss: -0.7009, Hard: 0.2334, Soft: -0.9343                     Acc: 87.50% LR: 0.000106                     Alpha: 0.5744425058364868                     Beta: -0.9897443652153015                     MemKD: 0.3169417679309845
+2026-02-23 05:46:41,044 - INFO - Epoch [140/200] Train Loss: -0.6890, Train Acc: 91.91%, Val Loss: 0.3617, Val Acc: 85.90%
+2026-02-23 05:46:41,092 - INFO - Checkpoint saved at epoch 140
+2026-02-23 05:47:04,145 - INFO - Epoch [141] Batch [0/17]                     Loss: -0.9682, Hard: 0.0859, Soft: -1.0540                     Acc: 100.00% LR: 0.000103                     Alpha: 0.5744425058364868                     Beta: -0.9917861223220825                     MemKD: 0.31646084785461426
+2026-02-23 05:47:32,493 - INFO - Epoch [141/200] Train Loss: -0.5917, Train Acc: 89.34%, Val Loss: 0.3783, Val Acc: 85.64%
+2026-02-23 05:47:54,636 - INFO - Epoch [142] Batch [0/17]                     Loss: -0.8422, Hard: 0.1013, Soft: -0.9435                     Acc: 93.75% LR: 0.000100                     Alpha: 0.5744425058364868                     Beta: -0.9937698841094971                     MemKD: 0.3159952759742737
+2026-02-23 05:48:22,657 - INFO - Epoch [142/200] Train Loss: -0.6606, Train Acc: 90.81%, Val Loss: 0.3868, Val Acc: 87.23%
+2026-02-23 05:48:43,711 - INFO - Epoch [143] Batch [0/17]                     Loss: -0.8691, Hard: 0.1329, Soft: -1.0020                     Acc: 100.00% LR: 0.000097                     Alpha: 0.5744425058364868                     Beta: -0.9956711530685425                     MemKD: 0.31555068492889404
+2026-02-23 05:49:11,863 - INFO - Epoch [143/200] Train Loss: -0.6401, Train Acc: 90.44%, Val Loss: 0.3946, Val Acc: 85.77%
+2026-02-23 05:49:33,534 - INFO - Epoch [144] Batch [0/17]                     Loss: -0.8535, Hard: 0.1373, Soft: -0.9908                     Acc: 93.75% LR: 0.000094                     Alpha: 0.5744425058364868                     Beta: -0.99753737449646                     MemKD: 0.3151135742664337
+2026-02-23 05:50:03,015 - INFO - Epoch [144/200] Train Loss: -0.6584, Train Acc: 89.71%, Val Loss: 0.3391, Val Acc: 88.43%
+2026-02-23 05:50:03,015 - INFO - Best model saved with accuracy: 88.43%
+2026-02-23 05:50:24,454 - INFO - Epoch [145] Batch [0/17]                     Loss: -0.5707, Hard: 0.2790, Soft: -0.8498                     Acc: 87.50% LR: 0.000091                     Alpha: 0.5744425058364868                     Beta: -0.9993232488632202                     MemKD: 0.31469789147377014
+2026-02-23 05:50:53,827 - INFO - Epoch [145/200] Train Loss: -0.6335, Train Acc: 90.44%, Val Loss: 0.4590, Val Acc: 82.45%
+2026-02-23 05:51:15,276 - INFO - Epoch [146] Batch [0/17]                     Loss: -0.6289, Hard: 0.2690, Soft: -0.8978                     Acc: 93.75% LR: 0.000088                     Alpha: 0.5744425058364868                     Beta: -1.0010288953781128                     MemKD: 0.31430405378341675
+2026-02-23 05:51:43,582 - INFO - Epoch [146/200] Train Loss: -0.6069, Train Acc: 88.60%, Val Loss: 0.3531, Val Acc: 86.84%
+2026-02-23 05:52:05,215 - INFO - Epoch [147] Batch [0/17]                     Loss: -0.7040, Hard: 0.2242, Soft: -0.9282                     Acc: 87.50% LR: 0.000085                     Alpha: 0.5744425058364868                     Beta: -1.0026901960372925                     MemKD: 0.3139182925224304
+2026-02-23 05:52:35,073 - INFO - Epoch [147/200] Train Loss: -0.6343, Train Acc: 86.40%, Val Loss: 0.3548, Val Acc: 88.43%
+2026-02-23 05:52:57,995 - INFO - Epoch [148] Batch [0/17]                     Loss: -0.8300, Hard: 0.1641, Soft: -0.9942                     Acc: 93.75% LR: 0.000082                     Alpha: 0.5744425058364868                     Beta: -1.0042868852615356                     MemKD: 0.31355005502700806
+2026-02-23 05:53:27,359 - INFO - Epoch [148/200] Train Loss: -0.6664, Train Acc: 91.18%, Val Loss: 0.3646, Val Acc: 86.30%
+2026-02-23 05:53:50,195 - INFO - Epoch [149] Batch [0/17]                     Loss: -0.7760, Hard: 0.1956, Soft: -0.9716                     Acc: 87.50% LR: 0.000079                     Alpha: 0.5744425058364868                     Beta: -1.0058397054672241                     MemKD: 0.3131901025772095
+2026-02-23 05:54:18,189 - INFO - Epoch [149/200] Train Loss: -0.6749, Train Acc: 90.07%, Val Loss: 0.4103, Val Acc: 85.11%
+2026-02-23 05:54:40,450 - INFO - Epoch [150] Batch [0/17]                     Loss: -0.7999, Hard: 0.2034, Soft: -1.0033                     Acc: 93.75% LR: 0.000076                     Alpha: 0.5744425058364868                     Beta: -1.0073268413543701                     MemKD: 0.31284546852111816
+2026-02-23 05:55:10,261 - INFO - Epoch [150/200] Train Loss: -0.6181, Train Acc: 88.24%, Val Loss: 0.3742, Val Acc: 86.30%
+2026-02-23 05:55:10,300 - INFO - Checkpoint saved at epoch 150
+2026-02-23 05:55:33,028 - INFO - Epoch [151] Batch [0/17]                     Loss: -0.7279, Hard: 0.2456, Soft: -0.9735                     Acc: 87.50% LR: 0.000073                     Alpha: 0.5744425058364868                     Beta: -1.0087590217590332                     MemKD: 0.31251564621925354
+2026-02-23 05:56:02,497 - INFO - Epoch [151/200] Train Loss: -0.6940, Train Acc: 90.81%, Val Loss: 0.3706, Val Acc: 86.97%
+2026-02-23 05:56:26,084 - INFO - Epoch [152] Batch [0/17]                     Loss: -0.6018, Hard: 0.2769, Soft: -0.8787                     Acc: 81.25% LR: 0.000070                     Alpha: 0.5744425058364868                     Beta: -1.0101325511932373                     MemKD: 0.31220075488090515
+2026-02-23 05:56:54,194 - INFO - Epoch [152/200] Train Loss: -0.7573, Train Acc: 92.28%, Val Loss: 0.3898, Val Acc: 85.24%
+2026-02-23 05:57:15,323 - INFO - Epoch [153] Batch [0/17]                     Loss: -0.7309, Hard: 0.2127, Soft: -0.9436                     Acc: 93.75% LR: 0.000068                     Alpha: 0.5744425058364868                     Beta: -1.0114781856536865                     MemKD: 0.3118896484375
+2026-02-23 05:57:44,432 - INFO - Epoch [153/200] Train Loss: -0.7101, Train Acc: 90.81%, Val Loss: 0.3746, Val Acc: 86.84%
+2026-02-23 05:58:07,170 - INFO - Epoch [154] Batch [0/17]                     Loss: -0.4281, Hard: 0.3927, Soft: -0.8208                     Acc: 81.25% LR: 0.000065                     Alpha: 0.5744425058364868                     Beta: -1.0127707719802856                     MemKD: 0.31159186363220215
+2026-02-23 05:58:36,269 - INFO - Epoch [154/200] Train Loss: -0.7200, Train Acc: 91.91%, Val Loss: 0.3800, Val Acc: 86.44%
+2026-02-23 05:58:59,481 - INFO - Epoch [155] Batch [0/17]                     Loss: -0.9412, Hard: 0.0830, Soft: -1.0241                     Acc: 100.00% LR: 0.000062                     Alpha: 0.5744425058364868                     Beta: -1.0140002965927124                     MemKD: 0.3113093972206116
+2026-02-23 05:59:29,241 - INFO - Epoch [155/200] Train Loss: -0.7689, Train Acc: 93.38%, Val Loss: 0.3685, Val Acc: 86.44%
+2026-02-23 05:59:51,648 - INFO - Epoch [156] Batch [0/17]                     Loss: -0.7931, Hard: 0.2089, Soft: -1.0019                     Acc: 87.50% LR: 0.000060                     Alpha: 0.5744425058364868                     Beta: -1.015192985534668                     MemKD: 0.311034232378006
+2026-02-23 06:00:18,753 - INFO - Epoch [156/200] Train Loss: -0.6983, Train Acc: 88.97%, Val Loss: 0.3912, Val Acc: 86.30%
+2026-02-23 06:00:40,179 - INFO - Epoch [157] Batch [0/17]                     Loss: -0.9058, Hard: 0.0838, Soft: -0.9896                     Acc: 93.75% LR: 0.000057                     Alpha: 0.5744425058364868                     Beta: -1.016323447227478                     MemKD: 0.31077608466148376
+2026-02-23 06:01:08,789 - INFO - Epoch [157/200] Train Loss: -0.7296, Train Acc: 90.81%, Val Loss: 0.3946, Val Acc: 85.37%
+2026-02-23 06:01:31,788 - INFO - Epoch [158] Batch [0/17]                     Loss: -0.4855, Hard: 0.4291, Soft: -0.9146                     Acc: 75.00% LR: 0.000055                     Alpha: 0.5744425058364868                     Beta: -1.017407774925232                     MemKD: 0.3105281889438629
+2026-02-23 06:01:59,955 - INFO - Epoch [158/200] Train Loss: -0.6198, Train Acc: 88.97%, Val Loss: 0.3922, Val Acc: 86.30%
+2026-02-23 06:02:22,773 - INFO - Epoch [159] Batch [0/17]                     Loss: -0.9746, Hard: 0.0545, Soft: -1.0291                     Acc: 100.00% LR: 0.000052                     Alpha: 0.5744425058364868                     Beta: -1.0184133052825928                     MemKD: 0.31030115485191345
+2026-02-23 06:02:51,141 - INFO - Epoch [159/200] Train Loss: -0.6988, Train Acc: 90.44%, Val Loss: 0.3702, Val Acc: 86.30%
+2026-02-23 06:03:11,782 - INFO - Epoch [160] Batch [0/17]                     Loss: -0.8452, Hard: 0.1518, Soft: -0.9970                     Acc: 100.00% LR: 0.000050                     Alpha: 0.5744425058364868                     Beta: -1.0193827152252197                     MemKD: 0.3100808560848236
+2026-02-23 06:03:39,644 - INFO - Epoch [160/200] Train Loss: -0.6269, Train Acc: 88.60%, Val Loss: 0.3797, Val Acc: 85.90%
+2026-02-23 06:03:39,690 - INFO - Checkpoint saved at epoch 160
+2026-02-23 06:04:01,569 - INFO - Epoch [161] Batch [0/17]                     Loss: -0.6156, Hard: 0.3112, Soft: -0.9268                     Acc: 87.50% LR: 0.000048                     Alpha: 0.5744425058364868                     Beta: -1.0203001499176025                     MemKD: 0.3098730444908142
+2026-02-23 06:04:30,956 - INFO - Epoch [161/200] Train Loss: -0.7223, Train Acc: 90.07%, Val Loss: 0.3731, Val Acc: 87.37%
+2026-02-23 06:04:53,627 - INFO - Epoch [162] Batch [0/17]                     Loss: -0.9361, Hard: 0.0925, Soft: -1.0287                     Acc: 100.00% LR: 0.000045                     Alpha: 0.5744425058364868                     Beta: -1.0211831331253052                     MemKD: 0.309673011302948
+2026-02-23 06:05:21,083 - INFO - Epoch [162/200] Train Loss: -0.7569, Train Acc: 93.38%, Val Loss: 0.3774, Val Acc: 86.97%
+2026-02-23 06:05:42,643 - INFO - Epoch [163] Batch [0/17]                     Loss: -0.7351, Hard: 0.2411, Soft: -0.9762                     Acc: 93.75% LR: 0.000043                     Alpha: 0.5744425058364868                     Beta: -1.022036075592041                     MemKD: 0.3094794750213623
+2026-02-23 06:06:10,589 - INFO - Epoch [163/200] Train Loss: -0.7319, Train Acc: 91.91%, Val Loss: 0.3762, Val Acc: 87.37%
+2026-02-23 06:06:32,594 - INFO - Epoch [164] Batch [0/17]                     Loss: -0.8566, Hard: 0.1441, Soft: -1.0006                     Acc: 93.75% LR: 0.000041                     Alpha: 0.5744425058364868                     Beta: -1.0228509902954102                     MemKD: 0.3092939257621765
+2026-02-23 06:07:02,026 - INFO - Epoch [164/200] Train Loss: -0.7651, Train Acc: 93.01%, Val Loss: 0.3550, Val Acc: 87.37%
+2026-02-23 06:07:24,503 - INFO - Epoch [165] Batch [0/17]                     Loss: -0.6974, Hard: 0.2177, Soft: -0.9151                     Acc: 93.75% LR: 0.000039                     Alpha: 0.5744425058364868                     Beta: -1.0236132144927979                     MemKD: 0.30912211537361145
+2026-02-23 06:07:52,675 - INFO - Epoch [165/200] Train Loss: -0.7985, Train Acc: 94.85%, Val Loss: 0.3563, Val Acc: 87.37%
+2026-02-23 06:08:16,355 - INFO - Epoch [166] Batch [0/17]                     Loss: -0.6608, Hard: 0.3099, Soft: -0.9707                     Acc: 87.50% LR: 0.000037                     Alpha: 0.5744425058364868                     Beta: -1.0243412256240845                     MemKD: 0.30895698070526123
+2026-02-23 06:08:44,882 - INFO - Epoch [166/200] Train Loss: -0.7328, Train Acc: 93.01%, Val Loss: 0.3913, Val Acc: 85.51%
+2026-02-23 06:09:07,216 - INFO - Epoch [167] Batch [0/17]                     Loss: -0.8812, Hard: 0.1561, Soft: -1.0374                     Acc: 93.75% LR: 0.000035                     Alpha: 0.5744425058364868                     Beta: -1.0250269174575806                     MemKD: 0.3088022470474243
+2026-02-23 06:09:35,016 - INFO - Epoch [167/200] Train Loss: -0.6952, Train Acc: 92.65%, Val Loss: 0.3850, Val Acc: 85.37%
+2026-02-23 06:09:56,481 - INFO - Epoch [168] Batch [0/17]                     Loss: -0.9351, Hard: 0.1071, Soft: -1.0422                     Acc: 100.00% LR: 0.000033                     Alpha: 0.5744425058364868                     Beta: -1.0256656408309937                     MemKD: 0.30865874886512756
+2026-02-23 06:10:25,560 - INFO - Epoch [168/200] Train Loss: -0.6723, Train Acc: 90.81%, Val Loss: 0.3674, Val Acc: 86.84%
+2026-02-23 06:10:48,367 - INFO - Epoch [169] Batch [0/17]                     Loss: -0.6249, Hard: 0.2857, Soft: -0.9106                     Acc: 87.50% LR: 0.000031                     Alpha: 0.5744425058364868                     Beta: -1.0262590646743774                     MemKD: 0.30852627754211426
+2026-02-23 06:11:17,725 - INFO - Epoch [169/200] Train Loss: -0.7416, Train Acc: 91.18%, Val Loss: 0.3521, Val Acc: 86.84%
+2026-02-23 06:11:40,662 - INFO - Epoch [170] Batch [0/17]                     Loss: -0.7565, Hard: 0.2086, Soft: -0.9651                     Acc: 87.50% LR: 0.000029                     Alpha: 0.5744425058364868                     Beta: -1.0268287658691406                     MemKD: 0.30839845538139343
+2026-02-23 06:12:08,222 - INFO - Epoch [170/200] Train Loss: -0.7339, Train Acc: 90.81%, Val Loss: 0.3593, Val Acc: 86.57%
+2026-02-23 06:12:08,271 - INFO - Checkpoint saved at epoch 170
+2026-02-23 06:12:30,635 - INFO - Epoch [171] Batch [0/17]                     Loss: -1.0291, Hard: 0.0388, Soft: -1.0679                     Acc: 100.00% LR: 0.000027                     Alpha: 0.5744425058364868                     Beta: -1.027361273765564                     MemKD: 0.30827903747558594
+2026-02-23 06:12:58,317 - INFO - Epoch [171/200] Train Loss: -0.7963, Train Acc: 93.75%, Val Loss: 0.3611, Val Acc: 85.90%
+2026-02-23 06:13:20,834 - INFO - Epoch [172] Batch [0/17]                     Loss: -0.9365, Hard: 0.0943, Soft: -1.0308                     Acc: 100.00% LR: 0.000025                     Alpha: 0.5744425058364868                     Beta: -1.0278681516647339                     MemKD: 0.30816468596458435
+2026-02-23 06:13:50,958 - INFO - Epoch [172/200] Train Loss: -0.6784, Train Acc: 90.07%, Val Loss: 0.3584, Val Acc: 86.57%
+2026-02-23 06:14:13,960 - INFO - Epoch [173] Batch [0/17]                     Loss: -0.5966, Hard: 0.3282, Soft: -0.9248                     Acc: 87.50% LR: 0.000024                     Alpha: 0.5744425058364868                     Beta: -1.0283321142196655                     MemKD: 0.3080611526966095
+2026-02-23 06:14:41,907 - INFO - Epoch [173/200] Train Loss: -0.5814, Train Acc: 89.34%, Val Loss: 0.3897, Val Acc: 86.84%
+2026-02-23 06:15:04,373 - INFO - Epoch [174] Batch [0/17]                     Loss: -0.8286, Hard: 0.1898, Soft: -1.0185                     Acc: 87.50% LR: 0.000022                     Alpha: 0.5744425058364868                     Beta: -1.0287604331970215                     MemKD: 0.30796608328819275
+2026-02-23 06:15:32,129 - INFO - Epoch [174/200] Train Loss: -0.7338, Train Acc: 89.71%, Val Loss: 0.3637, Val Acc: 86.57%
+2026-02-23 06:15:55,031 - INFO - Epoch [175] Batch [0/17]                     Loss: -0.7907, Hard: 0.2333, Soft: -1.0240                     Acc: 87.50% LR: 0.000021                     Alpha: 0.5744425058364868                     Beta: -1.029158592224121                     MemKD: 0.3078778386116028
+2026-02-23 06:16:24,377 - INFO - Epoch [175/200] Train Loss: -0.7330, Train Acc: 90.44%, Val Loss: 0.3435, Val Acc: 87.23%
+2026-02-23 06:16:46,170 - INFO - Epoch [176] Batch [0/17]                     Loss: -0.6434, Hard: 0.3259, Soft: -0.9693                     Acc: 87.50% LR: 0.000019                     Alpha: 0.5744425058364868                     Beta: -1.0295333862304688                     MemKD: 0.30779463052749634
+2026-02-23 06:17:15,008 - INFO - Epoch [176/200] Train Loss: -0.7189, Train Acc: 90.81%, Val Loss: 0.3454, Val Acc: 86.70%
+2026-02-23 06:17:37,280 - INFO - Epoch [177] Batch [0/17]                     Loss: -0.8279, Hard: 0.1410, Soft: -0.9688                     Acc: 93.75% LR: 0.000018                     Alpha: 0.5744425058364868                     Beta: -1.0298829078674316                     MemKD: 0.30771690607070923
+2026-02-23 06:18:03,807 - INFO - Epoch [177/200] Train Loss: -0.6767, Train Acc: 88.60%, Val Loss: 0.3505, Val Acc: 87.77%
+2026-02-23 06:18:26,555 - INFO - Epoch [178] Batch [0/17]                     Loss: -0.7245, Hard: 0.2200, Soft: -0.9444                     Acc: 87.50% LR: 0.000016                     Alpha: 0.5744425058364868                     Beta: -1.0302022695541382                     MemKD: 0.3076459765434265
+2026-02-23 06:18:56,168 - INFO - Epoch [178/200] Train Loss: -0.7837, Train Acc: 91.18%, Val Loss: 0.3570, Val Acc: 86.17%
+2026-02-23 06:19:19,481 - INFO - Epoch [179] Batch [0/17]                     Loss: -0.4717, Hard: 0.4145, Soft: -0.8862                     Acc: 81.25% LR: 0.000015                     Alpha: 0.5744425058364868                     Beta: -1.030500054359436                     MemKD: 0.3075796365737915
+2026-02-23 06:19:48,801 - INFO - Epoch [179/200] Train Loss: -0.6792, Train Acc: 92.28%, Val Loss: 0.3409, Val Acc: 87.10%
+2026-02-23 06:20:11,839 - INFO - Epoch [180] Batch [0/17]                     Loss: -0.7572, Hard: 0.2271, Soft: -0.9842                     Acc: 93.75% LR: 0.000013                     Alpha: 0.5744425058364868                     Beta: -1.0307669639587402                     MemKD: 0.30752044916152954
+2026-02-23 06:20:40,233 - INFO - Epoch [180/200] Train Loss: -0.7077, Train Acc: 90.07%, Val Loss: 0.3543, Val Acc: 86.97%
+2026-02-23 06:20:40,281 - INFO - Checkpoint saved at epoch 180
+2026-02-23 06:21:00,531 - INFO - Epoch [181] Batch [0/17]                     Loss: -0.4450, Hard: 0.4376, Soft: -0.8826                     Acc: 75.00% LR: 0.000012                     Alpha: 0.5744425058364868                     Beta: -1.0310101509094238                     MemKD: 0.307466596364975
+2026-02-23 06:21:29,457 - INFO - Epoch [181/200] Train Loss: -0.7796, Train Acc: 90.81%, Val Loss: 0.3621, Val Acc: 86.30%
+2026-02-23 06:21:51,255 - INFO - Epoch [182] Batch [0/17]                     Loss: -0.7808, Hard: 0.2002, Soft: -0.9809                     Acc: 93.75% LR: 0.000011                     Alpha: 0.5744425058364868                     Beta: -1.0312331914901733                     MemKD: 0.30741700530052185
+2026-02-23 06:22:20,136 - INFO - Epoch [182/200] Train Loss: -0.6857, Train Acc: 90.07%, Val Loss: 0.3585, Val Acc: 86.97%
+2026-02-23 06:22:41,930 - INFO - Epoch [183] Batch [0/17]                     Loss: -0.7611, Hard: 0.2731, Soft: -1.0342                     Acc: 87.50% LR: 0.000010                     Alpha: 0.5744425058364868                     Beta: -1.0314345359802246                     MemKD: 0.3073723316192627
+2026-02-23 06:23:10,791 - INFO - Epoch [183/200] Train Loss: -0.7281, Train Acc: 90.81%, Val Loss: 0.3622, Val Acc: 86.97%
+2026-02-23 06:23:34,049 - INFO - Epoch [184] Batch [0/17]                     Loss: -0.6184, Hard: 0.3095, Soft: -0.9279                     Acc: 93.75% LR: 0.000009                     Alpha: 0.5744425058364868                     Beta: -1.0316147804260254                     MemKD: 0.3073326051235199
+2026-02-23 06:24:01,357 - INFO - Epoch [184/200] Train Loss: -0.7613, Train Acc: 92.28%, Val Loss: 0.3570, Val Acc: 87.37%
+2026-02-23 06:24:23,431 - INFO - Epoch [185] Batch [0/17]                     Loss: -0.3078, Hard: 0.4555, Soft: -0.7633                     Acc: 81.25% LR: 0.000008                     Alpha: 0.5744425058364868                     Beta: -1.0317765474319458                     MemKD: 0.3072967231273651
+2026-02-23 06:24:52,002 - INFO - Epoch [185/200] Train Loss: -0.7684, Train Acc: 93.01%, Val Loss: 0.3671, Val Acc: 86.30%
+2026-02-23 06:25:15,164 - INFO - Epoch [186] Batch [0/17]                     Loss: -0.1291, Hard: 0.7093, Soft: -0.8384                     Acc: 75.00% LR: 0.000007                     Alpha: 0.5744425058364868                     Beta: -1.0319193601608276                     MemKD: 0.307265043258667
+2026-02-23 06:25:44,711 - INFO - Epoch [186/200] Train Loss: -0.6239, Train Acc: 89.71%, Val Loss: 0.3542, Val Acc: 86.44%
+2026-02-23 06:26:08,132 - INFO - Epoch [187] Batch [0/17]                     Loss: -0.7937, Hard: 0.1699, Soft: -0.9636                     Acc: 93.75% LR: 0.000006                     Alpha: 0.5744425058364868                     Beta: -1.0320425033569336                     MemKD: 0.30723807215690613
+2026-02-23 06:26:35,830 - INFO - Epoch [187/200] Train Loss: -0.7323, Train Acc: 90.44%, Val Loss: 0.3576, Val Acc: 86.57%
+2026-02-23 06:26:57,748 - INFO - Epoch [188] Batch [0/17]                     Loss: -0.4862, Hard: 0.4628, Soft: -0.9490                     Acc: 87.50% LR: 0.000005                     Alpha: 0.5744425058364868                     Beta: -1.0321505069732666                     MemKD: 0.30721423029899597
+2026-02-23 06:27:26,095 - INFO - Epoch [188/200] Train Loss: -0.7405, Train Acc: 90.44%, Val Loss: 0.3618, Val Acc: 86.17%
+2026-02-23 06:27:49,152 - INFO - Epoch [189] Batch [0/17]                     Loss: -0.4407, Hard: 0.4652, Soft: -0.9059                     Acc: 87.50% LR: 0.000004                     Alpha: 0.5744425058364868                     Beta: -1.0322450399398804                     MemKD: 0.30719345808029175
+2026-02-23 06:28:17,583 - INFO - Epoch [189/200] Train Loss: -0.7062, Train Acc: 91.18%, Val Loss: 0.3735, Val Acc: 86.04%
+2026-02-23 06:28:40,269 - INFO - Epoch [190] Batch [0/17]                     Loss: -0.8676, Hard: 0.1349, Soft: -1.0024                     Acc: 100.00% LR: 0.000004                     Alpha: 0.5744425058364868                     Beta: -1.0323257446289062                     MemKD: 0.30717572569847107
+2026-02-23 06:29:09,219 - INFO - Epoch [190/200] Train Loss: -0.6749, Train Acc: 88.24%, Val Loss: 0.3517, Val Acc: 86.70%
+2026-02-23 06:29:09,265 - INFO - Checkpoint saved at epoch 190
+2026-02-23 06:29:31,267 - INFO - Epoch [191] Batch [0/17]                     Loss: -0.7985, Hard: 0.2133, Soft: -1.0118                     Acc: 87.50% LR: 0.000003                     Alpha: 0.5744425058364868                     Beta: -1.032391905784607                     MemKD: 0.3071613013744354
+2026-02-23 06:29:57,889 - INFO - Epoch [191/200] Train Loss: -0.7517, Train Acc: 91.18%, Val Loss: 0.3502, Val Acc: 88.03%
+2026-02-23 06:30:19,849 - INFO - Epoch [192] Batch [0/17]                     Loss: -0.7460, Hard: 0.2586, Soft: -1.0046                     Acc: 87.50% LR: 0.000002                     Alpha: 0.5744425058364868                     Beta: -1.0324472188949585                     MemKD: 0.30714911222457886
+2026-02-23 06:30:48,720 - INFO - Epoch [192/200] Train Loss: -0.7722, Train Acc: 90.07%, Val Loss: 0.3516, Val Acc: 87.23%
+2026-02-23 06:31:10,281 - INFO - Epoch [193] Batch [0/17]                     Loss: -0.9084, Hard: 0.1030, Soft: -1.0114                     Acc: 93.75% LR: 0.000002                     Alpha: 0.5744425058364868                     Beta: -1.0324921607971191                     MemKD: 0.30713915824890137
+2026-02-23 06:31:39,796 - INFO - Epoch [193/200] Train Loss: -0.7837, Train Acc: 91.54%, Val Loss: 0.3670, Val Acc: 86.17%
+2026-02-23 06:32:02,498 - INFO - Epoch [194] Batch [0/17]                     Loss: -0.1788, Hard: 0.6098, Soft: -0.7886                     Acc: 75.00% LR: 0.000002                     Alpha: 0.5744425058364868                     Beta: -1.0325285196304321                     MemKD: 0.30713126063346863
+2026-02-23 06:32:30,989 - INFO - Epoch [194/200] Train Loss: -0.7341, Train Acc: 91.54%, Val Loss: 0.3555, Val Acc: 86.84%
+2026-02-23 06:32:52,239 - INFO - Epoch [195] Batch [0/17]                     Loss: -0.5510, Hard: 0.3671, Soft: -0.9181                     Acc: 75.00% LR: 0.000001                     Alpha: 0.5744425058364868                     Beta: -1.0325548648834229                     MemKD: 0.30712535977363586
+2026-02-23 06:33:21,702 - INFO - Epoch [195/200] Train Loss: -0.7418, Train Acc: 91.18%, Val Loss: 0.3624, Val Acc: 87.37%
+2026-02-23 06:33:44,649 - INFO - Epoch [196] Batch [0/17]                     Loss: -0.8977, Hard: 0.1407, Soft: -1.0384                     Acc: 93.75% LR: 0.000001                     Alpha: 0.5744425058364868                     Beta: -1.0325751304626465                     MemKD: 0.3071209788322449
+2026-02-23 06:34:13,723 - INFO - Epoch [196/200] Train Loss: -0.8392, Train Acc: 93.01%, Val Loss: 0.3637, Val Acc: 86.57%
+2026-02-23 06:34:35,934 - INFO - Epoch [197] Batch [0/17]                     Loss: -0.9608, Hard: 0.0862, Soft: -1.0470                     Acc: 100.00% LR: 0.000000                     Alpha: 0.5744425058364868                     Beta: -1.032589316368103                     MemKD: 0.30711793899536133
+2026-02-23 06:35:06,226 - INFO - Epoch [197/200] Train Loss: -0.7654, Train Acc: 89.34%, Val Loss: 0.3538, Val Acc: 86.04%
+2026-02-23 06:35:28,207 - INFO - Epoch [198] Batch [0/17]                     Loss: -0.3898, Hard: 0.4688, Soft: -0.8586                     Acc: 81.25% LR: 0.000000                     Alpha: 0.5744425058364868                     Beta: -1.0325974225997925                     MemKD: 0.30711600184440613
+2026-02-23 06:35:56,320 - INFO - Epoch [198/200] Train Loss: -0.7665, Train Acc: 91.91%, Val Loss: 0.3528, Val Acc: 86.30%
+2026-02-23 06:36:18,228 - INFO - Epoch [199] Batch [0/17]                     Loss: -0.7780, Hard: 0.1968, Soft: -0.9749                     Acc: 87.50% LR: 0.000000                     Alpha: 0.5744425058364868                     Beta: -1.0326014757156372                     MemKD: 0.30711492896080017
+2026-02-23 06:36:46,405 - INFO - Epoch [199/200] Train Loss: -0.7748, Train Acc: 93.01%, Val Loss: 0.3578, Val Acc: 86.17%
+2026-02-23 06:37:09,314 - INFO - Epoch [200] Batch [0/17]                     Loss: -0.6227, Hard: 0.3326, Soft: -0.9553                     Acc: 87.50% LR: 0.000000                     Alpha: 0.5744425058364868                     Beta: -1.0326035022735596                     MemKD: 0.30711451172828674
+2026-02-23 06:37:39,195 - INFO - Epoch [200/200] Train Loss: -0.7389, Train Acc: 90.44%, Val Loss: 0.3530, Val Acc: 86.44%
+2026-02-23 06:37:39,237 - INFO - Checkpoint saved at epoch 200
+2026-02-23 06:37:39,237 - INFO - ==================================================
+2026-02-23 06:37:39,237 - INFO - Training finished! Best accuracy: 88.43%
+2026-02-23 06:37:39,237 - INFO - ==================================================

@@ -1,0 +1,23 @@
+2026-02-06 18:04:15,000 - INFO - ==================================================
+2026-02-06 18:04:15,000 - INFO - Distillation Training Configuration
+2026-02-06 18:04:15,000 - INFO - ==================================================
+2026-02-06 18:04:15,000 - INFO - GPUs: [4, 5, 6, 7]
+2026-02-06 18:04:15,000 - INFO - World size: 4
+2026-02-06 18:04:15,000 - INFO - Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/ShipsEar_622
+2026-02-06 18:04:15,000 - INFO - Data type: wav_s@wav_t
+2026-02-06 18:04:15,000 - INFO - Batch size: 16
+2026-02-06 18:04:15,000 - INFO - Epochs: 50
+2026-02-06 18:04:15,000 - INFO - Learning rate: 0.0005
+2026-02-06 18:04:15,000 - INFO - Temperature: 2.0
+2026-02-06 18:04:15,000 - INFO - Alpha: 0.3
+2026-02-06 18:04:15,000 - INFO - Save dir: checkpoints/grid_shipsear/num_epochs50_weight_decay0.0001_batch_size16_lr0.0005_distill_typeTser_freezeTrue_USE_DYNAMIC_DISTILL_WEIGHTTrue_p_encoder0.1_p_classifier0.2
+2026-02-06 18:04:15,001 - INFO - ==================================================
+2026-02-06 18:04:15,032 - INFO - Train dataset size: 2240
+2026-02-06 18:04:15,032 - INFO - Validation dataset size: 749
+2026-02-06 18:04:16,522 - INFO - Student params: 316,299 (0.32M)
+2026-02-06 18:04:16,523 - INFO - Teacher params: 164,415,877 (164.42M)
+2026-02-06 18:04:16,523 - INFO - Trainable params: 271,372 (0.27M)
+2026-02-06 18:04:17,559 - INFO - Start training...
+2026-02-06 18:04:17,560 - INFO - No checkpoint found, start from scratch
+2026-02-06 18:04:41,989 - INFO - Epoch [1] Batch [0/35]                     Loss: 1.6834, Hard: 1.6834, Soft: 1.0079                     Acc: 12.50% LR: 0.000500                     Alpha: 0.5744425058364868                     Beta: 0.0                     MemKD: 0.0
+2026-02-06 18:04:45,869 - INFO - Epoch [1] Batch [20/35]                     Loss: 1.4793, Hard: 1.4793, Soft: 0.5552                     Acc: 38.39% LR: 0.000500                     Alpha: 0.5744425058364868                     Beta: 0.0                     MemKD: 0.0

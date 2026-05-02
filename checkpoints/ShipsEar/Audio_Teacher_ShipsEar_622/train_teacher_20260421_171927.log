@@ -1,0 +1,18 @@
+2026-04-21 17:19:27,596 - INFO - ==================================================
+2026-04-21 17:19:27,596 - INFO - Teacher Model Training Configuration (ShipsEar)
+2026-04-21 17:19:27,596 - INFO - ==================================================
+2026-04-21 17:19:27,596 - INFO - GPUs: [4, 5, 6, 7]
+2026-04-21 17:19:27,596 - INFO - World size: 4
+2026-04-21 17:19:27,596 - INFO - Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/ShipsEar_622
+2026-04-21 17:19:27,596 - INFO - Data type: wav_t
+2026-04-21 17:19:27,596 - INFO - Batch size: 32
+2026-04-21 17:19:27,596 - INFO - Epochs: 100
+2026-04-21 17:19:27,596 - INFO - Learning rate: 0.0001
+2026-04-21 17:19:27,596 - INFO - Weight decay: 0.0001
+2026-04-21 17:19:27,596 - INFO - Save dir: checkpoints/ShipsEar/Audio_Teacher_ShipsEar_622
+2026-04-21 17:19:27,596 - INFO - ==================================================
+2026-04-21 17:19:27,627 - INFO - Train dataset size: 2240
+2026-04-21 17:19:27,628 - INFO - Validation dataset size: 749
+2026-04-21 17:19:29,355 - INFO - Total parameters: 164.42M
+2026-04-21 17:19:29,356 - INFO - Trainable parameters: 164.42M
+2026-04-21 17:19:29,357 - INFO - Start training...

@@ -1,0 +1,22 @@
+2026-04-06 11:28:50,164 - INFO - ==================================================
+2026-04-06 11:28:50,164 - INFO - Comparison Distillation Training (DeepShip)
+2026-04-06 11:28:50,164 - INFO - ==================================================
+2026-04-06 11:28:50,164 - INFO - GPUs: [4, 5, 6, 7]
+2026-04-06 11:28:50,164 - INFO - World size: 4
+2026-04-06 11:28:50,164 - INFO - Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip_622
+2026-04-06 11:28:50,164 - INFO - Distillation method: cc
+2026-04-06 11:28:50,164 - INFO - Temperature: 4.0
+2026-04-06 11:28:50,164 - INFO - Alpha: 0.5
+2026-04-06 11:28:50,164 - INFO - Save dir: /media/hdd1/fubohan/Code/UATR/checkpoints/DeepShip/comparison_distillation_cc
+2026-04-06 11:28:50,164 - INFO - ==================================================
+2026-04-06 11:28:50,637 - INFO - Train dataset size: 31892
+2026-04-06 11:28:50,637 - INFO - Validation dataset size: 10631
+2026-04-06 11:28:51,779 - INFO - Student params: 316,234 (0.32M)
+2026-04-06 11:28:51,779 - INFO - Teacher params: 164,415,748 (164.42M)
+2026-04-06 11:28:52,270 - INFO - Start training with method: cc...
+2026-04-06 11:28:52,271 - INFO - No checkpoint found, start from scratch
+2026-04-06 11:29:16,903 - INFO - Epoch [1] Batch [0/498] Loss: 7.6052, Hard: 1.4225, Soft: 13.7879 Acc: 31.25% LR: 0.000500
+2026-04-06 11:29:18,457 - INFO - Epoch [1] Batch [10/498] Loss: 7.4599, Hard: 1.3762, Soft: 13.5436 Acc: 32.95% LR: 0.000500
+2026-04-06 11:29:20,052 - INFO - Epoch [1] Batch [20/498] Loss: 7.5875, Hard: 1.4033, Soft: 13.7717 Acc: 33.63% LR: 0.000500
+2026-04-06 11:29:21,671 - INFO - Epoch [1] Batch [30/498] Loss: 7.3285, Hard: 1.2542, Soft: 13.4029 Acc: 33.27% LR: 0.000500
+2026-04-06 11:29:23,300 - INFO - Epoch [1] Batch [40/498] Loss: 7.7706, Hard: 1.3129, Soft: 14.2284 Acc: 33.54% LR: 0.000500

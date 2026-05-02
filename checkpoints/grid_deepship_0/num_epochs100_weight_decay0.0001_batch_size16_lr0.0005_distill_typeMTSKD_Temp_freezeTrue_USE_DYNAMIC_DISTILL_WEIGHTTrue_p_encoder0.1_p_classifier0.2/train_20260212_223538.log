@@ -1,0 +1,28 @@
+2026-02-12 22:35:38,568 - INFO - ==================================================
+2026-02-12 22:35:38,569 - INFO - Distillation Training Configuration
+2026-02-12 22:35:38,569 - INFO - ==================================================
+2026-02-12 22:35:38,569 - INFO - GPUs: [4, 5, 6, 7]
+2026-02-12 22:35:38,569 - INFO - World size: 4
+2026-02-12 22:35:38,569 - INFO - Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip_622
+2026-02-12 22:35:38,569 - INFO - Data type: wav_s@wav_t
+2026-02-12 22:35:38,569 - INFO - Batch size: 16
+2026-02-12 22:35:38,569 - INFO - Epochs: 100
+2026-02-12 22:35:38,569 - INFO - Learning rate: 0.0005
+2026-02-12 22:35:38,569 - INFO - Temperature: 2.0
+2026-02-12 22:35:38,569 - INFO - Alpha: 0.3
+2026-02-12 22:35:38,569 - INFO - Save dir: checkpoints/grid_deepship_0/num_epochs100_weight_decay0.0001_batch_size16_lr0.0005_distill_typeMTSKD_Temp_freezeTrue_USE_DYNAMIC_DISTILL_WEIGHTTrue_p_encoder0.1_p_classifier0.2
+2026-02-12 22:35:38,569 - INFO - ==================================================
+2026-02-12 22:35:38,732 - INFO - Train dataset size: 31892
+2026-02-12 22:35:38,732 - INFO - Validation dataset size: 10631
+2026-02-12 22:35:39,765 - INFO - Student params: 316,234 (0.32M)
+2026-02-12 22:35:39,765 - INFO - Teacher params: 164,415,748 (164.42M)
+2026-02-12 22:35:39,765 - INFO - Trainable params: 271,242 (0.27M)
+2026-02-12 22:35:40,527 - INFO - Start training...
+2026-02-12 22:35:40,528 - INFO - 🔥 Resume from: checkpoints/grid_deepship_0/num_epochs100_weight_decay0.0001_batch_size16_lr0.0005_distill_typeMTSKD_Temp_freezeTrue_USE_DYNAMIC_DISTILL_WEIGHTTrue_p_encoder0.1_p_classifier0.2/checkpoint_epoch_15.pth
+2026-02-12 22:35:40,607 - INFO - Resume epoch: 16
+2026-02-12 22:35:40,607 - INFO - Best acc: 72.7614747930775
+2026-02-12 22:36:02,787 - INFO - Epoch [16] Batch [0/498]                     Loss: 0.6375, Hard: 0.6375, Soft: 0.1714                     Acc: 68.75% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5
+2026-02-12 22:36:05,864 - INFO - Epoch [16] Batch [20/498]                     Loss: 0.2948, Hard: 0.2948, Soft: 0.0995                     Acc: 77.68% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5
+2026-02-12 22:36:08,928 - INFO - Epoch [16] Batch [40/498]                     Loss: 0.5594, Hard: 0.5594, Soft: 0.1605                     Acc: 76.68% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5
+2026-02-12 22:36:12,547 - INFO - Epoch [16] Batch [60/498]                     Loss: 0.4258, Hard: 0.4258, Soft: 0.1488                     Acc: 77.66% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5
+2026-02-12 22:36:16,291 - INFO - Epoch [16] Batch [80/498]                     Loss: 0.4680, Hard: 0.4680, Soft: 0.1422                     Acc: 76.54% LR: 0.000473                     Alpha: 0.5                     Beta: 0.0                     MemKD: 0.5

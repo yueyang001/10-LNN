@@ -1,0 +1,831 @@
+2026-04-10 20:54:43,690 - INFO - ==================================================
+2026-04-10 20:54:43,690 - INFO - Comparison Distillation Training V2 (基于参考实现)
+2026-04-10 20:54:43,690 - INFO - ==================================================
+2026-04-10 20:54:43,690 - INFO - GPUs: [4, 5, 6, 7]
+2026-04-10 20:54:43,690 - INFO - World size: 4
+2026-04-10 20:54:43,690 - INFO - Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/ShipsEar_622
+2026-04-10 20:54:43,690 - INFO - Distillation method: cat_kd
+2026-04-10 20:54:43,691 - INFO - Temperature: 4.0
+2026-04-10 20:54:43,691 - INFO - Alpha: 0.5
+2026-04-10 20:54:43,691 - INFO - Save dir: /media/hdd1/fubohan/Code/UATR/checkpoints/ShipsEar/comparison_distillation_v2_cat_kd
+2026-04-10 20:54:43,691 - INFO - ==================================================
+2026-04-10 20:54:43,736 - INFO - Train dataset size: 2240
+2026-04-10 20:54:43,736 - INFO - Validation dataset size: 749
+2026-04-10 20:54:46,443 - INFO - Student params: 316,299 (0.32M)
+2026-04-10 20:54:46,443 - INFO - Teacher params: 164,415,877 (164.42M)
+2026-04-10 20:54:47,047 - INFO - Start training with method: cat_kd...
+2026-04-10 20:54:47,048 - INFO - 🔥 Resume from: /media/hdd1/fubohan/Code/UATR/checkpoints/ShipsEar/comparison_distillation_v2_cat_kd/checkpoint_epoch_10.pth
+2026-04-10 20:54:47,096 - INFO - Optimizer state loaded successfully
+2026-04-10 20:54:47,096 - INFO - Scheduler state loaded successfully
+2026-04-10 20:54:47,096 - INFO - Resume epoch: 11
+2026-04-10 20:54:47,096 - INFO - Best acc: 21.675531914893618
+2026-04-10 20:55:12,452 - INFO - Epoch [11] Batch [0/28] Loss: 1.8743, Hard: 1.6554, Soft: 2.0933 Acc: 20.00% LR: 0.000497
+2026-04-10 20:55:14,781 - INFO - Epoch [11] Batch [10/28] Loss: 1.7662, Hard: 1.4891, Soft: 2.0433 Acc: 36.82% LR: 0.000497
+2026-04-10 20:55:17,037 - INFO - Epoch [11] Batch [20/28] Loss: 1.6516, Hard: 1.4121, Soft: 1.8912 Acc: 39.76% LR: 0.000497
+2026-04-10 20:55:46,693 - INFO - Epoch [11/200] Train Loss: 1.7232, Train Acc: 0.41%, Val Loss: 1.2914, Val Acc: 46.94%, Val AUC: 76.54%, Val F1: 23.48%
+2026-04-10 20:55:46,693 - INFO - Best model saved! Acc: 46.94%, AUC: 76.54%, F1: 23.48%
+2026-04-10 20:56:11,974 - INFO - Epoch [12] Batch [0/28] Loss: 1.6012, Hard: 1.2036, Soft: 1.9989 Acc: 50.00% LR: 0.000496
+2026-04-10 20:56:14,366 - INFO - Epoch [12] Batch [10/28] Loss: 1.5508, Hard: 1.1664, Soft: 1.9351 Acc: 42.73% LR: 0.000496
+2026-04-10 20:56:16,594 - INFO - Epoch [12] Batch [20/28] Loss: 1.6341, Hard: 1.3368, Soft: 1.9314 Acc: 44.05% LR: 0.000496
+2026-04-10 20:56:46,015 - INFO - Epoch [12/200] Train Loss: 1.6326, Train Acc: 0.43%, Val Loss: 1.2245, Val Acc: 55.05%, Val AUC: 80.23%, Val F1: 48.23%
+2026-04-10 20:56:46,015 - INFO - Best model saved! Acc: 55.05%, AUC: 80.23%, F1: 48.23%
+2026-04-10 20:57:09,654 - INFO - Epoch [13] Batch [0/28] Loss: 1.6208, Hard: 1.2996, Soft: 1.9420 Acc: 45.00% LR: 0.000496
+2026-04-10 20:57:11,950 - INFO - Epoch [13] Batch [10/28] Loss: 1.6232, Hard: 1.3499, Soft: 1.8964 Acc: 43.64% LR: 0.000496
+2026-04-10 20:57:14,110 - INFO - Epoch [13] Batch [20/28] Loss: 1.5938, Hard: 1.2615, Soft: 1.9261 Acc: 44.29% LR: 0.000496
+2026-04-10 20:57:42,299 - INFO - Epoch [13/200] Train Loss: 1.5961, Train Acc: 0.46%, Val Loss: 1.1911, Val Acc: 47.61%, Val AUC: 81.30%, Val F1: 36.79%
+2026-04-10 20:58:06,221 - INFO - Epoch [14] Batch [0/28] Loss: 1.5476, Hard: 1.1842, Soft: 1.9111 Acc: 40.00% LR: 0.000495
+2026-04-10 20:58:08,639 - INFO - Epoch [14] Batch [10/28] Loss: 1.5071, Hard: 1.0791, Soft: 1.9351 Acc: 46.82% LR: 0.000495
+2026-04-10 20:58:11,033 - INFO - Epoch [14] Batch [20/28] Loss: 1.4968, Hard: 1.0749, Soft: 1.9188 Acc: 48.81% LR: 0.000495
+2026-04-10 20:58:41,054 - INFO - Epoch [14/200] Train Loss: 1.5683, Train Acc: 0.50%, Val Loss: 1.1812, Val Acc: 47.61%, Val AUC: 82.50%, Val F1: 30.64%
+2026-04-10 20:59:02,789 - INFO - Epoch [15] Batch [0/28] Loss: 1.5758, Hard: 1.3056, Soft: 1.8461 Acc: 30.00% LR: 0.000494
+2026-04-10 20:59:05,828 - INFO - Epoch [15] Batch [10/28] Loss: 1.5453, Hard: 1.1487, Soft: 1.9419 Acc: 50.00% LR: 0.000494
+2026-04-10 20:59:08,842 - INFO - Epoch [15] Batch [20/28] Loss: 1.5070, Hard: 1.0527, Soft: 1.9613 Acc: 51.90% LR: 0.000494
+2026-04-10 20:59:38,237 - INFO - Epoch [15/200] Train Loss: 1.5259, Train Acc: 0.53%, Val Loss: 1.0256, Val Acc: 59.04%, Val AUC: 85.38%, Val F1: 52.23%
+2026-04-10 20:59:38,237 - INFO - Best model saved! Acc: 59.04%, AUC: 85.38%, F1: 52.23%
+2026-04-10 21:00:01,362 - INFO - Epoch [16] Batch [0/28] Loss: 1.4410, Hard: 0.9891, Soft: 1.8930 Acc: 60.00% LR: 0.000493
+2026-04-10 21:00:04,496 - INFO - Epoch [16] Batch [10/28] Loss: 1.4115, Hard: 0.9202, Soft: 1.9029 Acc: 58.18% LR: 0.000493
+2026-04-10 21:00:07,617 - INFO - Epoch [16] Batch [20/28] Loss: 1.5520, Hard: 1.1673, Soft: 1.9368 Acc: 57.62% LR: 0.000493
+2026-04-10 21:00:36,924 - INFO - Epoch [16/200] Train Loss: 1.4934, Train Acc: 0.57%, Val Loss: 1.0095, Val Acc: 60.11%, Val AUC: 84.77%, Val F1: 52.98%
+2026-04-10 21:00:36,924 - INFO - Best model saved! Acc: 60.11%, AUC: 84.77%, F1: 52.98%
+2026-04-10 21:01:01,175 - INFO - Epoch [17] Batch [0/28] Loss: 1.5950, Hard: 1.2771, Soft: 1.9129 Acc: 40.00% LR: 0.000492
+2026-04-10 21:01:03,441 - INFO - Epoch [17] Batch [10/28] Loss: 1.6233, Hard: 1.3427, Soft: 1.9038 Acc: 54.55% LR: 0.000492
+2026-04-10 21:01:05,800 - INFO - Epoch [17] Batch [20/28] Loss: 1.5946, Hard: 1.3010, Soft: 1.8882 Acc: 55.00% LR: 0.000492
+2026-04-10 21:01:34,942 - INFO - Epoch [17/200] Train Loss: 1.5048, Train Acc: 0.56%, Val Loss: 0.9794, Val Acc: 60.11%, Val AUC: 87.67%, Val F1: 55.96%
+2026-04-10 21:01:58,752 - INFO - Epoch [18] Batch [0/28] Loss: 1.5547, Hard: 1.2413, Soft: 1.8681 Acc: 55.00% LR: 0.000491
+2026-04-10 21:02:01,306 - INFO - Epoch [18] Batch [10/28] Loss: 1.4771, Hard: 1.0462, Soft: 1.9080 Acc: 59.09% LR: 0.000491
+2026-04-10 21:02:03,937 - INFO - Epoch [18] Batch [20/28] Loss: 1.4642, Hard: 0.9787, Soft: 1.9497 Acc: 58.57% LR: 0.000491
+2026-04-10 21:02:32,752 - INFO - Epoch [18/200] Train Loss: 1.4739, Train Acc: 0.58%, Val Loss: 1.1029, Val Acc: 53.46%, Val AUC: 85.52%, Val F1: 40.71%
+2026-04-10 21:02:56,508 - INFO - Epoch [19] Batch [0/28] Loss: 1.5178, Hard: 1.0918, Soft: 1.9439 Acc: 50.00% LR: 0.000490
+2026-04-10 21:02:59,604 - INFO - Epoch [19] Batch [10/28] Loss: 1.3291, Hard: 0.8217, Soft: 1.8365 Acc: 60.91% LR: 0.000490
+2026-04-10 21:03:02,795 - INFO - Epoch [19] Batch [20/28] Loss: 1.4056, Hard: 0.9190, Soft: 1.8922 Acc: 59.76% LR: 0.000490
+2026-04-10 21:03:32,136 - INFO - Epoch [19/200] Train Loss: 1.4584, Train Acc: 0.58%, Val Loss: 0.9779, Val Acc: 60.77%, Val AUC: 88.26%, Val F1: 53.17%
+2026-04-10 21:03:32,136 - INFO - Best model saved! Acc: 60.77%, AUC: 88.26%, F1: 53.17%
+2026-04-10 21:03:56,074 - INFO - Epoch [20] Batch [0/28] Loss: 1.4392, Hard: 0.9958, Soft: 1.8826 Acc: 60.00% LR: 0.000489
+2026-04-10 21:03:59,266 - INFO - Epoch [20] Batch [10/28] Loss: 1.5215, Hard: 1.1552, Soft: 1.8877 Acc: 57.73% LR: 0.000489
+2026-04-10 21:04:02,405 - INFO - Epoch [20] Batch [20/28] Loss: 1.5557, Hard: 1.1810, Soft: 1.9304 Acc: 58.10% LR: 0.000489
+2026-04-10 21:04:32,732 - INFO - Epoch [20/200] Train Loss: 1.4499, Train Acc: 0.59%, Val Loss: 0.9174, Val Acc: 62.63%, Val AUC: 88.76%, Val F1: 56.98%
+2026-04-10 21:04:32,732 - INFO - Best model saved! Acc: 62.63%, AUC: 88.76%, F1: 56.98%
+2026-04-10 21:04:32,849 - INFO - Checkpoint saved at epoch 20
+2026-04-10 21:04:57,631 - INFO - Epoch [21] Batch [0/28] Loss: 1.4621, Hard: 1.0142, Soft: 1.9100 Acc: 60.00% LR: 0.000488
+2026-04-10 21:05:00,786 - INFO - Epoch [21] Batch [10/28] Loss: 1.3158, Hard: 0.7269, Soft: 1.9047 Acc: 69.09% LR: 0.000488
+2026-04-10 21:05:03,999 - INFO - Epoch [21] Batch [20/28] Loss: 1.4463, Hard: 0.9213, Soft: 1.9713 Acc: 65.71% LR: 0.000488
+2026-04-10 21:05:33,590 - INFO - Epoch [21/200] Train Loss: 1.4271, Train Acc: 0.65%, Val Loss: 0.9232, Val Acc: 61.44%, Val AUC: 88.86%, Val F1: 56.39%
+2026-04-10 21:05:55,968 - INFO - Epoch [22] Batch [0/28] Loss: 1.5079, Hard: 1.1589, Soft: 1.8568 Acc: 45.00% LR: 0.000487
+2026-04-10 21:05:58,564 - INFO - Epoch [22] Batch [10/28] Loss: 1.3324, Hard: 0.8112, Soft: 1.8537 Acc: 60.00% LR: 0.000487
+2026-04-10 21:06:00,804 - INFO - Epoch [22] Batch [20/28] Loss: 1.5580, Hard: 1.2729, Soft: 1.8430 Acc: 57.86% LR: 0.000487
+2026-04-10 21:06:30,178 - INFO - Epoch [22/200] Train Loss: 1.4555, Train Acc: 0.58%, Val Loss: 0.8478, Val Acc: 65.56%, Val AUC: 90.12%, Val F1: 61.30%
+2026-04-10 21:06:30,178 - INFO - Best model saved! Acc: 65.56%, AUC: 90.12%, F1: 61.30%
+2026-04-10 21:06:54,006 - INFO - Epoch [23] Batch [0/28] Loss: 1.3562, Hard: 0.8288, Soft: 1.8836 Acc: 80.00% LR: 0.000485
+2026-04-10 21:06:56,581 - INFO - Epoch [23] Batch [10/28] Loss: 1.3198, Hard: 0.7631, Soft: 1.8764 Acc: 66.36% LR: 0.000485
+2026-04-10 21:06:59,737 - INFO - Epoch [23] Batch [20/28] Loss: 1.3854, Hard: 0.9185, Soft: 1.8523 Acc: 62.62% LR: 0.000485
+2026-04-10 21:07:30,479 - INFO - Epoch [23/200] Train Loss: 1.4153, Train Acc: 0.63%, Val Loss: 0.8980, Val Acc: 61.44%, Val AUC: 88.70%, Val F1: 54.71%
+2026-04-10 21:07:54,926 - INFO - Epoch [24] Batch [0/28] Loss: 1.3488, Hard: 0.7966, Soft: 1.9009 Acc: 65.00% LR: 0.000484
+2026-04-10 21:07:58,060 - INFO - Epoch [24] Batch [10/28] Loss: 1.3677, Hard: 0.8397, Soft: 1.8957 Acc: 64.09% LR: 0.000484
+2026-04-10 21:08:01,199 - INFO - Epoch [24] Batch [20/28] Loss: 1.3711, Hard: 0.8870, Soft: 1.8551 Acc: 61.19% LR: 0.000484
+2026-04-10 21:08:30,230 - INFO - Epoch [24/200] Train Loss: 1.4275, Train Acc: 0.61%, Val Loss: 0.8196, Val Acc: 67.29%, Val AUC: 90.68%, Val F1: 62.46%
+2026-04-10 21:08:30,230 - INFO - Best model saved! Acc: 67.29%, AUC: 90.68%, F1: 62.46%
+2026-04-10 21:08:54,538 - INFO - Epoch [25] Batch [0/28] Loss: 1.4362, Hard: 1.0476, Soft: 1.8248 Acc: 55.00% LR: 0.000482
+2026-04-10 21:08:57,512 - INFO - Epoch [25] Batch [10/28] Loss: 1.2934, Hard: 0.7492, Soft: 1.8377 Acc: 60.00% LR: 0.000482
+2026-04-10 21:08:59,925 - INFO - Epoch [25] Batch [20/28] Loss: 1.4488, Hard: 0.9502, Soft: 1.9474 Acc: 61.67% LR: 0.000482
+2026-04-10 21:09:30,551 - INFO - Epoch [25/200] Train Loss: 1.4234, Train Acc: 0.61%, Val Loss: 0.7902, Val Acc: 68.75%, Val AUC: 91.02%, Val F1: 65.70%
+2026-04-10 21:09:30,551 - INFO - Best model saved! Acc: 68.75%, AUC: 91.02%, F1: 65.70%
+2026-04-10 21:09:54,913 - INFO - Epoch [26] Batch [0/28] Loss: 1.4601, Hard: 1.0346, Soft: 1.8856 Acc: 65.00% LR: 0.000481
+2026-04-10 21:09:58,104 - INFO - Epoch [26] Batch [10/28] Loss: 1.4613, Hard: 1.0753, Soft: 1.8473 Acc: 60.00% LR: 0.000481
+2026-04-10 21:10:01,408 - INFO - Epoch [26] Batch [20/28] Loss: 1.3064, Hard: 0.7027, Soft: 1.9100 Acc: 62.86% LR: 0.000481
+2026-04-10 21:10:32,237 - INFO - Epoch [26/200] Train Loss: 1.3814, Train Acc: 0.63%, Val Loss: 0.8716, Val Acc: 64.49%, Val AUC: 90.91%, Val F1: 59.53%
+2026-04-10 21:10:56,970 - INFO - Epoch [27] Batch [0/28] Loss: 1.2999, Hard: 0.7545, Soft: 1.8454 Acc: 80.00% LR: 0.000479
+2026-04-10 21:11:00,561 - INFO - Epoch [27] Batch [10/28] Loss: 1.3292, Hard: 0.8415, Soft: 1.8169 Acc: 67.73% LR: 0.000479
+2026-04-10 21:11:04,708 - INFO - Epoch [27] Batch [20/28] Loss: 1.4543, Hard: 1.0790, Soft: 1.8296 Acc: 65.95% LR: 0.000479
+2026-04-10 21:11:34,186 - INFO - Epoch [27/200] Train Loss: 1.3833, Train Acc: 0.65%, Val Loss: 0.8579, Val Acc: 64.10%, Val AUC: 90.22%, Val F1: 61.89%
+2026-04-10 21:11:58,001 - INFO - Epoch [28] Batch [0/28] Loss: 1.3624, Hard: 0.8960, Soft: 1.8288 Acc: 60.00% LR: 0.000478
+2026-04-10 21:12:01,464 - INFO - Epoch [28] Batch [10/28] Loss: 1.3545, Hard: 0.8410, Soft: 1.8680 Acc: 65.91% LR: 0.000478
+2026-04-10 21:12:05,224 - INFO - Epoch [28] Batch [20/28] Loss: 1.3331, Hard: 0.7553, Soft: 1.9108 Acc: 64.76% LR: 0.000478
+2026-04-10 21:12:36,653 - INFO - Epoch [28/200] Train Loss: 1.3830, Train Acc: 0.65%, Val Loss: 0.7940, Val Acc: 69.95%, Val AUC: 91.90%, Val F1: 65.04%
+2026-04-10 21:12:36,654 - INFO - Best model saved! Acc: 69.95%, AUC: 91.90%, F1: 65.04%
+2026-04-10 21:13:01,200 - INFO - Epoch [29] Batch [0/28] Loss: 1.3035, Hard: 0.7222, Soft: 1.8848 Acc: 75.00% LR: 0.000476
+2026-04-10 21:13:04,308 - INFO - Epoch [29] Batch [10/28] Loss: 1.2897, Hard: 0.7428, Soft: 1.8366 Acc: 69.09% LR: 0.000476
+2026-04-10 21:13:07,471 - INFO - Epoch [29] Batch [20/28] Loss: 1.5162, Hard: 1.1466, Soft: 1.8858 Acc: 68.81% LR: 0.000476
+2026-04-10 21:13:38,746 - INFO - Epoch [29/200] Train Loss: 1.3421, Train Acc: 0.69%, Val Loss: 0.7305, Val Acc: 73.67%, Val AUC: 92.97%, Val F1: 72.51%
+2026-04-10 21:13:38,747 - INFO - Best model saved! Acc: 73.67%, AUC: 92.97%, F1: 72.51%
+2026-04-10 21:14:01,875 - INFO - Epoch [30] Batch [0/28] Loss: 1.3957, Hard: 0.9634, Soft: 1.8280 Acc: 70.00% LR: 0.000475
+2026-04-10 21:14:05,204 - INFO - Epoch [30] Batch [10/28] Loss: 1.5036, Hard: 1.1641, Soft: 1.8431 Acc: 66.82% LR: 0.000475
+2026-04-10 21:14:08,923 - INFO - Epoch [30] Batch [20/28] Loss: 1.3626, Hard: 0.8518, Soft: 1.8735 Acc: 66.90% LR: 0.000475
+2026-04-10 21:14:39,840 - INFO - Epoch [30/200] Train Loss: 1.3793, Train Acc: 0.64%, Val Loss: 0.7439, Val Acc: 68.75%, Val AUC: 91.94%, Val F1: 65.81%
+2026-04-10 21:14:39,903 - INFO - Checkpoint saved at epoch 30
+2026-04-10 21:15:03,456 - INFO - Epoch [31] Batch [0/28] Loss: 1.3364, Hard: 0.7584, Soft: 1.9144 Acc: 70.00% LR: 0.000473
+2026-04-10 21:15:07,322 - INFO - Epoch [31] Batch [10/28] Loss: 1.3743, Hard: 0.8802, Soft: 1.8685 Acc: 66.82% LR: 0.000473
+2026-04-10 21:15:11,105 - INFO - Epoch [31] Batch [20/28] Loss: 1.2835, Hard: 0.7373, Soft: 1.8297 Acc: 68.33% LR: 0.000473
+2026-04-10 21:15:41,971 - INFO - Epoch [31/200] Train Loss: 1.3659, Train Acc: 0.66%, Val Loss: 0.7653, Val Acc: 69.02%, Val AUC: 91.86%, Val F1: 65.29%
+2026-04-10 21:16:05,778 - INFO - Epoch [32] Batch [0/28] Loss: 1.3642, Hard: 0.9182, Soft: 1.8103 Acc: 55.00% LR: 0.000471
+2026-04-10 21:16:08,721 - INFO - Epoch [32] Batch [10/28] Loss: 1.3939, Hard: 0.8649, Soft: 1.9228 Acc: 68.18% LR: 0.000471
+2026-04-10 21:16:11,700 - INFO - Epoch [32] Batch [20/28] Loss: 1.2956, Hard: 0.6996, Soft: 1.8916 Acc: 69.76% LR: 0.000471
+2026-04-10 21:16:41,788 - INFO - Epoch [32/200] Train Loss: 1.3276, Train Acc: 0.69%, Val Loss: 0.7733, Val Acc: 71.94%, Val AUC: 92.36%, Val F1: 72.71%
+2026-04-10 21:17:06,130 - INFO - Epoch [33] Batch [0/28] Loss: 1.3231, Hard: 0.8134, Soft: 1.8327 Acc: 70.00% LR: 0.000469
+2026-04-10 21:17:09,872 - INFO - Epoch [33] Batch [10/28] Loss: 1.4163, Hard: 0.9754, Soft: 1.8573 Acc: 67.73% LR: 0.000469
+2026-04-10 21:17:13,672 - INFO - Epoch [33] Batch [20/28] Loss: 1.3448, Hard: 0.8167, Soft: 1.8729 Acc: 66.43% LR: 0.000469
+2026-04-10 21:17:42,798 - INFO - Epoch [33/200] Train Loss: 1.3782, Train Acc: 0.66%, Val Loss: 0.7948, Val Acc: 67.82%, Val AUC: 91.89%, Val F1: 64.78%
+2026-04-10 21:18:06,049 - INFO - Epoch [34] Batch [0/28] Loss: 1.1725, Hard: 0.5085, Soft: 1.8365 Acc: 85.00% LR: 0.000467
+2026-04-10 21:18:09,718 - INFO - Epoch [34] Batch [10/28] Loss: 1.2969, Hard: 0.7197, Soft: 1.8740 Acc: 66.36% LR: 0.000467
+2026-04-10 21:18:13,441 - INFO - Epoch [34] Batch [20/28] Loss: 1.4425, Hard: 1.0031, Soft: 1.8819 Acc: 64.29% LR: 0.000467
+2026-04-10 21:18:42,650 - INFO - Epoch [34/200] Train Loss: 1.3599, Train Acc: 0.66%, Val Loss: 0.8094, Val Acc: 69.41%, Val AUC: 90.48%, Val F1: 64.29%
+2026-04-10 21:19:06,179 - INFO - Epoch [35] Batch [0/28] Loss: 1.4860, Hard: 1.1469, Soft: 1.8250 Acc: 60.00% LR: 0.000465
+2026-04-10 21:19:10,000 - INFO - Epoch [35] Batch [10/28] Loss: 1.2268, Hard: 0.5798, Soft: 1.8739 Acc: 68.18% LR: 0.000465
+2026-04-10 21:19:14,166 - INFO - Epoch [35] Batch [20/28] Loss: 1.4254, Hard: 0.9889, Soft: 1.8620 Acc: 65.71% LR: 0.000465
+2026-04-10 21:19:44,319 - INFO - Epoch [35/200] Train Loss: 1.3541, Train Acc: 0.67%, Val Loss: 0.7300, Val Acc: 71.14%, Val AUC: 92.92%, Val F1: 66.82%
+2026-04-10 21:20:07,270 - INFO - Epoch [36] Batch [0/28] Loss: 1.3672, Hard: 0.8213, Soft: 1.9131 Acc: 60.00% LR: 0.000463
+2026-04-10 21:20:10,227 - INFO - Epoch [36] Batch [10/28] Loss: 1.2331, Hard: 0.5871, Soft: 1.8791 Acc: 70.00% LR: 0.000463
+2026-04-10 21:20:13,301 - INFO - Epoch [36] Batch [20/28] Loss: 1.3552, Hard: 0.8725, Soft: 1.8379 Acc: 66.90% LR: 0.000463
+2026-04-10 21:20:42,657 - INFO - Epoch [36/200] Train Loss: 1.3291, Train Acc: 0.68%, Val Loss: 0.6732, Val Acc: 72.61%, Val AUC: 93.13%, Val F1: 70.99%
+2026-04-10 21:21:06,617 - INFO - Epoch [37] Batch [0/28] Loss: 1.3053, Hard: 0.6794, Soft: 1.9312 Acc: 80.00% LR: 0.000461
+2026-04-10 21:21:09,944 - INFO - Epoch [37] Batch [10/28] Loss: 1.3018, Hard: 0.7216, Soft: 1.8821 Acc: 71.82% LR: 0.000461
+2026-04-10 21:21:13,685 - INFO - Epoch [37] Batch [20/28] Loss: 1.2178, Hard: 0.5730, Soft: 1.8627 Acc: 70.00% LR: 0.000461
+2026-04-10 21:21:43,708 - INFO - Epoch [37/200] Train Loss: 1.3084, Train Acc: 0.71%, Val Loss: 0.6236, Val Acc: 75.27%, Val AUC: 94.26%, Val F1: 72.08%
+2026-04-10 21:21:43,709 - INFO - Best model saved! Acc: 75.27%, AUC: 94.26%, F1: 72.08%
+2026-04-10 21:22:07,219 - INFO - Epoch [38] Batch [0/28] Loss: 1.1972, Hard: 0.5082, Soft: 1.8862 Acc: 85.00% LR: 0.000459
+2026-04-10 21:22:11,102 - INFO - Epoch [38] Batch [10/28] Loss: 1.2519, Hard: 0.6635, Soft: 1.8402 Acc: 75.91% LR: 0.000459
+2026-04-10 21:22:14,845 - INFO - Epoch [38] Batch [20/28] Loss: 1.2883, Hard: 0.7346, Soft: 1.8419 Acc: 74.05% LR: 0.000459
+2026-04-10 21:22:44,631 - INFO - Epoch [38/200] Train Loss: 1.3052, Train Acc: 0.72%, Val Loss: 0.6613, Val Acc: 73.94%, Val AUC: 93.49%, Val F1: 72.91%
+2026-04-10 21:23:09,080 - INFO - Epoch [39] Batch [0/28] Loss: 1.1470, Hard: 0.4967, Soft: 1.7972 Acc: 80.00% LR: 0.000457
+2026-04-10 21:23:12,203 - INFO - Epoch [39] Batch [10/28] Loss: 1.3769, Hard: 0.8524, Soft: 1.9015 Acc: 72.27% LR: 0.000457
+2026-04-10 21:23:14,880 - INFO - Epoch [39] Batch [20/28] Loss: 1.3696, Hard: 0.8432, Soft: 1.8960 Acc: 72.62% LR: 0.000457
+2026-04-10 21:23:44,346 - INFO - Epoch [39/200] Train Loss: 1.3020, Train Acc: 0.72%, Val Loss: 0.7844, Val Acc: 70.35%, Val AUC: 91.75%, Val F1: 65.24%
+2026-04-10 21:24:07,241 - INFO - Epoch [40] Batch [0/28] Loss: 1.2680, Hard: 0.6687, Soft: 1.8674 Acc: 75.00% LR: 0.000455
+2026-04-10 21:24:11,123 - INFO - Epoch [40] Batch [10/28] Loss: 1.3175, Hard: 0.7017, Soft: 1.9332 Acc: 71.82% LR: 0.000455
+2026-04-10 21:24:14,902 - INFO - Epoch [40] Batch [20/28] Loss: 1.3726, Hard: 0.8654, Soft: 1.8798 Acc: 72.38% LR: 0.000455
+2026-04-10 21:24:44,141 - INFO - Epoch [40/200] Train Loss: 1.2981, Train Acc: 0.72%, Val Loss: 0.6954, Val Acc: 73.67%, Val AUC: 93.32%, Val F1: 71.43%
+2026-04-10 21:24:44,190 - INFO - Checkpoint saved at epoch 40
+2026-04-10 21:25:06,576 - INFO - Epoch [41] Batch [0/28] Loss: 1.2946, Hard: 0.7578, Soft: 1.8313 Acc: 60.00% LR: 0.000452
+2026-04-10 21:25:10,193 - INFO - Epoch [41] Batch [10/28] Loss: 1.3703, Hard: 0.8733, Soft: 1.8674 Acc: 66.36% LR: 0.000452
+2026-04-10 21:25:13,872 - INFO - Epoch [41] Batch [20/28] Loss: 1.3740, Hard: 0.9177, Soft: 1.8303 Acc: 66.67% LR: 0.000452
+2026-04-10 21:25:43,273 - INFO - Epoch [41/200] Train Loss: 1.3434, Train Acc: 0.67%, Val Loss: 0.6602, Val Acc: 72.61%, Val AUC: 94.24%, Val F1: 71.41%
+2026-04-10 21:26:06,361 - INFO - Epoch [42] Batch [0/28] Loss: 1.3723, Hard: 0.8996, Soft: 1.8451 Acc: 65.00% LR: 0.000450
+2026-04-10 21:26:10,100 - INFO - Epoch [42] Batch [10/28] Loss: 1.2348, Hard: 0.6285, Soft: 1.8411 Acc: 76.82% LR: 0.000450
+2026-04-10 21:26:13,806 - INFO - Epoch [42] Batch [20/28] Loss: 1.2163, Hard: 0.5779, Soft: 1.8547 Acc: 75.00% LR: 0.000450
+2026-04-10 21:26:43,920 - INFO - Epoch [42/200] Train Loss: 1.2902, Train Acc: 0.74%, Val Loss: 0.7611, Val Acc: 69.68%, Val AUC: 93.33%, Val F1: 67.78%
+2026-04-10 21:27:07,207 - INFO - Epoch [43] Batch [0/28] Loss: 1.2675, Hard: 0.6596, Soft: 1.8755 Acc: 85.00% LR: 0.000448
+2026-04-10 21:27:10,145 - INFO - Epoch [43] Batch [10/28] Loss: 1.1334, Hard: 0.4507, Soft: 1.8161 Acc: 70.45% LR: 0.000448
+2026-04-10 21:27:13,087 - INFO - Epoch [43] Batch [20/28] Loss: 1.3405, Hard: 0.8453, Soft: 1.8357 Acc: 72.38% LR: 0.000448
+2026-04-10 21:27:44,283 - INFO - Epoch [43/200] Train Loss: 1.2697, Train Acc: 0.73%, Val Loss: 0.6387, Val Acc: 75.00%, Val AUC: 94.70%, Val F1: 74.08%
+2026-04-10 21:28:08,165 - INFO - Epoch [44] Batch [0/28] Loss: 1.2956, Hard: 0.7303, Soft: 1.8608 Acc: 70.00% LR: 0.000445
+2026-04-10 21:28:11,885 - INFO - Epoch [44] Batch [10/28] Loss: 1.3884, Hard: 0.9103, Soft: 1.8665 Acc: 72.73% LR: 0.000445
+2026-04-10 21:28:15,668 - INFO - Epoch [44] Batch [20/28] Loss: 1.4432, Hard: 1.0469, Soft: 1.8395 Acc: 74.05% LR: 0.000445
+2026-04-10 21:28:47,019 - INFO - Epoch [44/200] Train Loss: 1.2691, Train Acc: 0.75%, Val Loss: 0.5886, Val Acc: 78.59%, Val AUC: 95.12%, Val F1: 77.22%
+2026-04-10 21:28:47,019 - INFO - Best model saved! Acc: 78.59%, AUC: 95.12%, F1: 77.22%
+2026-04-10 21:29:10,786 - INFO - Epoch [45] Batch [0/28] Loss: 1.3436, Hard: 0.8640, Soft: 1.8231 Acc: 65.00% LR: 0.000443
+2026-04-10 21:29:14,636 - INFO - Epoch [45] Batch [10/28] Loss: 1.3101, Hard: 0.7459, Soft: 1.8743 Acc: 77.27% LR: 0.000443
+2026-04-10 21:29:18,483 - INFO - Epoch [45] Batch [20/28] Loss: 1.2783, Hard: 0.7210, Soft: 1.8356 Acc: 75.71% LR: 0.000443
+2026-04-10 21:29:47,685 - INFO - Epoch [45/200] Train Loss: 1.2679, Train Acc: 0.76%, Val Loss: 0.6780, Val Acc: 74.87%, Val AUC: 94.56%, Val F1: 72.56%
+2026-04-10 21:30:12,044 - INFO - Epoch [46] Batch [0/28] Loss: 1.4301, Hard: 1.0124, Soft: 1.8478 Acc: 65.00% LR: 0.000440
+2026-04-10 21:30:15,182 - INFO - Epoch [46] Batch [10/28] Loss: 1.2372, Hard: 0.5688, Soft: 1.9056 Acc: 73.18% LR: 0.000440
+2026-04-10 21:30:18,092 - INFO - Epoch [46] Batch [20/28] Loss: 1.2638, Hard: 0.6721, Soft: 1.8555 Acc: 74.76% LR: 0.000440
+2026-04-10 21:30:47,364 - INFO - Epoch [46/200] Train Loss: 1.2586, Train Acc: 0.74%, Val Loss: 0.5779, Val Acc: 77.53%, Val AUC: 95.02%, Val F1: 76.13%
+2026-04-10 21:31:11,358 - INFO - Epoch [47] Batch [0/28] Loss: 1.2994, Hard: 0.7488, Soft: 1.8500 Acc: 70.00% LR: 0.000438
+2026-04-10 21:31:14,986 - INFO - Epoch [47] Batch [10/28] Loss: 1.3903, Hard: 0.9408, Soft: 1.8399 Acc: 68.18% LR: 0.000438
+2026-04-10 21:31:18,402 - INFO - Epoch [47] Batch [20/28] Loss: 1.2331, Hard: 0.5589, Soft: 1.9073 Acc: 74.52% LR: 0.000438
+2026-04-10 21:31:48,023 - INFO - Epoch [47/200] Train Loss: 1.2483, Train Acc: 0.76%, Val Loss: 0.5500, Val Acc: 78.72%, Val AUC: 95.44%, Val F1: 77.13%
+2026-04-10 21:31:48,023 - INFO - Best model saved! Acc: 78.72%, AUC: 95.44%, F1: 77.13%
+2026-04-10 21:32:11,103 - INFO - Epoch [48] Batch [0/28] Loss: 1.4732, Hard: 1.1388, Soft: 1.8077 Acc: 60.00% LR: 0.000435
+2026-04-10 21:32:14,824 - INFO - Epoch [48] Batch [10/28] Loss: 1.5167, Hard: 1.1987, Soft: 1.8347 Acc: 72.27% LR: 0.000435
+2026-04-10 21:32:18,329 - INFO - Epoch [48] Batch [20/28] Loss: 1.2900, Hard: 0.7406, Soft: 1.8394 Acc: 74.29% LR: 0.000435
+2026-04-10 21:32:48,553 - INFO - Epoch [48/200] Train Loss: 1.2714, Train Acc: 0.74%, Val Loss: 0.7175, Val Acc: 71.54%, Val AUC: 93.29%, Val F1: 69.52%
+2026-04-10 21:33:11,570 - INFO - Epoch [49] Batch [0/28] Loss: 1.1747, Hard: 0.4932, Soft: 1.8563 Acc: 85.00% LR: 0.000432
+2026-04-10 21:33:14,798 - INFO - Epoch [49] Batch [10/28] Loss: 1.3536, Hard: 0.8739, Soft: 1.8332 Acc: 77.73% LR: 0.000432
+2026-04-10 21:33:17,784 - INFO - Epoch [49] Batch [20/28] Loss: 1.3177, Hard: 0.7981, Soft: 1.8373 Acc: 74.05% LR: 0.000432
+2026-04-10 21:33:48,013 - INFO - Epoch [49/200] Train Loss: 1.2648, Train Acc: 0.75%, Val Loss: 0.5835, Val Acc: 77.26%, Val AUC: 95.33%, Val F1: 75.46%
+2026-04-10 21:34:11,780 - INFO - Epoch [50] Batch [0/28] Loss: 1.2905, Hard: 0.7471, Soft: 1.8338 Acc: 70.00% LR: 0.000430
+2026-04-10 21:34:15,437 - INFO - Epoch [50] Batch [10/28] Loss: 1.1483, Hard: 0.4337, Soft: 1.8630 Acc: 75.00% LR: 0.000430
+2026-04-10 21:34:18,691 - INFO - Epoch [50] Batch [20/28] Loss: 1.1341, Hard: 0.4189, Soft: 1.8492 Acc: 76.43% LR: 0.000430
+2026-04-10 21:34:47,848 - INFO - Epoch [50/200] Train Loss: 1.2587, Train Acc: 0.74%, Val Loss: 0.6219, Val Acc: 76.60%, Val AUC: 94.63%, Val F1: 73.68%
+2026-04-10 21:34:47,898 - INFO - Checkpoint saved at epoch 50
+2026-04-10 21:35:10,262 - INFO - Epoch [51] Batch [0/28] Loss: 1.3046, Hard: 0.7576, Soft: 1.8516 Acc: 65.00% LR: 0.000427
+2026-04-10 21:35:14,050 - INFO - Epoch [51] Batch [10/28] Loss: 1.3301, Hard: 0.8387, Soft: 1.8215 Acc: 70.45% LR: 0.000427
+2026-04-10 21:35:17,629 - INFO - Epoch [51] Batch [20/28] Loss: 1.3749, Hard: 0.8786, Soft: 1.8712 Acc: 73.10% LR: 0.000427
+2026-04-10 21:35:47,448 - INFO - Epoch [51/200] Train Loss: 1.2807, Train Acc: 0.72%, Val Loss: 0.6912, Val Acc: 71.14%, Val AUC: 94.08%, Val F1: 66.91%
+2026-04-10 21:36:12,562 - INFO - Epoch [52] Batch [0/28] Loss: 1.2475, Hard: 0.5575, Soft: 1.9374 Acc: 80.00% LR: 0.000424
+2026-04-10 21:36:16,923 - INFO - Epoch [52] Batch [10/28] Loss: 1.2181, Hard: 0.5437, Soft: 1.8925 Acc: 76.82% LR: 0.000424
+2026-04-10 21:36:20,968 - INFO - Epoch [52] Batch [20/28] Loss: 1.2434, Hard: 0.6081, Soft: 1.8787 Acc: 76.19% LR: 0.000424
+2026-04-10 21:36:51,514 - INFO - Epoch [52/200] Train Loss: 1.2317, Train Acc: 0.77%, Val Loss: 0.6301, Val Acc: 77.66%, Val AUC: 95.01%, Val F1: 76.49%
+2026-04-10 21:37:14,801 - INFO - Epoch [53] Batch [0/28] Loss: 1.3060, Hard: 0.7562, Soft: 1.8557 Acc: 70.00% LR: 0.000421
+2026-04-10 21:37:18,784 - INFO - Epoch [53] Batch [10/28] Loss: 1.4023, Hard: 0.9438, Soft: 1.8607 Acc: 78.64% LR: 0.000421
+2026-04-10 21:37:21,670 - INFO - Epoch [53] Batch [20/28] Loss: 1.1683, Hard: 0.5123, Soft: 1.8244 Acc: 79.52% LR: 0.000421
+2026-04-10 21:37:50,898 - INFO - Epoch [53/200] Train Loss: 1.2153, Train Acc: 0.79%, Val Loss: 0.5293, Val Acc: 79.39%, Val AUC: 95.83%, Val F1: 77.68%
+2026-04-10 21:37:50,898 - INFO - Best model saved! Acc: 79.39%, AUC: 95.83%, F1: 77.68%
+2026-04-10 21:38:13,418 - INFO - Epoch [54] Batch [0/28] Loss: 1.3886, Hard: 0.9086, Soft: 1.8686 Acc: 75.00% LR: 0.000418
+2026-04-10 21:38:17,095 - INFO - Epoch [54] Batch [10/28] Loss: 1.1999, Hard: 0.5396, Soft: 1.8602 Acc: 76.82% LR: 0.000418
+2026-04-10 21:38:20,290 - INFO - Epoch [54] Batch [20/28] Loss: 1.2289, Hard: 0.6011, Soft: 1.8567 Acc: 75.48% LR: 0.000418
+2026-04-10 21:38:48,278 - INFO - Epoch [54/200] Train Loss: 1.2376, Train Acc: 0.76%, Val Loss: 0.6507, Val Acc: 75.80%, Val AUC: 94.63%, Val F1: 73.24%
+2026-04-10 21:39:11,001 - INFO - Epoch [55] Batch [0/28] Loss: 1.1388, Hard: 0.4587, Soft: 1.8188 Acc: 85.00% LR: 0.000415
+2026-04-10 21:39:14,591 - INFO - Epoch [55] Batch [10/28] Loss: 1.1695, Hard: 0.5037, Soft: 1.8352 Acc: 77.73% LR: 0.000415
+2026-04-10 21:39:17,699 - INFO - Epoch [55] Batch [20/28] Loss: 1.2764, Hard: 0.6849, Soft: 1.8680 Acc: 77.86% LR: 0.000415
+2026-04-10 21:39:47,569 - INFO - Epoch [55/200] Train Loss: 1.2347, Train Acc: 0.77%, Val Loss: 0.6281, Val Acc: 74.20%, Val AUC: 93.94%, Val F1: 73.64%
+2026-04-10 21:40:10,961 - INFO - Epoch [56] Batch [0/28] Loss: 1.2564, Hard: 0.6083, Soft: 1.9046 Acc: 80.00% LR: 0.000412
+2026-04-10 21:40:13,766 - INFO - Epoch [56] Batch [10/28] Loss: 1.2141, Hard: 0.5587, Soft: 1.8695 Acc: 71.36% LR: 0.000412
+2026-04-10 21:40:16,102 - INFO - Epoch [56] Batch [20/28] Loss: 1.1217, Hard: 0.4226, Soft: 1.8208 Acc: 74.29% LR: 0.000412
+2026-04-10 21:40:44,378 - INFO - Epoch [56/200] Train Loss: 1.2400, Train Acc: 0.76%, Val Loss: 0.5585, Val Acc: 78.86%, Val AUC: 95.15%, Val F1: 77.87%
+2026-04-10 21:41:06,985 - INFO - Epoch [57] Batch [0/28] Loss: 1.2670, Hard: 0.6474, Soft: 1.8867 Acc: 75.00% LR: 0.000409
+2026-04-10 21:41:09,959 - INFO - Epoch [57] Batch [10/28] Loss: 1.2186, Hard: 0.5345, Soft: 1.9027 Acc: 79.09% LR: 0.000409
+2026-04-10 21:41:12,598 - INFO - Epoch [57] Batch [20/28] Loss: 1.2910, Hard: 0.7311, Soft: 1.8509 Acc: 80.48% LR: 0.000409
+2026-04-10 21:41:42,669 - INFO - Epoch [57/200] Train Loss: 1.2185, Train Acc: 0.79%, Val Loss: 0.7762, Val Acc: 69.95%, Val AUC: 92.79%, Val F1: 69.51%
+2026-04-10 21:42:05,113 - INFO - Epoch [58] Batch [0/28] Loss: 1.2394, Hard: 0.6081, Soft: 1.8708 Acc: 75.00% LR: 0.000406
+2026-04-10 21:42:08,486 - INFO - Epoch [58] Batch [10/28] Loss: 1.3337, Hard: 0.8488, Soft: 1.8186 Acc: 79.09% LR: 0.000406
+2026-04-10 21:42:11,527 - INFO - Epoch [58] Batch [20/28] Loss: 1.3821, Hard: 0.9250, Soft: 1.8392 Acc: 77.38% LR: 0.000406
+2026-04-10 21:42:41,474 - INFO - Epoch [58/200] Train Loss: 1.2402, Train Acc: 0.77%, Val Loss: 0.5479, Val Acc: 78.72%, Val AUC: 95.59%, Val F1: 76.65%
+2026-04-10 21:43:05,239 - INFO - Epoch [59] Batch [0/28] Loss: 1.1505, Hard: 0.4469, Soft: 1.8541 Acc: 80.00% LR: 0.000403
+2026-04-10 21:43:09,015 - INFO - Epoch [59] Batch [10/28] Loss: 1.2906, Hard: 0.7429, Soft: 1.8383 Acc: 80.45% LR: 0.000403
+2026-04-10 21:43:12,062 - INFO - Epoch [59] Batch [20/28] Loss: 1.1899, Hard: 0.5685, Soft: 1.8113 Acc: 80.00% LR: 0.000403
+2026-04-10 21:43:41,671 - INFO - Epoch [59/200] Train Loss: 1.2079, Train Acc: 0.79%, Val Loss: 0.6671, Val Acc: 76.60%, Val AUC: 94.10%, Val F1: 73.01%
+2026-04-10 21:44:06,262 - INFO - Epoch [60] Batch [0/28] Loss: 1.2507, Hard: 0.6583, Soft: 1.8431 Acc: 70.00% LR: 0.000400
+2026-04-10 21:44:09,944 - INFO - Epoch [60] Batch [10/28] Loss: 1.1058, Hard: 0.3605, Soft: 1.8510 Acc: 76.82% LR: 0.000400
+2026-04-10 21:44:13,129 - INFO - Epoch [60] Batch [20/28] Loss: 1.2131, Hard: 0.5513, Soft: 1.8750 Acc: 78.10% LR: 0.000400
+2026-04-10 21:44:43,064 - INFO - Epoch [60/200] Train Loss: 1.2129, Train Acc: 0.78%, Val Loss: 0.6058, Val Acc: 79.92%, Val AUC: 95.13%, Val F1: 78.63%
+2026-04-10 21:44:43,069 - INFO - Best model saved! Acc: 79.92%, AUC: 95.13%, F1: 78.63%
+2026-04-10 21:44:43,123 - INFO - Checkpoint saved at epoch 60
+2026-04-10 21:45:06,643 - INFO - Epoch [61] Batch [0/28] Loss: 1.2080, Hard: 0.5820, Soft: 1.8340 Acc: 65.00% LR: 0.000397
+2026-04-10 21:45:10,344 - INFO - Epoch [61] Batch [10/28] Loss: 1.1325, Hard: 0.4731, Soft: 1.7918 Acc: 73.18% LR: 0.000397
+2026-04-10 21:45:13,404 - INFO - Epoch [61] Batch [20/28] Loss: 1.3830, Hard: 0.9224, Soft: 1.8436 Acc: 72.38% LR: 0.000397
+2026-04-10 21:45:42,827 - INFO - Epoch [61/200] Train Loss: 1.2378, Train Acc: 0.74%, Val Loss: 0.5864, Val Acc: 77.93%, Val AUC: 95.28%, Val F1: 75.64%
+2026-04-10 21:46:06,634 - INFO - Epoch [62] Batch [0/28] Loss: 1.1630, Hard: 0.4881, Soft: 1.8378 Acc: 80.00% LR: 0.000394
+2026-04-10 21:46:09,727 - INFO - Epoch [62] Batch [10/28] Loss: 1.2000, Hard: 0.5536, Soft: 1.8463 Acc: 80.91% LR: 0.000394
+2026-04-10 21:46:12,752 - INFO - Epoch [62] Batch [20/28] Loss: 1.3428, Hard: 0.8720, Soft: 1.8136 Acc: 77.38% LR: 0.000394
+2026-04-10 21:46:42,484 - INFO - Epoch [62/200] Train Loss: 1.2293, Train Acc: 0.78%, Val Loss: 0.6527, Val Acc: 74.47%, Val AUC: 94.28%, Val F1: 73.61%
+2026-04-10 21:47:05,829 - INFO - Epoch [63] Batch [0/28] Loss: 1.1430, Hard: 0.4112, Soft: 1.8748 Acc: 90.00% LR: 0.000391
+2026-04-10 21:47:08,734 - INFO - Epoch [63] Batch [10/28] Loss: 1.2444, Hard: 0.6106, Soft: 1.8783 Acc: 80.91% LR: 0.000391
+2026-04-10 21:47:11,167 - INFO - Epoch [63] Batch [20/28] Loss: 1.2083, Hard: 0.5776, Soft: 1.8389 Acc: 80.95% LR: 0.000391
+2026-04-10 21:47:40,063 - INFO - Epoch [63/200] Train Loss: 1.2167, Train Acc: 0.79%, Val Loss: 0.5117, Val Acc: 79.26%, Val AUC: 96.08%, Val F1: 78.47%
+2026-04-10 21:48:03,199 - INFO - Epoch [64] Batch [0/28] Loss: 1.3624, Hard: 0.8695, Soft: 1.8554 Acc: 75.00% LR: 0.000387
+2026-04-10 21:48:06,133 - INFO - Epoch [64] Batch [10/28] Loss: 1.1742, Hard: 0.5331, Soft: 1.8153 Acc: 78.64% LR: 0.000387
+2026-04-10 21:48:08,543 - INFO - Epoch [64] Batch [20/28] Loss: 1.1196, Hard: 0.3801, Soft: 1.8592 Acc: 77.86% LR: 0.000387
+2026-04-10 21:48:36,390 - INFO - Epoch [64/200] Train Loss: 1.2173, Train Acc: 0.78%, Val Loss: 0.5485, Val Acc: 79.12%, Val AUC: 95.58%, Val F1: 77.57%
+2026-04-10 21:48:59,158 - INFO - Epoch [65] Batch [0/28] Loss: 1.0659, Hard: 0.2962, Soft: 1.8355 Acc: 90.00% LR: 0.000384
+2026-04-10 21:49:02,758 - INFO - Epoch [65] Batch [10/28] Loss: 1.1631, Hard: 0.5250, Soft: 1.8013 Acc: 75.91% LR: 0.000384
+2026-04-10 21:49:05,793 - INFO - Epoch [65] Batch [20/28] Loss: 1.2857, Hard: 0.6968, Soft: 1.8746 Acc: 77.62% LR: 0.000384
+2026-04-10 21:49:35,051 - INFO - Epoch [65/200] Train Loss: 1.2010, Train Acc: 0.79%, Val Loss: 0.5529, Val Acc: 78.32%, Val AUC: 95.14%, Val F1: 77.71%
+2026-04-10 21:49:58,546 - INFO - Epoch [66] Batch [0/28] Loss: 1.2296, Hard: 0.6273, Soft: 1.8319 Acc: 75.00% LR: 0.000381
+2026-04-10 21:50:02,148 - INFO - Epoch [66] Batch [10/28] Loss: 1.1198, Hard: 0.4040, Soft: 1.8356 Acc: 76.82% LR: 0.000381
+2026-04-10 21:50:05,199 - INFO - Epoch [66] Batch [20/28] Loss: 1.4761, Hard: 1.1249, Soft: 1.8274 Acc: 75.00% LR: 0.000381
+2026-04-10 21:50:34,790 - INFO - Epoch [66/200] Train Loss: 1.2252, Train Acc: 0.76%, Val Loss: 0.6908, Val Acc: 73.27%, Val AUC: 93.91%, Val F1: 71.23%
+2026-04-10 21:50:57,540 - INFO - Epoch [67] Batch [0/28] Loss: 1.0597, Hard: 0.2980, Soft: 1.8214 Acc: 100.00% LR: 0.000377
+2026-04-10 21:51:00,619 - INFO - Epoch [67] Batch [10/28] Loss: 1.2605, Hard: 0.6613, Soft: 1.8597 Acc: 82.73% LR: 0.000377
+2026-04-10 21:51:03,560 - INFO - Epoch [67] Batch [20/28] Loss: 1.2995, Hard: 0.7501, Soft: 1.8489 Acc: 79.29% LR: 0.000377
+2026-04-10 21:51:32,876 - INFO - Epoch [67/200] Train Loss: 1.1992, Train Acc: 0.80%, Val Loss: 0.5774, Val Acc: 80.05%, Val AUC: 95.31%, Val F1: 78.96%
+2026-04-10 21:51:32,880 - INFO - Best model saved! Acc: 80.05%, AUC: 95.31%, F1: 78.96%
+2026-04-10 21:51:55,708 - INFO - Epoch [68] Batch [0/28] Loss: 1.3106, Hard: 0.8236, Soft: 1.7975 Acc: 70.00% LR: 0.000374
+2026-04-10 21:51:59,030 - INFO - Epoch [68] Batch [10/28] Loss: 1.1215, Hard: 0.4003, Soft: 1.8426 Acc: 80.45% LR: 0.000374
+2026-04-10 21:52:02,102 - INFO - Epoch [68] Batch [20/28] Loss: 1.2561, Hard: 0.6495, Soft: 1.8627 Acc: 82.14% LR: 0.000374
+2026-04-10 21:52:31,022 - INFO - Epoch [68/200] Train Loss: 1.1927, Train Acc: 0.81%, Val Loss: 0.6505, Val Acc: 76.06%, Val AUC: 94.90%, Val F1: 74.46%
+2026-04-10 21:52:53,894 - INFO - Epoch [69] Batch [0/28] Loss: 1.1307, Hard: 0.3942, Soft: 1.8673 Acc: 80.00% LR: 0.000370
+2026-04-10 21:52:57,021 - INFO - Epoch [69] Batch [10/28] Loss: 1.1699, Hard: 0.5096, Soft: 1.8301 Acc: 77.73% LR: 0.000370
+2026-04-10 21:52:59,969 - INFO - Epoch [69] Batch [20/28] Loss: 1.1956, Hard: 0.5946, Soft: 1.7966 Acc: 76.43% LR: 0.000370
+2026-04-10 21:53:31,334 - INFO - Epoch [69/200] Train Loss: 1.2094, Train Acc: 0.77%, Val Loss: 0.5321, Val Acc: 79.26%, Val AUC: 95.91%, Val F1: 78.64%
+2026-04-10 21:53:53,993 - INFO - Epoch [70] Batch [0/28] Loss: 1.2428, Hard: 0.6390, Soft: 1.8466 Acc: 70.00% LR: 0.000367
+2026-04-10 21:53:57,005 - INFO - Epoch [70] Batch [10/28] Loss: 1.3170, Hard: 0.7573, Soft: 1.8768 Acc: 82.27% LR: 0.000367
+2026-04-10 21:53:59,933 - INFO - Epoch [70] Batch [20/28] Loss: 1.1627, Hard: 0.5067, Soft: 1.8188 Acc: 82.38% LR: 0.000367
+2026-04-10 21:54:28,851 - INFO - Epoch [70/200] Train Loss: 1.1620, Train Acc: 0.83%, Val Loss: 0.5626, Val Acc: 78.19%, Val AUC: 95.71%, Val F1: 76.51%
+2026-04-10 21:54:28,904 - INFO - Checkpoint saved at epoch 70
+2026-04-10 21:54:52,799 - INFO - Epoch [71] Batch [0/28] Loss: 1.2132, Hard: 0.5928, Soft: 1.8336 Acc: 80.00% LR: 0.000363
+2026-04-10 21:54:55,974 - INFO - Epoch [71] Batch [10/28] Loss: 1.1700, Hard: 0.4952, Soft: 1.8448 Acc: 80.00% LR: 0.000363
+2026-04-10 21:54:59,137 - INFO - Epoch [71] Batch [20/28] Loss: 1.2255, Hard: 0.6246, Soft: 1.8265 Acc: 79.52% LR: 0.000363
+2026-04-10 21:55:29,778 - INFO - Epoch [71/200] Train Loss: 1.1889, Train Acc: 0.80%, Val Loss: 0.7435, Val Acc: 71.28%, Val AUC: 93.24%, Val F1: 67.88%
+2026-04-10 21:55:53,189 - INFO - Epoch [72] Batch [0/28] Loss: 1.2335, Hard: 0.6229, Soft: 1.8442 Acc: 75.00% LR: 0.000360
+2026-04-10 21:55:56,340 - INFO - Epoch [72] Batch [10/28] Loss: 1.2010, Hard: 0.5955, Soft: 1.8065 Acc: 74.55% LR: 0.000360
+2026-04-10 21:55:59,424 - INFO - Epoch [72] Batch [20/28] Loss: 1.1465, Hard: 0.4671, Soft: 1.8258 Acc: 77.14% LR: 0.000360
+2026-04-10 21:56:30,145 - INFO - Epoch [72/200] Train Loss: 1.1913, Train Acc: 0.78%, Val Loss: 0.5064, Val Acc: 82.45%, Val AUC: 96.21%, Val F1: 81.76%
+2026-04-10 21:56:30,145 - INFO - Best model saved! Acc: 82.45%, AUC: 96.21%, F1: 81.76%
+2026-04-10 21:56:53,328 - INFO - Epoch [73] Batch [0/28] Loss: 1.2373, Hard: 0.6660, Soft: 1.8085 Acc: 70.00% LR: 0.000356
+2026-04-10 21:56:56,465 - INFO - Epoch [73] Batch [10/28] Loss: 1.2305, Hard: 0.6326, Soft: 1.8283 Acc: 80.00% LR: 0.000356
+2026-04-10 21:56:59,538 - INFO - Epoch [73] Batch [20/28] Loss: 1.0649, Hard: 0.2810, Soft: 1.8488 Acc: 80.24% LR: 0.000356
+2026-04-10 21:57:29,505 - INFO - Epoch [73/200] Train Loss: 1.1876, Train Acc: 0.80%, Val Loss: 0.6075, Val Acc: 76.20%, Val AUC: 95.05%, Val F1: 73.47%
+2026-04-10 21:57:53,518 - INFO - Epoch [74] Batch [0/28] Loss: 1.2226, Hard: 0.5971, Soft: 1.8480 Acc: 80.00% LR: 0.000353
+2026-04-10 21:57:56,031 - INFO - Epoch [74] Batch [10/28] Loss: 1.1829, Hard: 0.4841, Soft: 1.8817 Acc: 80.45% LR: 0.000353
+2026-04-10 21:57:58,545 - INFO - Epoch [74] Batch [20/28] Loss: 1.1424, Hard: 0.4154, Soft: 1.8695 Acc: 80.95% LR: 0.000353
+2026-04-10 21:58:27,744 - INFO - Epoch [74/200] Train Loss: 1.1804, Train Acc: 0.81%, Val Loss: 0.5197, Val Acc: 79.92%, Val AUC: 95.95%, Val F1: 79.06%
+2026-04-10 21:58:50,411 - INFO - Epoch [75] Batch [0/28] Loss: 1.0670, Hard: 0.2943, Soft: 1.8396 Acc: 90.00% LR: 0.000349
+2026-04-10 21:58:53,033 - INFO - Epoch [75] Batch [10/28] Loss: 1.1559, Hard: 0.4275, Soft: 1.8842 Acc: 83.64% LR: 0.000349
+2026-04-10 21:58:56,199 - INFO - Epoch [75] Batch [20/28] Loss: 1.1433, Hard: 0.4820, Soft: 1.8046 Acc: 80.48% LR: 0.000349
+2026-04-10 21:59:25,155 - INFO - Epoch [75/200] Train Loss: 1.1619, Train Acc: 0.81%, Val Loss: 0.5105, Val Acc: 79.26%, Val AUC: 96.10%, Val F1: 78.03%
+2026-04-10 21:59:48,627 - INFO - Epoch [76] Batch [0/28] Loss: 1.1659, Hard: 0.5191, Soft: 1.8127 Acc: 85.00% LR: 0.000346
+2026-04-10 21:59:51,719 - INFO - Epoch [76] Batch [10/28] Loss: 1.1024, Hard: 0.3566, Soft: 1.8481 Acc: 79.09% LR: 0.000346
+2026-04-10 21:59:54,952 - INFO - Epoch [76] Batch [20/28] Loss: 1.1575, Hard: 0.5008, Soft: 1.8142 Acc: 79.76% LR: 0.000346
+2026-04-10 22:00:26,863 - INFO - Epoch [76/200] Train Loss: 1.1761, Train Acc: 0.82%, Val Loss: 0.6082, Val Acc: 75.53%, Val AUC: 95.41%, Val F1: 74.53%
+2026-04-10 22:00:50,601 - INFO - Epoch [77] Batch [0/28] Loss: 1.1398, Hard: 0.3929, Soft: 1.8868 Acc: 85.00% LR: 0.000342
+2026-04-10 22:00:53,652 - INFO - Epoch [77] Batch [10/28] Loss: 1.2241, Hard: 0.6465, Soft: 1.8017 Acc: 79.55% LR: 0.000342
+2026-04-10 22:00:57,163 - INFO - Epoch [77] Batch [20/28] Loss: 1.2488, Hard: 0.6336, Soft: 1.8640 Acc: 80.24% LR: 0.000342
+2026-04-10 22:01:27,410 - INFO - Epoch [77/200] Train Loss: 1.1944, Train Acc: 0.80%, Val Loss: 0.8356, Val Acc: 69.81%, Val AUC: 93.74%, Val F1: 68.97%
+2026-04-10 22:01:51,767 - INFO - Epoch [78] Batch [0/28] Loss: 1.1570, Hard: 0.4170, Soft: 1.8970 Acc: 90.00% LR: 0.000338
+2026-04-10 22:01:55,680 - INFO - Epoch [78] Batch [10/28] Loss: 1.0668, Hard: 0.2825, Soft: 1.8510 Acc: 84.09% LR: 0.000338
+2026-04-10 22:01:59,654 - INFO - Epoch [78] Batch [20/28] Loss: 1.5791, Hard: 1.2608, Soft: 1.8973 Acc: 84.05% LR: 0.000338
+2026-04-10 22:02:28,739 - INFO - Epoch [78/200] Train Loss: 1.1548, Train Acc: 0.84%, Val Loss: 0.5551, Val Acc: 78.06%, Val AUC: 95.84%, Val F1: 76.65%
+2026-04-10 22:02:52,238 - INFO - Epoch [79] Batch [0/28] Loss: 1.1738, Hard: 0.5312, Soft: 1.8165 Acc: 80.00% LR: 0.000335
+2026-04-10 22:02:55,900 - INFO - Epoch [79] Batch [10/28] Loss: 1.0971, Hard: 0.3378, Soft: 1.8563 Acc: 81.36% LR: 0.000335
+2026-04-10 22:02:58,951 - INFO - Epoch [79] Batch [20/28] Loss: 1.0695, Hard: 0.2587, Soft: 1.8803 Acc: 83.10% LR: 0.000335
+2026-04-10 22:03:29,097 - INFO - Epoch [79/200] Train Loss: 1.1626, Train Acc: 0.82%, Val Loss: 0.5746, Val Acc: 78.59%, Val AUC: 96.19%, Val F1: 78.14%
+2026-04-10 22:03:52,387 - INFO - Epoch [80] Batch [0/28] Loss: 1.2446, Hard: 0.6800, Soft: 1.8091 Acc: 70.00% LR: 0.000331
+2026-04-10 22:03:56,116 - INFO - Epoch [80] Batch [10/28] Loss: 1.1398, Hard: 0.4441, Soft: 1.8355 Acc: 82.27% LR: 0.000331
+2026-04-10 22:03:59,340 - INFO - Epoch [80] Batch [20/28] Loss: 1.1550, Hard: 0.4708, Soft: 1.8391 Acc: 80.24% LR: 0.000331
+2026-04-10 22:04:29,315 - INFO - Epoch [80/200] Train Loss: 1.1689, Train Acc: 0.80%, Val Loss: 0.4635, Val Acc: 82.45%, Val AUC: 96.68%, Val F1: 81.14%
+2026-04-10 22:04:29,381 - INFO - Checkpoint saved at epoch 80
+2026-04-10 22:04:53,904 - INFO - Epoch [81] Batch [0/28] Loss: 1.1840, Hard: 0.5139, Soft: 1.8541 Acc: 75.00% LR: 0.000327
+2026-04-10 22:04:56,884 - INFO - Epoch [81] Batch [10/28] Loss: 1.1827, Hard: 0.4254, Soft: 1.9399 Acc: 77.27% LR: 0.000327
+2026-04-10 22:04:59,249 - INFO - Epoch [81] Batch [20/28] Loss: 1.1043, Hard: 0.3737, Soft: 1.8348 Acc: 78.10% LR: 0.000327
+2026-04-10 22:05:27,891 - INFO - Epoch [81/200] Train Loss: 1.1981, Train Acc: 0.78%, Val Loss: 0.5347, Val Acc: 79.92%, Val AUC: 95.97%, Val F1: 78.99%
+2026-04-10 22:05:51,476 - INFO - Epoch [82] Batch [0/28] Loss: 1.1012, Hard: 0.3329, Soft: 1.8694 Acc: 90.00% LR: 0.000324
+2026-04-10 22:05:54,307 - INFO - Epoch [82] Batch [10/28] Loss: 1.1933, Hard: 0.5263, Soft: 1.8602 Acc: 85.45% LR: 0.000324
+2026-04-10 22:05:57,541 - INFO - Epoch [82] Batch [20/28] Loss: 1.2528, Hard: 0.6913, Soft: 1.8143 Acc: 83.10% LR: 0.000324
+2026-04-10 22:06:27,730 - INFO - Epoch [82/200] Train Loss: 1.1476, Train Acc: 0.83%, Val Loss: 0.5825, Val Acc: 77.93%, Val AUC: 95.78%, Val F1: 75.97%
+2026-04-10 22:06:51,164 - INFO - Epoch [83] Batch [0/28] Loss: 1.0684, Hard: 0.2984, Soft: 1.8383 Acc: 95.00% LR: 0.000320
+2026-04-10 22:06:54,762 - INFO - Epoch [83] Batch [10/28] Loss: 1.0331, Hard: 0.1780, Soft: 1.8882 Acc: 81.82% LR: 0.000320
+2026-04-10 22:06:57,886 - INFO - Epoch [83] Batch [20/28] Loss: 1.0532, Hard: 0.2680, Soft: 1.8384 Acc: 81.67% LR: 0.000320
+2026-04-10 22:07:27,687 - INFO - Epoch [83/200] Train Loss: 1.1548, Train Acc: 0.82%, Val Loss: 0.5467, Val Acc: 78.19%, Val AUC: 96.51%, Val F1: 78.23%
+2026-04-10 22:07:50,434 - INFO - Epoch [84] Batch [0/28] Loss: 1.0971, Hard: 0.3375, Soft: 1.8567 Acc: 85.00% LR: 0.000316
+2026-04-10 22:07:54,074 - INFO - Epoch [84] Batch [10/28] Loss: 1.1640, Hard: 0.4682, Soft: 1.8598 Acc: 82.73% LR: 0.000316
+2026-04-10 22:07:57,230 - INFO - Epoch [84] Batch [20/28] Loss: 1.3274, Hard: 0.8148, Soft: 1.8400 Acc: 81.43% LR: 0.000316
+2026-04-10 22:08:25,681 - INFO - Epoch [84/200] Train Loss: 1.1710, Train Acc: 0.82%, Val Loss: 0.5264, Val Acc: 81.12%, Val AUC: 95.77%, Val F1: 80.41%
+2026-04-10 22:08:49,585 - INFO - Epoch [85] Batch [0/28] Loss: 1.0865, Hard: 0.3293, Soft: 1.8438 Acc: 90.00% LR: 0.000312
+2026-04-10 22:08:52,715 - INFO - Epoch [85] Batch [10/28] Loss: 1.0780, Hard: 0.3354, Soft: 1.8205 Acc: 85.45% LR: 0.000312
+2026-04-10 22:08:55,807 - INFO - Epoch [85] Batch [20/28] Loss: 1.0487, Hard: 0.1988, Soft: 1.8986 Acc: 84.29% LR: 0.000312
+2026-04-10 22:09:25,510 - INFO - Epoch [85/200] Train Loss: 1.1415, Train Acc: 0.84%, Val Loss: 0.4929, Val Acc: 82.05%, Val AUC: 96.65%, Val F1: 81.77%
+2026-04-10 22:09:48,804 - INFO - Epoch [86] Batch [0/28] Loss: 1.0889, Hard: 0.3388, Soft: 1.8390 Acc: 90.00% LR: 0.000308
+2026-04-10 22:09:51,908 - INFO - Epoch [86] Batch [10/28] Loss: 1.1977, Hard: 0.5769, Soft: 1.8184 Acc: 85.00% LR: 0.000308
+2026-04-10 22:09:55,067 - INFO - Epoch [86] Batch [20/28] Loss: 1.0925, Hard: 0.3575, Soft: 1.8275 Acc: 81.19% LR: 0.000308
+2026-04-10 22:10:26,837 - INFO - Epoch [86/200] Train Loss: 1.1751, Train Acc: 0.81%, Val Loss: 0.4206, Val Acc: 84.84%, Val AUC: 97.11%, Val F1: 83.89%
+2026-04-10 22:10:26,837 - INFO - Best model saved! Acc: 84.84%, AUC: 97.11%, F1: 83.89%
+2026-04-10 22:10:48,674 - INFO - Epoch [87] Batch [0/28] Loss: 1.0296, Hard: 0.1994, Soft: 1.8599 Acc: 100.00% LR: 0.000305
+2026-04-10 22:10:51,556 - INFO - Epoch [87] Batch [10/28] Loss: 1.0910, Hard: 0.2910, Soft: 1.8911 Acc: 84.09% LR: 0.000305
+2026-04-10 22:10:54,488 - INFO - Epoch [87] Batch [20/28] Loss: 1.1197, Hard: 0.3889, Soft: 1.8505 Acc: 80.48% LR: 0.000305
+2026-04-10 22:11:22,785 - INFO - Epoch [87/200] Train Loss: 1.1516, Train Acc: 0.81%, Val Loss: 0.5952, Val Acc: 76.46%, Val AUC: 95.69%, Val F1: 75.16%
+2026-04-10 22:11:44,843 - INFO - Epoch [88] Batch [0/28] Loss: 1.0439, Hard: 0.2168, Soft: 1.8709 Acc: 95.00% LR: 0.000301
+2026-04-10 22:11:47,165 - INFO - Epoch [88] Batch [10/28] Loss: 1.0841, Hard: 0.3000, Soft: 1.8682 Acc: 88.18% LR: 0.000301
+2026-04-10 22:11:49,438 - INFO - Epoch [88] Batch [20/28] Loss: 1.1193, Hard: 0.3806, Soft: 1.8580 Acc: 84.76% LR: 0.000301
+2026-04-10 22:12:17,195 - INFO - Epoch [88/200] Train Loss: 1.1175, Train Acc: 0.84%, Val Loss: 0.5570, Val Acc: 77.79%, Val AUC: 96.39%, Val F1: 77.18%
+2026-04-10 22:12:40,143 - INFO - Epoch [89] Batch [0/28] Loss: 1.0791, Hard: 0.2815, Soft: 1.8768 Acc: 90.00% LR: 0.000297
+2026-04-10 22:12:42,423 - INFO - Epoch [89] Batch [10/28] Loss: 1.3172, Hard: 0.7433, Soft: 1.8911 Acc: 79.55% LR: 0.000297
+2026-04-10 22:12:44,679 - INFO - Epoch [89] Batch [20/28] Loss: 1.0585, Hard: 0.2016, Soft: 1.9154 Acc: 82.86% LR: 0.000297
+2026-04-10 22:13:14,114 - INFO - Epoch [89/200] Train Loss: 1.1402, Train Acc: 0.83%, Val Loss: 0.4758, Val Acc: 82.45%, Val AUC: 96.74%, Val F1: 81.18%
+2026-04-10 22:13:37,065 - INFO - Epoch [90] Batch [0/28] Loss: 1.0611, Hard: 0.2729, Soft: 1.8493 Acc: 90.00% LR: 0.000293
+2026-04-10 22:13:39,998 - INFO - Epoch [90] Batch [10/28] Loss: 1.0898, Hard: 0.3401, Soft: 1.8395 Acc: 83.64% LR: 0.000293
+2026-04-10 22:13:42,914 - INFO - Epoch [90] Batch [20/28] Loss: 1.3050, Hard: 0.7095, Soft: 1.9005 Acc: 84.76% LR: 0.000293
+2026-04-10 22:14:13,069 - INFO - Epoch [90/200] Train Loss: 1.1456, Train Acc: 0.84%, Val Loss: 0.5833, Val Acc: 78.19%, Val AUC: 95.35%, Val F1: 78.32%
+2026-04-10 22:14:13,153 - INFO - Checkpoint saved at epoch 90
+2026-04-10 22:14:36,408 - INFO - Epoch [91] Batch [0/28] Loss: 1.1479, Hard: 0.4943, Soft: 1.8015 Acc: 75.00% LR: 0.000289
+2026-04-10 22:14:39,163 - INFO - Epoch [91] Batch [10/28] Loss: 1.1551, Hard: 0.4824, Soft: 1.8278 Acc: 82.27% LR: 0.000289
+2026-04-10 22:14:41,921 - INFO - Epoch [91] Batch [20/28] Loss: 1.3491, Hard: 0.8851, Soft: 1.8130 Acc: 84.29% LR: 0.000289
+2026-04-10 22:15:10,948 - INFO - Epoch [91/200] Train Loss: 1.1327, Train Acc: 0.83%, Val Loss: 0.5673, Val Acc: 79.65%, Val AUC: 95.53%, Val F1: 78.09%
+2026-04-10 22:15:34,384 - INFO - Epoch [92] Batch [0/28] Loss: 1.0480, Hard: 0.2205, Soft: 1.8755 Acc: 90.00% LR: 0.000285
+2026-04-10 22:15:37,334 - INFO - Epoch [92] Batch [10/28] Loss: 1.2270, Hard: 0.6565, Soft: 1.7975 Acc: 88.18% LR: 0.000285
+2026-04-10 22:15:40,136 - INFO - Epoch [92] Batch [20/28] Loss: 1.1149, Hard: 0.3975, Soft: 1.8324 Acc: 85.95% LR: 0.000285
+2026-04-10 22:16:09,422 - INFO - Epoch [92/200] Train Loss: 1.1169, Train Acc: 0.86%, Val Loss: 0.4817, Val Acc: 80.98%, Val AUC: 96.61%, Val F1: 80.08%
+2026-04-10 22:16:33,267 - INFO - Epoch [93] Batch [0/28] Loss: 1.1572, Hard: 0.5025, Soft: 1.8120 Acc: 85.00% LR: 0.000281
+2026-04-10 22:16:36,051 - INFO - Epoch [93] Batch [10/28] Loss: 1.1204, Hard: 0.4096, Soft: 1.8311 Acc: 81.82% LR: 0.000281
+2026-04-10 22:16:39,232 - INFO - Epoch [93] Batch [20/28] Loss: 1.0563, Hard: 0.2431, Soft: 1.8695 Acc: 84.05% LR: 0.000281
+2026-04-10 22:17:09,501 - INFO - Epoch [93/200] Train Loss: 1.1557, Train Acc: 0.83%, Val Loss: 0.4552, Val Acc: 82.98%, Val AUC: 96.83%, Val F1: 82.49%
+2026-04-10 22:17:32,850 - INFO - Epoch [94] Batch [0/28] Loss: 1.1431, Hard: 0.4125, Soft: 1.8737 Acc: 85.00% LR: 0.000277
+2026-04-10 22:17:35,674 - INFO - Epoch [94] Batch [10/28] Loss: 1.2795, Hard: 0.7091, Soft: 1.8498 Acc: 82.27% LR: 0.000277
+2026-04-10 22:17:39,244 - INFO - Epoch [94] Batch [20/28] Loss: 1.1596, Hard: 0.4691, Soft: 1.8502 Acc: 83.57% LR: 0.000277
+2026-04-10 22:18:09,025 - INFO - Epoch [94/200] Train Loss: 1.1475, Train Acc: 0.84%, Val Loss: 0.5537, Val Acc: 78.86%, Val AUC: 95.66%, Val F1: 76.76%
+2026-04-10 22:18:32,930 - INFO - Epoch [95] Batch [0/28] Loss: 1.2222, Hard: 0.6622, Soft: 1.7823 Acc: 75.00% LR: 0.000274
+2026-04-10 22:18:35,850 - INFO - Epoch [95] Batch [10/28] Loss: 1.0525, Hard: 0.2555, Soft: 1.8495 Acc: 81.82% LR: 0.000274
+2026-04-10 22:18:38,825 - INFO - Epoch [95] Batch [20/28] Loss: 1.0883, Hard: 0.2835, Soft: 1.8931 Acc: 83.10% LR: 0.000274
+2026-04-10 22:19:09,946 - INFO - Epoch [95/200] Train Loss: 1.1503, Train Acc: 0.82%, Val Loss: 0.5286, Val Acc: 81.12%, Val AUC: 95.83%, Val F1: 80.11%
+2026-04-10 22:19:34,113 - INFO - Epoch [96] Batch [0/28] Loss: 1.0952, Hard: 0.3628, Soft: 1.8275 Acc: 80.00% LR: 0.000270
+2026-04-10 22:19:37,684 - INFO - Epoch [96] Batch [10/28] Loss: 0.9946, Hard: 0.1862, Soft: 1.8030 Acc: 87.73% LR: 0.000270
+2026-04-10 22:19:41,152 - INFO - Epoch [96] Batch [20/28] Loss: 1.0504, Hard: 0.2870, Soft: 1.8138 Acc: 85.95% LR: 0.000270
+2026-04-10 22:20:10,776 - INFO - Epoch [96/200] Train Loss: 1.1045, Train Acc: 0.86%, Val Loss: 0.4917, Val Acc: 82.85%, Val AUC: 96.65%, Val F1: 82.27%
+2026-04-10 22:20:32,999 - INFO - Epoch [97] Batch [0/28] Loss: 1.0986, Hard: 0.3587, Soft: 1.8386 Acc: 85.00% LR: 0.000266
+2026-04-10 22:20:36,482 - INFO - Epoch [97] Batch [10/28] Loss: 1.0953, Hard: 0.3719, Soft: 1.8187 Acc: 82.27% LR: 0.000266
+2026-04-10 22:20:39,958 - INFO - Epoch [97] Batch [20/28] Loss: 1.0285, Hard: 0.1718, Soft: 1.8851 Acc: 81.90% LR: 0.000266
+2026-04-10 22:21:10,538 - INFO - Epoch [97/200] Train Loss: 1.1351, Train Acc: 0.83%, Val Loss: 0.4769, Val Acc: 82.98%, Val AUC: 96.56%, Val F1: 82.25%
+2026-04-10 22:21:34,103 - INFO - Epoch [98] Batch [0/28] Loss: 1.2110, Hard: 0.5635, Soft: 1.8584 Acc: 75.00% LR: 0.000262
+2026-04-10 22:21:37,316 - INFO - Epoch [98] Batch [10/28] Loss: 1.2759, Hard: 0.7095, Soft: 1.8424 Acc: 85.00% LR: 0.000262
+2026-04-10 22:21:40,196 - INFO - Epoch [98] Batch [20/28] Loss: 1.0870, Hard: 0.3486, Soft: 1.8254 Acc: 83.10% LR: 0.000262
+2026-04-10 22:22:09,969 - INFO - Epoch [98/200] Train Loss: 1.1298, Train Acc: 0.83%, Val Loss: 0.5836, Val Acc: 76.60%, Val AUC: 95.91%, Val F1: 75.16%
+2026-04-10 22:22:33,995 - INFO - Epoch [99] Batch [0/28] Loss: 1.0271, Hard: 0.2106, Soft: 1.8437 Acc: 100.00% LR: 0.000258
+2026-04-10 22:22:36,804 - INFO - Epoch [99] Batch [10/28] Loss: 1.1899, Hard: 0.5414, Soft: 1.8385 Acc: 85.45% LR: 0.000258
+2026-04-10 22:22:39,294 - INFO - Epoch [99] Batch [20/28] Loss: 1.0402, Hard: 0.2467, Soft: 1.8336 Acc: 84.29% LR: 0.000258
+2026-04-10 22:23:07,242 - INFO - Epoch [99/200] Train Loss: 1.1385, Train Acc: 0.83%, Val Loss: 0.9512, Val Acc: 65.43%, Val AUC: 91.19%, Val F1: 63.71%
+2026-04-10 22:23:29,358 - INFO - Epoch [100] Batch [0/28] Loss: 1.1200, Hard: 0.4012, Soft: 1.8388 Acc: 85.00% LR: 0.000254
+2026-04-10 22:23:32,719 - INFO - Epoch [100] Batch [10/28] Loss: 1.1156, Hard: 0.4120, Soft: 1.8192 Acc: 85.45% LR: 0.000254
+2026-04-10 22:23:35,984 - INFO - Epoch [100] Batch [20/28] Loss: 1.2824, Hard: 0.7712, Soft: 1.7936 Acc: 83.33% LR: 0.000254
+2026-04-10 22:24:05,001 - INFO - Epoch [100/200] Train Loss: 1.1275, Train Acc: 0.84%, Val Loss: 0.4722, Val Acc: 82.05%, Val AUC: 96.77%, Val F1: 81.60%
+2026-04-10 22:24:05,056 - INFO - Checkpoint saved at epoch 100
+2026-04-10 22:24:27,855 - INFO - Epoch [101] Batch [0/28] Loss: 1.3339, Hard: 0.7898, Soft: 1.8779 Acc: 75.00% LR: 0.000250
+2026-04-10 22:24:31,307 - INFO - Epoch [101] Batch [10/28] Loss: 1.0664, Hard: 0.2862, Soft: 1.8467 Acc: 88.64% LR: 0.000250
+2026-04-10 22:24:34,747 - INFO - Epoch [101] Batch [20/28] Loss: 1.0091, Hard: 0.1870, Soft: 1.8312 Acc: 86.43% LR: 0.000250
+2026-04-10 22:25:04,256 - INFO - Epoch [101/200] Train Loss: 1.1389, Train Acc: 0.84%, Val Loss: 0.6456, Val Acc: 76.20%, Val AUC: 95.72%, Val F1: 74.64%
+2026-04-10 22:25:29,148 - INFO - Epoch [102] Batch [0/28] Loss: 0.9824, Hard: 0.1432, Soft: 1.8215 Acc: 95.00% LR: 0.000246
+2026-04-10 22:25:32,537 - INFO - Epoch [102] Batch [10/28] Loss: 0.9989, Hard: 0.1946, Soft: 1.8033 Acc: 85.91% LR: 0.000246
+2026-04-10 22:25:35,617 - INFO - Epoch [102] Batch [20/28] Loss: 1.2495, Hard: 0.5909, Soft: 1.9081 Acc: 84.29% LR: 0.000246
+2026-04-10 22:26:04,910 - INFO - Epoch [102/200] Train Loss: 1.1226, Train Acc: 0.84%, Val Loss: 0.4189, Val Acc: 83.78%, Val AUC: 97.16%, Val F1: 82.87%
+2026-04-10 22:26:28,695 - INFO - Epoch [103] Batch [0/28] Loss: 1.0593, Hard: 0.2617, Soft: 1.8570 Acc: 90.00% LR: 0.000242
+2026-04-10 22:26:32,106 - INFO - Epoch [103] Batch [10/28] Loss: 1.1876, Hard: 0.5083, Soft: 1.8669 Acc: 84.09% LR: 0.000242
+2026-04-10 22:26:34,997 - INFO - Epoch [103] Batch [20/28] Loss: 1.1087, Hard: 0.4045, Soft: 1.8130 Acc: 84.76% LR: 0.000242
+2026-04-10 22:27:04,510 - INFO - Epoch [103/200] Train Loss: 1.1222, Train Acc: 0.85%, Val Loss: 0.4820, Val Acc: 82.85%, Val AUC: 96.57%, Val F1: 82.00%
+2026-04-10 22:27:28,859 - INFO - Epoch [104] Batch [0/28] Loss: 1.0864, Hard: 0.2901, Soft: 1.8828 Acc: 95.00% LR: 0.000238
+2026-04-10 22:27:31,779 - INFO - Epoch [104] Batch [10/28] Loss: 1.1235, Hard: 0.3908, Soft: 1.8562 Acc: 85.45% LR: 0.000238
+2026-04-10 22:27:34,581 - INFO - Epoch [104] Batch [20/28] Loss: 1.1458, Hard: 0.4740, Soft: 1.8176 Acc: 84.29% LR: 0.000238
+2026-04-10 22:28:04,128 - INFO - Epoch [104/200] Train Loss: 1.1133, Train Acc: 0.85%, Val Loss: 0.4336, Val Acc: 83.51%, Val AUC: 97.05%, Val F1: 83.36%
+2026-04-10 22:28:27,970 - INFO - Epoch [105] Batch [0/28] Loss: 1.1098, Hard: 0.4187, Soft: 1.8009 Acc: 80.00% LR: 0.000234
+2026-04-10 22:28:30,264 - INFO - Epoch [105] Batch [10/28] Loss: 1.0768, Hard: 0.3329, Soft: 1.8207 Acc: 86.36% LR: 0.000234
+2026-04-10 22:28:32,674 - INFO - Epoch [105] Batch [20/28] Loss: 1.3261, Hard: 0.8247, Soft: 1.8276 Acc: 85.95% LR: 0.000234
+2026-04-10 22:29:01,601 - INFO - Epoch [105/200] Train Loss: 1.1097, Train Acc: 0.85%, Val Loss: 0.5407, Val Acc: 81.25%, Val AUC: 96.20%, Val F1: 80.66%
+2026-04-10 22:29:24,690 - INFO - Epoch [106] Batch [0/28] Loss: 1.0913, Hard: 0.3872, Soft: 1.7954 Acc: 80.00% LR: 0.000230
+2026-04-10 22:29:27,551 - INFO - Epoch [106] Batch [10/28] Loss: 1.4362, Hard: 1.0016, Soft: 1.8707 Acc: 82.27% LR: 0.000230
+2026-04-10 22:29:30,376 - INFO - Epoch [106] Batch [20/28] Loss: 1.0482, Hard: 0.2555, Soft: 1.8410 Acc: 83.10% LR: 0.000230
+2026-04-10 22:29:59,284 - INFO - Epoch [106/200] Train Loss: 1.1267, Train Acc: 0.84%, Val Loss: 0.4431, Val Acc: 82.71%, Val AUC: 97.23%, Val F1: 81.53%
+2026-04-10 22:30:23,177 - INFO - Epoch [107] Batch [0/28] Loss: 1.0580, Hard: 0.3112, Soft: 1.8048 Acc: 95.00% LR: 0.000226
+2026-04-10 22:30:26,123 - INFO - Epoch [107] Batch [10/28] Loss: 1.2960, Hard: 0.7622, Soft: 1.8297 Acc: 87.73% LR: 0.000226
+2026-04-10 22:30:29,061 - INFO - Epoch [107] Batch [20/28] Loss: 1.0659, Hard: 0.2734, Soft: 1.8585 Acc: 87.14% LR: 0.000226
+2026-04-10 22:30:58,926 - INFO - Epoch [107/200] Train Loss: 1.0983, Train Acc: 0.87%, Val Loss: 0.4344, Val Acc: 84.04%, Val AUC: 96.87%, Val F1: 83.09%
+2026-04-10 22:31:22,286 - INFO - Epoch [108] Batch [0/28] Loss: 1.0161, Hard: 0.2283, Soft: 1.8039 Acc: 95.00% LR: 0.000223
+2026-04-10 22:31:25,073 - INFO - Epoch [108] Batch [10/28] Loss: 1.0319, Hard: 0.2120, Soft: 1.8518 Acc: 87.73% LR: 0.000223
+2026-04-10 22:31:27,902 - INFO - Epoch [108] Batch [20/28] Loss: 1.0696, Hard: 0.2462, Soft: 1.8929 Acc: 89.05% LR: 0.000223
+2026-04-10 22:31:57,397 - INFO - Epoch [108/200] Train Loss: 1.0984, Train Acc: 0.88%, Val Loss: 0.4237, Val Acc: 84.31%, Val AUC: 97.00%, Val F1: 83.17%
+2026-04-10 22:32:19,699 - INFO - Epoch [109] Batch [0/28] Loss: 1.0937, Hard: 0.3402, Soft: 1.8472 Acc: 85.00% LR: 0.000219
+2026-04-10 22:32:22,106 - INFO - Epoch [109] Batch [10/28] Loss: 1.1910, Hard: 0.4838, Soft: 1.8983 Acc: 86.36% LR: 0.000219
+2026-04-10 22:32:24,487 - INFO - Epoch [109] Batch [20/28] Loss: 1.1129, Hard: 0.4121, Soft: 1.8137 Acc: 87.86% LR: 0.000219
+2026-04-10 22:32:52,168 - INFO - Epoch [109/200] Train Loss: 1.0876, Train Acc: 0.89%, Val Loss: 0.4686, Val Acc: 83.24%, Val AUC: 97.13%, Val F1: 82.71%
+2026-04-10 22:33:15,140 - INFO - Epoch [110] Batch [0/28] Loss: 1.1671, Hard: 0.4716, Soft: 1.8626 Acc: 85.00% LR: 0.000215
+2026-04-10 22:33:17,951 - INFO - Epoch [110] Batch [10/28] Loss: 1.0436, Hard: 0.2395, Soft: 1.8478 Acc: 86.36% LR: 0.000215
+2026-04-10 22:33:20,742 - INFO - Epoch [110] Batch [20/28] Loss: 1.1496, Hard: 0.4756, Soft: 1.8235 Acc: 86.43% LR: 0.000215
+2026-04-10 22:33:50,389 - INFO - Epoch [110/200] Train Loss: 1.1025, Train Acc: 0.87%, Val Loss: 0.4248, Val Acc: 86.17%, Val AUC: 96.97%, Val F1: 85.60%
+2026-04-10 22:33:50,389 - INFO - Best model saved! Acc: 86.17%, AUC: 96.97%, F1: 85.60%
+2026-04-10 22:33:50,483 - INFO - Checkpoint saved at epoch 110
+2026-04-10 22:34:13,604 - INFO - Epoch [111] Batch [0/28] Loss: 1.0913, Hard: 0.3844, Soft: 1.7983 Acc: 85.00% LR: 0.000211
+2026-04-10 22:34:16,596 - INFO - Epoch [111] Batch [10/28] Loss: 1.1472, Hard: 0.4710, Soft: 1.8234 Acc: 90.45% LR: 0.000211
+2026-04-10 22:34:19,393 - INFO - Epoch [111] Batch [20/28] Loss: 1.2414, Hard: 0.6724, Soft: 1.8104 Acc: 89.05% LR: 0.000211
+2026-04-10 22:34:47,732 - INFO - Epoch [111/200] Train Loss: 1.0904, Train Acc: 0.88%, Val Loss: 0.4911, Val Acc: 81.12%, Val AUC: 96.42%, Val F1: 79.21%
+2026-04-10 22:35:10,643 - INFO - Epoch [112] Batch [0/28] Loss: 1.0432, Hard: 0.2296, Soft: 1.8567 Acc: 90.00% LR: 0.000207
+2026-04-10 22:35:13,118 - INFO - Epoch [112] Batch [10/28] Loss: 1.1858, Hard: 0.4871, Soft: 1.8845 Acc: 89.55% LR: 0.000207
+2026-04-10 22:35:15,940 - INFO - Epoch [112] Batch [20/28] Loss: 1.1844, Hard: 0.4379, Soft: 1.9308 Acc: 88.57% LR: 0.000207
+2026-04-10 22:35:44,931 - INFO - Epoch [112/200] Train Loss: 1.0894, Train Acc: 0.89%, Val Loss: 0.5049, Val Acc: 79.12%, Val AUC: 96.97%, Val F1: 78.33%
+2026-04-10 22:36:08,551 - INFO - Epoch [113] Batch [0/28] Loss: 1.0865, Hard: 0.3238, Soft: 1.8492 Acc: 90.00% LR: 0.000203
+2026-04-10 22:36:11,454 - INFO - Epoch [113] Batch [10/28] Loss: 1.1298, Hard: 0.4372, Soft: 1.8224 Acc: 85.00% LR: 0.000203
+2026-04-10 22:36:14,883 - INFO - Epoch [113] Batch [20/28] Loss: 1.0348, Hard: 0.2397, Soft: 1.8298 Acc: 85.00% LR: 0.000203
+2026-04-10 22:36:44,769 - INFO - Epoch [113/200] Train Loss: 1.1091, Train Acc: 0.86%, Val Loss: 0.4696, Val Acc: 82.85%, Val AUC: 97.02%, Val F1: 82.05%
+2026-04-10 22:37:08,323 - INFO - Epoch [114] Batch [0/28] Loss: 0.9982, Hard: 0.2036, Soft: 1.7927 Acc: 90.00% LR: 0.000199
+2026-04-10 22:37:11,242 - INFO - Epoch [114] Batch [10/28] Loss: 1.0666, Hard: 0.3331, Soft: 1.8000 Acc: 86.36% LR: 0.000199
+2026-04-10 22:37:14,495 - INFO - Epoch [114] Batch [20/28] Loss: 1.2604, Hard: 0.6589, Soft: 1.8619 Acc: 86.19% LR: 0.000199
+2026-04-10 22:37:44,459 - INFO - Epoch [114/200] Train Loss: 1.1237, Train Acc: 0.85%, Val Loss: 0.4307, Val Acc: 84.44%, Val AUC: 97.16%, Val F1: 83.83%
+2026-04-10 22:38:07,647 - INFO - Epoch [115] Batch [0/28] Loss: 1.0251, Hard: 0.2075, Soft: 1.8427 Acc: 95.00% LR: 0.000195
+2026-04-10 22:38:10,064 - INFO - Epoch [115] Batch [10/28] Loss: 1.0869, Hard: 0.2931, Soft: 1.8807 Acc: 85.45% LR: 0.000195
+2026-04-10 22:38:12,860 - INFO - Epoch [115] Batch [20/28] Loss: 1.0924, Hard: 0.3622, Soft: 1.8225 Acc: 83.33% LR: 0.000195
+2026-04-10 22:38:43,115 - INFO - Epoch [115/200] Train Loss: 1.1172, Train Acc: 0.84%, Val Loss: 0.4907, Val Acc: 81.78%, Val AUC: 96.92%, Val F1: 81.69%
+2026-04-10 22:39:06,975 - INFO - Epoch [116] Batch [0/28] Loss: 1.1978, Hard: 0.4926, Soft: 1.9029 Acc: 80.00% LR: 0.000192
+2026-04-10 22:39:09,887 - INFO - Epoch [116] Batch [10/28] Loss: 1.1391, Hard: 0.4220, Soft: 1.8562 Acc: 84.09% LR: 0.000192
+2026-04-10 22:39:12,264 - INFO - Epoch [116] Batch [20/28] Loss: 1.1408, Hard: 0.4784, Soft: 1.8032 Acc: 84.76% LR: 0.000192
+2026-04-10 22:39:40,727 - INFO - Epoch [116/200] Train Loss: 1.1231, Train Acc: 0.84%, Val Loss: 0.4194, Val Acc: 84.18%, Val AUC: 97.02%, Val F1: 82.96%
+2026-04-10 22:40:04,012 - INFO - Epoch [117] Batch [0/28] Loss: 1.0932, Hard: 0.3077, Soft: 1.8788 Acc: 80.00% LR: 0.000188
+2026-04-10 22:40:07,408 - INFO - Epoch [117] Batch [10/28] Loss: 1.0390, Hard: 0.2297, Soft: 1.8483 Acc: 85.91% LR: 0.000188
+2026-04-10 22:40:10,535 - INFO - Epoch [117] Batch [20/28] Loss: 1.0444, Hard: 0.2360, Soft: 1.8528 Acc: 86.90% LR: 0.000188
+2026-04-10 22:40:40,296 - INFO - Epoch [117/200] Train Loss: 1.0822, Train Acc: 0.87%, Val Loss: 0.4476, Val Acc: 83.38%, Val AUC: 97.06%, Val F1: 83.00%
+2026-04-10 22:41:03,903 - INFO - Epoch [118] Batch [0/28] Loss: 1.1531, Hard: 0.5102, Soft: 1.7959 Acc: 85.00% LR: 0.000184
+2026-04-10 22:41:06,875 - INFO - Epoch [118] Batch [10/28] Loss: 1.0878, Hard: 0.3560, Soft: 1.8196 Acc: 83.64% LR: 0.000184
+2026-04-10 22:41:09,834 - INFO - Epoch [118] Batch [20/28] Loss: 1.1219, Hard: 0.3853, Soft: 1.8586 Acc: 85.00% LR: 0.000184
+2026-04-10 22:41:38,595 - INFO - Epoch [118/200] Train Loss: 1.1029, Train Acc: 0.85%, Val Loss: 0.4448, Val Acc: 83.51%, Val AUC: 96.88%, Val F1: 82.71%
+2026-04-10 22:42:02,059 - INFO - Epoch [119] Batch [0/28] Loss: 1.0846, Hard: 0.3228, Soft: 1.8463 Acc: 90.00% LR: 0.000180
+2026-04-10 22:42:04,949 - INFO - Epoch [119] Batch [10/28] Loss: 1.1375, Hard: 0.4211, Soft: 1.8539 Acc: 90.45% LR: 0.000180
+2026-04-10 22:42:07,791 - INFO - Epoch [119] Batch [20/28] Loss: 1.0465, Hard: 0.2133, Soft: 1.8796 Acc: 87.86% LR: 0.000180
+2026-04-10 22:42:37,220 - INFO - Epoch [119/200] Train Loss: 1.0771, Train Acc: 0.88%, Val Loss: 0.4808, Val Acc: 82.71%, Val AUC: 96.87%, Val F1: 82.08%
+2026-04-10 22:43:01,586 - INFO - Epoch [120] Batch [0/28] Loss: 1.1643, Hard: 0.4868, Soft: 1.8419 Acc: 85.00% LR: 0.000176
+2026-04-10 22:43:04,399 - INFO - Epoch [120] Batch [10/28] Loss: 1.0582, Hard: 0.2636, Soft: 1.8527 Acc: 86.82% LR: 0.000176
+2026-04-10 22:43:07,191 - INFO - Epoch [120] Batch [20/28] Loss: 1.1440, Hard: 0.4571, Soft: 1.8310 Acc: 85.71% LR: 0.000176
+2026-04-10 22:43:36,576 - INFO - Epoch [120/200] Train Loss: 1.0776, Train Acc: 0.88%, Val Loss: 0.4488, Val Acc: 83.11%, Val AUC: 97.11%, Val F1: 81.68%
+2026-04-10 22:43:36,638 - INFO - Checkpoint saved at epoch 120
+2026-04-10 22:43:59,801 - INFO - Epoch [121] Batch [0/28] Loss: 1.0349, Hard: 0.2668, Soft: 1.8030 Acc: 90.00% LR: 0.000173
+2026-04-10 22:44:02,599 - INFO - Epoch [121] Batch [10/28] Loss: 0.9832, Hard: 0.1170, Soft: 1.8495 Acc: 91.36% LR: 0.000173
+2026-04-10 22:44:05,386 - INFO - Epoch [121] Batch [20/28] Loss: 1.0309, Hard: 0.2473, Soft: 1.8145 Acc: 90.71% LR: 0.000173
+2026-04-10 22:44:34,085 - INFO - Epoch [121/200] Train Loss: 1.0529, Train Acc: 0.91%, Val Loss: 0.4964, Val Acc: 81.38%, Val AUC: 96.65%, Val F1: 80.96%
+2026-04-10 22:44:58,150 - INFO - Epoch [122] Batch [0/28] Loss: 1.0790, Hard: 0.2846, Soft: 1.8735 Acc: 90.00% LR: 0.000169
+2026-04-10 22:45:00,474 - INFO - Epoch [122] Batch [10/28] Loss: 1.1565, Hard: 0.4046, Soft: 1.9083 Acc: 88.64% LR: 0.000169
+2026-04-10 22:45:02,813 - INFO - Epoch [122] Batch [20/28] Loss: 1.0325, Hard: 0.1802, Soft: 1.8849 Acc: 87.62% LR: 0.000169
+2026-04-10 22:45:31,458 - INFO - Epoch [122/200] Train Loss: 1.0821, Train Acc: 0.88%, Val Loss: 0.4593, Val Acc: 82.85%, Val AUC: 96.69%, Val F1: 81.56%
+2026-04-10 22:45:55,277 - INFO - Epoch [123] Batch [0/28] Loss: 1.2287, Hard: 0.6467, Soft: 1.8107 Acc: 80.00% LR: 0.000165
+2026-04-10 22:45:58,111 - INFO - Epoch [123] Batch [10/28] Loss: 1.1315, Hard: 0.4555, Soft: 1.8075 Acc: 89.09% LR: 0.000165
+2026-04-10 22:46:01,052 - INFO - Epoch [123] Batch [20/28] Loss: 1.0441, Hard: 0.2424, Soft: 1.8459 Acc: 88.57% LR: 0.000165
+2026-04-10 22:46:30,522 - INFO - Epoch [123/200] Train Loss: 1.0873, Train Acc: 0.89%, Val Loss: 0.4053, Val Acc: 85.11%, Val AUC: 97.40%, Val F1: 84.07%
+2026-04-10 22:46:53,527 - INFO - Epoch [124] Batch [0/28] Loss: 1.0140, Hard: 0.2317, Soft: 1.7962 Acc: 95.00% LR: 0.000162
+2026-04-10 22:46:56,370 - INFO - Epoch [124] Batch [10/28] Loss: 1.1436, Hard: 0.4041, Soft: 1.8831 Acc: 86.36% LR: 0.000162
+2026-04-10 22:46:59,616 - INFO - Epoch [124] Batch [20/28] Loss: 1.0317, Hard: 0.2758, Soft: 1.7875 Acc: 88.57% LR: 0.000162
+2026-04-10 22:47:29,350 - INFO - Epoch [124/200] Train Loss: 1.0911, Train Acc: 0.87%, Val Loss: 0.3685, Val Acc: 86.30%, Val AUC: 97.87%, Val F1: 85.90%
+2026-04-10 22:47:29,350 - INFO - Best model saved! Acc: 86.30%, AUC: 97.87%, F1: 85.90%
+2026-04-10 22:47:53,199 - INFO - Epoch [125] Batch [0/28] Loss: 1.2050, Hard: 0.5774, Soft: 1.8326 Acc: 75.00% LR: 0.000158
+2026-04-10 22:47:56,126 - INFO - Epoch [125] Batch [10/28] Loss: 1.0618, Hard: 0.2826, Soft: 1.8410 Acc: 86.82% LR: 0.000158
+2026-04-10 22:47:59,409 - INFO - Epoch [125] Batch [20/28] Loss: 1.2244, Hard: 0.6433, Soft: 1.8055 Acc: 85.95% LR: 0.000158
+2026-04-10 22:48:30,154 - INFO - Epoch [125/200] Train Loss: 1.1076, Train Acc: 0.86%, Val Loss: 0.4680, Val Acc: 83.11%, Val AUC: 96.72%, Val F1: 82.21%
+2026-04-10 22:48:54,142 - INFO - Epoch [126] Batch [0/28] Loss: 1.1322, Hard: 0.4589, Soft: 1.8056 Acc: 90.00% LR: 0.000154
+2026-04-10 22:48:56,673 - INFO - Epoch [126] Batch [10/28] Loss: 1.0787, Hard: 0.3146, Soft: 1.8428 Acc: 85.91% LR: 0.000154
+2026-04-10 22:48:59,506 - INFO - Epoch [126] Batch [20/28] Loss: 1.2687, Hard: 0.7169, Soft: 1.8206 Acc: 85.48% LR: 0.000154
+2026-04-10 22:49:28,771 - INFO - Epoch [126/200] Train Loss: 1.0949, Train Acc: 0.86%, Val Loss: 0.4107, Val Acc: 85.24%, Val AUC: 97.38%, Val F1: 84.96%
+2026-04-10 22:49:52,393 - INFO - Epoch [127] Batch [0/28] Loss: 1.0837, Hard: 0.3597, Soft: 1.8076 Acc: 80.00% LR: 0.000151
+2026-04-10 22:49:55,849 - INFO - Epoch [127] Batch [10/28] Loss: 0.9928, Hard: 0.1755, Soft: 1.8102 Acc: 81.36% LR: 0.000151
+2026-04-10 22:49:59,317 - INFO - Epoch [127] Batch [20/28] Loss: 1.0600, Hard: 0.2748, Soft: 1.8451 Acc: 84.76% LR: 0.000151
+2026-04-10 22:50:30,144 - INFO - Epoch [127/200] Train Loss: 1.0915, Train Acc: 0.87%, Val Loss: 0.4333, Val Acc: 83.11%, Val AUC: 97.40%, Val F1: 81.97%
+2026-04-10 22:50:53,205 - INFO - Epoch [128] Batch [0/28] Loss: 1.0513, Hard: 0.2766, Soft: 1.8260 Acc: 85.00% LR: 0.000147
+2026-04-10 22:50:56,694 - INFO - Epoch [128] Batch [10/28] Loss: 1.1109, Hard: 0.4037, Soft: 1.8180 Acc: 84.55% LR: 0.000147
+2026-04-10 22:51:00,190 - INFO - Epoch [128] Batch [20/28] Loss: 1.1060, Hard: 0.3296, Soft: 1.8825 Acc: 85.24% LR: 0.000147
+2026-04-10 22:51:30,142 - INFO - Epoch [128/200] Train Loss: 1.0991, Train Acc: 0.86%, Val Loss: 0.4101, Val Acc: 85.77%, Val AUC: 97.42%, Val F1: 84.90%
+2026-04-10 22:51:54,080 - INFO - Epoch [129] Batch [0/28] Loss: 1.4773, Hard: 1.0984, Soft: 1.8562 Acc: 65.00% LR: 0.000144
+2026-04-10 22:51:57,534 - INFO - Epoch [129] Batch [10/28] Loss: 0.9955, Hard: 0.1512, Soft: 1.8398 Acc: 85.91% LR: 0.000144
+2026-04-10 22:52:01,049 - INFO - Epoch [129] Batch [20/28] Loss: 1.0684, Hard: 0.2834, Soft: 1.8534 Acc: 87.38% LR: 0.000144
+2026-04-10 22:52:30,854 - INFO - Epoch [129/200] Train Loss: 1.0936, Train Acc: 0.87%, Val Loss: 0.4232, Val Acc: 82.71%, Val AUC: 97.35%, Val F1: 81.71%
+2026-04-10 22:52:54,858 - INFO - Epoch [130] Batch [0/28] Loss: 1.1592, Hard: 0.5023, Soft: 1.8161 Acc: 80.00% LR: 0.000140
+2026-04-10 22:52:58,280 - INFO - Epoch [130] Batch [10/28] Loss: 1.0813, Hard: 0.3297, Soft: 1.8329 Acc: 90.00% LR: 0.000140
+2026-04-10 22:53:01,660 - INFO - Epoch [130] Batch [20/28] Loss: 1.0821, Hard: 0.3339, Soft: 1.8302 Acc: 89.29% LR: 0.000140
+2026-04-10 22:53:30,615 - INFO - Epoch [130/200] Train Loss: 1.0765, Train Acc: 0.88%, Val Loss: 0.4056, Val Acc: 85.77%, Val AUC: 97.35%, Val F1: 85.06%
+2026-04-10 22:53:30,685 - INFO - Checkpoint saved at epoch 130
+2026-04-10 22:53:54,854 - INFO - Epoch [131] Batch [0/28] Loss: 1.0339, Hard: 0.2642, Soft: 1.8036 Acc: 90.00% LR: 0.000137
+2026-04-10 22:53:58,427 - INFO - Epoch [131] Batch [10/28] Loss: 1.2381, Hard: 0.6422, Soft: 1.8341 Acc: 87.73% LR: 0.000137
+2026-04-10 22:54:01,589 - INFO - Epoch [131] Batch [20/28] Loss: 1.0076, Hard: 0.2147, Soft: 1.8005 Acc: 89.29% LR: 0.000137
+2026-04-10 22:54:31,590 - INFO - Epoch [131/200] Train Loss: 1.0723, Train Acc: 0.89%, Val Loss: 0.3822, Val Acc: 86.57%, Val AUC: 97.69%, Val F1: 85.72%
+2026-04-10 22:54:31,590 - INFO - Best model saved! Acc: 86.57%, AUC: 97.69%, F1: 85.72%
+2026-04-10 22:54:55,181 - INFO - Epoch [132] Batch [0/28] Loss: 1.2857, Hard: 0.7614, Soft: 1.8099 Acc: 75.00% LR: 0.000133
+2026-04-10 22:54:57,575 - INFO - Epoch [132] Batch [10/28] Loss: 1.0936, Hard: 0.3740, Soft: 1.8133 Acc: 86.36% LR: 0.000133
+2026-04-10 22:54:59,919 - INFO - Epoch [132] Batch [20/28] Loss: 1.0871, Hard: 0.3666, Soft: 1.8077 Acc: 86.43% LR: 0.000133
+2026-04-10 22:55:28,877 - INFO - Epoch [132/200] Train Loss: 1.0780, Train Acc: 0.86%, Val Loss: 0.4231, Val Acc: 84.84%, Val AUC: 97.15%, Val F1: 84.52%
+2026-04-10 22:55:52,946 - INFO - Epoch [133] Batch [0/28] Loss: 0.9703, Hard: 0.1420, Soft: 1.7986 Acc: 95.00% LR: 0.000130
+2026-04-10 22:55:55,330 - INFO - Epoch [133] Batch [10/28] Loss: 1.0372, Hard: 0.2478, Soft: 1.8266 Acc: 90.91% LR: 0.000130
+2026-04-10 22:55:57,671 - INFO - Epoch [133] Batch [20/28] Loss: 0.9543, Hard: 0.1070, Soft: 1.8016 Acc: 90.00% LR: 0.000130
+2026-04-10 22:56:26,558 - INFO - Epoch [133/200] Train Loss: 1.0576, Train Acc: 0.90%, Val Loss: 0.4007, Val Acc: 86.17%, Val AUC: 97.37%, Val F1: 85.26%
+2026-04-10 22:56:49,066 - INFO - Epoch [134] Batch [0/28] Loss: 1.0719, Hard: 0.3143, Soft: 1.8295 Acc: 85.00% LR: 0.000126
+2026-04-10 22:56:52,045 - INFO - Epoch [134] Batch [10/28] Loss: 1.0669, Hard: 0.3101, Soft: 1.8237 Acc: 85.91% LR: 0.000126
+2026-04-10 22:56:54,962 - INFO - Epoch [134] Batch [20/28] Loss: 1.0171, Hard: 0.1678, Soft: 1.8664 Acc: 88.57% LR: 0.000126
+2026-04-10 22:57:23,327 - INFO - Epoch [134/200] Train Loss: 1.0636, Train Acc: 0.89%, Val Loss: 0.4059, Val Acc: 85.37%, Val AUC: 97.48%, Val F1: 84.61%
+2026-04-10 22:57:47,055 - INFO - Epoch [135] Batch [0/28] Loss: 1.0661, Hard: 0.2555, Soft: 1.8767 Acc: 90.00% LR: 0.000123
+2026-04-10 22:57:49,980 - INFO - Epoch [135] Batch [10/28] Loss: 0.9824, Hard: 0.1529, Soft: 1.8119 Acc: 91.36% LR: 0.000123
+2026-04-10 22:57:52,820 - INFO - Epoch [135] Batch [20/28] Loss: 0.9820, Hard: 0.1185, Soft: 1.8454 Acc: 89.29% LR: 0.000123
+2026-04-10 22:58:22,752 - INFO - Epoch [135/200] Train Loss: 1.0606, Train Acc: 0.89%, Val Loss: 0.4834, Val Acc: 82.58%, Val AUC: 96.74%, Val F1: 81.24%
+2026-04-10 22:58:47,219 - INFO - Epoch [136] Batch [0/28] Loss: 1.0550, Hard: 0.3169, Soft: 1.7930 Acc: 85.00% LR: 0.000119
+2026-04-10 22:58:50,125 - INFO - Epoch [136] Batch [10/28] Loss: 0.9983, Hard: 0.1862, Soft: 1.8104 Acc: 87.27% LR: 0.000119
+2026-04-10 22:58:53,042 - INFO - Epoch [136] Batch [20/28] Loss: 1.0368, Hard: 0.2775, Soft: 1.7960 Acc: 88.57% LR: 0.000119
+2026-04-10 22:59:22,476 - INFO - Epoch [136/200] Train Loss: 1.0767, Train Acc: 0.88%, Val Loss: 0.4185, Val Acc: 84.57%, Val AUC: 97.20%, Val F1: 83.88%
+2026-04-10 22:59:46,287 - INFO - Epoch [137] Batch [0/28] Loss: 1.0083, Hard: 0.1147, Soft: 1.9020 Acc: 100.00% LR: 0.000116
+2026-04-10 22:59:49,234 - INFO - Epoch [137] Batch [10/28] Loss: 1.1631, Hard: 0.4698, Soft: 1.8564 Acc: 87.73% LR: 0.000116
+2026-04-10 22:59:52,103 - INFO - Epoch [137] Batch [20/28] Loss: 1.0259, Hard: 0.2124, Soft: 1.8394 Acc: 88.10% LR: 0.000116
+2026-04-10 23:00:22,471 - INFO - Epoch [137/200] Train Loss: 1.0845, Train Acc: 0.88%, Val Loss: 0.3922, Val Acc: 85.51%, Val AUC: 97.56%, Val F1: 84.73%
+2026-04-10 23:00:46,615 - INFO - Epoch [138] Batch [0/28] Loss: 0.9516, Hard: 0.1014, Soft: 1.8019 Acc: 100.00% LR: 0.000113
+2026-04-10 23:00:49,702 - INFO - Epoch [138] Batch [10/28] Loss: 1.1085, Hard: 0.3695, Soft: 1.8475 Acc: 87.27% LR: 0.000113
+2026-04-10 23:00:53,140 - INFO - Epoch [138] Batch [20/28] Loss: 1.2581, Hard: 0.6074, Soft: 1.9088 Acc: 86.90% LR: 0.000113
+2026-04-10 23:01:22,840 - INFO - Epoch [138/200] Train Loss: 1.1001, Train Acc: 0.87%, Val Loss: 0.3598, Val Acc: 84.97%, Val AUC: 97.82%, Val F1: 84.36%
+2026-04-10 23:01:47,457 - INFO - Epoch [139] Batch [0/28] Loss: 1.2574, Hard: 0.6905, Soft: 1.8243 Acc: 70.00% LR: 0.000109
+2026-04-10 23:01:50,066 - INFO - Epoch [139] Batch [10/28] Loss: 1.2143, Hard: 0.6088, Soft: 1.8197 Acc: 85.00% LR: 0.000109
+2026-04-10 23:01:52,793 - INFO - Epoch [139] Batch [20/28] Loss: 1.0588, Hard: 0.3047, Soft: 1.8128 Acc: 84.52% LR: 0.000109
+2026-04-10 23:02:22,490 - INFO - Epoch [139/200] Train Loss: 1.0852, Train Acc: 0.87%, Val Loss: 0.3799, Val Acc: 86.57%, Val AUC: 97.74%, Val F1: 86.08%
+2026-04-10 23:02:45,209 - INFO - Epoch [140] Batch [0/28] Loss: 1.0049, Hard: 0.1458, Soft: 1.8640 Acc: 95.00% LR: 0.000106
+2026-04-10 23:02:47,974 - INFO - Epoch [140] Batch [10/28] Loss: 1.0590, Hard: 0.2558, Soft: 1.8622 Acc: 88.64% LR: 0.000106
+2026-04-10 23:02:50,806 - INFO - Epoch [140] Batch [20/28] Loss: 1.0370, Hard: 0.2627, Soft: 1.8113 Acc: 89.29% LR: 0.000106
+2026-04-10 23:03:20,158 - INFO - Epoch [140/200] Train Loss: 1.0723, Train Acc: 0.90%, Val Loss: 0.4454, Val Acc: 84.31%, Val AUC: 97.14%, Val F1: 84.21%
+2026-04-10 23:03:20,212 - INFO - Checkpoint saved at epoch 140
+2026-04-10 23:03:42,944 - INFO - Epoch [141] Batch [0/28] Loss: 0.9796, Hard: 0.1490, Soft: 1.8101 Acc: 100.00% LR: 0.000103
+2026-04-10 23:03:45,785 - INFO - Epoch [141] Batch [10/28] Loss: 0.9827, Hard: 0.1419, Soft: 1.8235 Acc: 92.27% LR: 0.000103
+2026-04-10 23:03:48,653 - INFO - Epoch [141] Batch [20/28] Loss: 1.0855, Hard: 0.3021, Soft: 1.8689 Acc: 90.24% LR: 0.000103
+2026-04-10 23:04:17,118 - INFO - Epoch [141/200] Train Loss: 1.0589, Train Acc: 0.89%, Val Loss: 0.3625, Val Acc: 85.37%, Val AUC: 97.73%, Val F1: 84.76%
+2026-04-10 23:04:41,066 - INFO - Epoch [142] Batch [0/28] Loss: 1.0928, Hard: 0.3525, Soft: 1.8331 Acc: 85.00% LR: 0.000100
+2026-04-10 23:04:44,028 - INFO - Epoch [142] Batch [10/28] Loss: 0.9915, Hard: 0.1561, Soft: 1.8269 Acc: 89.09% LR: 0.000100
+2026-04-10 23:04:46,700 - INFO - Epoch [142] Batch [20/28] Loss: 0.9547, Hard: 0.1017, Soft: 1.8076 Acc: 90.00% LR: 0.000100
+2026-04-10 23:05:16,153 - INFO - Epoch [142/200] Train Loss: 1.0638, Train Acc: 0.89%, Val Loss: 0.3993, Val Acc: 84.97%, Val AUC: 97.60%, Val F1: 84.16%
+2026-04-10 23:05:39,255 - INFO - Epoch [143] Batch [0/28] Loss: 0.9910, Hard: 0.1213, Soft: 1.8607 Acc: 95.00% LR: 0.000097
+2026-04-10 23:05:41,552 - INFO - Epoch [143] Batch [10/28] Loss: 0.9870, Hard: 0.1964, Soft: 1.7775 Acc: 90.91% LR: 0.000097
+2026-04-10 23:05:43,845 - INFO - Epoch [143] Batch [20/28] Loss: 1.0409, Hard: 0.2549, Soft: 1.8268 Acc: 90.24% LR: 0.000097
+2026-04-10 23:06:12,898 - INFO - Epoch [143/200] Train Loss: 1.0431, Train Acc: 0.90%, Val Loss: 0.4472, Val Acc: 83.91%, Val AUC: 97.11%, Val F1: 83.08%
+2026-04-10 23:06:36,227 - INFO - Epoch [144] Batch [0/28] Loss: 1.1710, Hard: 0.4794, Soft: 1.8627 Acc: 80.00% LR: 0.000094
+2026-04-10 23:06:39,031 - INFO - Epoch [144] Batch [10/28] Loss: 1.0401, Hard: 0.2385, Soft: 1.8417 Acc: 90.00% LR: 0.000094
+2026-04-10 23:06:42,118 - INFO - Epoch [144] Batch [20/28] Loss: 1.2642, Hard: 0.7041, Soft: 1.8243 Acc: 90.71% LR: 0.000094
+2026-04-10 23:07:12,280 - INFO - Epoch [144/200] Train Loss: 1.0599, Train Acc: 0.91%, Val Loss: 0.3620, Val Acc: 86.84%, Val AUC: 97.68%, Val F1: 86.07%
+2026-04-10 23:07:12,280 - INFO - Best model saved! Acc: 86.84%, AUC: 97.68%, F1: 86.07%
+2026-04-10 23:07:36,648 - INFO - Epoch [145] Batch [0/28] Loss: 1.0129, Hard: 0.1358, Soft: 1.8900 Acc: 95.00% LR: 0.000091
+2026-04-10 23:07:39,751 - INFO - Epoch [145] Batch [10/28] Loss: 1.0909, Hard: 0.3056, Soft: 1.8761 Acc: 88.64% LR: 0.000091
+2026-04-10 23:07:43,156 - INFO - Epoch [145] Batch [20/28] Loss: 1.0280, Hard: 0.1968, Soft: 1.8593 Acc: 90.24% LR: 0.000091
+2026-04-10 23:08:13,426 - INFO - Epoch [145/200] Train Loss: 1.0620, Train Acc: 0.90%, Val Loss: 0.4137, Val Acc: 86.44%, Val AUC: 97.60%, Val F1: 85.74%
+2026-04-10 23:08:37,223 - INFO - Epoch [146] Batch [0/28] Loss: 1.0389, Hard: 0.2797, Soft: 1.7982 Acc: 90.00% LR: 0.000088
+2026-04-10 23:08:40,542 - INFO - Epoch [146] Batch [10/28] Loss: 1.0887, Hard: 0.3637, Soft: 1.8136 Acc: 90.00% LR: 0.000088
+2026-04-10 23:08:43,935 - INFO - Epoch [146] Batch [20/28] Loss: 1.0533, Hard: 0.2625, Soft: 1.8441 Acc: 89.05% LR: 0.000088
+2026-04-10 23:09:13,927 - INFO - Epoch [146/200] Train Loss: 1.0512, Train Acc: 0.89%, Val Loss: 0.4055, Val Acc: 84.97%, Val AUC: 97.48%, Val F1: 84.28%
+2026-04-10 23:09:37,849 - INFO - Epoch [147] Batch [0/28] Loss: 1.0655, Hard: 0.3345, Soft: 1.7965 Acc: 85.00% LR: 0.000085
+2026-04-10 23:09:41,252 - INFO - Epoch [147] Batch [10/28] Loss: 0.9415, Hard: 0.0817, Soft: 1.8013 Acc: 89.09% LR: 0.000085
+2026-04-10 23:09:44,666 - INFO - Epoch [147] Batch [20/28] Loss: 1.0772, Hard: 0.3584, Soft: 1.7960 Acc: 90.00% LR: 0.000085
+2026-04-10 23:10:15,753 - INFO - Epoch [147/200] Train Loss: 1.0441, Train Acc: 0.90%, Val Loss: 0.3617, Val Acc: 86.04%, Val AUC: 97.84%, Val F1: 85.53%
+2026-04-10 23:10:39,876 - INFO - Epoch [148] Batch [0/28] Loss: 1.0867, Hard: 0.3294, Soft: 1.8439 Acc: 90.00% LR: 0.000082
+2026-04-10 23:10:43,019 - INFO - Epoch [148] Batch [10/28] Loss: 1.0831, Hard: 0.3477, Soft: 1.8186 Acc: 89.55% LR: 0.000082
+2026-04-10 23:10:45,918 - INFO - Epoch [148] Batch [20/28] Loss: 1.0153, Hard: 0.2059, Soft: 1.8247 Acc: 90.00% LR: 0.000082
+2026-04-10 23:11:15,975 - INFO - Epoch [148/200] Train Loss: 1.0549, Train Acc: 0.89%, Val Loss: 0.4125, Val Acc: 85.64%, Val AUC: 97.72%, Val F1: 85.37%
+2026-04-10 23:11:38,982 - INFO - Epoch [149] Batch [0/28] Loss: 1.0976, Hard: 0.3603, Soft: 1.8349 Acc: 85.00% LR: 0.000079
+2026-04-10 23:11:41,320 - INFO - Epoch [149] Batch [10/28] Loss: 1.0290, Hard: 0.2702, Soft: 1.7878 Acc: 88.64% LR: 0.000079
+2026-04-10 23:11:43,601 - INFO - Epoch [149] Batch [20/28] Loss: 0.9903, Hard: 0.1701, Soft: 1.8105 Acc: 88.10% LR: 0.000079
+2026-04-10 23:12:11,628 - INFO - Epoch [149/200] Train Loss: 1.0664, Train Acc: 0.88%, Val Loss: 0.3886, Val Acc: 85.51%, Val AUC: 97.61%, Val F1: 84.57%
+2026-04-10 23:12:34,958 - INFO - Epoch [150] Batch [0/28] Loss: 0.9925, Hard: 0.1003, Soft: 1.8847 Acc: 100.00% LR: 0.000076
+2026-04-10 23:12:37,829 - INFO - Epoch [150] Batch [10/28] Loss: 1.0843, Hard: 0.3410, Soft: 1.8277 Acc: 88.18% LR: 0.000076
+2026-04-10 23:12:40,750 - INFO - Epoch [150] Batch [20/28] Loss: 1.0348, Hard: 0.2026, Soft: 1.8670 Acc: 91.19% LR: 0.000076
+2026-04-10 23:13:10,759 - INFO - Epoch [150/200] Train Loss: 1.0653, Train Acc: 0.89%, Val Loss: 0.3948, Val Acc: 85.77%, Val AUC: 97.54%, Val F1: 85.38%
+2026-04-10 23:13:10,824 - INFO - Checkpoint saved at epoch 150
+2026-04-10 23:13:34,396 - INFO - Epoch [151] Batch [0/28] Loss: 1.1126, Hard: 0.3739, Soft: 1.8513 Acc: 80.00% LR: 0.000073
+2026-04-10 23:13:37,171 - INFO - Epoch [151] Batch [10/28] Loss: 1.0287, Hard: 0.2488, Soft: 1.8086 Acc: 90.91% LR: 0.000073
+2026-04-10 23:13:40,127 - INFO - Epoch [151] Batch [20/28] Loss: 1.0018, Hard: 0.1815, Soft: 1.8220 Acc: 90.95% LR: 0.000073
+2026-04-10 23:14:09,821 - INFO - Epoch [151/200] Train Loss: 1.0467, Train Acc: 0.92%, Val Loss: 0.3668, Val Acc: 86.30%, Val AUC: 97.76%, Val F1: 85.68%
+2026-04-10 23:14:33,818 - INFO - Epoch [152] Batch [0/28] Loss: 1.0436, Hard: 0.2506, Soft: 1.8365 Acc: 85.00% LR: 0.000070
+2026-04-10 23:14:36,590 - INFO - Epoch [152] Batch [10/28] Loss: 1.1095, Hard: 0.3763, Soft: 1.8426 Acc: 92.73% LR: 0.000070
+2026-04-10 23:14:39,419 - INFO - Epoch [152] Batch [20/28] Loss: 1.1161, Hard: 0.3709, Soft: 1.8613 Acc: 90.00% LR: 0.000070
+2026-04-10 23:15:09,492 - INFO - Epoch [152/200] Train Loss: 1.0433, Train Acc: 0.91%, Val Loss: 0.3679, Val Acc: 86.57%, Val AUC: 97.78%, Val F1: 85.46%
+2026-04-10 23:15:33,453 - INFO - Epoch [153] Batch [0/28] Loss: 1.0649, Hard: 0.2769, Soft: 1.8528 Acc: 85.00% LR: 0.000068
+2026-04-10 23:15:35,784 - INFO - Epoch [153] Batch [10/28] Loss: 1.1483, Hard: 0.4909, Soft: 1.8057 Acc: 88.18% LR: 0.000068
+2026-04-10 23:15:38,084 - INFO - Epoch [153] Batch [20/28] Loss: 1.0282, Hard: 0.2280, Soft: 1.8283 Acc: 89.29% LR: 0.000068
+2026-04-10 23:16:05,346 - INFO - Epoch [153/200] Train Loss: 1.0510, Train Acc: 0.90%, Val Loss: 0.4099, Val Acc: 84.84%, Val AUC: 97.49%, Val F1: 83.45%
+2026-04-10 23:16:27,545 - INFO - Epoch [154] Batch [0/28] Loss: 1.0619, Hard: 0.2992, Soft: 1.8246 Acc: 90.00% LR: 0.000065
+2026-04-10 23:16:30,303 - INFO - Epoch [154] Batch [10/28] Loss: 1.0446, Hard: 0.2696, Soft: 1.8196 Acc: 90.00% LR: 0.000065
+2026-04-10 23:16:33,049 - INFO - Epoch [154] Batch [20/28] Loss: 0.9329, Hard: 0.0710, Soft: 1.7948 Acc: 89.52% LR: 0.000065
+2026-04-10 23:17:01,624 - INFO - Epoch [154/200] Train Loss: 1.0463, Train Acc: 0.90%, Val Loss: 0.3921, Val Acc: 85.24%, Val AUC: 97.52%, Val F1: 84.10%
+2026-04-10 23:17:24,535 - INFO - Epoch [155] Batch [0/28] Loss: 0.9130, Hard: 0.0404, Soft: 1.7857 Acc: 100.00% LR: 0.000062
+2026-04-10 23:17:27,289 - INFO - Epoch [155] Batch [10/28] Loss: 1.0957, Hard: 0.3513, Soft: 1.8401 Acc: 93.64% LR: 0.000062
+2026-04-10 23:17:30,137 - INFO - Epoch [155] Batch [20/28] Loss: 0.9845, Hard: 0.1170, Soft: 1.8521 Acc: 92.38% LR: 0.000062
+2026-04-10 23:17:59,617 - INFO - Epoch [155/200] Train Loss: 1.0374, Train Acc: 0.92%, Val Loss: 0.3774, Val Acc: 85.51%, Val AUC: 97.69%, Val F1: 85.27%
+2026-04-10 23:18:23,377 - INFO - Epoch [156] Batch [0/28] Loss: 1.1764, Hard: 0.5135, Soft: 1.8393 Acc: 90.00% LR: 0.000060
+2026-04-10 23:18:26,334 - INFO - Epoch [156] Batch [10/28] Loss: 0.9845, Hard: 0.1442, Soft: 1.8247 Acc: 89.55% LR: 0.000060
+2026-04-10 23:18:29,196 - INFO - Epoch [156] Batch [20/28] Loss: 0.9621, Hard: 0.0882, Soft: 1.8361 Acc: 90.00% LR: 0.000060
+2026-04-10 23:18:58,386 - INFO - Epoch [156/200] Train Loss: 1.0443, Train Acc: 0.91%, Val Loss: 0.3662, Val Acc: 86.84%, Val AUC: 97.78%, Val F1: 86.15%
+2026-04-10 23:19:21,646 - INFO - Epoch [157] Batch [0/28] Loss: 0.9957, Hard: 0.0966, Soft: 1.8947 Acc: 100.00% LR: 0.000057
+2026-04-10 23:19:24,432 - INFO - Epoch [157] Batch [10/28] Loss: 0.9917, Hard: 0.1438, Soft: 1.8397 Acc: 88.18% LR: 0.000057
+2026-04-10 23:19:27,771 - INFO - Epoch [157] Batch [20/28] Loss: 1.1052, Hard: 0.4155, Soft: 1.7949 Acc: 88.10% LR: 0.000057
+2026-04-10 23:19:57,023 - INFO - Epoch [157/200] Train Loss: 1.0539, Train Acc: 0.89%, Val Loss: 0.3544, Val Acc: 86.97%, Val AUC: 98.03%, Val F1: 86.04%
+2026-04-10 23:19:57,024 - INFO - Best model saved! Acc: 86.97%, AUC: 98.03%, F1: 86.04%
+2026-04-10 23:20:19,725 - INFO - Epoch [158] Batch [0/28] Loss: 1.0551, Hard: 0.2763, Soft: 1.8340 Acc: 90.00% LR: 0.000055
+2026-04-10 23:20:23,247 - INFO - Epoch [158] Batch [10/28] Loss: 1.0302, Hard: 0.1740, Soft: 1.8865 Acc: 87.27% LR: 0.000055
+2026-04-10 23:20:26,335 - INFO - Epoch [158] Batch [20/28] Loss: 1.1093, Hard: 0.3793, Soft: 1.8393 Acc: 88.81% LR: 0.000055
+2026-04-10 23:20:56,397 - INFO - Epoch [158/200] Train Loss: 1.0558, Train Acc: 0.89%, Val Loss: 0.3590, Val Acc: 85.90%, Val AUC: 97.83%, Val F1: 85.00%
+2026-04-10 23:21:19,793 - INFO - Epoch [159] Batch [0/28] Loss: 1.0232, Hard: 0.2685, Soft: 1.7780 Acc: 85.00% LR: 0.000052
+2026-04-10 23:21:22,427 - INFO - Epoch [159] Batch [10/28] Loss: 1.1060, Hard: 0.4009, Soft: 1.8111 Acc: 88.18% LR: 0.000052
+2026-04-10 23:21:24,750 - INFO - Epoch [159] Batch [20/28] Loss: 1.0337, Hard: 0.1248, Soft: 1.9426 Acc: 90.95% LR: 0.000052
+2026-04-10 23:21:55,259 - INFO - Epoch [159/200] Train Loss: 1.0649, Train Acc: 0.89%, Val Loss: 0.3982, Val Acc: 86.04%, Val AUC: 97.69%, Val F1: 85.54%
+2026-04-10 23:22:18,455 - INFO - Epoch [160] Batch [0/28] Loss: 1.0164, Hard: 0.1836, Soft: 1.8493 Acc: 95.00% LR: 0.000050
+2026-04-10 23:22:21,071 - INFO - Epoch [160] Batch [10/28] Loss: 0.9926, Hard: 0.1823, Soft: 1.8029 Acc: 90.45% LR: 0.000050
+2026-04-10 23:22:23,475 - INFO - Epoch [160] Batch [20/28] Loss: 1.0633, Hard: 0.3096, Soft: 1.8170 Acc: 90.95% LR: 0.000050
+2026-04-10 23:22:52,132 - INFO - Epoch [160/200] Train Loss: 1.0476, Train Acc: 0.91%, Val Loss: 0.3769, Val Acc: 86.17%, Val AUC: 97.67%, Val F1: 85.37%
+2026-04-10 23:22:52,206 - INFO - Checkpoint saved at epoch 160
+2026-04-10 23:23:15,569 - INFO - Epoch [161] Batch [0/28] Loss: 1.0580, Hard: 0.2946, Soft: 1.8214 Acc: 95.00% LR: 0.000048
+2026-04-10 23:23:18,605 - INFO - Epoch [161] Batch [10/28] Loss: 0.9834, Hard: 0.1248, Soft: 1.8419 Acc: 90.45% LR: 0.000048
+2026-04-10 23:23:21,579 - INFO - Epoch [161] Batch [20/28] Loss: 1.1459, Hard: 0.4004, Soft: 1.8913 Acc: 88.81% LR: 0.000048
+2026-04-10 23:23:51,535 - INFO - Epoch [161/200] Train Loss: 1.0601, Train Acc: 0.89%, Val Loss: 0.3555, Val Acc: 87.10%, Val AUC: 97.99%, Val F1: 86.52%
+2026-04-10 23:23:51,535 - INFO - Best model saved! Acc: 87.10%, AUC: 97.99%, F1: 86.52%
+2026-04-10 23:24:15,877 - INFO - Epoch [162] Batch [0/28] Loss: 1.0581, Hard: 0.3005, Soft: 1.8157 Acc: 85.00% LR: 0.000045
+2026-04-10 23:24:18,733 - INFO - Epoch [162] Batch [10/28] Loss: 1.0550, Hard: 0.2566, Soft: 1.8535 Acc: 90.91% LR: 0.000045
+2026-04-10 23:24:21,745 - INFO - Epoch [162] Batch [20/28] Loss: 1.0041, Hard: 0.2131, Soft: 1.7951 Acc: 91.90% LR: 0.000045
+2026-04-10 23:24:51,028 - INFO - Epoch [162/200] Train Loss: 1.0325, Train Acc: 0.91%, Val Loss: 0.3534, Val Acc: 86.57%, Val AUC: 97.92%, Val F1: 85.91%
+2026-04-10 23:25:14,222 - INFO - Epoch [163] Batch [0/28] Loss: 1.1361, Hard: 0.4448, Soft: 1.8275 Acc: 80.00% LR: 0.000043
+2026-04-10 23:25:17,152 - INFO - Epoch [163] Batch [10/28] Loss: 1.0151, Hard: 0.2052, Soft: 1.8249 Acc: 93.18% LR: 0.000043
+2026-04-10 23:25:20,045 - INFO - Epoch [163] Batch [20/28] Loss: 0.9549, Hard: 0.0776, Soft: 1.8322 Acc: 92.62% LR: 0.000043
+2026-04-10 23:25:50,391 - INFO - Epoch [163/200] Train Loss: 1.0418, Train Acc: 0.91%, Val Loss: 0.3660, Val Acc: 87.23%, Val AUC: 97.72%, Val F1: 86.48%
+2026-04-10 23:25:50,391 - INFO - Best model saved! Acc: 87.23%, AUC: 97.72%, F1: 86.48%
+2026-04-10 23:26:14,518 - INFO - Epoch [164] Batch [0/28] Loss: 1.0557, Hard: 0.3065, Soft: 1.8049 Acc: 85.00% LR: 0.000041
+2026-04-10 23:26:17,496 - INFO - Epoch [164] Batch [10/28] Loss: 1.1183, Hard: 0.3733, Soft: 1.8633 Acc: 90.00% LR: 0.000041
+2026-04-10 23:26:20,427 - INFO - Epoch [164] Batch [20/28] Loss: 1.0197, Hard: 0.2198, Soft: 1.8195 Acc: 90.48% LR: 0.000041
+2026-04-10 23:26:49,967 - INFO - Epoch [164/200] Train Loss: 1.0320, Train Acc: 0.90%, Val Loss: 0.3752, Val Acc: 86.44%, Val AUC: 97.60%, Val F1: 85.51%
+2026-04-10 23:27:13,837 - INFO - Epoch [165] Batch [0/28] Loss: 0.9896, Hard: 0.1834, Soft: 1.7959 Acc: 95.00% LR: 0.000039
+2026-04-10 23:27:16,573 - INFO - Epoch [165] Batch [10/28] Loss: 1.0103, Hard: 0.1734, Soft: 1.8473 Acc: 90.45% LR: 0.000039
+2026-04-10 23:27:19,392 - INFO - Epoch [165] Batch [20/28] Loss: 1.1165, Hard: 0.3789, Soft: 1.8540 Acc: 90.71% LR: 0.000039
+2026-04-10 23:27:48,913 - INFO - Epoch [165/200] Train Loss: 1.0503, Train Acc: 0.90%, Val Loss: 0.3668, Val Acc: 86.30%, Val AUC: 97.81%, Val F1: 85.27%
+2026-04-10 23:28:13,284 - INFO - Epoch [166] Batch [0/28] Loss: 1.1250, Hard: 0.4314, Soft: 1.8186 Acc: 80.00% LR: 0.000037
+2026-04-10 23:28:15,617 - INFO - Epoch [166] Batch [10/28] Loss: 1.1542, Hard: 0.4985, Soft: 1.8099 Acc: 86.82% LR: 0.000037
+2026-04-10 23:28:17,901 - INFO - Epoch [166] Batch [20/28] Loss: 1.0073, Hard: 0.1972, Soft: 1.8174 Acc: 88.57% LR: 0.000037
+2026-04-10 23:28:46,907 - INFO - Epoch [166/200] Train Loss: 1.0660, Train Acc: 0.88%, Val Loss: 0.3704, Val Acc: 85.90%, Val AUC: 97.72%, Val F1: 85.07%
+2026-04-10 23:29:10,596 - INFO - Epoch [167] Batch [0/28] Loss: 1.0216, Hard: 0.2309, Soft: 1.8123 Acc: 95.00% LR: 0.000035
+2026-04-10 23:29:13,336 - INFO - Epoch [167] Batch [10/28] Loss: 0.9740, Hard: 0.1535, Soft: 1.7944 Acc: 93.64% LR: 0.000035
+2026-04-10 23:29:16,409 - INFO - Epoch [167] Batch [20/28] Loss: 1.0798, Hard: 0.3226, Soft: 1.8371 Acc: 91.43% LR: 0.000035
+2026-04-10 23:29:46,725 - INFO - Epoch [167/200] Train Loss: 1.0487, Train Acc: 0.91%, Val Loss: 0.4060, Val Acc: 85.77%, Val AUC: 97.50%, Val F1: 84.83%
+2026-04-10 23:30:11,072 - INFO - Epoch [168] Batch [0/28] Loss: 0.9464, Hard: 0.0560, Soft: 1.8369 Acc: 100.00% LR: 0.000033
+2026-04-10 23:30:14,314 - INFO - Epoch [168] Batch [10/28] Loss: 1.0007, Hard: 0.1732, Soft: 1.8283 Acc: 90.00% LR: 0.000033
+2026-04-10 23:30:17,784 - INFO - Epoch [168] Batch [20/28] Loss: 1.0576, Hard: 0.2831, Soft: 1.8322 Acc: 90.00% LR: 0.000033
+2026-04-10 23:30:48,249 - INFO - Epoch [168/200] Train Loss: 1.0388, Train Acc: 0.91%, Val Loss: 0.3657, Val Acc: 86.97%, Val AUC: 97.76%, Val F1: 85.93%
+2026-04-10 23:31:11,908 - INFO - Epoch [169] Batch [0/28] Loss: 1.0070, Hard: 0.1169, Soft: 1.8970 Acc: 100.00% LR: 0.000031
+2026-04-10 23:31:15,389 - INFO - Epoch [169] Batch [10/28] Loss: 0.9908, Hard: 0.1373, Soft: 1.8443 Acc: 90.00% LR: 0.000031
+2026-04-10 23:31:18,544 - INFO - Epoch [169] Batch [20/28] Loss: 1.1182, Hard: 0.3643, Soft: 1.8721 Acc: 90.24% LR: 0.000031
+2026-04-10 23:31:49,133 - INFO - Epoch [169/200] Train Loss: 1.0296, Train Acc: 0.91%, Val Loss: 0.3477, Val Acc: 87.10%, Val AUC: 97.97%, Val F1: 86.20%
+2026-04-10 23:32:13,017 - INFO - Epoch [170] Batch [0/28] Loss: 1.0762, Hard: 0.2942, Soft: 1.8583 Acc: 85.00% LR: 0.000029
+2026-04-10 23:32:15,360 - INFO - Epoch [170] Batch [10/28] Loss: 1.1447, Hard: 0.5045, Soft: 1.7849 Acc: 89.55% LR: 0.000029
+2026-04-10 23:32:17,713 - INFO - Epoch [170] Batch [20/28] Loss: 0.9946, Hard: 0.1841, Soft: 1.8052 Acc: 91.43% LR: 0.000029
+2026-04-10 23:32:46,655 - INFO - Epoch [170/200] Train Loss: 1.0221, Train Acc: 0.92%, Val Loss: 0.3639, Val Acc: 86.44%, Val AUC: 97.83%, Val F1: 85.51%
+2026-04-10 23:32:46,704 - INFO - Checkpoint saved at epoch 170
+2026-04-10 23:33:10,686 - INFO - Epoch [171] Batch [0/28] Loss: 0.9683, Hard: 0.1369, Soft: 1.7998 Acc: 95.00% LR: 0.000027
+2026-04-10 23:33:13,460 - INFO - Epoch [171] Batch [10/28] Loss: 1.0907, Hard: 0.3023, Soft: 1.8792 Acc: 91.82% LR: 0.000027
+2026-04-10 23:33:16,206 - INFO - Epoch [171] Batch [20/28] Loss: 1.0523, Hard: 0.2495, Soft: 1.8550 Acc: 91.43% LR: 0.000027
+2026-04-10 23:33:45,753 - INFO - Epoch [171/200] Train Loss: 1.0405, Train Acc: 0.91%, Val Loss: 0.3513, Val Acc: 87.23%, Val AUC: 97.89%, Val F1: 86.35%
+2026-04-10 23:34:08,868 - INFO - Epoch [172] Batch [0/28] Loss: 0.9503, Hard: 0.0423, Soft: 1.8583 Acc: 100.00% LR: 0.000025
+2026-04-10 23:34:11,774 - INFO - Epoch [172] Batch [10/28] Loss: 1.0095, Hard: 0.1687, Soft: 1.8503 Acc: 90.91% LR: 0.000025
+2026-04-10 23:34:14,680 - INFO - Epoch [172] Batch [20/28] Loss: 1.1372, Hard: 0.4933, Soft: 1.7811 Acc: 89.76% LR: 0.000025
+2026-04-10 23:34:43,430 - INFO - Epoch [172/200] Train Loss: 1.0514, Train Acc: 0.90%, Val Loss: 0.3655, Val Acc: 86.44%, Val AUC: 97.79%, Val F1: 85.67%
+2026-04-10 23:35:06,441 - INFO - Epoch [173] Batch [0/28] Loss: 1.2278, Hard: 0.6378, Soft: 1.8179 Acc: 65.00% LR: 0.000024
+2026-04-10 23:35:09,242 - INFO - Epoch [173] Batch [10/28] Loss: 1.0110, Hard: 0.1992, Soft: 1.8229 Acc: 88.64% LR: 0.000024
+2026-04-10 23:35:12,087 - INFO - Epoch [173] Batch [20/28] Loss: 1.2441, Hard: 0.6563, Soft: 1.8319 Acc: 90.71% LR: 0.000024
+2026-04-10 23:35:41,156 - INFO - Epoch [173/200] Train Loss: 1.0427, Train Acc: 0.91%, Val Loss: 0.3812, Val Acc: 86.17%, Val AUC: 97.78%, Val F1: 85.22%
+2026-04-10 23:36:04,043 - INFO - Epoch [174] Batch [0/28] Loss: 1.0444, Hard: 0.2900, Soft: 1.7989 Acc: 80.00% LR: 0.000022
+2026-04-10 23:36:06,810 - INFO - Epoch [174] Batch [10/28] Loss: 0.9872, Hard: 0.1395, Soft: 1.8349 Acc: 92.73% LR: 0.000022
+2026-04-10 23:36:09,549 - INFO - Epoch [174] Batch [20/28] Loss: 0.9382, Hard: 0.1112, Soft: 1.7652 Acc: 90.24% LR: 0.000022
+2026-04-10 23:36:37,729 - INFO - Epoch [174/200] Train Loss: 1.0273, Train Acc: 0.91%, Val Loss: 0.3667, Val Acc: 86.70%, Val AUC: 97.77%, Val F1: 85.65%
+2026-04-10 23:37:00,788 - INFO - Epoch [175] Batch [0/28] Loss: 0.9924, Hard: 0.1196, Soft: 1.8651 Acc: 100.00% LR: 0.000021
+2026-04-10 23:37:03,726 - INFO - Epoch [175] Batch [10/28] Loss: 0.9810, Hard: 0.1540, Soft: 1.8081 Acc: 91.36% LR: 0.000021
+2026-04-10 23:37:06,563 - INFO - Epoch [175] Batch [20/28] Loss: 1.1230, Hard: 0.4413, Soft: 1.8047 Acc: 90.71% LR: 0.000021
+2026-04-10 23:37:34,524 - INFO - Epoch [175/200] Train Loss: 1.0434, Train Acc: 0.91%, Val Loss: 0.3602, Val Acc: 87.23%, Val AUC: 97.83%, Val F1: 86.27%
+2026-04-10 23:37:57,578 - INFO - Epoch [176] Batch [0/28] Loss: 1.1737, Hard: 0.4626, Soft: 1.8847 Acc: 80.00% LR: 0.000019
+2026-04-10 23:37:59,884 - INFO - Epoch [176] Batch [10/28] Loss: 0.9718, Hard: 0.0973, Soft: 1.8463 Acc: 87.27% LR: 0.000019
+2026-04-10 23:38:02,178 - INFO - Epoch [176] Batch [20/28] Loss: 1.0169, Hard: 0.1477, Soft: 1.8860 Acc: 88.10% LR: 0.000019
+2026-04-10 23:38:31,626 - INFO - Epoch [176/200] Train Loss: 1.0566, Train Acc: 0.89%, Val Loss: 0.3608, Val Acc: 86.44%, Val AUC: 97.85%, Val F1: 85.68%
+2026-04-10 23:38:55,779 - INFO - Epoch [177] Batch [0/28] Loss: 1.0289, Hard: 0.2051, Soft: 1.8527 Acc: 90.00% LR: 0.000018
+2026-04-10 23:38:58,075 - INFO - Epoch [177] Batch [10/28] Loss: 1.0644, Hard: 0.2413, Soft: 1.8875 Acc: 91.36% LR: 0.000018
+2026-04-10 23:39:00,357 - INFO - Epoch [177] Batch [20/28] Loss: 1.0134, Hard: 0.1186, Soft: 1.9083 Acc: 90.71% LR: 0.000018
+2026-04-10 23:39:29,308 - INFO - Epoch [177/200] Train Loss: 1.0443, Train Acc: 0.91%, Val Loss: 0.3501, Val Acc: 87.10%, Val AUC: 97.95%, Val F1: 86.15%
+2026-04-10 23:39:53,160 - INFO - Epoch [178] Batch [0/28] Loss: 0.9960, Hard: 0.1813, Soft: 1.8107 Acc: 90.00% LR: 0.000016
+2026-04-10 23:39:55,979 - INFO - Epoch [178] Batch [10/28] Loss: 1.0281, Hard: 0.2477, Soft: 1.8085 Acc: 89.09% LR: 0.000016
+2026-04-10 23:39:58,843 - INFO - Epoch [178] Batch [20/28] Loss: 0.9723, Hard: 0.1406, Soft: 1.8041 Acc: 89.52% LR: 0.000016
+2026-04-10 23:40:29,097 - INFO - Epoch [178/200] Train Loss: 1.0303, Train Acc: 0.91%, Val Loss: 0.3521, Val Acc: 87.10%, Val AUC: 97.95%, Val F1: 86.51%
+2026-04-10 23:40:53,574 - INFO - Epoch [179] Batch [0/28] Loss: 1.0211, Hard: 0.2156, Soft: 1.8267 Acc: 90.00% LR: 0.000015
+2026-04-10 23:40:56,510 - INFO - Epoch [179] Batch [10/28] Loss: 0.9986, Hard: 0.1975, Soft: 1.7997 Acc: 88.64% LR: 0.000015
+2026-04-10 23:41:00,110 - INFO - Epoch [179] Batch [20/28] Loss: 1.1490, Hard: 0.4534, Soft: 1.8446 Acc: 90.24% LR: 0.000015
+2026-04-10 23:41:28,952 - INFO - Epoch [179/200] Train Loss: 1.0531, Train Acc: 0.91%, Val Loss: 0.3585, Val Acc: 87.37%, Val AUC: 97.91%, Val F1: 86.56%
+2026-04-10 23:41:28,952 - INFO - Best model saved! Acc: 87.37%, AUC: 97.91%, F1: 86.56%
+2026-04-10 23:41:53,270 - INFO - Epoch [180] Batch [0/28] Loss: 1.1100, Hard: 0.3732, Soft: 1.8467 Acc: 85.00% LR: 0.000013
+2026-04-10 23:41:56,160 - INFO - Epoch [180] Batch [10/28] Loss: 0.9420, Hard: 0.0694, Soft: 1.8147 Acc: 90.45% LR: 0.000013
+2026-04-10 23:41:59,749 - INFO - Epoch [180] Batch [20/28] Loss: 0.9787, Hard: 0.1388, Soft: 1.8187 Acc: 91.43% LR: 0.000013
+2026-04-10 23:42:28,769 - INFO - Epoch [180/200] Train Loss: 1.0312, Train Acc: 0.92%, Val Loss: 0.3585, Val Acc: 87.10%, Val AUC: 97.92%, Val F1: 86.45%
+2026-04-10 23:42:28,839 - INFO - Checkpoint saved at epoch 180
+2026-04-10 23:42:50,847 - INFO - Epoch [181] Batch [0/28] Loss: 1.0793, Hard: 0.3175, Soft: 1.8411 Acc: 80.00% LR: 0.000012
+2026-04-10 23:42:54,143 - INFO - Epoch [181] Batch [10/28] Loss: 0.9982, Hard: 0.1716, Soft: 1.8249 Acc: 90.00% LR: 0.000012
+2026-04-10 23:42:57,653 - INFO - Epoch [181] Batch [20/28] Loss: 0.9787, Hard: 0.1226, Soft: 1.8348 Acc: 90.71% LR: 0.000012
+2026-04-10 23:43:26,063 - INFO - Epoch [181/200] Train Loss: 1.0332, Train Acc: 0.90%, Val Loss: 0.3737, Val Acc: 86.70%, Val AUC: 97.75%, Val F1: 85.96%
+2026-04-10 23:43:49,002 - INFO - Epoch [182] Batch [0/28] Loss: 1.1196, Hard: 0.3950, Soft: 1.8441 Acc: 80.00% LR: 0.000011
+2026-04-10 23:43:51,978 - INFO - Epoch [182] Batch [10/28] Loss: 0.9750, Hard: 0.0732, Soft: 1.8769 Acc: 91.82% LR: 0.000011
+2026-04-10 23:43:55,445 - INFO - Epoch [182] Batch [20/28] Loss: 1.3512, Hard: 0.8668, Soft: 1.8356 Acc: 90.71% LR: 0.000011
+2026-04-10 23:44:25,726 - INFO - Epoch [182/200] Train Loss: 1.0360, Train Acc: 0.91%, Val Loss: 0.3638, Val Acc: 86.84%, Val AUC: 97.84%, Val F1: 86.03%
+2026-04-10 23:44:49,455 - INFO - Epoch [183] Batch [0/28] Loss: 1.1203, Hard: 0.3668, Soft: 1.8738 Acc: 80.00% LR: 0.000010
+2026-04-10 23:44:52,370 - INFO - Epoch [183] Batch [10/28] Loss: 1.0447, Hard: 0.2808, Soft: 1.8087 Acc: 90.00% LR: 0.000010
+2026-04-10 23:44:55,243 - INFO - Epoch [183] Batch [20/28] Loss: 0.9673, Hard: 0.1164, Soft: 1.8183 Acc: 91.43% LR: 0.000010
+2026-04-10 23:45:24,394 - INFO - Epoch [183/200] Train Loss: 1.0370, Train Acc: 0.91%, Val Loss: 0.3653, Val Acc: 87.23%, Val AUC: 97.83%, Val F1: 86.44%
+2026-04-10 23:45:47,445 - INFO - Epoch [184] Batch [0/28] Loss: 1.1038, Hard: 0.3755, Soft: 1.8321 Acc: 85.00% LR: 0.000009
+2026-04-10 23:45:50,984 - INFO - Epoch [184] Batch [10/28] Loss: 0.9815, Hard: 0.1451, Soft: 1.8178 Acc: 93.18% LR: 0.000009
+2026-04-10 23:45:54,568 - INFO - Epoch [184] Batch [20/28] Loss: 1.1353, Hard: 0.4494, Soft: 1.8213 Acc: 91.19% LR: 0.000009
+2026-04-10 23:46:24,475 - INFO - Epoch [184/200] Train Loss: 1.0452, Train Acc: 0.91%, Val Loss: 0.3644, Val Acc: 87.10%, Val AUC: 97.83%, Val F1: 86.05%
+2026-04-10 23:46:47,968 - INFO - Epoch [185] Batch [0/28] Loss: 1.0892, Hard: 0.3191, Soft: 1.8593 Acc: 85.00% LR: 0.000008
+2026-04-10 23:46:51,473 - INFO - Epoch [185] Batch [10/28] Loss: 1.0535, Hard: 0.2770, Soft: 1.8300 Acc: 90.91% LR: 0.000008
+2026-04-10 23:46:55,029 - INFO - Epoch [185] Batch [20/28] Loss: 1.0226, Hard: 0.1566, Soft: 1.8886 Acc: 90.71% LR: 0.000008
+2026-04-10 23:47:25,182 - INFO - Epoch [185/200] Train Loss: 1.0393, Train Acc: 0.91%, Val Loss: 0.3746, Val Acc: 86.84%, Val AUC: 97.70%, Val F1: 85.95%
+2026-04-10 23:47:48,829 - INFO - Epoch [186] Batch [0/28] Loss: 1.0406, Hard: 0.2740, Soft: 1.8071 Acc: 80.00% LR: 0.000007
+2026-04-10 23:47:52,199 - INFO - Epoch [186] Batch [10/28] Loss: 1.0340, Hard: 0.2642, Soft: 1.8039 Acc: 91.36% LR: 0.000007
+2026-04-10 23:47:55,188 - INFO - Epoch [186] Batch [20/28] Loss: 0.9894, Hard: 0.1221, Soft: 1.8568 Acc: 90.48% LR: 0.000007
+2026-04-10 23:48:24,897 - INFO - Epoch [186/200] Train Loss: 1.0374, Train Acc: 0.90%, Val Loss: 0.3654, Val Acc: 86.44%, Val AUC: 97.84%, Val F1: 85.63%
+2026-04-10 23:48:48,835 - INFO - Epoch [187] Batch [0/28] Loss: 1.0393, Hard: 0.2769, Soft: 1.8017 Acc: 85.00% LR: 0.000006
+2026-04-10 23:48:51,603 - INFO - Epoch [187] Batch [10/28] Loss: 1.0241, Hard: 0.2052, Soft: 1.8430 Acc: 89.55% LR: 0.000006
+2026-04-10 23:48:54,316 - INFO - Epoch [187] Batch [20/28] Loss: 1.1822, Hard: 0.5084, Soft: 1.8560 Acc: 90.00% LR: 0.000006
+2026-04-10 23:49:22,052 - INFO - Epoch [187/200] Train Loss: 1.0409, Train Acc: 0.90%, Val Loss: 0.3839, Val Acc: 86.84%, Val AUC: 97.73%, Val F1: 85.89%
+2026-04-10 23:49:45,301 - INFO - Epoch [188] Batch [0/28] Loss: 0.9844, Hard: 0.1177, Soft: 1.8512 Acc: 100.00% LR: 0.000005
+2026-04-10 23:49:48,741 - INFO - Epoch [188] Batch [10/28] Loss: 1.0097, Hard: 0.1473, Soft: 1.8721 Acc: 91.36% LR: 0.000005
+2026-04-10 23:49:52,065 - INFO - Epoch [188] Batch [20/28] Loss: 1.0109, Hard: 0.1513, Soft: 1.8704 Acc: 91.90% LR: 0.000005
+2026-04-10 23:50:21,803 - INFO - Epoch [188/200] Train Loss: 1.0201, Train Acc: 0.92%, Val Loss: 0.3721, Val Acc: 86.97%, Val AUC: 97.78%, Val F1: 86.28%
+2026-04-10 23:50:44,788 - INFO - Epoch [189] Batch [0/28] Loss: 1.1135, Hard: 0.4243, Soft: 1.8027 Acc: 85.00% LR: 0.000004
+2026-04-10 23:50:48,294 - INFO - Epoch [189] Batch [10/28] Loss: 0.9942, Hard: 0.1325, Soft: 1.8560 Acc: 91.36% LR: 0.000004
+2026-04-10 23:50:51,162 - INFO - Epoch [189] Batch [20/28] Loss: 1.0019, Hard: 0.1727, Soft: 1.8312 Acc: 91.67% LR: 0.000004
+2026-04-10 23:51:20,172 - INFO - Epoch [189/200] Train Loss: 1.0464, Train Acc: 0.91%, Val Loss: 0.3713, Val Acc: 86.97%, Val AUC: 97.77%, Val F1: 86.18%
+2026-04-10 23:51:43,947 - INFO - Epoch [190] Batch [0/28] Loss: 0.9311, Hard: 0.0541, Soft: 1.8081 Acc: 100.00% LR: 0.000004
+2026-04-10 23:51:46,884 - INFO - Epoch [190] Batch [10/28] Loss: 1.0247, Hard: 0.2231, Soft: 1.8263 Acc: 91.82% LR: 0.000004
+2026-04-10 23:51:49,729 - INFO - Epoch [190] Batch [20/28] Loss: 1.0779, Hard: 0.2709, Soft: 1.8849 Acc: 91.67% LR: 0.000004
+2026-04-10 23:52:18,496 - INFO - Epoch [190/200] Train Loss: 1.0496, Train Acc: 0.92%, Val Loss: 0.3399, Val Acc: 87.10%, Val AUC: 98.03%, Val F1: 86.60%
+2026-04-10 23:52:18,545 - INFO - Checkpoint saved at epoch 190
+2026-04-10 23:52:41,704 - INFO - Epoch [191] Batch [0/28] Loss: 0.9817, Hard: 0.1775, Soft: 1.7858 Acc: 95.00% LR: 0.000003
+2026-04-10 23:52:44,643 - INFO - Epoch [191] Batch [10/28] Loss: 0.9635, Hard: 0.1233, Soft: 1.8038 Acc: 91.82% LR: 0.000003
+2026-04-10 23:52:47,644 - INFO - Epoch [191] Batch [20/28] Loss: 1.0857, Hard: 0.3350, Soft: 1.8363 Acc: 92.38% LR: 0.000003
+2026-04-10 23:53:16,360 - INFO - Epoch [191/200] Train Loss: 1.0415, Train Acc: 0.92%, Val Loss: 0.3392, Val Acc: 87.37%, Val AUC: 98.03%, Val F1: 86.77%
+2026-04-10 23:53:39,593 - INFO - Epoch [192] Batch [0/28] Loss: 1.0727, Hard: 0.3232, Soft: 1.8222 Acc: 85.00% LR: 0.000002
+2026-04-10 23:53:42,452 - INFO - Epoch [192] Batch [10/28] Loss: 0.9948, Hard: 0.1530, Soft: 1.8365 Acc: 90.91% LR: 0.000002
+2026-04-10 23:53:45,206 - INFO - Epoch [192] Batch [20/28] Loss: 1.0162, Hard: 0.2050, Soft: 1.8274 Acc: 91.90% LR: 0.000002
+2026-04-10 23:54:14,771 - INFO - Epoch [192/200] Train Loss: 1.0243, Train Acc: 0.93%, Val Loss: 0.3443, Val Acc: 87.23%, Val AUC: 97.96%, Val F1: 86.30%
+2026-04-10 23:54:38,798 - INFO - Epoch [193] Batch [0/28] Loss: 1.0468, Hard: 0.2740, Soft: 1.8196 Acc: 90.00% LR: 0.000002
+2026-04-10 23:54:41,124 - INFO - Epoch [193] Batch [10/28] Loss: 1.0009, Hard: 0.1666, Soft: 1.8352 Acc: 92.27% LR: 0.000002
+2026-04-10 23:54:43,437 - INFO - Epoch [193] Batch [20/28] Loss: 1.0441, Hard: 0.2578, Soft: 1.8305 Acc: 92.86% LR: 0.000002
+2026-04-10 23:55:12,769 - INFO - Epoch [193/200] Train Loss: 1.0187, Train Acc: 0.92%, Val Loss: 0.3606, Val Acc: 87.23%, Val AUC: 97.90%, Val F1: 86.50%
+2026-04-10 23:55:36,592 - INFO - Epoch [194] Batch [0/28] Loss: 1.0851, Hard: 0.3587, Soft: 1.8116 Acc: 90.00% LR: 0.000002
+2026-04-10 23:55:38,959 - INFO - Epoch [194] Batch [10/28] Loss: 0.9925, Hard: 0.1682, Soft: 1.8167 Acc: 90.91% LR: 0.000002
+2026-04-10 23:55:41,321 - INFO - Epoch [194] Batch [20/28] Loss: 0.9868, Hard: 0.1768, Soft: 1.7968 Acc: 90.71% LR: 0.000002
+2026-04-10 23:56:11,444 - INFO - Epoch [194/200] Train Loss: 1.0234, Train Acc: 0.91%, Val Loss: 0.3509, Val Acc: 87.63%, Val AUC: 97.92%, Val F1: 86.65%
+2026-04-10 23:56:11,444 - INFO - Best model saved! Acc: 87.63%, AUC: 97.92%, F1: 86.65%
+2026-04-10 23:56:34,039 - INFO - Epoch [195] Batch [0/28] Loss: 1.0140, Hard: 0.1522, Soft: 1.8759 Acc: 95.00% LR: 0.000001
+2026-04-10 23:56:36,923 - INFO - Epoch [195] Batch [10/28] Loss: 1.0910, Hard: 0.3339, Soft: 1.8482 Acc: 91.36% LR: 0.000001
+2026-04-10 23:56:39,777 - INFO - Epoch [195] Batch [20/28] Loss: 1.0674, Hard: 0.2899, Soft: 1.8448 Acc: 91.43% LR: 0.000001
+2026-04-10 23:57:08,948 - INFO - Epoch [195/200] Train Loss: 1.0296, Train Acc: 0.91%, Val Loss: 0.3733, Val Acc: 86.84%, Val AUC: 97.72%, Val F1: 85.74%
+2026-04-10 23:57:32,644 - INFO - Epoch [196] Batch [0/28] Loss: 1.0436, Hard: 0.2615, Soft: 1.8258 Acc: 90.00% LR: 0.000001
+2026-04-10 23:57:35,618 - INFO - Epoch [196] Batch [10/28] Loss: 1.1200, Hard: 0.4143, Soft: 1.8256 Acc: 87.73% LR: 0.000001
+2026-04-10 23:57:38,489 - INFO - Epoch [196] Batch [20/28] Loss: 0.9410, Hard: 0.0833, Soft: 1.7986 Acc: 90.00% LR: 0.000001
+2026-04-10 23:58:07,295 - INFO - Epoch [196/200] Train Loss: 1.0341, Train Acc: 0.90%, Val Loss: 0.3555, Val Acc: 87.63%, Val AUC: 97.91%, Val F1: 87.07%
+2026-04-10 23:58:30,704 - INFO - Epoch [197] Batch [0/28] Loss: 1.2060, Hard: 0.5823, Soft: 1.8298 Acc: 80.00% LR: 0.000000
+2026-04-10 23:58:33,617 - INFO - Epoch [197] Batch [10/28] Loss: 0.9674, Hard: 0.0938, Soft: 1.8410 Acc: 89.55% LR: 0.000000
+2026-04-10 23:58:36,482 - INFO - Epoch [197] Batch [20/28] Loss: 1.0155, Hard: 0.2231, Soft: 1.8078 Acc: 91.90% LR: 0.000000
+2026-04-10 23:59:05,718 - INFO - Epoch [197/200] Train Loss: 1.0399, Train Acc: 0.91%, Val Loss: 0.3528, Val Acc: 87.63%, Val AUC: 97.92%, Val F1: 86.84%
+2026-04-10 23:59:29,635 - INFO - Epoch [198] Batch [0/28] Loss: 0.9762, Hard: 0.1565, Soft: 1.7959 Acc: 95.00% LR: 0.000000
+2026-04-10 23:59:32,422 - INFO - Epoch [198] Batch [10/28] Loss: 0.9518, Hard: 0.0882, Soft: 1.8154 Acc: 93.64% LR: 0.000000
+2026-04-10 23:59:35,166 - INFO - Epoch [198] Batch [20/28] Loss: 1.1118, Hard: 0.3679, Soft: 1.8557 Acc: 90.00% LR: 0.000000
+2026-04-11 00:00:04,889 - INFO - Epoch [198/200] Train Loss: 1.0321, Train Acc: 0.91%, Val Loss: 0.3488, Val Acc: 86.70%, Val AUC: 98.02%, Val F1: 86.09%
+2026-04-11 00:00:28,475 - INFO - Epoch [199] Batch [0/28] Loss: 1.0220, Hard: 0.2280, Soft: 1.8159 Acc: 90.00% LR: 0.000000
+2026-04-11 00:00:31,398 - INFO - Epoch [199] Batch [10/28] Loss: 1.0174, Hard: 0.1429, Soft: 1.8920 Acc: 88.18% LR: 0.000000
+2026-04-11 00:00:34,248 - INFO - Epoch [199] Batch [20/28] Loss: 0.9713, Hard: 0.1367, Soft: 1.8060 Acc: 89.29% LR: 0.000000
+2026-04-11 00:01:05,080 - INFO - Epoch [199/200] Train Loss: 1.0435, Train Acc: 0.90%, Val Loss: 0.3570, Val Acc: 87.37%, Val AUC: 97.88%, Val F1: 86.76%
+2026-04-11 00:01:28,229 - INFO - Epoch [200] Batch [0/28] Loss: 1.0003, Hard: 0.1194, Soft: 1.8813 Acc: 95.00% LR: 0.000000
+2026-04-11 00:01:30,520 - INFO - Epoch [200] Batch [10/28] Loss: 1.0264, Hard: 0.1961, Soft: 1.8568 Acc: 91.36% LR: 0.000000
+2026-04-11 00:01:33,215 - INFO - Epoch [200] Batch [20/28] Loss: 1.0038, Hard: 0.1209, Soft: 1.8866 Acc: 91.19% LR: 0.000000
+2026-04-11 00:02:01,789 - INFO - Epoch [200/200] Train Loss: 1.0290, Train Acc: 0.91%, Val Loss: 0.3584, Val Acc: 87.23%, Val AUC: 97.89%, Val F1: 86.22%
+2026-04-11 00:02:01,836 - INFO - Checkpoint saved at epoch 200
+2026-04-11 00:02:01,836 - INFO - ==================================================
+2026-04-11 00:02:01,836 - INFO - Training finished! Best Acc: 87.63%, Best AUC: 97.92%, Best F1: 86.65%
+2026-04-11 00:02:01,837 - INFO - ==================================================

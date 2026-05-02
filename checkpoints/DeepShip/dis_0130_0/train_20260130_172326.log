@@ -1,0 +1,23 @@
+2026-01-30 17:23:26,124 - INFO - ==================================================
+2026-01-30 17:23:26,124 - INFO - Distillation Training Configuration
+2026-01-30 17:23:26,124 - INFO - ==================================================
+2026-01-30 17:23:26,124 - INFO - GPUs: [4, 5, 6, 7]
+2026-01-30 17:23:26,124 - INFO - World size: 4
+2026-01-30 17:23:26,124 - INFO - Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip_622
+2026-01-30 17:23:26,124 - INFO - Data type: wav_s@wav_t
+2026-01-30 17:23:26,124 - INFO - Batch size: 32
+2026-01-30 17:23:26,124 - INFO - Epochs: 100
+2026-01-30 17:23:26,124 - INFO - Learning rate: 0.001
+2026-01-30 17:23:26,125 - INFO - Temperature: 2.0
+2026-01-30 17:23:26,125 - INFO - Alpha: 0.3
+2026-01-30 17:23:26,125 - INFO - Save dir: checkpoints/DeepShip/dis_0130_0
+2026-01-30 17:23:26,125 - INFO - ==================================================
+2026-01-30 17:23:26,576 - INFO - Train dataset size: 31892
+2026-01-30 17:23:26,576 - INFO - Validation dataset size: 10631
+2026-01-30 17:23:27,943 - INFO - Student params: 316,234 (0.32M)
+2026-01-30 17:23:27,943 - INFO - Teacher params: 164,415,748 (164.42M)
+2026-01-30 17:23:27,943 - INFO - Trainable params: 271,242 (0.27M)
+2026-01-30 17:23:28,752 - INFO - Start training...
+2026-01-30 17:23:54,220 - INFO - Epoch [1] Batch [0/249]                     Loss: 0.8383, Hard: 1.5778, Soft: 0.0988                     Acc: 25.00% LR: 0.001000                     Alpha: 0.5                     Beta: 0.5 
+2026-01-30 17:23:59,265 - INFO - Epoch [1] Batch [20/249]                     Loss: 0.6650, Hard: 1.2989, Soft: 0.0437                     Acc: 31.55% LR: 0.001000                     Alpha: 0.5049793124198914                     Beta: 0.5 
+2026-01-30 17:24:04,939 - INFO - Epoch [1] Batch [40/249]                     Loss: 0.7145, Hard: 1.4147, Soft: 0.0414                     Acc: 35.59% LR: 0.001000                     Alpha: 0.5098580121994019                     Beta: 0.5 

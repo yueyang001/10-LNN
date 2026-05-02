@@ -1,0 +1,21 @@
+2026-02-10 10:57:00,696 - INFO - ==================================================
+2026-02-10 10:57:00,696 - INFO - Distillation Training Configuration
+2026-02-10 10:57:00,696 - INFO - ==================================================
+2026-02-10 10:57:00,696 - INFO - GPUs: [4, 5, 6, 7]
+2026-02-10 10:57:00,696 - INFO - World size: 4
+2026-02-10 10:57:00,696 - INFO - Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip_622
+2026-02-10 10:57:00,696 - INFO - Data type: wav_s@wav_t
+2026-02-10 10:57:00,696 - INFO - Batch size: 32
+2026-02-10 10:57:00,696 - INFO - Epochs: 100
+2026-02-10 10:57:00,696 - INFO - Learning rate: 0.001
+2026-02-10 10:57:00,696 - INFO - Temperature: 2.0
+2026-02-10 10:57:00,696 - INFO - Alpha: 0.3
+2026-02-10 10:57:00,696 - INFO - Save dir: checkpoints/DeepShip/dis_0130_0
+2026-02-10 10:57:00,696 - INFO - ==================================================
+2026-02-10 10:57:00,968 - INFO - Train dataset size: 31892
+2026-02-10 10:57:00,968 - INFO - Validation dataset size: 10631
+2026-02-10 10:57:03,156 - INFO - Student params: 316,234 (0.32M)
+2026-02-10 10:57:03,156 - INFO - Teacher params: 164,415,748 (164.42M)
+2026-02-10 10:57:03,156 - INFO - Trainable params: 271,242 (0.27M)
+2026-02-10 10:57:03,917 - INFO - Start training...
+2026-02-10 10:57:03,918 - INFO - 🔥 Resume from: checkpoints/DeepShip/dis_0130_0/checkpoint_epoch_100.pth

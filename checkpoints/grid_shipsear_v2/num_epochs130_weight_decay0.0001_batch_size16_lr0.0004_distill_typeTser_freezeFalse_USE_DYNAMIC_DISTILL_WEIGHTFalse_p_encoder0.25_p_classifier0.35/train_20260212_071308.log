@@ -1,0 +1,21 @@
+2026-02-12 07:13:08,562 - INFO - ==================================================
+2026-02-12 07:13:08,562 - INFO - Distillation Training Configuration
+2026-02-12 07:13:08,562 - INFO - ==================================================
+2026-02-12 07:13:08,562 - INFO - GPUs: [4, 5, 6, 7]
+2026-02-12 07:13:08,562 - INFO - World size: 4
+2026-02-12 07:13:08,562 - INFO - Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/ShipsEar_622
+2026-02-12 07:13:08,562 - INFO - Data type: wav_s@wav_t
+2026-02-12 07:13:08,563 - INFO - Batch size: 16
+2026-02-12 07:13:08,563 - INFO - Epochs: 130
+2026-02-12 07:13:08,563 - INFO - Learning rate: 0.0004
+2026-02-12 07:13:08,563 - INFO - Temperature: 2.0
+2026-02-12 07:13:08,563 - INFO - Alpha: 0.3
+2026-02-12 07:13:08,563 - INFO - Save dir: checkpoints/grid_shipsear_v2/num_epochs130_weight_decay0.0001_batch_size16_lr0.0004_distill_typeTser_freezeFalse_USE_DYNAMIC_DISTILL_WEIGHTFalse_p_encoder0.25_p_classifier0.35
+2026-02-12 07:13:08,563 - INFO - ==================================================
+2026-02-12 07:13:08,594 - INFO - Train dataset size: 2240
+2026-02-12 07:13:08,594 - INFO - Validation dataset size: 749
+2026-02-12 07:13:09,576 - INFO - Student params: 316,299 (0.32M)
+2026-02-12 07:13:09,577 - INFO - Teacher params: 164,415,877 (164.42M)
+2026-02-12 07:13:09,577 - INFO - Trainable params: 164,687,249 (164.69M)
+2026-02-12 07:13:10,142 - INFO - Start training...
+2026-02-12 07:13:10,142 - INFO - No checkpoint found, start from scratch
