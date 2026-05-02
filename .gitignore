@@ -1,0 +1,22 @@
+# 屏蔽所有的权重文件
+*.pth
+*.pt
+*.ckpt
+**/*.pth
+
+# 屏蔽特定文件夹
+backup/
+checkpoints/
+models/wav2vec2-large-robust-12-ft-emotion-msp-dim/
+
+# 屏蔽运行日志和缓存
+.vscode
+__pycache__/
+*.log
+.ipynb_checkpoints/
+
+# 屏蔽其他大文件
+*.zip
+*.tar.gz
+*.whl
+**/*.safetensors

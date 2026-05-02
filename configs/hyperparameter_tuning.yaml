@@ -1,0 +1,52 @@
+# 超参数搜索配置文件
+# 基于 train_distillation_shipsear.yaml 修改
+
+# 训练配置
+training:
+  num_epochs: 200  
+  batch_size: 16
+  lr: 1e-3
+  weight_decay: 5e-4
+  seed: 42
+  log_interval: 20
+
+# 蒸馏配置 - 关键修改：使用 MTSKD_Temp
+distillation:
+  temperature: 2.0
+  alpha: 0.3
+  learnable_alpha: false
+  distill_type: 'MTSKD_Temp'  # ✅ 使用支持 lambda_m 和 beta 的蒸馏方法
+  weight_type: 'uniform'
+  USE_DYNAMIC_DISTILL_WEIGHT: True
+
+# 模型配置
+model:
+  num_classes: 5
+  # 教师网络 (Wav2Vec2)
+  teacher:
+    pretrained: true
+    freeze: true
+    checkpoint_path: '/media/hdd1/fubohan/Code/UATR/models/Audio_Teacher_ShipsEar_622/checkpoints/Student.pth'
+  # 学生网络 (LNN AudioCfC)
+  student:
+    stu_seq_len: 16  # student 时间序列长度
+    p_encoder: 0.2
+    p_classifier: 0.3
+
+# 数据集配置
+dataset:
+  data_dir: '/media/hdd1/chuxiaohui/AI4Ocean_UATR/ShipsEar_622'
+  data_type: 'wav_s@wav_t'  # wav / mel / cqt / wav@mel@cqt
+  num_workers: 4
+
+# 分布式配置
+distributed:
+  master_addr: 'localhost'
+  master_port: '12351'
+  backend: 'nccl'
+  gpu_ids: [4, 5, 6, 7]
+
+# 保存配置
+save:
+  save_dir: 'checkpoints/ShipsEar/hyperparameter_tuning'  # 专门的保存目录
+  save_interval: 10

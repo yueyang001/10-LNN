@@ -1,0 +1,84 @@
+# Comparison Distillation Training Configuration for ShipsEar
+
+# 数据集配置
+dataset:
+  data_dir: '/media/hdd1/chuxiaohui/AI4Ocean_UATR/ShipsEar_622'  # 修改为实际的数据集路径
+  data_type: 'wav_s@wav_t'  # 学生使用wav_s，教师使用wav_t（经过processor处理）
+  num_workers: 4
+
+# 模型配置
+model:
+  num_classes: 5  # ShipsEar_622 有5个类别: A, B, C, D, E
+  stu_seq_len: 16  # 学生网络的序列长度
+
+  # 教师网络配置
+  teacher:
+    pretrained: true
+    freeze: true  # 冻结教师网络
+    checkpoint_path: '/media/hdd1/fubohan/Code/UATR/models/Audio_Teacher_ShipsEar_622/checkpoints/Student.pth'  # 教师网络权重路径
+
+  # 学生网络配置
+  student:
+    p_encoder: 0.355
+    p_classifier: 0.255
+
+# 蒸馏配置
+distillation:
+  method: 'kd'  # 蒸馏方法，可选值:
+               # - 'kd': 基础 KD
+               # - 'lskd': Logit Standardization KD
+               # - 'dkd': Decoupled KD
+               # - 'nkd': Negative KD
+               # - 'wsld': Weighted Soft Label Distillation
+               # - 'sdd': Structure Decoupled Distillation
+               # - 'at': Attention Transfer
+               # - 'nst': Neuron Selectivity Transfer
+               # - 'fsp': Flow of Solution Procedure
+               # - 'pkt': Probabilistic Knowledge Transfer
+               # - 'rkd': Relational Knowledge Distillation
+               # - 'sp': Similarity-Preserving KD
+               # - 'cc': Correlation Congruence
+               # - 'vid': Variational Information Distillation
+               # - 'mgd': Masked Generative Distillation
+               # - 'sr': Spatial-wise Relative Representation
+               # - 'cat_kd': Channel-Aligned Transfer KD
+               # - 'ickd': Inner Correlation KD
+               # - 'vkd': Variational KD
+               # - 'uatr_kd': UATR-specific KD
+               # - 'ofa': One-for-All KD
+               # - 'diffkd': Diffusion-based KD
+               # - 'freekd': FreeKD
+               # - 'mkd': Masked KD
+
+  temperature: 4.0  # 蒸馏温度
+  alpha: 0.5  # 蒸馏损失权重 (hard_loss * alpha + soft_loss * (1-alpha))
+
+  # 方法特定参数
+  dkd_alpha: 1.0
+  dkd_beta: 1.0
+  rkd_wd: 25
+  rkd_wa: 50
+  wsld_temp: 1.0
+  wsld_alpha: 1.0
+
+# 训练配置
+training:
+  num_epochs: 200
+  batch_size: 20 # 减小 batch size 以避免 OOM
+  lr: 0.0005
+  weight_decay: 0.0001
+  seed: 42
+  log_interval: 10
+
+# DDP配置
+distributed:
+  backend: 'nccl'
+  master_addr: 'localhost'
+  master_port: '0'  # 使用随机可用端口
+  gpu_ids: [4, 5, 6, 7]  # 使用GPU
+  # gpu_ids: [0, 1, 2, 3]
+
+# 保存配置
+save:
+  save_dir: '/media/hdd1/fubohan/Code/UATR/checkpoints/ShipsEar/comparison_distillation'  # 修改为保存路径
+  save_interval: 10  # 每10个epoch保存一次

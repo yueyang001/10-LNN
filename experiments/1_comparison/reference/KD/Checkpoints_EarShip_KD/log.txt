@@ -1,0 +1,43 @@
+[20:15:15.098] Namespace(batch_size=16, gpu='0', learning_rate=0.001, num_epochs=20, seed=1337, weight_decay=5e-05)
+[20:15:33.649] train_epoch 1 : loss : 0.550438  acc : 43.478260
+[20:15:36.086] test_epoch 1 : loss : 0.496632  acc : 45.989304
+[20:15:52.030] train_epoch 2 : loss : 0.457350  acc : 57.056854
+[20:15:54.467] test_epoch 2 : loss : 0.420768  acc : 60.427811
+[20:16:10.533] train_epoch 3 : loss : 0.393088  acc : 63.578594
+[20:16:12.982] test_epoch 3 : loss : 0.345599  acc : 64.304817
+[20:16:29.112] train_epoch 4 : loss : 0.344724  acc : 68.193977
+[20:16:31.598] test_epoch 4 : loss : 0.321631  acc : 67.245987
+[20:16:46.608] train_epoch 5 : loss : 0.309109  acc : 73.143806
+[20:16:49.035] test_epoch 5 : loss : 0.277073  acc : 74.465248
+[20:17:04.024] train_epoch 6 : loss : 0.271232  acc : 76.688965
+[20:17:06.449] test_epoch 6 : loss : 0.303703  acc : 72.727272
+[20:17:21.341] train_epoch 7 : loss : 0.241855  acc : 79.765884
+[20:17:23.757] test_epoch 7 : loss : 0.240935  acc : 78.342247
+[20:17:38.656] train_epoch 8 : loss : 0.222123  acc : 82.274246
+[20:17:41.076] test_epoch 8 : loss : 0.198823  acc : 82.486633
+[20:17:55.984] train_epoch 9 : loss : 0.209057  acc : 83.411369
+[20:17:58.437] test_epoch 9 : loss : 0.194893  acc : 82.620323
+[20:18:13.505] train_epoch 10 : loss : 0.203258  acc : 84.682274
+[20:18:15.928] test_epoch 10 : loss : 0.191032  acc : 83.957222
+[20:18:32.152] train_epoch 11 : loss : 0.247677  acc : 77.759193
+[20:18:34.644] test_epoch 11 : loss : 0.271705  acc : 71.791443
+[20:18:49.967] train_epoch 12 : loss : 0.225661  acc : 80.066887
+[20:18:52.394] test_epoch 12 : loss : 0.249814  acc : 77.406418
+[20:19:07.690] train_epoch 13 : loss : 0.200288  acc : 82.173912
+[20:19:10.126] test_epoch 13 : loss : 0.227688  acc : 78.475937
+[20:19:25.639] train_epoch 14 : loss : 0.181034  acc : 84.949837
+[20:19:28.106] test_epoch 14 : loss : 0.297325  acc : 75.000000
+[20:19:43.367] train_epoch 15 : loss : 0.169598  acc : 85.886292
+[20:19:45.793] test_epoch 15 : loss : 0.163378  acc : 86.229950
+[20:20:01.070] train_epoch 16 : loss : 0.152073  acc : 86.956520
+[20:20:03.494] test_epoch 16 : loss : 0.273808  acc : 78.743317
+[20:20:18.751] train_epoch 17 : loss : 0.133803  acc : 88.762543
+[20:20:21.167] test_epoch 17 : loss : 0.172479  acc : 85.026741
+[20:20:36.405] train_epoch 18 : loss : 0.131230  acc : 88.561867
+[20:20:38.818] test_epoch 18 : loss : 0.145490  acc : 90.240646
+[20:20:54.014] train_epoch 19 : loss : 0.116742  acc : 91.137123
+[20:20:56.424] test_epoch 19 : loss : 0.151730  acc : 88.368988
+[20:21:11.645] train_epoch 20 : loss : 0.102795  acc : 92.240799
+[20:21:14.062] test_epoch 20 : loss : 0.154447  acc : 88.636360
+[20:21:14.074] Best_acc : 90.240646
+[20:21:14.074] Best_acc_epoch : 18.000000

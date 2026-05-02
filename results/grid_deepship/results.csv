@@ -1,0 +1,1 @@
+epoch,wd,batch,lr,distill_type,freeze_teacher,dynamic_weight,p_encoder,p_classifier,best_acc

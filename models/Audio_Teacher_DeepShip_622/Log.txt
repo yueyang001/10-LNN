@@ -1,0 +1,405 @@
+[2025/01/16-01:46:23.521] #################### RUN ####################
+[2025/01/16-01:46:23.521] 
+data_dir: /home/cuihanlin/TFAVD/TFAVD_Dataset/DeepShip_622
+num_classes: 4
+snapshot_dir: /home/cuihanlin/TFAVD/Experiment_record/Audio_Teacher_DeepShip_622
+gpu_id: 6
+data_type: wav_t
+train_mode: at
+T: 3
+seed: 42
+num_epochs: 120
+batch_size: 32
+num_workers: 32
+learning_rate: 0.001
+
+[2025/01/16-01:46:23.546] The current device is GPU.
+[2025/01/16-01:46:23.548] Random seed 42 has been set !
+[2025/01/16-01:46:23.834] ['passengership', 'tanker', 'cargo', 'tug']
+[2025/01/16-01:46:23.834] 4
+[2025/01/16-01:46:24.610] Inititalization method is kaiming !
+[2025/01/16-01:50:17.382] Epoch 0 train Loss: 0.8707 Acc: 0.6264
+[2025/01/16-01:50:46.192] Epoch 0 validation Loss: 0.7068 Acc: 0.7042
+[2025/01/16-01:54:41.228] Epoch 1 train Loss: 0.6778 Acc: 0.7180
+[2025/01/16-01:55:09.786] Epoch 1 validation Loss: 0.7011 Acc: 0.7066
+[2025/01/16-01:59:05.368] Epoch 2 train Loss: 0.5765 Acc: 0.7636
+[2025/01/16-01:59:34.221] Epoch 2 validation Loss: 0.5770 Acc: 0.7742
+[2025/01/16-02:03:29.599] Epoch 3 train Loss: 0.5033 Acc: 0.7968
+[2025/01/16-02:03:57.935] Epoch 3 validation Loss: 0.4754 Acc: 0.8141
+[2025/01/16-02:07:51.075] Epoch 4 train Loss: 0.4372 Acc: 0.8256
+[2025/01/16-02:08:20.208] Epoch 4 validation Loss: 0.4725 Acc: 0.8159
+[2025/01/16-02:12:15.201] Epoch 5 train Loss: 0.3797 Acc: 0.8500
+[2025/01/16-02:12:44.367] Epoch 5 validation Loss: 0.4066 Acc: 0.8417
+[2025/01/16-02:16:38.860] Epoch 6 train Loss: 0.3388 Acc: 0.8676
+[2025/01/16-02:17:07.724] Epoch 6 validation Loss: 0.3826 Acc: 0.8569
+[2025/01/16-02:21:01.832] Epoch 7 train Loss: 0.3065 Acc: 0.8804
+[2025/01/16-02:21:30.601] Epoch 7 validation Loss: 0.3597 Acc: 0.8612
+[2025/01/16-02:25:24.617] Epoch 8 train Loss: 0.2850 Acc: 0.8918
+[2025/01/16-02:25:53.245] Epoch 8 validation Loss: 0.3644 Acc: 0.8612
+[2025/01/16-02:29:47.904] Epoch 9 train Loss: 0.2752 Acc: 0.8955
+[2025/01/16-02:30:16.157] Epoch 9 validation Loss: 0.3604 Acc: 0.8641
+[2025/01/16-02:30:46.047]                precision    recall  f1-score   support
+
+passengership     0.8697    0.8993    0.8843      2613
+       tanker     0.9009    0.7872    0.8402      2759
+        cargo     0.8211    0.8422    0.8315      2561
+          tug     0.8721    0.9344    0.9022      2699
+
+     accuracy                         0.8654     10632
+    macro avg     0.8659    0.8658    0.8646     10632
+ weighted avg     0.8667    0.8654    0.8647     10632
+
+[2025/01/16-02:34:40.373] Epoch 10 train Loss: 0.3946 Acc: 0.8453
+[2025/01/16-02:35:09.130] Epoch 10 validation Loss: 0.3829 Acc: 0.8566
+[2025/01/16-02:39:03.063] Epoch 11 train Loss: 0.3451 Acc: 0.8617
+[2025/01/16-02:39:31.630] Epoch 11 validation Loss: 0.4583 Acc: 0.8261
+[2025/01/16-02:43:24.918] Epoch 12 train Loss: 0.3096 Acc: 0.8793
+[2025/01/16-02:43:53.103] Epoch 12 validation Loss: 0.3802 Acc: 0.8569
+[2025/01/16-02:47:48.014] Epoch 13 train Loss: 0.2813 Acc: 0.8905
+[2025/01/16-02:48:16.489] Epoch 13 validation Loss: 0.3218 Acc: 0.8785
+[2025/01/16-02:52:10.818] Epoch 14 train Loss: 0.2480 Acc: 0.9040
+[2025/01/16-02:52:39.497] Epoch 14 validation Loss: 0.3199 Acc: 0.8844
+[2025/01/16-02:56:33.538] Epoch 15 train Loss: 0.2239 Acc: 0.9142
+[2025/01/16-02:57:02.224] Epoch 15 validation Loss: 0.2897 Acc: 0.8964
+[2025/01/16-03:00:56.959] Epoch 16 train Loss: 0.1952 Acc: 0.9252
+[2025/01/16-03:01:25.493] Epoch 16 validation Loss: 0.2412 Acc: 0.9161
+[2025/01/16-03:05:18.594] Epoch 17 train Loss: 0.1772 Acc: 0.9335
+[2025/01/16-03:05:47.173] Epoch 17 validation Loss: 0.2533 Acc: 0.9116
+[2025/01/16-03:09:41.650] Epoch 18 train Loss: 0.1524 Acc: 0.9434
+[2025/01/16-03:10:10.096] Epoch 18 validation Loss: 0.2251 Acc: 0.9231
+[2025/01/16-03:14:03.989] Epoch 19 train Loss: 0.1337 Acc: 0.9501
+[2025/01/16-03:14:31.941] Epoch 19 validation Loss: 0.2225 Acc: 0.9243
+[2025/01/16-03:15:02.023]                precision    recall  f1-score   support
+
+passengership     0.9162    0.9583    0.9368      2613
+       tanker     0.9327    0.8891    0.9104      2759
+        cargo     0.9189    0.8985    0.9086      2561
+          tug     0.9501    0.9733    0.9616      2699
+
+     accuracy                         0.9297     10632
+    macro avg     0.9295    0.9298    0.9293     10632
+ weighted avg     0.9297    0.9297    0.9294     10632
+
+[2025/01/16-03:18:55.073] Epoch 20 train Loss: 0.1168 Acc: 0.9567
+[2025/01/16-03:19:23.736] Epoch 20 validation Loss: 0.1844 Acc: 0.9360
+[2025/01/16-03:23:17.984] Epoch 21 train Loss: 0.0995 Acc: 0.9641
+[2025/01/16-03:23:46.444] Epoch 21 validation Loss: 0.1720 Acc: 0.9411
+[2025/01/16-03:27:40.724] Epoch 22 train Loss: 0.0873 Acc: 0.9681
+[2025/01/16-03:28:09.544] Epoch 22 validation Loss: 0.1653 Acc: 0.9459
+[2025/01/16-03:32:04.244] Epoch 23 train Loss: 0.0723 Acc: 0.9751
+[2025/01/16-03:32:32.648] Epoch 23 validation Loss: 0.1655 Acc: 0.9437
+[2025/01/16-03:36:26.888] Epoch 24 train Loss: 0.0637 Acc: 0.9786
+[2025/01/16-03:36:55.450] Epoch 24 validation Loss: 0.1534 Acc: 0.9479
+[2025/01/16-03:40:49.373] Epoch 25 train Loss: 0.0565 Acc: 0.9812
+[2025/01/16-03:41:17.452] Epoch 25 validation Loss: 0.1416 Acc: 0.9537
+[2025/01/16-03:45:11.063] Epoch 26 train Loss: 0.0514 Acc: 0.9828
+[2025/01/16-03:45:39.490] Epoch 26 validation Loss: 0.1382 Acc: 0.9541
+[2025/01/16-03:49:34.858] Epoch 27 train Loss: 0.0460 Acc: 0.9858
+[2025/01/16-03:50:03.299] Epoch 27 validation Loss: 0.1392 Acc: 0.9534
+[2025/01/16-03:53:56.712] Epoch 28 train Loss: 0.0449 Acc: 0.9860
+[2025/01/16-03:54:24.907] Epoch 28 validation Loss: 0.1403 Acc: 0.9536
+[2025/01/16-03:58:18.176] Epoch 29 train Loss: 0.0422 Acc: 0.9873
+[2025/01/16-03:58:46.385] Epoch 29 validation Loss: 0.1400 Acc: 0.9534
+[2025/01/16-03:59:15.893]                precision    recall  f1-score   support
+
+passengership     0.9499    0.9652    0.9575      2613
+       tanker     0.9462    0.9431    0.9446      2759
+        cargo     0.9466    0.9348    0.9407      2561
+          tug     0.9774    0.9770    0.9772      2699
+
+     accuracy                         0.9551     10632
+    macro avg     0.9550    0.9550    0.9550     10632
+ weighted avg     0.9551    0.9551    0.9551     10632
+
+[2025/01/16-04:03:09.098] Epoch 30 train Loss: 0.1981 Acc: 0.9268
+[2025/01/16-04:03:37.561] Epoch 30 validation Loss: 0.2260 Acc: 0.9216
+[2025/01/16-04:07:31.952] Epoch 31 train Loss: 0.1433 Acc: 0.9458
+[2025/01/16-04:08:00.156] Epoch 31 validation Loss: 0.2047 Acc: 0.9293
+[2025/01/16-04:11:53.633] Epoch 32 train Loss: 0.1267 Acc: 0.9510
+[2025/01/16-04:12:22.178] Epoch 32 validation Loss: 0.2130 Acc: 0.9300
+[2025/01/16-04:16:14.784] Epoch 33 train Loss: 0.1148 Acc: 0.9570
+[2025/01/16-04:16:43.145] Epoch 33 validation Loss: 0.2230 Acc: 0.9263
+[2025/01/16-04:20:36.511] Epoch 34 train Loss: 0.1068 Acc: 0.9601
+[2025/01/16-04:21:04.843] Epoch 34 validation Loss: 0.1872 Acc: 0.9369
+[2025/01/16-04:24:58.268] Epoch 35 train Loss: 0.0933 Acc: 0.9650
+[2025/01/16-04:25:26.723] Epoch 35 validation Loss: 0.1773 Acc: 0.9451
+[2025/01/16-04:29:19.528] Epoch 36 train Loss: 0.0882 Acc: 0.9673
+[2025/01/16-04:29:47.833] Epoch 36 validation Loss: 0.1854 Acc: 0.9401
+[2025/01/16-04:33:40.498] Epoch 37 train Loss: 0.0840 Acc: 0.9687
+[2025/01/16-04:34:08.741] Epoch 37 validation Loss: 0.1565 Acc: 0.9492
+[2025/01/16-04:38:02.472] Epoch 38 train Loss: 0.0738 Acc: 0.9729
+[2025/01/16-04:38:30.714] Epoch 38 validation Loss: 0.1457 Acc: 0.9535
+[2025/01/16-04:42:23.701] Epoch 39 train Loss: 0.0651 Acc: 0.9761
+[2025/01/16-04:42:51.843] Epoch 39 validation Loss: 0.1985 Acc: 0.9402
+[2025/01/16-04:43:21.386]                precision    recall  f1-score   support
+
+passengership     0.9499    0.9652    0.9575      2613
+       tanker     0.9462    0.9431    0.9446      2759
+        cargo     0.9466    0.9348    0.9407      2561
+          tug     0.9774    0.9770    0.9772      2699
+
+     accuracy                         0.9551     10632
+    macro avg     0.9550    0.9550    0.9550     10632
+ weighted avg     0.9551    0.9551    0.9551     10632
+
+[2025/01/16-04:47:14.571] Epoch 40 train Loss: 0.0632 Acc: 0.9766
+[2025/01/16-04:47:42.761] Epoch 40 validation Loss: 0.1529 Acc: 0.9535
+[2025/01/16-04:51:35.884] Epoch 41 train Loss: 0.0524 Acc: 0.9808
+[2025/01/16-04:52:03.925] Epoch 41 validation Loss: 0.1492 Acc: 0.9534
+[2025/01/16-04:55:58.062] Epoch 42 train Loss: 0.0515 Acc: 0.9814
+[2025/01/16-04:56:26.314] Epoch 42 validation Loss: 0.1348 Acc: 0.9616
+[2025/01/16-05:00:19.819] Epoch 43 train Loss: 0.0418 Acc: 0.9858
+[2025/01/16-05:00:48.068] Epoch 43 validation Loss: 0.1208 Acc: 0.9637
+[2025/01/16-05:04:40.857] Epoch 44 train Loss: 0.0436 Acc: 0.9834
+[2025/01/16-05:05:09.085] Epoch 44 validation Loss: 0.1468 Acc: 0.9559
+[2025/01/16-05:09:01.628] Epoch 45 train Loss: 0.0369 Acc: 0.9873
+[2025/01/16-05:09:29.811] Epoch 45 validation Loss: 0.1386 Acc: 0.9596
+[2025/01/16-05:13:23.593] Epoch 46 train Loss: 0.0287 Acc: 0.9903
+[2025/01/16-05:13:51.853] Epoch 46 validation Loss: 0.1457 Acc: 0.9604
+[2025/01/16-05:17:45.139] Epoch 47 train Loss: 0.0289 Acc: 0.9898
+[2025/01/16-05:18:13.465] Epoch 47 validation Loss: 0.1184 Acc: 0.9679
+[2025/01/16-05:22:06.544] Epoch 48 train Loss: 0.0226 Acc: 0.9921
+[2025/01/16-05:22:34.483] Epoch 48 validation Loss: 0.1261 Acc: 0.9653
+[2025/01/16-05:26:27.933] Epoch 49 train Loss: 0.0215 Acc: 0.9922
+[2025/01/16-05:26:56.299] Epoch 49 validation Loss: 0.1067 Acc: 0.9717
+[2025/01/16-05:27:26.368]                precision    recall  f1-score   support
+
+passengership     0.9827    0.9591    0.9708      2613
+       tanker     0.9674    0.9692    0.9683      2759
+        cargo     0.9642    0.9668    0.9655      2561
+          tug     0.9727    0.9911    0.9818      2699
+
+     accuracy                         0.9717     10632
+    macro avg     0.9718    0.9715    0.9716     10632
+ weighted avg     0.9718    0.9717    0.9717     10632
+
+[2025/01/16-05:31:20.723] Epoch 50 train Loss: 0.0169 Acc: 0.9944
+[2025/01/16-05:31:49.108] Epoch 50 validation Loss: 0.1214 Acc: 0.9694
+[2025/01/16-05:35:42.972] Epoch 51 train Loss: 0.0148 Acc: 0.9955
+[2025/01/16-05:36:11.842] Epoch 51 validation Loss: 0.1068 Acc: 0.9725
+[2025/01/16-05:40:05.783] Epoch 52 train Loss: 0.0145 Acc: 0.9949
+[2025/01/16-05:40:34.071] Epoch 52 validation Loss: 0.1378 Acc: 0.9651
+[2025/01/16-05:44:27.258] Epoch 53 train Loss: 0.0117 Acc: 0.9965
+[2025/01/16-05:44:55.469] Epoch 53 validation Loss: 0.0963 Acc: 0.9748
+[2025/01/16-05:48:47.999] Epoch 54 train Loss: 0.0090 Acc: 0.9972
+[2025/01/16-05:49:15.934] Epoch 54 validation Loss: 0.1244 Acc: 0.9701
+[2025/01/16-05:53:08.621] Epoch 55 train Loss: 0.0093 Acc: 0.9971
+[2025/01/16-05:53:37.108] Epoch 55 validation Loss: 0.0958 Acc: 0.9752
+[2025/01/16-05:57:31.288] Epoch 56 train Loss: 0.0063 Acc: 0.9984
+[2025/01/16-05:58:01.047] Epoch 56 validation Loss: 0.1011 Acc: 0.9744
+[2025/01/16-06:01:57.631] Epoch 57 train Loss: 0.0045 Acc: 0.9990
+[2025/01/16-06:02:27.392] Epoch 57 validation Loss: 0.0989 Acc: 0.9760
+[2025/01/16-06:06:24.245] Epoch 58 train Loss: 0.0058 Acc: 0.9983
+[2025/01/16-06:06:54.036] Epoch 58 validation Loss: 0.0922 Acc: 0.9778
+[2025/01/16-06:10:49.531] Epoch 59 train Loss: 0.0043 Acc: 0.9991
+[2025/01/16-06:11:18.984] Epoch 59 validation Loss: 0.0919 Acc: 0.9770
+[2025/01/16-06:11:50.431]                precision    recall  f1-score   support
+
+passengership     0.9781    0.9744    0.9762      2613
+       tanker     0.9752    0.9699    0.9726      2759
+        cargo     0.9715    0.9723    0.9719      2561
+          tug     0.9838    0.9922    0.9880      2699
+
+     accuracy                         0.9772     10632
+    macro avg     0.9772    0.9772    0.9772     10632
+ weighted avg     0.9772    0.9772    0.9772     10632
+
+[2025/01/16-06:15:47.366] Epoch 60 train Loss: 0.0029 Acc: 0.9996
+[2025/01/16-06:16:16.989] Epoch 60 validation Loss: 0.0900 Acc: 0.9791
+[2025/01/16-06:20:12.008] Epoch 61 train Loss: 0.0031 Acc: 0.9993
+[2025/01/16-06:20:40.280] Epoch 61 validation Loss: 0.0856 Acc: 0.9802
+[2025/01/16-06:24:33.466] Epoch 62 train Loss: 0.0022 Acc: 0.9997
+[2025/01/16-06:25:01.864] Epoch 62 validation Loss: 0.0901 Acc: 0.9780
+[2025/01/16-06:28:55.997] Epoch 63 train Loss: 0.0018 Acc: 0.9996
+[2025/01/16-06:29:24.283] Epoch 63 validation Loss: 0.0877 Acc: 0.9802
+[2025/01/16-06:33:17.279] Epoch 64 train Loss: 0.0019 Acc: 0.9996
+[2025/01/16-06:33:45.419] Epoch 64 validation Loss: 0.0862 Acc: 0.9800
+[2025/01/16-06:37:37.555] Epoch 65 train Loss: 0.0018 Acc: 0.9997
+[2025/01/16-06:38:05.486] Epoch 65 validation Loss: 0.0848 Acc: 0.9802
+[2025/01/16-06:41:58.388] Epoch 66 train Loss: 0.0014 Acc: 0.9998
+[2025/01/16-06:42:26.794] Epoch 66 validation Loss: 0.0867 Acc: 0.9798
+[2025/01/16-06:46:20.300] Epoch 67 train Loss: 0.0016 Acc: 0.9998
+[2025/01/16-06:46:48.539] Epoch 67 validation Loss: 0.0855 Acc: 0.9799
+[2025/01/16-06:50:41.656] Epoch 68 train Loss: 0.0017 Acc: 0.9998
+[2025/01/16-06:51:10.034] Epoch 68 validation Loss: 0.0847 Acc: 0.9800
+[2025/01/16-06:55:04.020] Epoch 69 train Loss: 0.0014 Acc: 0.9999
+[2025/01/16-06:55:32.344] Epoch 69 validation Loss: 0.0847 Acc: 0.9802
+[2025/01/16-06:56:02.091]                precision    recall  f1-score   support
+
+passengership     0.9808    0.9778    0.9793      2613
+       tanker     0.9701    0.9768    0.9735      2759
+        cargo     0.9806    0.9688    0.9747      2561
+          tug     0.9868    0.9941    0.9904      2699
+
+     accuracy                         0.9795     10632
+    macro avg     0.9796    0.9794    0.9795     10632
+ weighted avg     0.9795    0.9795    0.9795     10632
+
+[2025/01/16-06:59:54.938] Epoch 70 train Loss: 0.1241 Acc: 0.9609
+[2025/01/16-07:00:23.124] Epoch 70 validation Loss: 0.1547 Acc: 0.9527
+[2025/01/16-07:04:16.256] Epoch 71 train Loss: 0.0529 Acc: 0.9813
+[2025/01/16-07:04:44.607] Epoch 71 validation Loss: 0.1527 Acc: 0.9561
+[2025/01/16-07:08:37.025] Epoch 72 train Loss: 0.0458 Acc: 0.9837
+[2025/01/16-07:09:05.431] Epoch 72 validation Loss: 0.1411 Acc: 0.9596
+[2025/01/16-07:12:59.444] Epoch 73 train Loss: 0.0398 Acc: 0.9863
+[2025/01/16-07:13:27.585] Epoch 73 validation Loss: 0.1377 Acc: 0.9608
+[2025/01/16-07:17:21.070] Epoch 74 train Loss: 0.0436 Acc: 0.9842
+[2025/01/16-07:17:49.126] Epoch 74 validation Loss: 0.1398 Acc: 0.9596
+[2025/01/16-07:21:42.479] Epoch 75 train Loss: 0.0377 Acc: 0.9876
+[2025/01/16-07:22:10.858] Epoch 75 validation Loss: 0.1241 Acc: 0.9652
+[2025/01/16-07:26:02.272] Epoch 76 train Loss: 0.0379 Acc: 0.9867
+[2025/01/16-07:26:30.488] Epoch 76 validation Loss: 0.1744 Acc: 0.9563
+[2025/01/16-07:30:23.853] Epoch 77 train Loss: 0.0403 Acc: 0.9854
+[2025/01/16-07:30:52.052] Epoch 77 validation Loss: 0.1678 Acc: 0.9530
+[2025/01/16-07:34:45.286] Epoch 78 train Loss: 0.0291 Acc: 0.9899
+[2025/01/16-07:35:13.147] Epoch 78 validation Loss: 0.1353 Acc: 0.9650
+[2025/01/16-07:39:08.154] Epoch 79 train Loss: 0.0333 Acc: 0.9882
+[2025/01/16-07:39:37.698] Epoch 79 validation Loss: 0.1177 Acc: 0.9649
+[2025/01/16-07:40:09.264]                precision    recall  f1-score   support
+
+passengership     0.9808    0.9778    0.9793      2613
+       tanker     0.9701    0.9768    0.9735      2759
+        cargo     0.9806    0.9688    0.9747      2561
+          tug     0.9868    0.9941    0.9904      2699
+
+     accuracy                         0.9795     10632
+    macro avg     0.9796    0.9794    0.9795     10632
+ weighted avg     0.9795    0.9795    0.9795     10632
+
+[2025/01/16-07:44:06.249] Epoch 80 train Loss: 0.0309 Acc: 0.9895
+[2025/01/16-07:44:35.060] Epoch 80 validation Loss: 0.1076 Acc: 0.9724
+[2025/01/16-07:48:27.931] Epoch 81 train Loss: 0.0296 Acc: 0.9898
+[2025/01/16-07:48:55.897] Epoch 81 validation Loss: 0.1194 Acc: 0.9669
+[2025/01/16-07:52:48.121] Epoch 82 train Loss: 0.0283 Acc: 0.9903
+[2025/01/16-07:53:16.015] Epoch 82 validation Loss: 0.1310 Acc: 0.9628
+[2025/01/16-07:57:08.695] Epoch 83 train Loss: 0.0299 Acc: 0.9896
+[2025/01/16-07:57:36.691] Epoch 83 validation Loss: 0.1472 Acc: 0.9600
+[2025/01/16-08:01:29.538] Epoch 84 train Loss: 0.0255 Acc: 0.9914
+[2025/01/16-08:01:57.695] Epoch 84 validation Loss: 0.1110 Acc: 0.9707
+[2025/01/16-08:05:49.975] Epoch 85 train Loss: 0.0209 Acc: 0.9931
+[2025/01/16-08:06:18.546] Epoch 85 validation Loss: 0.1622 Acc: 0.9596
+[2025/01/16-08:10:11.230] Epoch 86 train Loss: 0.0267 Acc: 0.9911
+[2025/01/16-08:10:38.956] Epoch 86 validation Loss: 0.1670 Acc: 0.9587
+[2025/01/16-08:14:31.503] Epoch 87 train Loss: 0.0212 Acc: 0.9924
+[2025/01/16-08:14:59.672] Epoch 87 validation Loss: 0.1362 Acc: 0.9646
+[2025/01/16-08:18:52.237] Epoch 88 train Loss: 0.0214 Acc: 0.9922
+[2025/01/16-08:19:20.131] Epoch 88 validation Loss: 0.1195 Acc: 0.9691
+[2025/01/16-08:23:12.724] Epoch 89 train Loss: 0.0212 Acc: 0.9925
+[2025/01/16-08:23:40.675] Epoch 89 validation Loss: 0.1031 Acc: 0.9732
+[2025/01/16-08:24:09.856]                precision    recall  f1-score   support
+
+passengership     0.9808    0.9778    0.9793      2613
+       tanker     0.9701    0.9768    0.9735      2759
+        cargo     0.9806    0.9688    0.9747      2561
+          tug     0.9868    0.9941    0.9904      2699
+
+     accuracy                         0.9795     10632
+    macro avg     0.9796    0.9794    0.9795     10632
+ weighted avg     0.9795    0.9795    0.9795     10632
+
+[2025/01/16-08:28:01.645] Epoch 90 train Loss: 0.0223 Acc: 0.9926
+[2025/01/16-08:28:29.768] Epoch 90 validation Loss: 0.1496 Acc: 0.9641
+[2025/01/16-08:32:22.652] Epoch 91 train Loss: 0.0166 Acc: 0.9942
+[2025/01/16-08:32:50.505] Epoch 91 validation Loss: 0.1474 Acc: 0.9638
+[2025/01/16-08:36:42.895] Epoch 92 train Loss: 0.0179 Acc: 0.9942
+[2025/01/16-08:37:10.636] Epoch 92 validation Loss: 0.0992 Acc: 0.9732
+[2025/01/16-08:41:01.820] Epoch 93 train Loss: 0.0193 Acc: 0.9932
+[2025/01/16-08:41:29.575] Epoch 93 validation Loss: 0.1605 Acc: 0.9606
+[2025/01/16-08:45:22.537] Epoch 94 train Loss: 0.0173 Acc: 0.9945
+[2025/01/16-08:45:50.385] Epoch 94 validation Loss: 0.0967 Acc: 0.9765
+[2025/01/16-08:49:43.047] Epoch 95 train Loss: 0.0105 Acc: 0.9967
+[2025/01/16-08:50:10.921] Epoch 95 validation Loss: 0.0996 Acc: 0.9760
+[2025/01/16-08:54:04.329] Epoch 96 train Loss: 0.0194 Acc: 0.9935
+[2025/01/16-08:54:32.198] Epoch 96 validation Loss: 0.1010 Acc: 0.9763
+[2025/01/16-08:58:25.033] Epoch 97 train Loss: 0.0108 Acc: 0.9965
+[2025/01/16-08:58:52.973] Epoch 97 validation Loss: 0.1038 Acc: 0.9754
+[2025/01/16-09:02:45.316] Epoch 98 train Loss: 0.0129 Acc: 0.9957
+[2025/01/16-09:03:13.115] Epoch 98 validation Loss: 0.1081 Acc: 0.9740
+[2025/01/16-09:07:06.419] Epoch 99 train Loss: 0.0141 Acc: 0.9954
+[2025/01/16-09:07:34.224] Epoch 99 validation Loss: 0.0982 Acc: 0.9771
+[2025/01/16-09:08:03.407]                precision    recall  f1-score   support
+
+passengership     0.9808    0.9778    0.9793      2613
+       tanker     0.9701    0.9768    0.9735      2759
+        cargo     0.9806    0.9688    0.9747      2561
+          tug     0.9868    0.9941    0.9904      2699
+
+     accuracy                         0.9795     10632
+    macro avg     0.9796    0.9794    0.9795     10632
+ weighted avg     0.9795    0.9795    0.9795     10632
+
+[2025/01/16-09:11:56.508] Epoch 100 train Loss: 0.0085 Acc: 0.9972
+[2025/01/16-09:12:24.461] Epoch 100 validation Loss: 0.0932 Acc: 0.9769
+[2025/01/16-09:16:17.987] Epoch 101 train Loss: 0.0134 Acc: 0.9955
+[2025/01/16-09:16:46.024] Epoch 101 validation Loss: 0.0941 Acc: 0.9772
+[2025/01/16-09:20:38.353] Epoch 102 train Loss: 0.0113 Acc: 0.9959
+[2025/01/16-09:21:06.473] Epoch 102 validation Loss: 0.0945 Acc: 0.9757
+[2025/01/16-09:24:58.836] Epoch 103 train Loss: 0.0079 Acc: 0.9977
+[2025/01/16-09:25:26.496] Epoch 103 validation Loss: 0.1022 Acc: 0.9739
+[2025/01/16-09:29:18.401] Epoch 104 train Loss: 0.0104 Acc: 0.9967
+[2025/01/16-09:29:46.566] Epoch 104 validation Loss: 0.0887 Acc: 0.9783
+[2025/01/16-09:33:40.341] Epoch 105 train Loss: 0.0042 Acc: 0.9991
+[2025/01/16-09:34:08.422] Epoch 105 validation Loss: 0.0858 Acc: 0.9786
+[2025/01/16-09:38:00.768] Epoch 106 train Loss: 0.0084 Acc: 0.9973
+[2025/01/16-09:38:28.821] Epoch 106 validation Loss: 0.0881 Acc: 0.9786
+[2025/01/16-09:42:20.832] Epoch 107 train Loss: 0.0068 Acc: 0.9975
+[2025/01/16-09:42:48.785] Epoch 107 validation Loss: 0.0924 Acc: 0.9790
+[2025/01/16-09:46:41.986] Epoch 108 train Loss: 0.0085 Acc: 0.9972
+[2025/01/16-09:47:09.960] Epoch 108 validation Loss: 0.0860 Acc: 0.9807
+[2025/01/16-09:51:02.884] Epoch 109 train Loss: 0.0048 Acc: 0.9985
+[2025/01/16-09:51:31.157] Epoch 109 validation Loss: 0.0880 Acc: 0.9817
+[2025/01/16-09:52:00.697]                precision    recall  f1-score   support
+
+passengership     0.9823    0.9778    0.9801      2613
+       tanker     0.9803    0.9757    0.9780      2759
+        cargo     0.9762    0.9785    0.9774      2561
+          tug     0.9882    0.9952    0.9917      2699
+
+     accuracy                         0.9818     10632
+    macro avg     0.9818    0.9818    0.9818     10632
+ weighted avg     0.9818    0.9818    0.9818     10632
+
+[2025/01/16-09:55:54.342] Epoch 110 train Loss: 0.0044 Acc: 0.9988
+[2025/01/16-09:56:22.471] Epoch 110 validation Loss: 0.1370 Acc: 0.9710
+[2025/01/16-10:00:15.900] Epoch 111 train Loss: 0.0064 Acc: 0.9981
+[2025/01/16-10:00:43.907] Epoch 111 validation Loss: 0.1066 Acc: 0.9770
+[2025/01/16-10:04:36.506] Epoch 112 train Loss: 0.0031 Acc: 0.9992
+[2025/01/16-10:05:04.699] Epoch 112 validation Loss: 0.1836 Acc: 0.9620
+[2025/01/16-10:08:58.096] Epoch 113 train Loss: 0.0070 Acc: 0.9977
+[2025/01/16-10:09:26.024] Epoch 113 validation Loss: 0.0948 Acc: 0.9782
+[2025/01/16-10:13:19.368] Epoch 114 train Loss: 0.0021 Acc: 0.9993
+[2025/01/16-10:13:47.360] Epoch 114 validation Loss: 0.0754 Acc: 0.9834
+[2025/01/16-10:17:38.851] Epoch 115 train Loss: 0.0036 Acc: 0.9990
+[2025/01/16-10:18:06.687] Epoch 115 validation Loss: 0.0838 Acc: 0.9819
+[2025/01/16-10:21:58.446] Epoch 116 train Loss: 0.0028 Acc: 0.9992
+[2025/01/16-10:22:26.329] Epoch 116 validation Loss: 0.0808 Acc: 0.9828
+[2025/01/16-10:26:18.796] Epoch 117 train Loss: 0.0028 Acc: 0.9990
+[2025/01/16-10:26:46.859] Epoch 117 validation Loss: 0.0712 Acc: 0.9854
+[2025/01/16-10:30:39.204] Epoch 118 train Loss: 0.0012 Acc: 0.9998
+[2025/01/16-10:31:07.030] Epoch 118 validation Loss: 0.0708 Acc: 0.9856
+[2025/01/16-10:34:59.699] Epoch 119 train Loss: 0.0028 Acc: 0.9992
+[2025/01/16-10:35:27.620] Epoch 119 validation Loss: 0.0958 Acc: 0.9805
+[2025/01/16-10:35:56.561]                precision    recall  f1-score   support
+
+passengership     0.9865    0.9790    0.9827      2613
+       tanker     0.9825    0.9779    0.9802      2759
+        cargo     0.9763    0.9820    0.9792      2561
+          tug     0.9893    0.9959    0.9926      2699
+
+     accuracy                         0.9837     10632
+    macro avg     0.9837    0.9837    0.9837     10632
+ weighted avg     0.9837    0.9837    0.9837     10632
+
+[2025/01/16-10:35:56.561] Training complete in 529m 32s
+[2025/01/16-10:35:56.561] Best validation Acc: 0.985608  (Epoch: 118)
+[2025/01/16-10:36:27.690]                precision    recall  f1-score   support
+
+passengership     0.9865    0.9790    0.9827      2613
+       tanker     0.9825    0.9779    0.9802      2759
+        cargo     0.9763    0.9820    0.9792      2561
+          tug     0.9893    0.9959    0.9926      2699
+
+     accuracy                         0.9837     10632
+    macro avg     0.9837    0.9837    0.9837     10632
+ weighted avg     0.9837    0.9837    0.9837     10632
+

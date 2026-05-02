@@ -1,0 +1,6 @@
+epoch,wd,batch,lr,distill_type,freeze_teacher,dynamic_weight,p_encoder,p_classifier,best_acc
+200,0.0001,20,0.0005,MTSKD_Temp,True,False,0.355,0.255,92.3898531375167
+200,0.0001,20,0.0005,MemKD,True,False,0.355,0.255,89.62765957446808
+200,0.0001,20,0.0005,Tser,True,False,0.355,0.255,88.29787234042553
+200,0.0001,20,0.0005,MTSKD_Temp,True,False,0.355,0.255,91.09042553191489
+200,0.0001,20,0.0005,none,True,False,0.355,0.255,88.03191489361703
