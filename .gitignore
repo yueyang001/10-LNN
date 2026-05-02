@@ -3,10 +3,12 @@
 *.pt
 *.ckpt
 **/*.pth
-
+checkpoints/**/*.pth
+checkpoints/**/*.safetensors
+checkpoints/**/*.bin
 # 屏蔽特定文件夹
 backup/
-checkpoints/
+# checkpoints/
 models/wav2vec2-large-robust-12-ft-emotion-msp-dim/
 
 # 屏蔽运行日志和缓存

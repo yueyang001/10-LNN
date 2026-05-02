@@ -1,0 +1,40 @@
+dataset:
+  data_dir: /media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip_622
+  data_type: wav_s@wav_t
+  num_workers: 4
+distillation:
+  USE_DYNAMIC_DISTILL_WEIGHT: true
+  alpha: 0.3
+  distill_type: MTSKD_Temp
+  learnable_alpha: true
+  temperature: 2.0
+  weight_type: uniform
+distributed:
+  backend: nccl
+  gpu_ids:
+  - 4
+  - 5
+  - 6
+  - 7
+  master_addr: localhost
+  master_port: '12356'
+model:
+  num_classes: 4
+  student:
+    p_classifier: 0.25
+    p_encoder: 0.12
+    stu_seq_len: 16
+  teacher:
+    checkpoint_path: /media/hdd1/fubohan/Code/UATR/models/Audio_Teacher_DeepShip_622/checkpoints/Student.pth
+    freeze: true
+    pretrained: true
+save:
+  save_dir: checkpoints/grid_deepship_0/num_epochs200_weight_decay8e-05_batch_size16_lr0.0004_distill_typeMTSKD_Temp_freezeTrue_USE_DYNAMIC_DISTILL_WEIGHTTrue_p_encoder0.12_p_classifier0.25
+  save_interval: 10
+training:
+  batch_size: 16
+  log_interval: 20
+  lr: 0.0004
+  num_epochs: 200
+  seed: 42
+  weight_decay: 8.0e-05

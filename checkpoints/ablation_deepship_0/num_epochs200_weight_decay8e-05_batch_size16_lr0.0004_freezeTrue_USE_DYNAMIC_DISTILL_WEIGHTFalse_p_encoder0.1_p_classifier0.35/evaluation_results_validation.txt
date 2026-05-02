@@ -1,0 +1,38 @@
+============================================================
+EVALUATION RESULTS - VALIDATION SET
+============================================================
+
+Checkpoint: checkpoints/ablation_deepship/num_epochs200_weight_decay8e-05_batch_size16_lr0.0004_freezeTrue_USE_DYNAMIC_DISTILL_WEIGHTFalse_p_encoder0.1_p_classifier0.35/best_student.pth
+Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip_622
+Dataset split: validation
+Number of samples: 10631
+
+Accuracy: 87.7434%
+
+F1 Score:
+  Macro:   87.6790%
+  Micro:   87.7434%
+  Weighted: 87.7182%
+
+AUC Score:
+  OVO (One-vs-One):   97.7000%
+  OVR (One-vs-Rest):  97.7044%
+
+Confusion Matrix:
+[[2343   68   69  133]
+ [ 117 2333  277   32]
+ [ 101  211 2130  118]
+ [  61   22   94 2522]]
+
+Classification Report:
+               precision    recall  f1-score   support
+
+passengership     0.8936    0.8967    0.8951      2613
+       tanker     0.8857    0.8456    0.8652      2759
+        cargo     0.8288    0.8320    0.8304      2560
+          tug     0.8991    0.9344    0.9164      2699
+
+     accuracy                         0.8774     10631
+    macro avg     0.8768    0.8772    0.8768     10631
+ weighted avg     0.8773    0.8774    0.8772     10631
+

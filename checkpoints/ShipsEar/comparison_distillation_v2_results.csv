@@ -1,0 +1,7 @@
+Method,Best Acc (%),Best AUC (%),Best F1 (%),Status,Has Checkpoint
+cat_kd,87.63,97.92,86.65,completed,True
+ickd,84.71,97.22,83.81,completed,True
+vkd,87.77,97.67,86.93,completed,True
+mgd,88.43,97.94,87.73,completed,True
+sdd,89.10,98.28,88.38,completed,True
+diffkd,88.56,98.07,87.95,completed,True

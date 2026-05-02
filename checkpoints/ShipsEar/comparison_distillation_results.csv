@@ -1,0 +1,22 @@
+Method,Best Acc (%),Best AUC (%),Best F1 (%),Status,Has Checkpoint
+kd,90.03,98.27,89.38,completed,True
+lskd,89.10,98.21,88.71,completed,True
+dkd,88.70,97.78,87.78,completed,True
+nkd,89.10,98.09,87.73,completed,True
+wsld,88.43,98.12,87.89,completed,True
+freekd,87.23,97.81,86.33,completed,True
+at,89.49,98.02,88.98,completed,True
+nst,87.50,97.71,86.87,completed,True
+fsp,88.43,97.62,86.86,completed,True
+pkt,88.56,97.92,87.33,completed,True
+rkd,87.77,97.38,86.55,completed,True
+sp,88.30,98.06,87.88,completed,True
+cc,88.96,98.08,88.22,completed,True
+vid,88.30,98.08,87.75,completed,True
+cat_kd,87.50,98.01,86.68,completed,True
+ickd,21.68,43.62,7.13,completed,True
+vkd,87.90,97.75,87.23,completed,True
+mgd,21.68,43.62,7.13,completed,True
+sdd,21.68,43.62,7.13,completed,True
+diffkd,21.68,43.62,7.13,completed,True
+mkd,89.36,98.31,88.71,completed,True

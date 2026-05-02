@@ -1,0 +1,40 @@
+============================================================
+EVALUATION RESULTS - VALIDATION SET
+============================================================
+
+Checkpoint: checkpoints/ablation_shipsear/num_epochs200_weight_decay0.0001_batch_size20_lr0.0005_distill_typeMTSKD_Temp_freezeTrue_USE_DYNAMIC_DISTILL_WEIGHTFalse_p_encoder0.355_p_classifier0.255/best_student.pth
+Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/ShipsEar_622
+Dataset split: validation
+Number of samples: 749
+
+Accuracy: 92.3899%
+
+F1 Score:
+  Macro:    91.8480%
+  Micro:    92.3899%
+  Weighted:  92.3381%
+
+AUC Score:
+  OVO (One-vs-One):   98.8423%
+  OVR (One-vs-Rest):  98.7017%
+
+Confusion Matrix:
+[[115   2   6   1   0]
+ [  3 153   5   2   0]
+ [  7   3 265   7   1]
+ [  4   0   9  83   7]
+ [  0   0   0   0  76]]
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           A     0.8915    0.9274    0.9091       124
+           D     0.9684    0.9387    0.9533       163
+           C     0.9298    0.9364    0.9331       283
+           B     0.8925    0.8058    0.8469       103
+           E     0.9048    1.0000    0.9500        76
+
+    accuracy                         0.9239       749
+   macro avg     0.9174    0.9217    0.9185       749
+weighted avg     0.9242    0.9239    0.9234       749
+

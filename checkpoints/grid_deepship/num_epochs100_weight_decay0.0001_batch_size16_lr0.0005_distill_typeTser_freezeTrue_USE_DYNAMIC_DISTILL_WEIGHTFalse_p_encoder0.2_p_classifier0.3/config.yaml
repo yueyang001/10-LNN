@@ -1,0 +1,39 @@
+training:
+  num_epochs: 100
+  batch_size: 16
+  lr: 0.0005
+  weight_decay: 0.0001
+  seed: 42
+  log_interval: 20
+distillation:
+  temperature: 2.0
+  alpha: 0.3
+  learnable_alpha: true
+  distill_type: Tser
+  weight_type: uniform
+  USE_DYNAMIC_DISTILL_WEIGHT: false
+model:
+  num_classes: 4
+  teacher:
+    pretrained: true
+    freeze: true
+    checkpoint_path: /media/hdd1/fubohan/Code/UATR/models/Audio_Teacher_DeepShip_622/checkpoints/Student.pth
+  student:
+    p_encoder: 0.2
+    p_classifier: 0.3
+dataset:
+  data_dir: /media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip_622
+  data_type: wav_s@wav_t
+  num_workers: 4
+distributed:
+  master_addr: localhost
+  master_port: '12356'
+  backend: nccl
+  gpu_ids:
+  - 4
+  - 5
+  - 6
+  - 7
+save:
+  save_dir: checkpoints/grid_deepship/num_epochs100_weight_decay0.0001_batch_size16_lr0.0005_distill_typeTser_freezeTrue_USE_DYNAMIC_DISTILL_WEIGHTFalse_p_encoder0.2_p_classifier0.3
+  save_interval: 10
