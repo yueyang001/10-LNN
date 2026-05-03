@@ -15,6 +15,7 @@ models/wav2vec2-large-robust-12-ft-emotion-msp-dim/
 .vscode
 __pycache__/
 *.log
+!checkpoints/**/*.log
 .ipynb_checkpoints/
 
 # 屏蔽其他大文件
