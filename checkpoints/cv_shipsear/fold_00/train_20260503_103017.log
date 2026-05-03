@@ -1,0 +1,35 @@
+2026-05-03 10:30:17,081 - INFO - ==================================================
+2026-05-03 10:30:17,081 - INFO - Distillation Training Configuration
+2026-05-03 10:30:17,081 - INFO - ==================================================
+2026-05-03 10:30:17,081 - INFO - GPUs: [4, 5, 6, 7]
+2026-05-03 10:30:17,082 - INFO - World size: 4
+2026-05-03 10:30:17,082 - INFO - Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/ShipsEar_622
+2026-05-03 10:30:17,082 - INFO - Data type: wav_s@wav_t
+2026-05-03 10:30:17,082 - INFO - Batch size: 16
+2026-05-03 10:30:17,082 - INFO - Epochs: 100
+2026-05-03 10:30:17,082 - INFO - Learning rate: 0.001
+2026-05-03 10:30:17,082 - INFO - Temperature: 2.0
+2026-05-03 10:30:17,082 - INFO - Alpha: 0.3
+2026-05-03 10:30:17,082 - INFO - Save dir: checkpoints/cv_shipsear/fold_00
+2026-05-03 10:30:17,082 - INFO - ==================================================
+2026-05-03 10:30:17,128 - INFO - Train dataset size: 2240
+2026-05-03 10:30:17,128 - INFO - Validation dataset size: 749
+2026-05-03 10:30:18,196 - INFO - Student params: 316,299 (0.32M)
+2026-05-03 10:30:18,197 - INFO - Teacher params: 164,415,877 (164.42M)
+2026-05-03 10:30:18,197 - INFO - Trainable params: 271,372 (0.27M)
+2026-05-03 10:30:18,707 - INFO - Start training...
+2026-05-03 10:30:18,708 - INFO - No checkpoint found, start from scratch
+2026-05-03 10:30:41,692 - INFO - Epoch [1] Batch [0/35]                     Loss: 1.7246, Hard: 1.7246, Soft: 0.0000                     Acc: 12.50% LR: 0.001000                     Alpha: 0.5744425058364868                     Beta: 0.0                     MemKD: 0.0
+2026-05-03 10:30:45,059 - INFO - Epoch [1] Batch [20/35]                     Loss: 1.4460, Hard: 1.4460, Soft: 0.0000                     Acc: 37.50% LR: 0.001000                     Alpha: 0.5744425058364868                     Beta: 0.0                     MemKD: 0.0
+2026-05-03 10:31:12,723 - INFO - Epoch [1/100] Train Loss: 1.4217, Train Acc: 41.07%, Val Loss: 1.4637, Val Acc: 42.82%
+2026-05-03 10:31:12,723 - INFO - Best model saved with accuracy: 42.82%
+2026-05-03 10:31:34,613 - INFO - Epoch [2] Batch [0/35]                     Loss: 1.2069, Hard: 1.2069, Soft: 0.0000                     Acc: 43.75% LR: 0.001000                     Alpha: 0.5744425058364868                     Beta: 0.0                     MemKD: 0.0
+2026-05-03 10:31:37,606 - INFO - Epoch [2] Batch [20/35]                     Loss: 1.3438, Hard: 1.3438, Soft: 0.0000                     Acc: 45.83% LR: 0.001000                     Alpha: 0.5744425058364868                     Beta: 0.0                     MemKD: 0.0
+2026-05-03 10:32:04,878 - INFO - Epoch [2/100] Train Loss: 1.3046, Train Acc: 44.29%, Val Loss: 1.1943, Val Acc: 51.46%
+2026-05-03 10:32:04,879 - INFO - Best model saved with accuracy: 51.46%
+2026-05-03 10:32:25,358 - INFO - Epoch [3] Batch [0/35]                     Loss: 1.0792, Hard: 1.0792, Soft: 0.0000                     Acc: 56.25% LR: 0.000999                     Alpha: 0.5744425058364868                     Beta: 0.0                     MemKD: 0.0
+2026-05-03 10:32:28,388 - INFO - Epoch [3] Batch [20/35]                     Loss: 1.1696, Hard: 1.1696, Soft: 0.0000                     Acc: 44.64% LR: 0.000999                     Alpha: 0.5744425058364868                     Beta: 0.0                     MemKD: 0.0
+2026-05-03 10:32:56,044 - INFO - Epoch [3/100] Train Loss: 1.2583, Train Acc: 46.43%, Val Loss: 1.1228, Val Acc: 54.12%
+2026-05-03 10:32:56,044 - INFO - Best model saved with accuracy: 54.12%
+2026-05-03 10:33:18,160 - INFO - Epoch [4] Batch [0/35]                     Loss: 1.2189, Hard: 1.2189, Soft: 0.0000                     Acc: 56.25% LR: 0.000998                     Alpha: 0.5744425058364868                     Beta: 0.0                     MemKD: 0.0
+2026-05-03 10:33:21,450 - INFO - Epoch [4] Batch [20/35]                     Loss: 1.1806, Hard: 1.1806, Soft: 0.0000                     Acc: 50.30% LR: 0.000998                     Alpha: 0.5744425058364868                     Beta: 0.0                     MemKD: 0.0

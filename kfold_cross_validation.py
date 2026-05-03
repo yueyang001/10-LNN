@@ -251,7 +251,7 @@ def main():
     """主函数：演示如何使用"""
 
     # ============ 配置 ============
-    data_dir = "./data"  # 修改为你的数据目录
+    data_dir = '/media/hdd1/chuxiaohui/AI4Ocean_UATR/ShipsEar_622'  # 修改为你的数据目录
 
     # 检查数据目录是否存在
     if not os.path.exists(data_dir):
