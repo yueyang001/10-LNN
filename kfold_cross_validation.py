@@ -250,8 +250,18 @@ class KFoldCrossValidator:
 def main():
     """主函数：演示如何使用"""
 
+    import argparse
+    parser = argparse.ArgumentParser(description="K-Fold交叉验证")
+    parser.add_argument("--data-dir", type=str,
+                        default='/media/hdd1/chuxiaohui/AI4Ocean_UATR/ShipsEar_622',
+                        help="数据目录路径")
+    parser.add_argument("--output-dir", type=str,
+                        default="results/kfold_splits",
+                        help="输出目录")
+    args = parser.parse_args()
+
     # ============ 配置 ============
-    data_dir = '/media/hdd1/chuxiaohui/AI4Ocean_UATR/ShipsEar_622'  # 修改为你的数据目录
+    data_dir = args.data_dir
 
     # 检查数据目录是否存在
     if not os.path.exists(data_dir):
@@ -262,7 +272,7 @@ def main():
     # ============ 创建验证器 ============
     validator = KFoldCrossValidator(
         data_dir=data_dir,
-        output_dir="results/kfold_splits",
+        output_dir=args.output_dir,
         seed=42  # 固定随机种子保证复现性
     )
 
