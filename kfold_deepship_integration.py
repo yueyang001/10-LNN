@@ -131,11 +131,16 @@ class DeepShipKFoldTrainer:
             config = yaml.safe_load(f)
 
         config['save']['save_dir'] = save_dir
-        # 蒸馏脚本使用 training.num_epochs 而不是 train.epochs
+
+        # 适配不同的配置格式：train -> training
+        if 'train' in config and 'training' not in config:
+            config['training'] = config.pop('train')
+
+        # 适配不同的epoch字段名：epochs -> num_epochs
         if 'training' in config:
+            if 'epochs' in config['training'] and 'num_epochs' not in config['training']:
+                config['training']['num_epochs'] = config['training'].pop('epochs')
             config['training']['num_epochs'] = 200
-        else:
-            config['train']['epochs'] = 200
 
         # 创建临时配置文件
         with tempfile.NamedTemporaryFile(mode='w', suffix='.yaml', delete=False) as tmp:
