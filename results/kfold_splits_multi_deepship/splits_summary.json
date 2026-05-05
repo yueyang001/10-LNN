@@ -1,0 +1,37 @@
+{
+  "total_splits": 3,
+  "output_dir": "results/kfold_splits_multi_deepship",
+  "generated_time": "2026-05-05T08:57:10.009942",
+  "splits": {
+    "split_00_seed42": {
+      "split_id": 0,
+      "split_name": "split_00_seed42",
+      "seed": 42,
+      "data_dir": "/media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip_622",
+      "output_dir": "results/kfold_splits_multi_deepship/split_00_seed42",
+      "n_samples": 31892,
+      "n_folds": 10,
+      "generated_time": "2026-05-05T08:57:08.979850"
+    },
+    "split_01_seed123": {
+      "split_id": 1,
+      "split_name": "split_01_seed123",
+      "seed": 123,
+      "data_dir": "/media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip_622",
+      "output_dir": "results/kfold_splits_multi_deepship/split_01_seed123",
+      "n_samples": 31892,
+      "n_folds": 10,
+      "generated_time": "2026-05-05T08:57:09.582978"
+    },
+    "split_02_seed456": {
+      "split_id": 2,
+      "split_name": "split_02_seed456",
+      "seed": 456,
+      "data_dir": "/media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip_622",
+      "output_dir": "results/kfold_splits_multi_deepship/split_02_seed456",
+      "n_samples": 31892,
+      "n_folds": 10,
+      "generated_time": "2026-05-05T08:57:10.009911"
+    }
+  }
+}
