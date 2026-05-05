@@ -1,0 +1,57 @@
+================================================================================
+多组K-Fold划分对比报告
+生成时间: 2026-05-05 08:57:10
+================================================================================
+
+【划分概览】
+总划分组数: 3
+输出目录: results/kfold_splits_multi_deepship
+
+【各组详情】
+
+split_00_seed42
+  随机种子: 42
+  样本数: 31892
+  数据目录: /media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip_622
+  生成时间: 2026-05-05T08:57:08.979850
+  详细文件:
+    - split_00_seed42/kfold_summary.txt
+    - split_00_seed42/kfold_fold*.txt
+
+split_01_seed123
+  随机种子: 123
+  样本数: 31892
+  数据目录: /media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip_622
+  生成时间: 2026-05-05T08:57:09.582978
+  详细文件:
+    - split_01_seed123/kfold_summary.txt
+    - split_01_seed123/kfold_fold*.txt
+
+split_02_seed456
+  随机种子: 456
+  样本数: 31892
+  数据目录: /media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip_622
+  生成时间: 2026-05-05T08:57:10.009911
+  详细文件:
+    - split_02_seed456/kfold_summary.txt
+    - split_02_seed456/kfold_fold*.txt
+
+================================================================================
+【使用方法】
+
+选择一组划分进行训练:
+
+  # 使用split_00 (seed=42)
+  python kfold_shipsear_integration.py \
+      --train-all \
+      --gpus 4,5,6,7 \
+      --splits-dir results/kfold_splits_multi/split_00_seed42
+
+  # 使用split_01 (seed=123)
+  python kfold_shipsear_integration.py \
+      --train-all \
+      --gpus 4,5,6,7 \
+      --splits-dir results/kfold_splits_multi/split_01_seed123
+
+  # 对比结果
+  cat results/kfold_splits_multi/splits_comparison.txt
