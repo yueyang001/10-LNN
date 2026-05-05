@@ -1,13 +1,13 @@
 """
-DeepShip K-Fold交叉验证 + 模型训练 完整集成脚本
+DeepShip K-Fold交叉验证 + 蒸馏模型训练 完整集成脚本
 
 此脚本演示如何:
 1. 加载K-Fold划分结果
-2. 为每个Fold运行一次完整的DeepShip训练
+2. 为每个Fold运行一次完整的蒸馏训练（学生网络+两种蒸馏方法）
 3. 收集所有Fold的结果进行统计分析
 
 使用方式:
-    python kfold_deepship_integration.py --fold 0 --config configs/train_distillation_deepship.yaml
+    python kfold_deepship_integration.py --fold 0 --config configs/train_LNN_deepship.yaml
     或
     python kfold_deepship_integration.py --all  # 运行所有10个Fold
 """
@@ -17,6 +17,7 @@ import sys
 import argparse
 import csv
 import json
+import re
 import numpy as np
 from pathlib import Path
 from datetime import datetime
@@ -98,39 +99,148 @@ class DeepShipKFoldTrainer:
         os.makedirs(fold_save_dir, exist_ok=True)
         config["save"]["save_dir"] = fold_save_dir
 
-        # 这里应该调用你的训练函数
-        # result = your_train_function(config, gpus)
-        # 为了演示，这里使用模拟结果
-        result = self._mock_train(fold_idx, fold_save_dir)
+        # 调用真实的训练脚本
+        import subprocess
+        import time
+        start_time = time.time()
+        result = self._real_train(fold_idx, fold_save_dir, gpus)
+        training_time = time.time() - start_time
+
+        # 如果训练成功，记录时间；如果失败则返回None
+        if result:
+            result["training_time"] = training_time
 
         # 保存结果到CSV
         self._save_result_to_csv(fold_idx, len(train_samples), len(val_samples), result)
 
         return result
 
-    def _mock_train(self, fold_idx, save_dir):
-        """模拟训练（用于演示）"""
-        import random
-        time_elapsed = random.uniform(30, 60)
-        best_train_acc = random.uniform(0.85, 0.95)
-        best_val_acc = random.uniform(0.80, 0.90)
-        best_epoch = random.randint(50, 150)
+    def _real_train(self, fold_idx, save_dir, gpus="4,5,6,7"):
+        """调用真实的训练脚本 (蒸馏训练)"""
+        import subprocess
+        import yaml
+        import tempfile
 
-        # 保存日志
-        log_file = os.path.join(save_dir, "training.log")
-        with open(log_file, "w") as f:
-            f.write(f"Mock training for DeepShip Fold {fold_idx}\n")
-            f.write(f"Best train accuracy: {best_train_acc:.4f}\n")
-            f.write(f"Best val accuracy: {best_val_acc:.4f}\n")
-            f.write(f"Best epoch: {best_epoch}\n")
+        config_file = "configs/train_LNN_deepship.yaml"
+        if not os.path.exists(config_file):
+            print(f"⚠️  配置文件 {config_file} 不存在")
+            return None
 
-        return {
-            "best_train_acc": best_train_acc,
-            "best_val_acc": best_val_acc,
-            "best_epoch": best_epoch,
-            "training_time": time_elapsed,
-            "status": "success"
-        }
+        # 读取配置文件并修改
+        with open(config_file, 'r') as f:
+            config = yaml.safe_load(f)
+
+        config['save']['save_dir'] = save_dir
+        # 蒸馏脚本使用 training.num_epochs 而不是 train.epochs
+        if 'training' in config:
+            config['training']['num_epochs'] = 200
+        else:
+            config['train']['epochs'] = 200
+
+        # 创建临时配置文件
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.yaml', delete=False) as tmp:
+            yaml.dump(config, tmp)
+            tmp_config = tmp.name
+
+        try:
+            log_file = os.path.join(save_dir, "training.log")
+            cmd = (
+                f"python train_distillation_shipsear.py "
+                f"--config {tmp_config} "
+                f"--gpus {gpus} "
+                f"2>&1 | tee {log_file}"
+            )
+
+            print(f"\n📝 运行蒸馏训练命令: {cmd}\n")
+            result = subprocess.run(cmd, shell=True, capture_output=False)
+
+            if result.returncode == 0:
+                print(f"✓ Fold {fold_idx} 蒸馏训练成功")
+                # 从日志文件中解析真实结果
+                parsed_result = self._parse_training_log(log_file)
+                if parsed_result:
+                    parsed_result["status"] = "success"
+                    return parsed_result
+                else:
+                    print(f"⚠️  无法从日志文件解析结果，使用默认值")
+                    return {
+                        "best_train_acc": 0.0,
+                        "best_val_acc": 0.0,
+                        "best_epoch": 200,
+                        "status": "success"
+                    }
+            else:
+                print(f"✗ Fold {fold_idx} 蒸馏训练失败 (返回码: {result.returncode})")
+                return None
+        finally:
+            # 删除临时文件
+            if os.path.exists(tmp_config):
+                os.remove(tmp_config)
+
+    def _parse_training_log(self, log_file):
+        """从日志文件中解析训练结果"""
+        best_val_acc = 0.0
+        best_train_acc = 0.0
+        best_epoch = 0
+
+        if not os.path.exists(log_file):
+            print(f"⚠️  日志文件不存在: {log_file}")
+            return None
+
+        try:
+            with open(log_file, 'r', encoding='utf-8') as f:
+                lines = f.readlines()
+
+            # 从末尾开始查找"Training finished"行
+            for line in reversed(lines):
+                # 查找最后的训练完成信息: "Training finished! Best accuracy: XX.XX%"
+                if "Training finished! Best accuracy:" in line:
+                    match = re.search(r'Best accuracy: ([\d.]+)%', line)
+                    if match:
+                        best_val_acc = float(match.group(1))
+                        break
+
+            # 查找最佳精度对应的epoch和训练精度
+            # 日志格式: "Epoch [X/200] Train Loss: X.XXXX Train Acc: XX.XX% Val Acc: XX.XX%"
+            best_found = False
+            for line in lines:
+                if f"Val Acc: {best_val_acc:.2f}%" in line or (best_val_acc > 0 and f"Val Acc: {best_val_acc:.1f}%" in line):
+                    # 提取epoch和训练精度
+                    epoch_match = re.search(r'Epoch \[(\d+)/\d+\]', line)
+                    train_acc_match = re.search(r'Train Acc: ([\d.]+)%', line)
+
+                    if epoch_match and train_acc_match:
+                        best_epoch = int(epoch_match.group(1))
+                        best_train_acc = float(train_acc_match.group(1))
+                        best_found = True
+                        break
+
+            if not best_found and best_val_acc > 0:
+                # 如果没找到完全匹配的epoch，找最接近的
+                closest_line = None
+                for line in lines:
+                    if "Val Acc:" in line:
+                        val_match = re.search(r'Val Acc: ([\d.]+)%', line)
+                        if val_match:
+                            val_acc = float(val_match.group(1))
+                            if abs(val_acc - best_val_acc) < 0.1:
+                                closest_line = line
+
+                if closest_line:
+                    epoch_match = re.search(r'Epoch \[(\d+)/\d+\]', closest_line)
+                    train_acc_match = re.search(r'Train Acc: ([\d.]+)%', closest_line)
+                    if epoch_match and train_acc_match:
+                        best_epoch = int(epoch_match.group(1))
+                        best_train_acc = float(train_acc_match.group(1))
+
+            return {
+                "best_train_acc": best_train_acc,
+                "best_val_acc": best_val_acc,
+                "best_epoch": best_epoch
+            }
+        except Exception as e:
+            print(f"⚠️  解析日志文件失败: {e}")
+            return None
 
     def _save_result_to_csv(self, fold_idx, n_train, n_val, result):
         """保存训练结果到CSV"""
@@ -252,7 +362,7 @@ def main():
 if __name__ == "__main__":
     # 如果没有命令行参数，运行演示
     if len(sys.argv) == 1:
-        print("📌 DeepShip K-Fold交叉验证训练演示\n")
+        print("📌 DeepShip K-Fold交叉验证 + 蒸馏训练演示\n")
         print("使用示例:")
         print("  python kfold_deepship_integration.py --fold 0          # 训练Fold 0")
         print("  python kfold_deepship_integration.py --all             # 训练所有Fold")

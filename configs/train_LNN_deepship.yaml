@@ -13,7 +13,7 @@ model:
 train:
   batch_size: 32
   # epochs: 80
-  epochs: 100
+  epochs: 200
   # lr: 1.0e-4
   lr: 1.0e-3
   # weight_decay: 1.0e-4
