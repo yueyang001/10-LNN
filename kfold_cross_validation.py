@@ -262,6 +262,11 @@ def main():
 
     # ============ 配置 ============
     data_dir = args.data_dir
+    output_dir = args.output_dir
+
+    print(f"\n✅ 参数接收:")
+    print(f"   数据目录: {data_dir}")
+    print(f"   输出目录: {output_dir}")
 
     # 检查数据目录是否存在
     if not os.path.exists(data_dir):
@@ -272,7 +277,7 @@ def main():
     # ============ 创建验证器 ============
     validator = KFoldCrossValidator(
         data_dir=data_dir,
-        output_dir=args.output_dir,
+        output_dir=output_dir,
         seed=42  # 固定随机种子保证复现性
     )
 
