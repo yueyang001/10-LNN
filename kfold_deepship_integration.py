@@ -121,7 +121,7 @@ class DeepShipKFoldTrainer:
         import yaml
         import tempfile
 
-        config_file = "configs/train_LNN_deepship.yaml"
+        config_file = "configs/train_distillation_deepship.yaml"
         if not os.path.exists(config_file):
             print(f"⚠️  配置文件 {config_file} 不存在")
             return None
