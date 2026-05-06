@@ -240,7 +240,7 @@ class WiredCfCCell(nn.Module):
                 backbone_dropout=0.0,
                 sparsity_mask=input_sparsity,
             )
-            self.register_module(f"layer_{l}", rnn_cell)
+            setattr(self, f"layer_{l}", rnn_cell)
             self._layers.append(rnn_cell)
             in_features = len(hidden_units)
 

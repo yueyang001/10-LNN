@@ -30,7 +30,7 @@ import subprocess
 import csv
 from datetime import datetime
 from pathlib import Path
-from kfold_cross_validation import KFoldCrossValidator
+from experiments.cv.kfold_cross_validation import KFoldCrossValidator
 from kfold_data_loader import KFoldDataLoader
 
 
