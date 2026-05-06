@@ -258,15 +258,18 @@ def main():
     parser.add_argument("--output-dir", type=str,
                         default="results/kfold_splits",
                         help="输出目录")
+    parser.add_argument("--seed", type=int, default=42, help="随机种子")
     args = parser.parse_args()
 
     # ============ 配置 ============
     data_dir = args.data_dir
     output_dir = args.output_dir
+    seed = args.seed
 
     print(f"\n✅ 参数接收:")
     print(f"   数据目录: {data_dir}")
     print(f"   输出目录: {output_dir}")
+    print(f"   随机种子: {seed}")
 
     # 检查数据目录是否存在
     if not os.path.exists(data_dir):
@@ -278,7 +281,7 @@ def main():
     validator = KFoldCrossValidator(
         data_dir=data_dir,
         output_dir=output_dir,
-        seed=42  # 固定随机种子保证复现性
+        seed=seed  # 使用参数中的种子
     )
 
     # ============ 扫描数据集 ============
