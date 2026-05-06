@@ -142,6 +142,19 @@ class DeepShipKFoldTrainer:
                 config['training']['num_epochs'] = config['training'].pop('epochs')
             config['training']['num_epochs'] = 200
 
+        # 修改端口以避免冲突 - 根据不同group使用不同端口
+        if 'distributed' not in config:
+            config['distributed'] = {}
+        config['distributed']['master_addr'] = 'localhost'
+        
+        # 根据results_dir确定使用哪个端口组
+        if 'group3' in save_dir:
+            config['distributed']['master_port'] = '12363'  # group3使用12363端口
+        elif 'group2' in save_dir:
+            config['distributed']['master_port'] = '12362'  # group2使用12362端口
+        else:
+            config['distributed']['master_port'] = '12361'  # group1使用12361端口
+
         # 创建临时配置文件
         with tempfile.NamedTemporaryFile(mode='w', suffix='.yaml', delete=False) as tmp:
             yaml.dump(config, tmp)

@@ -1,0 +1,26 @@
+2026-05-06 20:36:24,242 - INFO - ==================================================
+2026-05-06 20:36:24,242 - INFO - Distillation Training Configuration
+2026-05-06 20:36:24,242 - INFO - ==================================================
+2026-05-06 20:36:24,243 - INFO - GPUs: [4, 5, 6, 7]
+2026-05-06 20:36:24,243 - INFO - World size: 4
+2026-05-06 20:36:24,243 - INFO - Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/ShipsEar_622
+2026-05-06 20:36:24,243 - INFO - Data type: wav_s@wav_t
+2026-05-06 20:36:24,243 - INFO - Batch size: 16
+2026-05-06 20:36:24,243 - INFO - Epochs: 100
+2026-05-06 20:36:24,243 - INFO - Learning rate: 0.001
+2026-05-06 20:36:24,243 - INFO - Temperature: 2.0
+2026-05-06 20:36:24,243 - INFO - Alpha: 0.3
+2026-05-06 20:36:24,243 - INFO - Save dir: checkpoints/cv_shipsear/fold_00
+2026-05-06 20:36:24,243 - INFO - ==================================================
+2026-05-06 20:36:24,276 - INFO - Train dataset size: 2240
+2026-05-06 20:36:24,276 - INFO - Validation dataset size: 749
+2026-05-06 20:36:26,718 - INFO - Student params: 316,299 (0.32M)
+2026-05-06 20:36:26,719 - INFO - Teacher params: 164,415,877 (164.42M)
+2026-05-06 20:36:26,719 - INFO - Trainable params: 271,372 (0.27M)
+2026-05-06 20:36:29,462 - INFO - Start training...
+2026-05-06 20:36:29,462 - INFO - 🔥 Resume from: checkpoints/cv_shipsear/fold_00/checkpoint_epoch_100.pth
+2026-05-06 20:36:29,962 - INFO - Resume epoch: 101
+2026-05-06 20:36:29,962 - INFO - Best acc: 85.90425531914893
+2026-05-06 20:36:29,962 - INFO - ==================================================
+2026-05-06 20:36:29,962 - INFO - Training finished! Best accuracy: 85.90%
+2026-05-06 20:36:29,962 - INFO - ==================================================

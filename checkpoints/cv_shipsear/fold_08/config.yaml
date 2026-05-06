@@ -1,0 +1,42 @@
+dataset:
+  data_dir: /media/hdd1/chuxiaohui/AI4Ocean_UATR/ShipsEar_622
+  data_type: wav_s@wav_t
+  fold: 8
+  num_workers: 4
+  total_folds: 10
+distillation:
+  USE_DYNAMIC_DISTILL_WEIGHT: true
+  alpha: 0.3
+  distill_type: none
+  learnable_alpha: false
+  temperature: 2.0
+  weight_type: uniform
+distributed:
+  backend: nccl
+  gpu_ids:
+  - 4
+  - 5
+  - 6
+  - 7
+  master_addr: localhost
+  master_port: '12351'
+model:
+  num_classes: 5
+  student:
+    p_classifier: 0.3
+    p_encoder: 0.2
+    stu_seq_len: 16
+  teacher:
+    checkpoint_path: /media/hdd1/fubohan/Code/UATR/models/Audio_Teacher_ShipsEar_622/checkpoints/Student.pth
+    freeze: true
+    pretrained: true
+save:
+  save_dir: checkpoints/cv_shipsear/fold_08
+  save_interval: 10
+training:
+  batch_size: 16
+  log_interval: 20
+  lr: 1e-3
+  num_epochs: 100
+  seed: 42
+  weight_decay: 5e-4
