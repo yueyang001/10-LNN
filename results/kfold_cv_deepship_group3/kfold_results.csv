@@ -1,3 +1,4 @@
 fold_idx,n_train,n_val,best_train_acc,best_val_acc,best_epoch,training_time,status,remarks
 0,28702,3190,98.76,90.0,198,30406.918588399887,success,
 1,28702,3190,0.0,0.0,0,20957.768850564957,success,
+2,28703,3189,98.85,89.9,198,31601.84409070015,success,

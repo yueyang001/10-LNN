@@ -5,9 +5,9 @@ dataset:
   num_workers: 4
   total_folds: 10
 distillation:
-  USE_DYNAMIC_DISTILL_WEIGHT: true
+  USE_DYNAMIC_DISTILL_WEIGHT: false
   alpha: 0.3
-  distill_type: none
+  distill_type: MTSKD_Temp
   learnable_alpha: false
   temperature: 2.0
   weight_type: uniform
@@ -23,8 +23,8 @@ distributed:
 model:
   num_classes: 5
   student:
-    p_classifier: 0.3
-    p_encoder: 0.2
+    p_classifier: 0.255
+    p_encoder: 0.355
     stu_seq_len: 16
   teacher:
     checkpoint_path: /media/hdd1/fubohan/Code/UATR/models/Audio_Teacher_ShipsEar_622/checkpoints/Student.pth
@@ -36,7 +36,7 @@ save:
 training:
   batch_size: 16
   log_interval: 20
-  lr: 1e-3
-  num_epochs: 100
+  lr: 0.0005
+  num_epochs: 200
   seed: 42
-  weight_decay: 5e-4
+  weight_decay: 1e-4
