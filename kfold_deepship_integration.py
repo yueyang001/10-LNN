@@ -1,5 +1,5 @@
 """
-DeepShip K-Fold交叉验证 + 蒸馏模型训练 完整集成脚本
+DeepShip K-Fold 50折叠交叉验证 + 蒸馏模型训练 完整集成脚本
 
 此脚本演示如何:
 1. 加载K-Fold划分结果
@@ -9,7 +9,7 @@ DeepShip K-Fold交叉验证 + 蒸馏模型训练 完整集成脚本
 使用方式:
     python kfold_deepship_integration.py --fold 0 --config configs/train_LNN_deepship.yaml
     或
-    python kfold_deepship_integration.py --all  # 运行所有10个Fold
+    python kfold_deepship_integration.py --all  # 运行所有50个Fold
 """
 
 import os
@@ -77,7 +77,7 @@ class DeepShipKFoldTrainer:
             训练结果字典
         """
         print(f"\n{'='*80}")
-        print(f"DeepShip K-Fold Training - Fold {fold_idx}/9")
+        print(f"DeepShip K-Fold Training - Fold {fold_idx}/49")
         print(f"{'='*80}")
 
         # 获取该Fold的数据
@@ -142,18 +142,11 @@ class DeepShipKFoldTrainer:
                 config['training']['num_epochs'] = config['training'].pop('epochs')
             config['training']['num_epochs'] = 200
 
-        # 修改端口以避免冲突 - 根据不同group使用不同端口
+        # 修改端口以避免冲突
         if 'distributed' not in config:
             config['distributed'] = {}
         config['distributed']['master_addr'] = 'localhost'
-        
-        # 根据results_dir确定使用哪个端口组
-        if 'group3' in save_dir:
-            config['distributed']['master_port'] = '12363'  # group3使用12363端口
-        elif 'group2' in save_dir:
-            config['distributed']['master_port'] = '12362'  # group2使用12362端口
-        else:
-            config['distributed']['master_port'] = '12361'  # group1使用12361端口
+        config['distributed']['master_port'] = '12361'
 
         # 创建临时配置文件
         with tempfile.NamedTemporaryFile(mode='w', suffix='.yaml', delete=False) as tmp:
@@ -163,7 +156,7 @@ class DeepShipKFoldTrainer:
         try:
             log_file = os.path.join(save_dir, "training.log")
             cmd = (
-                f"python train_distillation_shipsear.py "
+                f"python train_distillation_deepship.py "
                 f"--config {tmp_config} "
                 f"--gpus {gpus} "
                 f"2>&1 | tee {log_file}"
@@ -174,7 +167,6 @@ class DeepShipKFoldTrainer:
 
             if result.returncode == 0:
                 print(f"✓ Fold {fold_idx} 蒸馏训练成功")
-                # 从日志文件中解析真实结果
                 parsed_result = self._parse_training_log(log_file)
                 if parsed_result:
                     parsed_result["status"] = "success"
@@ -282,9 +274,9 @@ class DeepShipKFoldTrainer:
                 ])
 
     def train_all_folds(self, config, gpus="4,5,6,7"):
-        """训练所有10个Fold"""
+        """训练所有50个Fold"""
         results = {}
-        for fold_idx in range(10):
+        for fold_idx in range(50):
             result = self.train_fold(fold_idx, config, gpus)
             results[fold_idx] = result
 
@@ -301,7 +293,7 @@ class DeepShipKFoldTrainer:
 
         with open(report_file, "w", encoding="utf-8") as f:
             f.write("=" * 80 + "\n")
-            f.write("DeepShip K-Fold交叉验证 - 训练总结报告\n")
+            f.write("DeepShip K-Fold 50折叠交叉验证 - 训练总结报告\n")
             f.write(f"生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
             f.write("=" * 80 + "\n\n")
 
@@ -365,11 +357,11 @@ def main():
 
     # 选择训练模式
     if args.all:
-        print("🔄 开始DeepShip K-Fold交叉验证（所有10个Fold）...")
+        print("🔄 开始DeepShip K-Fold交叉验证（所有50个Fold）...")
         trainer.train_all_folds(config, args.gpus)
     elif args.fold is not None:
-        if not (0 <= args.fold <= 9):
-            print("❌ 错误: Fold编号应该在0-9之间")
+        if not (0 <= args.fold <= 49):
+            print("❌ 错误: Fold编号应该在0-49之间")
             sys.exit(1)
         print(f"🔄 开始训练DeepShip Fold {args.fold}...")
         trainer.train_fold(args.fold, config, args.gpus)

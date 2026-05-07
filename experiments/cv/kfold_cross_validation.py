@@ -1,9 +1,8 @@
 """
-十折叠交叉验证脚本
+50折叠交叉验证脚本
 - 扫描数据目录结构
-- 生成平衡的十折叠数据集划分
+- 生成平衡的50折叠数据集划分
 - 保存详细的划分结果到txt文档
-- 支持复现性（固定随机种子）
 """
 
 import os
@@ -16,17 +15,16 @@ from collections import defaultdict
 
 
 class KFoldCrossValidator:
-    def __init__(self, data_dir, output_dir="results/kfold_splits", seed=42):
+    def __init__(self, data_dir, output_dir="results/kfold_splits"):
         """
         参数:
             data_dir: 数据根目录路径
             output_dir: 输出划分结果的目录
-            seed: 随机种子，用于复现
         """
         self.data_dir = data_dir
         self.output_dir = output_dir
-        self.seed = seed
-        self.n_splits = 10
+        self.seed = 42
+        self.n_splits = 50
 
         # 创建输出目录
         os.makedirs(output_dir, exist_ok=True)
@@ -77,7 +75,7 @@ class KFoldCrossValidator:
 
     def generate_folds(self, samples):
         """
-        使用 StratifiedKFold 生成平衡的十折叠划分
+        使用 StratifiedKFold 生成平衡的50折叠划分
 
         参数:
             samples: 样本列表 [(wav_path, category_idx, category_name), ...]
@@ -134,9 +132,8 @@ class KFoldCrossValidator:
         with open(output_file, "w", encoding="utf-8") as f:
             # 头部信息
             f.write("=" * 80 + "\n")
-            f.write(f"十折叠交叉验证 - Fold {fold_idx}\n")
+            f.write(f"50折叠交叉验证 - Fold {fold_idx}\n")
             f.write(f"生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-            f.write(f"随机种子: {self.seed}\n")
             f.write("=" * 80 + "\n\n")
 
             # 统计信息
@@ -171,8 +168,7 @@ class KFoldCrossValidator:
             f.write("\n")
             f.write("=" * 80 + "\n")
             f.write("复现说明:\n")
-            f.write(f"使用此文件中的样本路径列表，结合随机种子 {self.seed}\n")
-            f.write("可以完全复现该Fold的数据划分结果。\n")
+            f.write("使用此文件中的样本路径列表，可以完全复现该Fold的数据划分结果。\n")
             f.write("=" * 80 + "\n")
 
     def save_all_splits(self, suffix=""):
@@ -190,9 +186,8 @@ class KFoldCrossValidator:
         summary_file = os.path.join(self.output_dir, f"kfold_summary{suffix}.txt")
         with open(summary_file, "w", encoding="utf-8") as f:
             f.write("=" * 80 + "\n")
-            f.write("十折叠交叉验证 - 总体汇总\n")
+            f.write("50折叠交叉验证 - 总体汇总\n")
             f.write(f"生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-            f.write(f"随机种子: {self.seed}\n")
             f.write(f"数据目录: {self.data_dir}\n")
             f.write("=" * 80 + "\n\n")
 
@@ -258,18 +253,16 @@ def main():
     parser.add_argument("--output-dir", type=str,
                         default="results/kfold_splits",
                         help="输出目录")
-    parser.add_argument("--seed", type=int, default=42, help="随机种子")
     args = parser.parse_args()
 
     # ============ 配置 ============
     data_dir = args.data_dir
     output_dir = args.output_dir
-    seed = args.seed
 
     print(f"\n✅ 参数接收:")
     print(f"   数据目录: {data_dir}")
     print(f"   输出目录: {output_dir}")
-    print(f"   随机种子: {seed}")
+    print(f"   折叠数: 50")
 
     # 检查数据目录是否存在
     if not os.path.exists(data_dir):
@@ -280,8 +273,7 @@ def main():
     # ============ 创建验证器 ============
     validator = KFoldCrossValidator(
         data_dir=data_dir,
-        output_dir=output_dir,
-        seed=seed  # 使用参数中的种子
+        output_dir=output_dir
     )
 
     # ============ 扫描数据集 ============
@@ -293,7 +285,7 @@ def main():
         return
 
     # ============ 生成折叠划分 ============
-    print("\n🔄 生成十折叠划分...")
+    print("\n🔄 生成50折叠划分...")
     validator.generate_folds(samples)
 
     # ============ 保存结果 ============
@@ -302,9 +294,7 @@ def main():
     validator.save_split_indices(suffix="")
 
     print("\n✨ 完成! 所有文件已保存到:", validator.output_dir)
-    print("\n📌 下次复现时使用相同的:")
-    print(f"   - 数据目录: {data_dir}")
-    print(f"   - 随机种子: {validator.seed}")
+    print(f"\n📌 数据已保存，可用于训练")
 
 
 if __name__ == "__main__":

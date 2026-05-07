@@ -1,5 +1,5 @@
 """
-K-Fold 十折叠数据加载器
+K-Fold 50折叠数据加载器
 用于在训练脚本中方便地加载划分好的K-Fold数据
 
 使用示例:
@@ -104,7 +104,7 @@ def load_kfold_splits(split_dir):
     """
     splits = {}
 
-    for fold_idx in range(10):
+    for fold_idx in range(50):
         try:
             loader = KFoldDataLoader(split_dir, fold_idx)
             splits[fold_idx] = {

@@ -1,5 +1,5 @@
 """
-K-Fold交叉验证 + ShipEar实际集成脚本
+K-Fold 50折叠交叉验证 + ShipEar实际集成脚本
 
 此脚本展示如何将K-Fold与现有的ShipEar训练系统集成。
 它可以:
@@ -30,8 +30,15 @@ import subprocess
 import csv
 from datetime import datetime
 from pathlib import Path
-from experiments.cv.kfold_cross_validation import KFoldCrossValidator
 from kfold_data_loader import KFoldDataLoader
+
+# 动态添加项目路径以导入KFoldCrossValidator
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'experiments', 'cv'))
+try:
+    from kfold_cross_validation import KFoldCrossValidator
+except ImportError:
+    print("❌ 警告: 无法导入 KFoldCrossValidator，请确保 experiments/cv/kfold_cross_validation.py 存在")
+    KFoldCrossValidator = None
 
 
 class ShipEarKFoldIntegration:
@@ -77,12 +84,15 @@ class ShipEarKFoldIntegration:
 
     def setup_kfold_splits(self):
         """生成K-Fold划分"""
+        if KFoldCrossValidator is None:
+            print("❌ 错误: 无法导入 KFoldCrossValidator")
+            return False
+
         print("\n📊 生成K-Fold划分...")
 
         validator = KFoldCrossValidator(
             data_dir=self.data_dir,
-            output_dir=self.splits_dir,
-            seed=42
+            output_dir=self.splits_dir
         )
 
         # 扫描训练数据
@@ -129,7 +139,7 @@ class ShipEarKFoldIntegration:
     def train_fold(self, fold_idx, gpus="4,5,6,7"):
         """训练单个Fold"""
         print(f"\n{'='*80}")
-        print(f"训练 Fold {fold_idx}/9")
+        print(f"训练 Fold {fold_idx}/49")
         print(f"{'='*80}")
 
         # 检查K-Fold划分文件是否存在
@@ -211,17 +221,17 @@ class ShipEarKFoldIntegration:
 
     def train_all_folds(self, gpus="4,5,6,7"):
         """批量训练所有Fold"""
-        print("\n🔄 开始批量训练（所有10个Fold）...\n")
+        print("\n🔄 开始批量训练（所有50个Fold）...\n")
 
         results = {}
-        for fold_idx in range(10):
+        for fold_idx in range(50):
             success = self.train_fold(fold_idx, gpus)
             results[fold_idx] = success
 
         # 统计成功/失败
         n_success = sum(1 for v in results.values() if v)
         print(f"\n{'='*80}")
-        print(f"训练完成统计: {n_success}/10 个Fold成功")
+        print(f"训练完成统计: {n_success}/50 个Fold成功")
         print(f"{'='*80}")
 
         # 生成总结报告
@@ -235,7 +245,7 @@ class ShipEarKFoldIntegration:
 
         with open(report_file, "w", encoding="utf-8") as f:
             f.write("=" * 80 + "\n")
-            f.write("ShipEar K-Fold交叉验证 - 训练总结\n")
+            f.write("ShipEar K-Fold 50折叠交叉验证 - 训练总结\n")
             f.write(f"生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
             f.write("=" * 80 + "\n\n")
 
@@ -335,8 +345,8 @@ def main():
         integration.generate_report()
 
     elif args.train_fold is not None:
-        if not (0 <= args.train_fold <= 9):
-            print("❌ 错误: Fold编号应该在0-9之间")
+        if not (0 <= args.train_fold <= 49):
+            print("❌ 错误: Fold编号应该在0-49之间")
             sys.exit(1)
         integration.train_fold(args.train_fold, args.gpus)
 
