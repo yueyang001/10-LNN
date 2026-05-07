@@ -1,0 +1,29 @@
+2026-05-07 10:35:06,942 - INFO - ==================================================
+2026-05-07 10:35:06,942 - INFO - Distillation Training Configuration
+2026-05-07 10:35:06,942 - INFO - ==================================================
+2026-05-07 10:35:06,942 - INFO - GPUs: [4, 5, 6, 7]
+2026-05-07 10:35:06,942 - INFO - World size: 4
+2026-05-07 10:35:06,943 - INFO - Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/ShipsEar_622
+2026-05-07 10:35:06,943 - INFO - Data type: wav_s@wav_t
+2026-05-07 10:35:06,943 - INFO - Batch size: 16
+2026-05-07 10:35:06,943 - INFO - Epochs: 200
+2026-05-07 10:35:06,943 - INFO - Learning rate: 0.0005
+2026-05-07 10:35:06,943 - INFO - Temperature: 2.0
+2026-05-07 10:35:06,943 - INFO - Alpha: 0.3
+2026-05-07 10:35:06,943 - INFO - Save dir: checkpoints/cv_shipsear/fold_00
+2026-05-07 10:35:06,943 - INFO - ==================================================
+2026-05-07 10:35:06,974 - INFO - Train dataset size: 2240
+2026-05-07 10:35:06,974 - INFO - Validation dataset size: 749
+2026-05-07 10:35:09,406 - INFO - Student params: 316,299 (0.32M)
+2026-05-07 10:35:09,406 - INFO - Teacher params: 164,415,877 (164.42M)
+2026-05-07 10:35:09,406 - INFO - Trainable params: 271,372 (0.27M)
+2026-05-07 10:35:11,004 - INFO - Start training...
+2026-05-07 10:35:11,006 - INFO - 🔥 Resume from: checkpoints/cv_shipsear/fold_00/checkpoint_epoch_100.pth
+2026-05-07 10:35:12,377 - INFO - Resume epoch: 101
+2026-05-07 10:35:12,377 - INFO - Best acc: 85.90425531914893
+2026-05-07 10:35:38,789 - INFO - Epoch [101] Batch [0/35]                     Loss: 1.1416, Hard: 1.0009, Soft: 0.1407                     Acc: 75.00% LR: 0.000000                     Alpha: 0.5744425058364868                     Beta: 0.0                     MemKD: 0.5
+2026-05-07 10:35:42,889 - INFO - Epoch [101] Batch [20/35]                     Loss: 0.3560, Hard: 0.2533, Soft: 0.1027                     Acc: 88.99% LR: 0.000000                     Alpha: 0.5744425058364868                     Beta: 0.0                     MemKD: 0.5
+2026-05-07 10:36:14,477 - INFO - Epoch [101/200] Train Loss: 0.4012, Train Acc: 88.75%, Val Loss: 0.4593, Val Acc: 84.97%
+2026-05-07 10:36:38,848 - INFO - Epoch [102] Batch [0/35]                     Loss: 0.1615, Hard: 0.0702, Soft: 0.0913                     Acc: 100.00% LR: 0.000000                     Alpha: 0.5744425058364868                     Beta: 0.0                     MemKD: 0.5
+2026-05-07 10:36:42,110 - INFO - Epoch [102] Batch [20/35]                     Loss: 0.3828, Hard: 0.2853, Soft: 0.0975                     Acc: 90.18% LR: 0.000000                     Alpha: 0.5744425058364868                     Beta: -4.825541054742644e-06                     MemKD: 0.4999997615814209
+2026-05-07 10:37:12,976 - INFO - Epoch [102/200] Train Loss: 0.3658, Train Acc: 89.11%, Val Loss: 0.4424, Val Acc: 85.24%

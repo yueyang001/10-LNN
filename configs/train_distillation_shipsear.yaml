@@ -1,11 +1,11 @@
 # 训练配置
 training:
-  num_epochs: 100
+  num_epochs: 200
   batch_size: 16
   # batch_size: 4
   # lr: 0.5e-3
-  lr: 1e-3
-  weight_decay: 5e-4
+  lr: 0.0005
+  weight_decay: 1e-4
   # weight_decay: 0.01
   seed: 42
   log_interval: 20
@@ -15,12 +15,12 @@ distillation:
   temperature: 2.0
   alpha: 0.3
   learnable_alpha: false
-  distill_type: 'none'
+  distill_type: 'MTSKD_Temp'
   # distill_type: 'base'
   # distill_type: 'mse'
   # distill_type: 'MemKD'
   weight_type: 'uniform'
-  USE_DYNAMIC_DISTILL_WEIGHT: True
+  USE_DYNAMIC_DISTILL_WEIGHT: false
 
 # 模型配置
 model:
@@ -33,8 +33,8 @@ model:
   # 学生网络 (LNN AudioCfC) - 使用默认参数
   student:
     stu_seq_len: 16  # student 时间序列长度
-    p_encoder: 0.2
-    p_classifier: 0.3
+    p_encoder: 0.355
+    p_classifier: 0.255
 
 # 数据集配置 (与 train.py 保持一致)
 dataset:

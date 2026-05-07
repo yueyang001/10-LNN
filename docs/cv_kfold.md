@@ -118,7 +118,7 @@ python kfold_shipsear_integration.py \
 python kfold_shipsear_integration.py \
   --train-all \
   --gpus 4,5,6,7 \
-  --splits-dir results/kfold_splits \
+  --splits-dir results/kfold_splits_shipsear \
   --results-dir results/kfold_cv_shipsear
 ```
 
