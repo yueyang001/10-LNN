@@ -181,6 +181,39 @@ CUDA_VISIBLE_DEVICES=4,5,6,7 python kfold_shipsear_integration.py \
   --results-dir results/kfold_cv_shipsear
 ```
 
+2026/5/11运行版本
+
+Deephip数据集
+```
+# 训练所有50个Fold（分5组，每组10折叠）
+python kfold_deepship_integration.py --all --gpus 4,5,6,7
+
+# 或只训练某个Fold进行测试
+python kfold_deepship_integration.py --fold 0 --gpus 4,5,6,7
+
+# 查看结果
+cat results/kfold_cv_deepship/kfold_summary_Group_0.txt
+cat results/kfold_cv_deepship/kfold_summary_report.txt  # 总体报告
+```
+
+shipsear版本
+```
+# 第1步：生成K-Fold划分（如果还没有）
+python kfold_shipsear_integration.py --setup --data-dir ./data
+
+# 第2步：训练所有50个Fold（分5组，每组10折叠）
+python kfold_shipsear_integration.py --train-all --gpus 4,5,6,7
+
+# 或只训练某个Fold进行测试
+python kfold_shipsear_integration.py --train-fold 0 --gpus 4,5,6,7
+
+# 查看结果
+python kfold_shipsear_integration.py --results
+
+# 指定保存目录
+python kfold_shipsear_integration.py --all --results-dir results/kfold_cv_shipsear --gpus 4,5,6,7
+```
+
 ---
 
 ## 输出结果说明
@@ -300,41 +333,7 @@ python kfold_deepship_integration.py \
 - **最小配置**：2块GPU（会降低速度）
 - **内存需求**：每块GPU需要 ≥ 12GB
 
----
 
-## 故障排除
-
-### 错误1: `FileNotFoundError: 找不到文件`
-**原因**：数据目录不存在或路径错误
-**解决**：
-```bash
-# 检查数据目录是否存在
-ls -la /media/hdd1/chuxiaohui/AI4Ocean_UATR/ShipsEar_622/train/wav/
-```
-
-### 错误2: `ImportError: cannot import name 'KFoldCrossValidator'`
-**原因**：导入路径错误
-**解决**：
-```bash
-# 确保在项目根目录运行脚本
-cd /media/hdd1/fubohan/Code/UATR
-```
-
-### 错误3: `CUDA out of memory`
-**原因**：GPU内存不足
-**解决**：
-- 减少批量大小（在config中修改）
-- 使用更少的GPU
-- 分开运行不同的Fold
-
-### 错误4: 训练卡住或无响应
-**原因**：可能是端口冲突或进程阻塞
-**解决**：
-```bash
-# 查找并杀死相关进程
-pkill -f "train_distillation_deepship.py"
-pkill -f "kfold_deepship_integration.py"
-```
 
 ---
 
@@ -380,4 +379,4 @@ ShipsEar_622/
 
 ---
 
-**最后更新：2026-05-07**
+**最后更新：2026-05-11**

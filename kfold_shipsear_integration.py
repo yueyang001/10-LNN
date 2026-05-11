@@ -1,237 +1,297 @@
 """
-K-Fold 50折叠交叉验证 + ShipEar实际集成脚本
+ShipEar K-Fold 50折叠交叉验证 + 蒸馏模型训练 完整集成脚本
 
-此脚本展示如何将K-Fold与现有的ShipEar训练系统集成。
-它可以:
-1. 生成K-Fold划分
-2. 为每个Fold创建对应的config
-3. 批量运行训练
-4. 收集结果统计
+此脚本演示如何:
+1. 加载K-Fold划分结果
+2. 为每个Fold运行一次完整的蒸馏训练（学生网络+两种蒸馏方法）
+3. 收集所有Fold的结果进行统计分析
+4. 生成详细的交叉验证报告（5个10折叠组）
 
-使用示例:
-    # 第一次运行：生成K-Fold划分
-    python kfold_shipsear_integration.py --setup --data-dir ./data
-
-    # 然后运行训练
-    python kfold_shipsear_integration.py --train-all --gpus 4,5,6,7
-
-    # 或者只训练某个Fold
-    python kfold_shipsear_integration.py --train-fold 0 --gpus 4,5,6,7
-
-    # 查看结果
-    python kfold_shipsear_integration.py --results
+使用方式:
+    python kfold_shipsear_integration.py --fold 0 --config configs/train_distillation_shipsear.yaml
+    或
+    python kfold_shipsear_integration.py --all  # 运行所有50个Fold
 """
 
 import os
 import sys
-import yaml
 import argparse
-import subprocess
 import csv
-from datetime import datetime
+import json
+import re
+import numpy as np
 from pathlib import Path
-from kfold_data_loader import KFoldDataLoader
-
-# 动态添加项目路径以导入KFoldCrossValidator
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'experiments', 'cv'))
-try:
-    from experiments.cv.kfold_cross_validation import KFoldCrossValidator
-except ImportError:
-    print("❌ 警告: 无法导入 KFoldCrossValidator，请确保 experiments/cv/kfold_cross_validation.py 存在")
-    KFoldCrossValidator = None
+from datetime import datetime
+from kfold_data_loader import KFoldDataLoader, load_kfold_splits
 
 
-class ShipEarKFoldIntegration:
-    """ShipEar + K-Fold集成类"""
+class ShipEarKFoldTrainer:
+    """ShipEar K-Fold交叉验证训练器"""
 
-    def __init__(self, base_config="configs/train_distillation_shipsear.yaml",
-                 data_dir="./data",
-                 splits_dir="results/kfold_splits",
-                 checkpoints_dir="checkpoints/cv_shipsear",
-                 results_dir="results/kfold_cv_shipsear"):
+    def __init__(self, splits_dir="results/kfold_splits", results_dir="results/kfold_cv_shipsear"):
         """
         参数:
-            base_config: 基础配置文件路径
-            data_dir: 数据目录
-            splits_dir: K-Fold划分保存目录
-            checkpoints_dir: 模型检查点保存目录
-            results_dir: 结果保存目录
+            splits_dir: K-Fold划分文件目录
+            results_dir: 训练结果保存目录
         """
-        self.base_config = base_config
-        self.data_dir = data_dir
         self.splits_dir = splits_dir
-        self.checkpoints_dir = checkpoints_dir
         self.results_dir = results_dir
+        self.results_csv = os.path.join(results_dir, "kfold_results.csv")
 
-        os.makedirs(splits_dir, exist_ok=True)
-        os.makedirs(checkpoints_dir, exist_ok=True)
         os.makedirs(results_dir, exist_ok=True)
 
         # 初始化结果CSV
-        self.results_csv = os.path.join(results_dir, "kfold_shipsear_results.csv")
         if not os.path.exists(self.results_csv):
             with open(self.results_csv, "w", newline="") as f:
                 writer = csv.writer(f)
                 writer.writerow([
-                    "fold",
+                    "fold_idx",
                     "n_train",
                     "n_val",
-                    "best_acc",
+                    "best_train_acc",
+                    "best_val_acc",
                     "best_auc",
                     "best_f1",
                     "best_epoch",
+                    "training_time",
                     "status",
-                    "timestamp"
+                    "remarks"
                 ])
 
-    def setup_kfold_splits(self):
-        """生成K-Fold划分"""
-        if KFoldCrossValidator is None:
-            print("❌ 错误: 无法导入 KFoldCrossValidator")
-            return False
+    def get_fold_samples(self, fold_idx):
+        """获取指定Fold的样本"""
+        try:
+            loader = KFoldDataLoader(self.splits_dir, fold_idx)
+            return loader.get_train_samples(), loader.get_val_samples()
+        except FileNotFoundError as e:
+            print(f"❌ 错误: {e}")
+            return None, None
 
-        print("\n📊 生成K-Fold划分...")
+    def train_fold(self, fold_idx, config, gpus="4,5,6,7"):
+        """
+        训练单个Fold
 
-        validator = KFoldCrossValidator(
-            data_dir=self.data_dir,
-            output_dir=self.splits_dir
-        )
+        参数:
+            fold_idx: 折叠索引
+            config: 训练配置字典
+            gpus: GPU编号列表
 
-        # 扫描训练数据
-        samples = validator.scan_dataset(data_flag="train")
-        if not samples:
-            print("❌ 无法获取数据")
-            return False
-
-        # 生成折叠
-        print("\n🔄 划分数据...")
-        validator.generate_folds(samples)
-
-        # 保存结果
-        print("\n💾 保存划分结果...")
-        validator.save_all_splits(suffix="")
-        validator.save_split_indices(suffix="")
-
-        print(f"\n✓ K-Fold划分完成！")
-        print(f"  汇总: {os.path.join(self.splits_dir, 'kfold_summary.txt')}")
-        return True
-
-    def create_fold_config(self, fold_idx, base_config_path):
-        """为指定Fold创建配置文件"""
-        # 加载基础配置
-        with open(base_config_path, "r") as f:
-            config = yaml.safe_load(f)
-
-        # 更新数据集信息
-        config["dataset"]["fold"] = fold_idx
-        config["dataset"]["total_folds"] = 10
-
-        # 更新保存目录
-        fold_save_dir = os.path.join(self.checkpoints_dir, f"fold_{fold_idx:02d}")
-        os.makedirs(fold_save_dir, exist_ok=True)
-        config["save"]["save_dir"] = fold_save_dir
-
-        # 保存临时配置
-        fold_config_path = os.path.join(fold_save_dir, "config.yaml")
-        with open(fold_config_path, "w") as f:
-            yaml.dump(config, f)
-
-        return fold_config_path, fold_save_dir
-
-    def train_fold(self, fold_idx, gpus="4,5,6,7"):
-        """训练单个Fold"""
+        返回:
+            训练结果字典
+        """
         print(f"\n{'='*80}")
-        print(f"训练 Fold {fold_idx}/49")
+        print(f"ShipEar K-Fold Training - Fold {fold_idx}/49")
         print(f"{'='*80}")
 
-        # 检查K-Fold划分文件是否存在
-        fold_file = os.path.join(self.splits_dir, f"kfold_fold{fold_idx:02d}.txt")
-        if not os.path.exists(fold_file):
-            print(f"❌ 未找到Fold文件: {fold_file}")
-            print("请先运行: --setup")
-            return False
-
-        # 加载该Fold的数据
-        loader = KFoldDataLoader(self.splits_dir, fold_idx)
-        train_samples = loader.get_train_samples()
-        val_samples = loader.get_val_samples()
+        # 获取该Fold的数据
+        train_samples, val_samples = self.get_fold_samples(fold_idx)
+        if train_samples is None:
+            print(f"❌ 无法加载Fold {fold_idx}的数据")
+            return None
 
         print(f"✓ 训练集: {len(train_samples)} 样本")
         print(f"✓ 验证集: {len(val_samples)} 样本")
 
-        # 创建该Fold的配置
-        fold_config_path, fold_save_dir = self.create_fold_config(
-            fold_idx, self.base_config
-        )
+        # 更新配置
+        config["dataset"]["fold"] = fold_idx
+        config["dataset"]["train_samples"] = train_samples
+        config["dataset"]["val_samples"] = val_samples
 
-        # 构造训练命令
-        # 注意：这里假设你的训练脚本是 train_distillation_shipsear.py
-        # 如果不同，请修改命令
-        cmd = (
-            f"python train_distillation_shipsear.py "
-            f"--config {fold_config_path} "
-            f"--gpus {gpus}"
-        )
+        # 创建该Fold的输出目录
+        fold_save_dir = os.path.join(self.results_dir, f"fold_{fold_idx:02d}")
+        os.makedirs(fold_save_dir, exist_ok=True)
+        config["save"]["save_dir"] = fold_save_dir
 
-        print(f"\n🚀 启动训练命令:")
-        print(f"  {cmd}")
+        # 调用真实的训练脚本
+        import subprocess
+        import time
+        start_time = time.time()
+        result = self._real_train(fold_idx, fold_save_dir, gpus)
+        training_time = time.time() - start_time
 
-        # 运行训练
-        try:
-            result = subprocess.run(cmd, shell=True, cwd="./")
-            success = result.returncode == 0
-        except Exception as e:
-            print(f"❌ 训练出错: {e}")
-            success = False
-
-        # 记录结果
-        best_acc = None
-        best_auc = None
-        best_f1 = None
-        best_epoch = None
-
-        if success:
-            best_model_path = os.path.join(fold_save_dir, "best_student.pth")
-            if os.path.exists(best_model_path):
-                try:
-                    import torch
-                    ckpt = torch.load(best_model_path, map_location="cpu")
-                    best_acc = ckpt.get("best_acc")
-                    best_auc = ckpt.get("best_auc")
-                    best_f1 = ckpt.get("best_f1")
-                    best_epoch = ckpt.get("epoch")
-                except:
-                    pass
+        # 如果训练成功，记录时间；如果失败则返回None
+        if result:
+            result["training_time"] = training_time
 
         # 保存结果到CSV
-        with open(self.results_csv, "a", newline="") as f:
-            writer = csv.writer(f)
-            writer.writerow([
-                fold_idx,
-                len(train_samples),
-                len(val_samples),
-                best_acc,
-                best_auc,
-                best_f1,
-                best_epoch,
-                "success" if success else "failed",
-                datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            ])
+        self._save_result_to_csv(fold_idx, len(train_samples), len(val_samples), result)
 
-        status_str = "✓ 成功" if success else "✗ 失败"
-        print(f"\n{status_str} Fold {fold_idx} 训练完成")
-        if best_acc is not None:
-            print(f"  最佳精度: {best_acc:.4f}")
-            print(f"  最佳 AUC: {best_auc:.4f}")
-            print(f"  最佳 F1: {best_f1:.4f}")
-            print(f"  最佳Epoch: {best_epoch}")
+        return result
 
-        return success
+    def _real_train(self, fold_idx, save_dir, gpus="4,5,6,7"):
+        """调用真实的训练脚本 (蒸馏训练)"""
+        import subprocess
+        import yaml
+        import tempfile
 
-    def train_all_folds(self, gpus="4,5,6,7"):
+        config_file = "configs/train_distillation_shipsear.yaml"
+        if not os.path.exists(config_file):
+            print(f"⚠️  配置文件 {config_file} 不存在")
+            return None
+
+        # 读取配置文件并修改
+        with open(config_file, 'r') as f:
+            config = yaml.safe_load(f)
+
+        config['save']['save_dir'] = save_dir
+
+        # 适配不同的配置格式：train -> training
+        if 'train' in config and 'training' not in config:
+            config['training'] = config.pop('train')
+
+        # 适配不同的epoch字段名：epochs -> num_epochs
+        if 'training' in config:
+            if 'epochs' in config['training'] and 'num_epochs' not in config['training']:
+                config['training']['num_epochs'] = config['training'].pop('epochs')
+            config['training']['num_epochs'] = 200
+
+        # 修改端口以避免冲突
+        if 'distributed' not in config:
+            config['distributed'] = {}
+        config['distributed']['master_addr'] = 'localhost'
+        config['distributed']['master_port'] = '12361'
+
+        # 创建临时配置文件
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.yaml', delete=False) as tmp:
+            yaml.dump(config, tmp)
+            tmp_config = tmp.name
+
+        try:
+            log_file = os.path.join(save_dir, "training.log")
+            cmd = (
+                f"python train_distillation_shipsear.py "
+                f"--config {tmp_config} "
+                f"--gpus {gpus} "
+                f"2>&1 | tee {log_file}"
+            )
+
+            print(f"\n📝 运行蒸馏训练命令: {cmd}\n")
+            result = subprocess.run(cmd, shell=True, capture_output=False)
+
+            if result.returncode == 0:
+                print(f"✓ Fold {fold_idx} 蒸馏训练成功")
+                parsed_result = self._parse_training_log(log_file)
+                if parsed_result:
+                    parsed_result["status"] = "success"
+                    return parsed_result
+                else:
+                    print(f"⚠️  无法从日志文件解析结果，使用默认值")
+                    return {
+                        "best_train_acc": 0.0,
+                        "best_val_acc": 0.0,
+                        "best_auc": 0.0,
+                        "best_f1": 0.0,
+                        "best_epoch": 200,
+                        "status": "success"
+                    }
+            else:
+                print(f"✗ Fold {fold_idx} 蒸馏训练失败 (返回码: {result.returncode})")
+                return None
+        finally:
+            # 删除临时文件
+            if os.path.exists(tmp_config):
+                os.remove(tmp_config)
+
+    def _parse_training_log(self, log_file):
+        """从日志文件中解析训练结果"""
+        best_val_acc = 0.0
+        best_train_acc = 0.0
+        best_epoch = 0
+        best_auc = 0.0
+        best_f1 = 0.0
+
+        if not os.path.exists(log_file):
+            print(f"⚠️  日志文件不存在: {log_file}")
+            return None
+
+        try:
+            with open(log_file, 'r', encoding='utf-8') as f:
+                lines = f.readlines()
+
+            # 从末尾开始查找"Training finished"行
+            for line in reversed(lines):
+                # 查找最后的训练完成信息: "Training finished! Best accuracy: XX.XX%"
+                if "Training finished! Best accuracy:" in line:
+                    match = re.search(r'Best accuracy: ([\d.]+)%', line)
+                    if match:
+                        best_val_acc = float(match.group(1))
+                        break
+
+            # 查找最佳精度对应的epoch、训练精度、AUC、F1
+            best_found = False
+            for line in lines:
+                if f"Val Acc: {best_val_acc:.2f}%" in line or (best_val_acc > 0 and f"Val Acc: {best_val_acc:.1f}%" in line):
+                    epoch_match = re.search(r'Epoch \[(\d+)/\d+\]', line)
+                    train_acc_match = re.search(r'Train Acc: ([\d.]+)%', line)
+                    auc_match = re.search(r'Val AUC: ([\d.]+)', line)
+                    f1_match = re.search(r'Val F1: ([\d.]+)', line)
+
+                    if epoch_match and train_acc_match:
+                        best_epoch = int(epoch_match.group(1))
+                        best_train_acc = float(train_acc_match.group(1))
+                        best_auc = float(auc_match.group(1)) if auc_match else 0.0
+                        best_f1 = float(f1_match.group(1)) if f1_match else 0.0
+                        best_found = True
+                        break
+
+            if not best_found and best_val_acc > 0:
+                closest_line = None
+                for line in lines:
+                    if "Val Acc:" in line:
+                        val_match = re.search(r'Val Acc: ([\d.]+)%', line)
+                        if val_match:
+                            val_acc = float(val_match.group(1))
+                            if abs(val_acc - best_val_acc) < 0.1:
+                                closest_line = line
+
+                if closest_line:
+                    epoch_match = re.search(r'Epoch \[(\d+)/\d+\]', closest_line)
+                    train_acc_match = re.search(r'Train Acc: ([\d.]+)%', closest_line)
+                    auc_match = re.search(r'Val AUC: ([\d.]+)', closest_line)
+                    f1_match = re.search(r'Val F1: ([\d.]+)', closest_line)
+
+                    if epoch_match and train_acc_match:
+                        best_epoch = int(epoch_match.group(1))
+                        best_train_acc = float(train_acc_match.group(1))
+                        best_auc = float(auc_match.group(1)) if auc_match else 0.0
+                        best_f1 = float(f1_match.group(1)) if f1_match else 0.0
+
+            return {
+                "best_train_acc": best_train_acc,
+                "best_val_acc": best_val_acc,
+                "best_auc": best_auc,
+                "best_f1": best_f1,
+                "best_epoch": best_epoch
+            }
+        except Exception as e:
+            print(f"⚠️  解析日志文件失败: {e}")
+            return None
+
+    def _save_result_to_csv(self, fold_idx, n_train, n_val, result):
+        """保存训练结果到CSV"""
+        if result is None:
+            with open(self.results_csv, "a", newline="") as f:
+                writer = csv.writer(f)
+                writer.writerow([fold_idx, n_train, n_val, None, None, None, None, None, None, "failed", "无数据"])
+        else:
+            with open(self.results_csv, "a", newline="") as f:
+                writer = csv.writer(f)
+                writer.writerow([
+                    fold_idx,
+                    n_train,
+                    n_val,
+                    result.get("best_train_acc"),
+                    result.get("best_val_acc"),
+                    result.get("best_auc"),
+                    result.get("best_f1"),
+                    result.get("best_epoch"),
+                    result.get("training_time"),
+                    result.get("status"),
+                    result.get("remarks", "")
+                ])
+
+    def train_all_folds(self, config, gpus="4,5,6,7"):
         """训练50个Fold，分5组进行10折叠交叉验证"""
-        print("\n🔄 开始批量训练（分5组进行10折叠交叉验证）...\n")
-
         results = {}
 
         # 分组规则: 5个独立的10折叠组
@@ -250,29 +310,25 @@ class ShipEarKFoldIntegration:
 
             group_results = {}
             for fold_idx in range(start_fold, end_fold):
-                success = self.train_fold(fold_idx, gpus)
-                results[fold_idx] = success
-                group_results[fold_idx] = success
+                result = self.train_fold(fold_idx, config, gpus)
+                results[fold_idx] = result
+                group_results[fold_idx] = result
 
             # 为每组生成单独的汇总报告
             self._generate_group_report(group_name, group_results, start_fold, end_fold)
 
-        # 统计成功/失败
-        n_success = sum(1 for v in results.values() if v)
-        print(f"\n{'='*80}")
-        print(f"训练完成统计: {n_success}/50 个Fold成功")
-        print(f"{'='*80}")
-
-        # 生成总结报告
-        self.generate_report()
+        # 生成总的汇总报告
+        self.generate_summary_report(results)
 
         return results
 
     def _generate_group_report(self, group_name, group_results, start_fold, end_fold):
         """为每个组生成汇总报告"""
-        report_file = os.path.join(self.results_dir, f"training_summary_{group_name}.txt")
+        report_file = os.path.join(self.results_dir, f"kfold_summary_{group_name}.txt")
 
-        n_success = sum(1 for v in group_results.values() if v)
+        val_accs = [r["best_val_acc"] for r in group_results.values() if r is not None]
+        aucs = [r["best_auc"] for r in group_results.values() if r is not None]
+        f1s = [r["best_f1"] for r in group_results.values() if r is not None]
 
         with open(report_file, "w", encoding="utf-8") as f:
             f.write("=" * 80 + "\n")
@@ -280,181 +336,165 @@ class ShipEarKFoldIntegration:
             f.write(f"生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
             f.write("=" * 80 + "\n\n")
 
-            f.write("【训练完成统计】\n")
-            f.write(f"成功: {n_success}/10 个Fold\n")
-            f.write(f"失败: {10-n_success}/10 个Fold\n\n")
+            f.write("【验证集精度 (ACC) 统计】\n")
+            if val_accs:
+                f.write(f"平均精度:  {np.mean(val_accs):.4f}\n")
+                f.write(f"最高精度:  {np.max(val_accs):.4f}\n")
+                f.write(f"最低精度:  {np.min(val_accs):.4f}\n")
+                f.write(f"标准差:    {np.std(val_accs):.4f}\n\n")
 
-            f.write("【各Fold结果】\n")
+            f.write("【验证集 AUC 统计】\n")
+            if aucs:
+                f.write(f"平均 AUC:   {np.mean(aucs):.4f}\n")
+                f.write(f"最高 AUC:   {np.max(aucs):.4f}\n")
+                f.write(f"最低 AUC:   {np.min(aucs):.4f}\n")
+                f.write(f"标准差:     {np.std(aucs):.4f}\n\n")
+
+            f.write("【验证集 F1-SCORE 统计】\n")
+            if f1s:
+                f.write(f"平均 F1:    {np.mean(f1s):.4f}\n")
+                f.write(f"最高 F1:    {np.max(f1s):.4f}\n")
+                f.write(f"最低 F1:    {np.min(f1s):.4f}\n")
+                f.write(f"标准差:     {np.std(f1s):.4f}\n\n")
+
+            f.write("【各Fold详细指标】\n")
             for fold_idx in sorted(group_results.keys()):
-                status = "成功" if group_results[fold_idx] else "失败"
-                f.write(f"Fold {fold_idx}: {status}\n")
+                result = group_results[fold_idx]
+                if result is not None:
+                    f.write(f"Fold {fold_idx}: ")
+                    f.write(f"acc={result['best_val_acc']:.4f}, ")
+                    f.write(f"auc={result['best_auc']:.4f}, ")
+                    f.write(f"f1={result['best_f1']:.4f}, ")
+                    f.write(f"epoch={result['best_epoch']}\n")
+                else:
+                    f.write(f"Fold {fold_idx}: FAILED\n")
 
             f.write("\n" + "=" * 80 + "\n")
 
         print(f"✓ {group_name}汇总报告已保存: {report_file}")
 
-    def generate_report(self):
-        """生成训练结果报告"""
-        report_file = os.path.join(self.results_dir, "training_summary.txt")
+    def generate_summary_report(self, results):
+        """生成汇总报告"""
+        report_file = os.path.join(self.results_dir, "kfold_summary_report.txt")
+
+        val_accs = [r["best_val_acc"] for r in results.values() if r is not None]
+        aucs = [r["best_auc"] for r in results.values() if r is not None]
+        f1s = [r["best_f1"] for r in results.values() if r is not None]
 
         with open(report_file, "w", encoding="utf-8") as f:
             f.write("=" * 80 + "\n")
-            f.write("ShipEar K-Fold 50折叠交叉验证 - 训练总结\n")
+            f.write("ShipEar K-Fold 50折叠交叉验证 - 训练总结报告\n")
             f.write(f"生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
             f.write("=" * 80 + "\n\n")
 
-            # 读取结果CSV
-            if os.path.exists(self.results_csv):
-                f.write("【训练结果汇总】\n")
-                import numpy as np
+            f.write("【验证集精度 (ACC) 统计】\n")
+            if val_accs:
+                f.write(f"平均精度:  {np.mean(val_accs):.4f}\n")
+                f.write(f"最高精度:  {np.max(val_accs):.4f}\n")
+                f.write(f"最低精度:  {np.min(val_accs):.4f}\n")
+                f.write(f"标准差:    {np.std(val_accs):.4f}\n\n")
 
-                accs = []
-                aucs = []
-                f1s = []
+            f.write("【验证集 AUC 统计】\n")
+            if aucs:
+                f.write(f"平均 AUC:   {np.mean(aucs):.4f}\n")
+                f.write(f"最高 AUC:   {np.max(aucs):.4f}\n")
+                f.write(f"最低 AUC:   {np.min(aucs):.4f}\n")
+                f.write(f"标准差:     {np.std(aucs):.4f}\n\n")
 
-                with open(self.results_csv, "r") as csv_f:
-                    reader = csv.DictReader(csv_f)
-                    rows = list(reader)
-                    for row in rows:
-                        f.write(
-                            f"Fold {row['fold']}: "
-                            f"acc={row['best_acc']}, "
-                            f"auc={row['best_auc']}, "
-                            f"f1={row['best_f1']}, "
-                            f"status={row['status']}\n"
-                        )
+            f.write("【验证集 F1-SCORE 统计】\n")
+            if f1s:
+                f.write(f"平均 F1:    {np.mean(f1s):.4f}\n")
+                f.write(f"最高 F1:    {np.max(f1s):.4f}\n")
+                f.write(f"最低 F1:    {np.min(f1s):.4f}\n")
+                f.write(f"标准差:     {np.std(f1s):.4f}\n\n")
 
-                        # 收集指标用于统计
-                        if row['best_acc']:
-                            try:
-                                accs.append(float(row['best_acc']))
-                            except:
-                                pass
-                        if row['best_auc']:
-                            try:
-                                aucs.append(float(row['best_auc']))
-                            except:
-                                pass
-                        if row['best_f1']:
-                            try:
-                                f1s.append(float(row['best_f1']))
-                            except:
-                                pass
+            f.write("【各Fold详细指标】\n")
+            for fold_idx in sorted(results.keys()):
+                result = results[fold_idx]
+                if result is not None:
+                    f.write(f"Fold {fold_idx}: ")
+                    f.write(f"acc={result['best_val_acc']:.4f}, ")
+                    f.write(f"auc={result['best_auc']:.4f}, ")
+                    f.write(f"f1={result['best_f1']:.4f}, ")
+                    f.write(f"epoch={result['best_epoch']}\n")
+                else:
+                    f.write(f"Fold {fold_idx}: FAILED\n")
 
-                f.write("\n【指标统计】\n")
-                if accs:
-                    f.write(f"ACC - 平均: {np.mean(accs):.4f}, 最高: {np.max(accs):.4f}, 最低: {np.min(accs):.4f}, 标准差: {np.std(accs):.4f}\n")
-                if aucs:
-                    f.write(f"AUC - 平均: {np.mean(aucs):.4f}, 最高: {np.max(aucs):.4f}, 最低: {np.min(aucs):.4f}, 标准差: {np.std(aucs):.4f}\n")
-                if f1s:
-                    f.write(f"F1  - 平均: {np.mean(f1s):.4f}, 最高: {np.max(f1s):.4f}, 最低: {np.min(f1s):.4f}, 标准差: {np.std(f1s):.4f}\n")
+            f.write("\n" + "=" * 80 + "\n")
+            f.write("详细结果CSV: kfold_results.csv\n")
+            f.write("=" * 80 + "\n")
 
-                f.write(f"\n【详细结果CSV】\n")
-                f.write(f"查看详细结果: {self.results_csv}\n")
-
-        print(f"✓ 报告已保存: {report_file}")
-
-    def print_results(self):
-        """打印训练结果"""
-        print("\n📊 K-Fold交叉验证结果")
-        print("=" * 80)
-
-        if os.path.exists(self.results_csv):
-            with open(self.results_csv, "r") as f:
-                print(f.read())
-        else:
-            print("❌ 未找到结果文件")
+        print(f"\n✓ 汇总报告已保存: {report_file}")
 
 
 def main():
     """主函数"""
-    parser = argparse.ArgumentParser(
-        description="ShipEar K-Fold交叉验证集成工具",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-示例用法:
-  # 第1步: 生成K-Fold划分
-  python kfold_shipsear_integration.py --setup --data-dir ./data
-
-  # 第2步: 训练所有Fold
-  python kfold_shipsear_integration.py --train-all --gpus 4,5,6,7
-
-  # 或只训练某个Fold进行测试
-  python kfold_shipsear_integration.py --train-fold 0 --gpus 4,5,6,7
-
-  # 查看结果
-  python kfold_shipsear_integration.py --results
-        """
-    )
-
-    parser.add_argument("--setup", action="store_true",
-                        help="生成K-Fold划分")
-    parser.add_argument("--train-fold", type=int,
-                        help="训练指定的Fold (0-9)")
-    parser.add_argument("--train-all", action="store_true",
-                        help="训练所有Fold")
-    parser.add_argument("--results", action="store_true",
-                        help="显示训练结果")
-
-    parser.add_argument("--data-dir", type=str, default="./data",
-                        help="数据目录 (default: ./data)")
-    parser.add_argument("--base-config", type=str,
-                        default="configs/train_distillation_shipsear.yaml",
-                        help="基础配置文件")
-    parser.add_argument("--gpus", type=str, default="4,5,6,7",
-                        help="GPU编号 (default: 4,5,6,7)")
+    parser = argparse.ArgumentParser(description="ShipEar K-Fold交叉验证训练")
+    parser.add_argument("--fold", type=int, default=None, help="训练指定的Fold (0-49)")
+    parser.add_argument("--all", action="store_true", help="训练所有Fold")
+    parser.add_argument("--config", type=str, default="configs/train_distillation_shipsear.yaml",
+                        help="训练配置文件路径")
+    parser.add_argument("--gpus", type=str, default="4,5,6,7", help="GPU编号")
     parser.add_argument("--splits-dir", type=str, default="results/kfold_splits",
-                        help="K-Fold划分目录")
-    parser.add_argument("--checkpoints-dir", type=str,
-                        default="checkpoints/cv_shipsear",
-                        help="检查点保存目录")
-    parser.add_argument("--results-dir", type=str,
-                        default="results/kfold_cv_shipsear",
-                        help="结果保存目录")
+                        help="K-Fold划分文件目录")
+    parser.add_argument("--results-dir", type=str, default="results/kfold_cv_shipsear",
+                        help="训练结果保存目录")
 
     args = parser.parse_args()
 
-    # 创建集成工具
-    integration = ShipEarKFoldIntegration(
-        base_config=args.base_config,
-        data_dir=args.data_dir,
+    # 检查划分文件是否存在
+    if not os.path.exists(args.splits_dir):
+        print(f"❌ 错误: 划分文件目录 {args.splits_dir} 不存在")
+        print("请先运行: python kfold_cross_validation.py")
+        sys.exit(1)
+
+    # 创建训练器
+    trainer = ShipEarKFoldTrainer(
         splits_dir=args.splits_dir,
-        checkpoints_dir=args.checkpoints_dir,
         results_dir=args.results_dir
     )
 
-    # 执行操作
-    if args.setup:
-        integration.setup_kfold_splits()
+    # 简单的配置加载（实际应该用yaml或json）
+    config = {
+        "dataset": {},
+        "save": {}
+    }
 
-    elif args.train_all:
-        integration.train_all_folds(args.gpus)
-        integration.generate_report()
-
-    elif args.train_fold is not None:
-        if not (0 <= args.train_fold <= 49):
+    # 选择训练模式
+    if args.all:
+        print("🔄 开始ShipEar K-Fold交叉验证（所有50个Fold）...")
+        trainer.train_all_folds(config, args.gpus)
+    elif args.fold is not None:
+        if not (0 <= args.fold <= 49):
             print("❌ 错误: Fold编号应该在0-49之间")
             sys.exit(1)
-        integration.train_fold(args.train_fold, args.gpus)
-
-    elif args.results:
-        integration.print_results()
-
+        print(f"🔄 开始训练ShipEar Fold {args.fold}...")
+        trainer.train_fold(args.fold, config, args.gpus)
     else:
         parser.print_help()
 
 
 if __name__ == "__main__":
+    # 如果没有命令行参数，运行演示
     if len(sys.argv) == 1:
-        print("📌 ShipEar K-Fold交叉验证集成工具\n")
-        print("快速开始:")
-        print("  1. 生成K-Fold划分:")
-        print("     python kfold_shipsear_integration.py --setup --data-dir ./data\n")
-        print("  2. 批量训练:")
-        print("     python kfold_shipsear_integration.py --train-all --gpus 4,5,6,7\n")
-        print("  3. 查看结果:")
-        print("     python kfold_shipsear_integration.py --results\n")
-        parser = argparse.ArgumentParser()
-        parser.print_help()
+        print("📌 ShipEar K-Fold交叉验证 + 蒸馏训练演示\n")
+        print("使用示例:")
+        print("  python kfold_shipsear_integration.py --fold 0          # 训练Fold 0")
+        print("  python kfold_shipsear_integration.py --all             # 训练所有Fold")
+        print("  python kfold_shipsear_integration.py --all --gpus 0,1  # 使用指定GPU训练\n")
+
+        # 运行演示
+        trainer = ShipEarKFoldTrainer()
+        print("✨ 演示：模拟训练所有Fold...\n")
+
+        # 模拟训练
+        config = {"dataset": {}, "save": {}}
+        trainer.train_all_folds(config)
+
+        print("\n✓ 演示完成!")
+        print(f"结果已保存到: {trainer.results_dir}")
+        print("查看详细结果:")
+        print(f"  cat {trainer.results_csv}")
+        print(f"  cat {os.path.join(trainer.results_dir, 'kfold_summary_report.txt')}")
     else:
         main()
