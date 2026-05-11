@@ -35,7 +35,7 @@ from kfold_data_loader import KFoldDataLoader
 # 动态添加项目路径以导入KFoldCrossValidator
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'experiments', 'cv'))
 try:
-    from kfold_cross_validation import KFoldCrossValidator
+    from experiments.cv.kfold_cross_validation import KFoldCrossValidator
 except ImportError:
     print("❌ 警告: 无法导入 KFoldCrossValidator，请确保 experiments/cv/kfold_cross_validation.py 存在")
     KFoldCrossValidator = None
