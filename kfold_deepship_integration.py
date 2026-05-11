@@ -49,6 +49,8 @@ class DeepShipKFoldTrainer:
                     "n_val",
                     "best_train_acc",
                     "best_val_acc",
+                    "best_auc",
+                    "best_f1",
                     "best_epoch",
                     "training_time",
                     "status",
@@ -192,6 +194,8 @@ class DeepShipKFoldTrainer:
         best_val_acc = 0.0
         best_train_acc = 0.0
         best_epoch = 0
+        best_auc = 0.0
+        best_f1 = 0.0
 
         if not os.path.exists(log_file):
             print(f"⚠️  日志文件不存在: {log_file}")
@@ -210,23 +214,24 @@ class DeepShipKFoldTrainer:
                         best_val_acc = float(match.group(1))
                         break
 
-            # 查找最佳精度对应的epoch和训练精度
-            # 日志格式: "Epoch [X/200] Train Loss: X.XXXX Train Acc: XX.XX% Val Acc: XX.XX%"
+            # 查找最佳精度对应的epoch和训练精度、AUC、F1
             best_found = False
             for line in lines:
                 if f"Val Acc: {best_val_acc:.2f}%" in line or (best_val_acc > 0 and f"Val Acc: {best_val_acc:.1f}%" in line):
-                    # 提取epoch和训练精度
                     epoch_match = re.search(r'Epoch \[(\d+)/\d+\]', line)
                     train_acc_match = re.search(r'Train Acc: ([\d.]+)%', line)
+                    auc_match = re.search(r'Val AUC: ([\d.]+)', line)
+                    f1_match = re.search(r'Val F1: ([\d.]+)', line)
 
                     if epoch_match and train_acc_match:
                         best_epoch = int(epoch_match.group(1))
                         best_train_acc = float(train_acc_match.group(1))
+                        best_auc = float(auc_match.group(1)) if auc_match else 0.0
+                        best_f1 = float(f1_match.group(1)) if f1_match else 0.0
                         best_found = True
                         break
 
             if not best_found and best_val_acc > 0:
-                # 如果没找到完全匹配的epoch，找最接近的
                 closest_line = None
                 for line in lines:
                     if "Val Acc:" in line:
@@ -239,13 +244,20 @@ class DeepShipKFoldTrainer:
                 if closest_line:
                     epoch_match = re.search(r'Epoch \[(\d+)/\d+\]', closest_line)
                     train_acc_match = re.search(r'Train Acc: ([\d.]+)%', closest_line)
+                    auc_match = re.search(r'Val AUC: ([\d.]+)', closest_line)
+                    f1_match = re.search(r'Val F1: ([\d.]+)', closest_line)
+
                     if epoch_match and train_acc_match:
                         best_epoch = int(epoch_match.group(1))
                         best_train_acc = float(train_acc_match.group(1))
+                        best_auc = float(auc_match.group(1)) if auc_match else 0.0
+                        best_f1 = float(f1_match.group(1)) if f1_match else 0.0
 
             return {
                 "best_train_acc": best_train_acc,
                 "best_val_acc": best_val_acc,
+                "best_auc": best_auc,
+                "best_f1": best_f1,
                 "best_epoch": best_epoch
             }
         except Exception as e:
@@ -257,7 +269,7 @@ class DeepShipKFoldTrainer:
         if result is None:
             with open(self.results_csv, "a", newline="") as f:
                 writer = csv.writer(f)
-                writer.writerow([fold_idx, n_train, n_val, None, None, None, None, "failed", "无数据"])
+                writer.writerow([fold_idx, n_train, n_val, None, None, None, None, None, None, "failed", "无数据"])
         else:
             with open(self.results_csv, "a", newline="") as f:
                 writer = csv.writer(f)
@@ -267,6 +279,8 @@ class DeepShipKFoldTrainer:
                     n_val,
                     result.get("best_train_acc"),
                     result.get("best_val_acc"),
+                    result.get("best_auc"),
+                    result.get("best_f1"),
                     result.get("best_epoch"),
                     result.get("training_time"),
                     result.get("status"),
@@ -274,22 +288,95 @@ class DeepShipKFoldTrainer:
                 ])
 
     def train_all_folds(self, config, gpus="4,5,6,7"):
-        """训练所有50个Fold"""
+        """训练50个Fold，分5组进行10折叠交叉验证"""
         results = {}
-        for fold_idx in range(50):
-            result = self.train_fold(fold_idx, config, gpus)
-            results[fold_idx] = result
 
-        # 生成总结报告
+        # 分组规则: 5个独立的10折叠组
+        fold_groups = [
+            (0, 10, "Group_0"),   # fold_0 to fold_9
+            (10, 20, "Group_1"),  # fold_10 to fold_19
+            (20, 30, "Group_2"),  # fold_20 to fold_29
+            (30, 40, "Group_3"),  # fold_30 to fold_39
+            (40, 50, "Group_4")   # fold_40 to fold_49
+        ]
+
+        for start_fold, end_fold, group_name in fold_groups:
+            print(f"\n{'='*80}")
+            print(f"训练 {group_name} (Fold {start_fold}-{end_fold-1}) 的10折叠交叉验证")
+            print(f"{'='*80}")
+
+            group_results = {}
+            for fold_idx in range(start_fold, end_fold):
+                result = self.train_fold(fold_idx, config, gpus)
+                results[fold_idx] = result
+                group_results[fold_idx] = result
+
+            # 为每组生成单独的汇总报告
+            self._generate_group_report(group_name, group_results, start_fold, end_fold)
+
+        # 生成总的汇总报告
         self.generate_summary_report(results)
 
         return results
+
+    def _generate_group_report(self, group_name, group_results, start_fold, end_fold):
+        """为每个组生成汇总报告"""
+        report_file = os.path.join(self.results_dir, f"kfold_summary_{group_name}.txt")
+
+        val_accs = [r["best_val_acc"] for r in group_results.values() if r is not None]
+        aucs = [r["best_auc"] for r in group_results.values() if r is not None]
+        f1s = [r["best_f1"] for r in group_results.values() if r is not None]
+
+        with open(report_file, "w", encoding="utf-8") as f:
+            f.write("=" * 80 + "\n")
+            f.write(f"DeepShip K-Fold {group_name} (Fold {start_fold}-{end_fold-1}) 10折叠交叉验证 - 训练总结\n")
+            f.write(f"生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+            f.write("=" * 80 + "\n\n")
+
+            f.write("【验证集精度 (ACC) 统计】\n")
+            if val_accs:
+                f.write(f"平均精度:  {np.mean(val_accs):.4f}\n")
+                f.write(f"最高精度:  {np.max(val_accs):.4f}\n")
+                f.write(f"最低精度:  {np.min(val_accs):.4f}\n")
+                f.write(f"标准差:    {np.std(val_accs):.4f}\n\n")
+
+            f.write("【验证集 AUC 统计】\n")
+            if aucs:
+                f.write(f"平均 AUC:   {np.mean(aucs):.4f}\n")
+                f.write(f"最高 AUC:   {np.max(aucs):.4f}\n")
+                f.write(f"最低 AUC:   {np.min(aucs):.4f}\n")
+                f.write(f"标准差:     {np.std(aucs):.4f}\n\n")
+
+            f.write("【验证集 F1-SCORE 统计】\n")
+            if f1s:
+                f.write(f"平均 F1:    {np.mean(f1s):.4f}\n")
+                f.write(f"最高 F1:    {np.max(f1s):.4f}\n")
+                f.write(f"最低 F1:    {np.min(f1s):.4f}\n")
+                f.write(f"标准差:     {np.std(f1s):.4f}\n\n")
+
+            f.write("【各Fold详细指标】\n")
+            for fold_idx in sorted(group_results.keys()):
+                result = group_results[fold_idx]
+                if result is not None:
+                    f.write(f"Fold {fold_idx}: ")
+                    f.write(f"acc={result['best_val_acc']:.4f}, ")
+                    f.write(f"auc={result['best_auc']:.4f}, ")
+                    f.write(f"f1={result['best_f1']:.4f}, ")
+                    f.write(f"epoch={result['best_epoch']}\n")
+                else:
+                    f.write(f"Fold {fold_idx}: FAILED\n")
+
+            f.write("\n" + "=" * 80 + "\n")
+
+        print(f"✓ {group_name}汇总报告已保存: {report_file}")
 
     def generate_summary_report(self, results):
         """生成汇总报告"""
         report_file = os.path.join(self.results_dir, "kfold_summary_report.txt")
 
         val_accs = [r["best_val_acc"] for r in results.values() if r is not None]
+        aucs = [r["best_auc"] for r in results.values() if r is not None]
+        f1s = [r["best_f1"] for r in results.values() if r is not None]
 
         with open(report_file, "w", encoding="utf-8") as f:
             f.write("=" * 80 + "\n")
@@ -297,20 +384,35 @@ class DeepShipKFoldTrainer:
             f.write(f"生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
             f.write("=" * 80 + "\n\n")
 
-            f.write("【验证集精度统计】\n")
+            f.write("【验证集精度 (ACC) 统计】\n")
             if val_accs:
                 f.write(f"平均精度:  {np.mean(val_accs):.4f}\n")
                 f.write(f"最高精度:  {np.max(val_accs):.4f}\n")
                 f.write(f"最低精度:  {np.min(val_accs):.4f}\n")
                 f.write(f"标准差:    {np.std(val_accs):.4f}\n\n")
 
-            f.write("【各Fold精度】\n")
+            f.write("【验证集 AUC 统计】\n")
+            if aucs:
+                f.write(f"平均 AUC:   {np.mean(aucs):.4f}\n")
+                f.write(f"最高 AUC:   {np.max(aucs):.4f}\n")
+                f.write(f"最低 AUC:   {np.min(aucs):.4f}\n")
+                f.write(f"标准差:     {np.std(aucs):.4f}\n\n")
+
+            f.write("【验证集 F1-SCORE 统计】\n")
+            if f1s:
+                f.write(f"平均 F1:    {np.mean(f1s):.4f}\n")
+                f.write(f"最高 F1:    {np.max(f1s):.4f}\n")
+                f.write(f"最低 F1:    {np.min(f1s):.4f}\n")
+                f.write(f"标准差:     {np.std(f1s):.4f}\n\n")
+
+            f.write("【各Fold详细指标】\n")
             for fold_idx in sorted(results.keys()):
                 result = results[fold_idx]
                 if result is not None:
                     f.write(f"Fold {fold_idx}: ")
-                    f.write(f"train_acc={result['best_train_acc']:.4f}, ")
-                    f.write(f"val_acc={result['best_val_acc']:.4f}, ")
+                    f.write(f"acc={result['best_val_acc']:.4f}, ")
+                    f.write(f"auc={result['best_auc']:.4f}, ")
+                    f.write(f"f1={result['best_f1']:.4f}, ")
                     f.write(f"epoch={result['best_epoch']}\n")
                 else:
                     f.write(f"Fold {fold_idx}: FAILED\n")

@@ -11,6 +11,8 @@ import torch.distributed as dist
 from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.utils.data import DataLoader
 from torch.utils.data.distributed import DistributedSampler
+from sklearn.metrics import roc_auc_score, f1_score
+import numpy as np
 
 # from models.CFC import AudioCfC
 from models.Audio_TeacherNet import build_Audio_TeacherNet
@@ -87,27 +89,33 @@ def load_config(config_path: str) -> dict:
 
 
 def save_checkpoint(model: nn.Module, optimizer, scheduler, epoch: int,
-                    best_acc: float, save_path: str, is_best: bool = False):
+                    best_acc: float, save_path: str, val_metrics: dict = None, is_best: bool = False):
     """保存检查点"""
-    # 获取学生网络的 state_dict
     if isinstance(model, DDP):
         student_state = model.module.student.state_dict()
     else:
         student_state = model.student.state_dict()
-    
+
     checkpoint = {
         'epoch': epoch,
         'student_state_dict': student_state,
         'optimizer_state_dict': optimizer.state_dict(),
         'scheduler_state_dict': scheduler.state_dict(),
-        'best_acc': best_acc
+        'best_acc': best_acc,
+        'best_auc': val_metrics.get('auc', 0.0) if val_metrics else 0.0,
+        'best_f1': val_metrics.get('f1', 0.0) if val_metrics else 0.0
     }
-    
+
     torch.save(checkpoint, save_path)
-    
+
     if is_best:
         best_path = os.path.join(os.path.dirname(save_path), 'best_student.pth')
-        torch.save({'student_state_dict': student_state, 'best_acc': best_acc}, best_path)
+        torch.save({
+            'student_state_dict': student_state,
+            'best_acc': best_acc,
+            'best_auc': val_metrics.get('auc', 0.0) if val_metrics else 0.0,
+            'best_f1': val_metrics.get('f1', 0.0) if val_metrics else 0.0
+        }, best_path)
 
 def auto_resume_if_possible(model, optimizer, scheduler, save_dir, logger):
     """
@@ -282,61 +290,80 @@ class DistillationTrainer:
     def validate(self, val_loader: DataLoader) -> dict:
         """验证"""
         self.model.eval()
-        
+
         total_loss = 0.0
         correct = 0
         total = 0
-        
+        all_preds = []
+        all_labels = []
+        all_logits = []
+
         for input_data, labels in val_loader:
             inputs = get_inputs(input_data, self.data_type, self.device)
             labels = labels.to(self.device)
-            
-            # 检查输入，单模态输入直接检查， 多模态输入检查每个模态，20260121yy修改
-            # if torch.isnan(inputs).any() or torch.isinf(inputs).any():
-            #     inputs = torch.nan_to_num(inputs, nan=0.0, posinf=1.0, neginf=-1.0)
+
             has_nan_inf = False
             if isinstance(inputs, list):
-                # 多模态输入：检查列表中的每个张量
                 for i, tensor in enumerate(inputs):
                     if torch.isnan(tensor).any() or torch.isinf(tensor).any():
                         has_nan_inf = True
-                # 统一处理NaN/Inf
                 if has_nan_inf:
                     inputs = [torch.nan_to_num(inp, nan=0.0, posinf=1.0, neginf=-1.0) for inp in inputs]
             else:
-                # 单模态输入：直接检查
                 if torch.isnan(inputs).any() or torch.isinf(inputs).any():
                     inputs = torch.nan_to_num(inputs, nan=0.0, posinf=1.0, neginf=-1.0)
-            # 仅使用学生网络
-            # student_logits, _, _ = self.model(inputs)
+
             student_logits, stu_seq_logits, fl, fg, bl, bg, x_encoder, teacher_logits, output_cnn_features,teacher_all_hidden_states = self.model(inputs)
-            
-            # 检查输出
+
             if torch.isnan(student_logits).any() or torch.isinf(student_logits).any():
                 continue
-            
+
             loss = F.cross_entropy(student_logits, labels)
-            
+
             total_loss += loss.item()
             pred = student_logits.argmax(dim=1)
             correct += (pred == labels).sum().item()
             total += labels.size(0)
-        
+
+            all_preds.append(pred.cpu().numpy())
+            all_labels.append(labels.cpu().numpy())
+            all_logits.append(F.softmax(student_logits, dim=1).cpu().numpy())
+
         # DDP 下聚合结果
         if dist.is_initialized():
             metrics_tensor = torch.tensor([total_loss, correct, total], device=self.device)
             dist.all_reduce(metrics_tensor, op=dist.ReduceOp.SUM)
             total_loss, correct, total = metrics_tensor.tolist()
-        
+
         num_batches = len(val_loader)
         if dist.is_initialized():
             num_batches *= dist.get_world_size()
-        
+
+        all_preds = np.concatenate(all_preds, axis=0) if all_preds else np.array([])
+        all_labels = np.concatenate(all_labels, axis=0) if all_labels else np.array([])
+        all_logits = np.concatenate(all_logits, axis=0) if all_logits else np.array([])
+
+        # 计算 AUC 和 F1-SCORE
+        auc = 0.0
+        f1 = 0.0
+        if len(np.unique(all_labels)) > 1:
+            try:
+                if all_logits.shape[1] == 2:
+                    auc = roc_auc_score(all_labels, all_logits[:, 1])
+                else:
+                    auc = roc_auc_score(all_labels, all_logits, multi_class='ovr')
+                f1 = f1_score(all_labels, all_preds, average='weighted')
+            except:
+                auc = 0.0
+                f1 = 0.0
+
         metrics = {
             'loss': total_loss / max(num_batches, 1),
-            'accuracy': 100. * correct / max(total, 1)
+            'accuracy': 100. * correct / max(total, 1),
+            'auc': auc,
+            'f1': f1
         }
-        
+
         return metrics
     
     def fit(self, train_loader: DataLoader, val_loader: DataLoader):
@@ -378,22 +405,23 @@ class DistillationTrainer:
                     f'Train Loss: {train_metrics["loss"]:.4f}, '
                     f'Train Acc: {100.*train_metrics["accuracy"]:.2f}%, '
                     f'Val Loss: {val_metrics["loss"]:.4f}, '
-                    f'Val Acc: {val_metrics["accuracy"]:.2f}%'
+                    f'Val Acc: {val_metrics["accuracy"]:.2f}%, '
+                    f'Val AUC: {val_metrics["auc"]:.4f}, '
+                    f'Val F1: {val_metrics["f1"]:.4f}'
                 )
-                
-                
+
                 # 保存最佳模型
                 is_best = val_metrics['accuracy'] > self.best_acc
                 if is_best:
                     self.best_acc = val_metrics['accuracy']
-                    self.logger.info(f'Best model saved with accuracy: {self.best_acc:.2f}%')
-                
+                    self.logger.info(f'Best model saved with accuracy: {self.best_acc:.2f}%, AUC: {val_metrics["auc"]:.4f}, F1: {val_metrics["f1"]:.4f}')
+
                 # 定期保存或保存最佳
                 if epoch % save_interval == 0 or is_best:
                     save_path = os.path.join(save_dir, f'checkpoint_epoch_{epoch}.pth')
                     save_checkpoint(
                         self.model, self.optimizer, self.scheduler,
-                        epoch, self.best_acc, save_path, is_best
+                        epoch, self.best_acc, save_path, val_metrics, is_best
                     )
                     if epoch % save_interval == 0:
                         self.logger.info(f'Checkpoint saved at epoch {epoch}')

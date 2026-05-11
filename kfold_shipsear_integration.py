@@ -77,6 +77,8 @@ class ShipEarKFoldIntegration:
                     "n_train",
                     "n_val",
                     "best_acc",
+                    "best_auc",
+                    "best_f1",
                     "best_epoch",
                     "status",
                     "timestamp"
@@ -184,16 +186,19 @@ class ShipEarKFoldIntegration:
 
         # 记录结果
         best_acc = None
+        best_auc = None
+        best_f1 = None
         best_epoch = None
 
         if success:
-            # 尝试从检查点读取最佳精度
             best_model_path = os.path.join(fold_save_dir, "best_student.pth")
             if os.path.exists(best_model_path):
                 try:
                     import torch
                     ckpt = torch.load(best_model_path, map_location="cpu")
                     best_acc = ckpt.get("best_acc")
+                    best_auc = ckpt.get("best_auc")
+                    best_f1 = ckpt.get("best_f1")
                     best_epoch = ckpt.get("epoch")
                 except:
                     pass
@@ -206,6 +211,8 @@ class ShipEarKFoldIntegration:
                 len(train_samples),
                 len(val_samples),
                 best_acc,
+                best_auc,
+                best_f1,
                 best_epoch,
                 "success" if success else "failed",
                 datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -215,18 +222,40 @@ class ShipEarKFoldIntegration:
         print(f"\n{status_str} Fold {fold_idx} 训练完成")
         if best_acc is not None:
             print(f"  最佳精度: {best_acc:.4f}")
+            print(f"  最佳 AUC: {best_auc:.4f}")
+            print(f"  最佳 F1: {best_f1:.4f}")
             print(f"  最佳Epoch: {best_epoch}")
 
         return success
 
     def train_all_folds(self, gpus="4,5,6,7"):
-        """批量训练所有Fold"""
-        print("\n🔄 开始批量训练（所有50个Fold）...\n")
+        """训练50个Fold，分5组进行10折叠交叉验证"""
+        print("\n🔄 开始批量训练（分5组进行10折叠交叉验证）...\n")
 
         results = {}
-        for fold_idx in range(50):
-            success = self.train_fold(fold_idx, gpus)
-            results[fold_idx] = success
+
+        # 分组规则: 5个独立的10折叠组
+        fold_groups = [
+            (0, 10, "Group_0"),   # fold_0 to fold_9
+            (10, 20, "Group_1"),  # fold_10 to fold_19
+            (20, 30, "Group_2"),  # fold_20 to fold_29
+            (30, 40, "Group_3"),  # fold_30 to fold_39
+            (40, 50, "Group_4")   # fold_40 to fold_49
+        ]
+
+        for start_fold, end_fold, group_name in fold_groups:
+            print(f"\n{'='*80}")
+            print(f"训练 {group_name} (Fold {start_fold}-{end_fold-1}) 的10折叠交叉验证")
+            print(f"{'='*80}")
+
+            group_results = {}
+            for fold_idx in range(start_fold, end_fold):
+                success = self.train_fold(fold_idx, gpus)
+                results[fold_idx] = success
+                group_results[fold_idx] = success
+
+            # 为每组生成单独的汇总报告
+            self._generate_group_report(group_name, group_results, start_fold, end_fold)
 
         # 统计成功/失败
         n_success = sum(1 for v in results.values() if v)
@@ -238,6 +267,31 @@ class ShipEarKFoldIntegration:
         self.generate_report()
 
         return results
+
+    def _generate_group_report(self, group_name, group_results, start_fold, end_fold):
+        """为每个组生成汇总报告"""
+        report_file = os.path.join(self.results_dir, f"training_summary_{group_name}.txt")
+
+        n_success = sum(1 for v in group_results.values() if v)
+
+        with open(report_file, "w", encoding="utf-8") as f:
+            f.write("=" * 80 + "\n")
+            f.write(f"ShipEar K-Fold {group_name} (Fold {start_fold}-{end_fold-1}) 10折叠交叉验证 - 训练总结\n")
+            f.write(f"生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+            f.write("=" * 80 + "\n\n")
+
+            f.write("【训练完成统计】\n")
+            f.write(f"成功: {n_success}/10 个Fold\n")
+            f.write(f"失败: {10-n_success}/10 个Fold\n\n")
+
+            f.write("【各Fold结果】\n")
+            for fold_idx in sorted(group_results.keys()):
+                status = "成功" if group_results[fold_idx] else "失败"
+                f.write(f"Fold {fold_idx}: {status}\n")
+
+            f.write("\n" + "=" * 80 + "\n")
+
+        print(f"✓ {group_name}汇总报告已保存: {report_file}")
 
     def generate_report(self):
         """生成训练结果报告"""
@@ -252,6 +306,12 @@ class ShipEarKFoldIntegration:
             # 读取结果CSV
             if os.path.exists(self.results_csv):
                 f.write("【训练结果汇总】\n")
+                import numpy as np
+
+                accs = []
+                aucs = []
+                f1s = []
+
                 with open(self.results_csv, "r") as csv_f:
                     reader = csv.DictReader(csv_f)
                     rows = list(reader)
@@ -259,8 +319,35 @@ class ShipEarKFoldIntegration:
                         f.write(
                             f"Fold {row['fold']}: "
                             f"acc={row['best_acc']}, "
+                            f"auc={row['best_auc']}, "
+                            f"f1={row['best_f1']}, "
                             f"status={row['status']}\n"
                         )
+
+                        # 收集指标用于统计
+                        if row['best_acc']:
+                            try:
+                                accs.append(float(row['best_acc']))
+                            except:
+                                pass
+                        if row['best_auc']:
+                            try:
+                                aucs.append(float(row['best_auc']))
+                            except:
+                                pass
+                        if row['best_f1']:
+                            try:
+                                f1s.append(float(row['best_f1']))
+                            except:
+                                pass
+
+                f.write("\n【指标统计】\n")
+                if accs:
+                    f.write(f"ACC - 平均: {np.mean(accs):.4f}, 最高: {np.max(accs):.4f}, 最低: {np.min(accs):.4f}, 标准差: {np.std(accs):.4f}\n")
+                if aucs:
+                    f.write(f"AUC - 平均: {np.mean(aucs):.4f}, 最高: {np.max(aucs):.4f}, 最低: {np.min(aucs):.4f}, 标准差: {np.std(aucs):.4f}\n")
+                if f1s:
+                    f.write(f"F1  - 平均: {np.mean(f1s):.4f}, 最高: {np.max(f1s):.4f}, 最低: {np.min(f1s):.4f}, 标准差: {np.std(f1s):.4f}\n")
 
                 f.write(f"\n【详细结果CSV】\n")
                 f.write(f"查看详细结果: {self.results_csv}\n")
