@@ -148,7 +148,7 @@ class DeepShipKFoldTrainer:
         if 'distributed' not in config:
             config['distributed'] = {}
         config['distributed']['master_addr'] = 'localhost'
-        config['distributed']['master_port'] = '12361'
+        config['distributed']['master_port'] = str(12361 + fold_idx)
 
         # 创建临时配置文件
         with tempfile.NamedTemporaryFile(mode='w', suffix='.yaml', delete=False) as tmp:

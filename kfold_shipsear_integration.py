@@ -145,11 +145,11 @@ class ShipEarKFoldTrainer:
                 config['training']['num_epochs'] = config['training'].pop('epochs')
             config['training']['num_epochs'] = 200
 
-        # 修改端口以避免冲突
+        # 修改端口以避免冲突 - 为每个fold使用不同的端口
         if 'distributed' not in config:
             config['distributed'] = {}
         config['distributed']['master_addr'] = 'localhost'
-        config['distributed']['master_port'] = '12361'
+        config['distributed']['master_port'] = str(12361 + fold_idx)
 
         # 创建临时配置文件
         with tempfile.NamedTemporaryFile(mode='w', suffix='.yaml', delete=False) as tmp:
