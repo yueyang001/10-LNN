@@ -27,7 +27,7 @@ from kfold_data_loader import KFoldDataLoader, load_kfold_splits
 class LNNDeepShipKFoldTrainer:
     """DeepShip纯学生网络(LNN) K-Fold交叉验证训练器"""
 
-    def __init__(self, splits_dir="results/kfold_splits", results_dir="results/kfold_cv_lnn_deepship"):
+    def __init__(self, splits_dir="results/kfold_splits_deepship", results_dir="results/kfold_cv_lnn_deepship"):
         """
         参数:
             splits_dir: K-Fold划分文件目录
@@ -430,7 +430,7 @@ def main():
     parser.add_argument("--fold", type=int, default=None, help="训练指定的Fold (0-49)")
     parser.add_argument("--all", action="store_true", help="训练所有Fold")
     parser.add_argument("--gpus", type=str, default="4,5,6,7", help="GPU编号")
-    parser.add_argument("--splits-dir", type=str, default="results/kfold_splits",
+    parser.add_argument("--splits-dir", type=str, default="results/kfold_splits_deepship",
                         help="K-Fold划分文件目录")
     parser.add_argument("--results-dir", type=str, default="results/kfold_cv_lnn_deepship",
                         help="训练结果保存目录")
