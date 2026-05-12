@@ -6,6 +6,8 @@
 checkpoints/**/*.pth
 checkpoints/**/*.safetensors
 checkpoints/**/*.bin
+# 屏蔽结果文件夹
+results/
 # 屏蔽特定文件夹
 backup/
 # checkpoints/
