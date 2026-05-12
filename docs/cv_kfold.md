@@ -376,7 +376,20 @@ ShipsEar_622/
   - `kfold_data_loader.py`：数据加载器
   - `kfold_deepship_integration.py`：DeepShip集成
   - `kfold_shipsear_integration.py`：ShipsEar集成
+# 创建两个 LNN 纯学生网络的 k折集成脚本
+```
+# 训练单个 fold
+python kfold_LNN_deepship_integration.py --fold 0
 
+# 训练所有 50 个 fold
+python kfold_LNN_deepship_integration.py --all
+
+# 指定 GPU
+python kfold_LNN_deepship_integration.py --all --gpus 0,1,2,3
+
+# ShipEar 版本同样用法
+python kfold_LNN_shipsear_integration.py --all
+```
 ---
 
 **最后更新：2026-05-11**
