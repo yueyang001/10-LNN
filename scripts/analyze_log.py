@@ -91,25 +91,25 @@ plt.figure(figsize=(14, 5))
 
 # 左边：ShipSEAR ACC Curve
 plt.subplot(1, 2, 1)
-plt.plot(shipsear_epochs, shipsear_train_acc, label="Train Acc", color=train_color, linewidth=2)
-plt.plot(shipsear_epochs, shipsear_val_acc, label="Val Acc", color=val_color, linewidth=2)
+plt.plot(shipsear_epochs, shipsear_train_acc, label="Training Acc", color=train_color, linewidth=2)
+plt.plot(shipsear_epochs, shipsear_val_acc, label="Validation Acc", color=val_color, linewidth=2)
 plt.xlabel("Epoch")
 plt.ylabel("Accuracy (%)")
-plt.title("ShipSEAR Dataset - ACC Curve")
+plt.title("ShipsEar Dataset - ACC Curve")
 plt.legend()
-plt.text(0.05, 0.95, '(a)', transform=plt.gca().transAxes,
-         ha='left', va='top', fontsize=14)
+plt.text(0.5, -0.25, '(a)', transform=plt.gca().transAxes, 
+         ha='center', va='top', fontsize=14)
 
 # 右边：DeepSHIP ACC Curve
 plt.subplot(1, 2, 2)
-plt.plot(deepship_epochs, deepship_train_acc, label="Train Acc", color=train_color, linewidth=2)
-plt.plot(deepship_epochs, deepship_val_acc, label="Val Acc", color=val_color, linewidth=2)
+plt.plot(deepship_epochs, deepship_train_acc, label="Training Acc", color=train_color, linewidth=2)
+plt.plot(deepship_epochs, deepship_val_acc, label="Validation Acc", color=val_color, linewidth=2)
 plt.xlabel("Epoch")
 plt.ylabel("Accuracy (%)")
-plt.title("DeepSHIP Dataset - ACC Curve")
+plt.title("DeepShip Dataset - ACC Curve")
 plt.legend()
-plt.text(0.05, 0.95, '(b)', transform=plt.gca().transAxes,
-         ha='left', va='top', fontsize=14)
+plt.text(0.5, -0.2, '(b)', transform=plt.gca().transAxes, 
+         ha='center', va='top', fontsize=14)
 
 plt.tight_layout()
 output_path = "results/overfitting_analysis/acc_curve_comparison.png"
