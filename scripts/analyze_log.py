@@ -97,7 +97,7 @@ plt.xlabel("Epoch")
 plt.ylabel("Accuracy (%)")
 plt.title("ShipsEar Dataset - ACC Curve")
 plt.legend()
-plt.text(0.5, -0.25, '(a)', transform=plt.gca().transAxes, 
+plt.text(0.5, -0.2, '(a)', transform=plt.gca().transAxes, 
          ha='center', va='top', fontsize=14)
 
 # 右边：DeepSHIP ACC Curve
