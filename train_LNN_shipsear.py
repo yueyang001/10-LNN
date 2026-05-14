@@ -11,6 +11,8 @@ from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.utils.data import DataLoader
 from torch.utils.data.distributed import DistributedSampler
 from datasets.audio_dataset_old import AudioDataset, train_transform, validation_test_transform
+from sklearn.metrics import roc_auc_score, f1_score
+import numpy as np
 # from models.LNN_Audio import liquidaudio_nano
 from models.LNN import AudioCfC
 # from models.CFC import AudioCfC as CFC_AudioCfC
@@ -250,16 +252,17 @@ def train(rank, world_size, config, gpu_ids):
                            f'LR: {current_lr:.6f}')
         
         scheduler.step()
-        
+
         # 验证
-        val_acc = validate(model, val_loader, device, data_type, logger)
-        
+        val_acc, val_auc, val_f1 = validate(model, val_loader, device, data_type, logger)
+
         if rank == 0:
             avg_loss = total_loss / max(valid_batches, 1)
             train_acc = 100. * correct / max(total, 1)
             logger.info(f'Epoch [{epoch+1}/{config["train"]["epochs"]}] '
                        f'Train Loss: {avg_loss:.4f} '
-                       f'Train Acc: {train_acc:.2f}% Val Acc: {val_acc:.2f}%')
+                       f'Train Acc: {train_acc:.2f}% Val Acc: {val_acc:.2f}% '
+                       f'Val AUC: {val_auc:.4f} Val F1: {val_f1:.4f}')
             
             # 保存最佳模型
             if val_acc > best_acc:
@@ -297,38 +300,64 @@ def get_inputs(input_data, data_type, device):
 
 
 def validate(model, val_loader, device, data_type, logger=None):
-    """验证函数"""
+    """验证函数，返回准确率、AUC、F1"""
     model.eval()
     correct = 0
     total = 0
-    
+    all_preds = []
+    all_labels = []
+    all_probs = []
+
     with torch.no_grad():
         for input_data, labels in val_loader:
             inputs = get_inputs(input_data, data_type, device)
             labels = labels.to(device)
-            
-            # 检查输入
+
             if torch.isnan(inputs).any() or torch.isinf(inputs).any():
                 inputs = torch.nan_to_num(inputs, nan=0.0, posinf=1.0, neginf=-1.0)
-            
+
             outputs, sequence_output,_,_,_,_,_ = model(inputs)
-            
-            # 检查输出
+
             if torch.isnan(outputs).any() or torch.isinf(outputs).any():
                 continue
-            
+
+            probs = torch.softmax(outputs, dim=1)
             _, predicted = outputs.max(1)
             total += labels.size(0)
             correct += predicted.eq(labels).sum().item()
-    
-    # 聚合所有进程的结果
+
+            all_preds.extend(predicted.cpu().numpy())
+            all_labels.extend(labels.cpu().numpy())
+            all_probs.extend(probs.cpu().numpy())
+
     correct_tensor = torch.tensor([correct], device=device)
     total_tensor = torch.tensor([total], device=device)
     dist.all_reduce(correct_tensor, op=dist.ReduceOp.SUM)
     dist.all_reduce(total_tensor, op=dist.ReduceOp.SUM)
-    
+
     accuracy = 100. * correct_tensor.item() / max(total_tensor.item(), 1)
-    return accuracy
+
+    all_preds = np.array(all_preds)
+    all_labels = np.array(all_labels)
+    all_probs = np.array(all_probs)
+
+    auc = 0.0
+    f1 = 0.0
+
+    if len(np.unique(all_labels)) > 1 and len(all_preds) > 0:
+        try:
+            if all_probs.shape[1] == 2:
+                auc = roc_auc_score(all_labels, all_probs[:, 1])
+            else:
+                auc = roc_auc_score(all_labels, all_probs, multi_class='ovr', average='weighted')
+            f1 = f1_score(all_labels, all_preds, average='weighted')
+        except Exception as e:
+            if logger:
+                logger.warning(f'Failed to compute AUC/F1: {e}')
+            auc = 0.0
+            f1 = 0.0
+
+    return accuracy, auc, f1
 
 
 def save_checkpoint(model, optimizer, epoch, acc, path):
