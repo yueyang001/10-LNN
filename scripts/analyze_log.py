@@ -4,6 +4,7 @@ import os
 import sys
 # python scripts/analyze_log.py <shipsear_pth_path> <deepship_pth_path>
 # 脚本会自动从 pth 文件所在目录查找对应的 log 文件
+# python scripts/analyze_log.py results/kfold_cv_shipsear/fold_02/best_student.pth results/kfold_cv_deepship/fold_09/best_student.pth
 # ========= 输入 pth 文件路径 =========
 if len(sys.argv) < 3:
     print("Usage: python analyze_log.py <shipsear_pth_path> <deepship_pth_path>")
@@ -94,7 +95,7 @@ plt.subplot(1, 2, 1)
 plt.plot(shipsear_epochs, shipsear_train_acc, label="Training Acc", color=train_color, linewidth=2)
 plt.plot(shipsear_epochs, shipsear_val_acc, label="Validation Acc", color=val_color, linewidth=2)
 plt.xlabel("Epoch")
-plt.ylabel("Accuracy (%)")
+plt.ylabel("ACC (%)")
 plt.title("ShipsEar Dataset - ACC Curve")
 plt.legend()
 plt.text(0.5, -0.2, '(a)', transform=plt.gca().transAxes, 
