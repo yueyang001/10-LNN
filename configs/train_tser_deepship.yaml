@@ -1,0 +1,54 @@
+# Tser Distillation Training Configuration for DeepShip
+
+# 数据集配置
+dataset:
+  data_dir: '/media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip_622'
+  data_type: 'wav_s@wav_t'
+  num_workers: 4
+
+# 模型配置
+model:
+  num_classes: 4
+  stu_seq_len: 16
+
+  # 教师网络配置
+  teacher:
+    pretrained: true
+    freeze: true
+    checkpoint_path: '/media/hdd1/fubohan/Code/UATR/models/Audio_Teacher_DeepShip_622/checkpoints/Student.pth'
+
+  # 学生网络配置
+  student:
+    p_encoder: 0.1
+    p_classifier: 0.35
+
+# 蒸馏配置 - Tser方法
+distillation:
+  method: 'Tser'  # 特征对齐与时序 KL 蒸馏
+  temperature: 4.0
+  alpha: 0.5  # hard_loss * alpha + soft_loss * (1-alpha)
+
+  # Tser特定参数
+  tser_beta: 0.5  # 序列损失权重
+  tser_feat_dim: 4  # 特征投影维度（=num_classes）
+
+# 训练配置
+training:
+  num_epochs: 200
+  batch_size: 16
+  lr: 0.0004
+  weight_decay: 8e-05
+  seed: 42
+  log_interval: 10
+
+# DDP配置
+distributed:
+  backend: 'nccl'
+  master_addr: 'localhost'
+  master_port: '12361'
+  gpu_ids: [0, 1, 2, 3]
+
+# 保存配置
+save:
+  save_dir: '/media/hdd1/fubohan/Code/UATR/checkpoints/DeepShip/tser_training'
+  save_interval: 10
