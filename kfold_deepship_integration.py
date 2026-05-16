@@ -10,6 +10,8 @@ DeepShip K-Fold 50折叠交叉验证 + 蒸馏模型训练 完整集成脚本
     python kfold_deepship_integration.py --fold 0 --config configs/train_LNN_deepship.yaml
     或
     python kfold_deepship_integration.py --all  # 运行所有50个Fold
+    对于TS-T,
+    python kfold_deepship_integration.py --all --config configs/train_tser_deepship.yaml --results-dir results/kfold_cv_deepship_tser --splits-dir results/kfold_splits_deepship --gpus 4,5,6,7
 """
 
 import os
