@@ -23,17 +23,16 @@ model:
 
 methods:
   - name: Student Baseline
-    checkpoint: checkpoints/ShipsEar/LNN_xxx/best_model.pth
-    checkpoint_key: model_state_dict
+    checkpoint: checkpoints/ablation_shipsear/num_epochs200_weight_decay0.0001_batch_size20_lr0.0005_freezeTrue_USE_DYNAMIC_DISTILL_WEIGHTFalse_p_encoder0.355_p_classifier0.255/checkpoint_epoch_112.pth
 
   - name: Proposed Distillation
-    checkpoint: checkpoints/ShipsEar/proposed_xxx/best_student.pth
+    checkpoint: checkpoints/ablation_shipsear/num_epochs200_weight_decay0.0001_batch_size20_lr0.0005_distill_typeMTSKD_Temp_freezeTrue_USE_DYNAMIC_DISTILL_WEIGHTFalse_p_encoder0.355_p_classifier0.255/best_student.pth
     checkpoint_key: student_state_dict
 
   - name: Logits KD
-    checkpoint: checkpoints/ShipsEar/comparison_distillation_kd/best_student.pth
+    checkpoint: checkpoints/ShipsEar/comparison_distillation_kd/checkpoint_epoch_170.pth
     checkpoint_key: student_state_dict
 
   - name: Feature KD
-    checkpoint: checkpoints/ShipsEar/comparison_distillation_rkd/best_student.pth
+    checkpoint: checkpoints/ShipsEar/comparison_distillation_v2_diffkd/best_student.pth
     checkpoint_key: student_state_dict

@@ -19,6 +19,10 @@ import sys
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
 
+# Add the project root to Python path for proper imports
+project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) # 返回上级目录
+sys.path.insert(0, project_root) # 添加项目根目录到 Python 路径
+
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
@@ -273,7 +277,7 @@ def plot_four_methods(
         ncol=min(num_classes, 6),
         fontsize=9,
     )
-    fig.suptitle(f"Four-Method t-SNE Comparison ({feature_layer})", fontsize=16, fontweight="bold")
+    # fig.suptitle(f"Four-Method t-SNE Comparison ({feature_layer})", fontsize=16, fontweight="bold")
     plt.tight_layout(rect=[0, 0.04, 1, 0.96])
     plt.savefig(output_path, dpi=300, bbox_inches="tight")
     plt.close()

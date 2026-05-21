@@ -82,7 +82,7 @@ def main() -> int:
         print(f"  python run_tsne_visualization.py --make-template --config {args.config}")
         return 1
 
-    cmd = [sys.executable, "batch_tsne_visualization.py", "--config", args.config]
+    cmd = [sys.executable, "experiments/tsne_analysis/batch_tsne_visualization.py", "--config", args.config]
     for key in ("output", "feature_layer", "max_samples", "perplexity", "batch_size", "seed", "n_iter"):
         value = getattr(args, key)
         if value is not None:
