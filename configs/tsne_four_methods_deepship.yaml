@@ -1,0 +1,39 @@
+# Four-method t-SNE comparison for DeepShip.
+# Replace the checkpoint paths with the four trained models you want to compare.
+
+output_dir: results/tsne_four_methods_deepship
+feature_layer: logits       # logits | seq_features | encoder | pooled_seq
+max_samples: 2000
+perplexity: 30
+batch_size: 32
+seed: 42
+n_iter: 1000
+
+dataset:
+  data_dir: /media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip_622
+  split: validation
+  data_type: wav_s
+  num_workers: 4
+
+model:
+  num_classes: 4
+  student:
+    p_encoder: 0.355
+    p_classifier: 0.255
+
+methods:
+  - name: Student Baseline
+    checkpoint: checkpoints/DeepShip/LNN_100epoch_0128_0/best_model.pth
+    checkpoint_key: model_state_dict
+
+  - name: Proposed Distillation
+    checkpoint: checkpoints/DeepShip/dis_0210_0/best_student.pth
+    checkpoint_key: student_state_dict
+
+  - name: Logits KD
+    checkpoint: checkpoints/DeepShip/comparison_distillation_kd/best_student.pth
+    checkpoint_key: student_state_dict
+
+  - name: Feature KD
+    checkpoint: checkpoints/DeepShip/comparison_distillation_rkd/best_student.pth
+    checkpoint_key: student_state_dict
