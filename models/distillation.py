@@ -24,17 +24,21 @@ class AudioDistillationModel(nn.Module):
         cfc_output_size=32,
         cfc_hidden_size=64,
         pooling='last',
+        use_teacher=True,
     ):
         super().__init__()
-        
-        # 教师网络 (ViT)
-        self.teacher = build_Audio_TeacherNet(
-            num_classes=num_classes, 
-            checkpoint_path=teacher_checkpoint
-        )
+        # 无蒸馏基线不构建教师模型，避免占用显存。
+        self.use_teacher = use_teacher
+        self.teacher = None
+        if self.use_teacher:
+            # 教师网络 (ViT)
+            self.teacher = build_Audio_TeacherNet(
+                num_classes=num_classes,
+                checkpoint_path=teacher_checkpoint
+            )
         
         # 冻结教师网络
-        if freeze_teacher:
+        if self.teacher is not None and freeze_teacher:
             for param in self.teacher.parameters():
                 param.requires_grad = False
             self.teacher.eval()
@@ -93,10 +97,12 @@ class AudioDistillationModel(nn.Module):
         
         # 教师网络前向传播 (仅训练时)
         teacher_logits = None
+        output_cnn_features = None
         teacher_all_hidden_states = None
 
-        with torch.no_grad():
-            teacher_logits, output_cnn_features, teacher_all_hidden_states, _ = self.teacher(audio_input[1])
+        if self.use_teacher and self.teacher is not None:
+            with torch.no_grad():
+                teacher_logits, output_cnn_features, teacher_all_hidden_states, _ = self.teacher(audio_input[1])
 
         
         return student_logits, stu_sequence_logits, fl, fg, bl, bg, x_encoder, teacher_logits, output_cnn_features, teacher_all_hidden_states

@@ -157,7 +157,12 @@ class DistillationLoss(nn.Module):
         hard_loss = self.ce_loss(student_logits, labels)
         
         # ========== 不同蒸馏类型分支处理 ==========
-        if self.distill_type == 'kl':
+        if self.distill_type == 'none':
+            """仅训练学生网络，不使用蒸馏损失"""
+            memkd_weight = torch.tensor(0.0, device=device)
+            soft_loss = torch.tensor(0.0, device=device)
+
+        elif self.distill_type == 'kl':
             """时序 KL 散度方法 (Logit Standardization)"""
             # 初始化memkd_weight
             memkd_weight = torch.tensor(0.0, device=device)
@@ -357,6 +362,9 @@ class DistillationLoss(nn.Module):
             else:
                 soft_loss = 0.5 * memkd_loss + 0.5 * kl_loss
                 memkd_weight = torch.tensor(0.5, device=device)
+
+        else:
+            raise ValueError(f"Unknown distill_type: {self.distill_type}")
         
         # ========== 动态蒸馏权重 ==========
         progress = self.current_epoch / self.total_epoch

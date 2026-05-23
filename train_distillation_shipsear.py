@@ -206,9 +206,11 @@ class DistillationTrainer:
         if not is_teacher_training:
             # 教师网络保持 eval 模式
             if isinstance(self.model, DDP):
-                self.model.module.teacher.eval()
+                if self.model.module.teacher is not None:
+                    self.model.module.teacher.eval()
             else:
-                self.model.teacher.eval()
+                if self.model.teacher is not None:
+                    self.model.teacher.eval()
         
         total_loss = 0.0
         total_hard_loss = 0.0
@@ -511,6 +513,8 @@ def main_worker(rank: int, world_size: int, config: dict, gpu_ids: list):
     # 创建模型
     debug_num_classes = config['model']['num_classes']
     print(f"[DEBUG] Creating AudioDistillationModel with num_classes={debug_num_classes}")
+    distill_type = config['distillation'].get('distill_type', 'kl')
+    use_teacher = distill_type != 'none'
     # 这里传入的是教师模型和学生模型的参数
     model = AudioDistillationModel(
         num_classes=debug_num_classes,
@@ -519,13 +523,14 @@ def main_worker(rank: int, world_size: int, config: dict, gpu_ids: list):
         teacher_checkpoint=config['model']['teacher']['checkpoint_path'],
         # LNN AudioCfC使用默认参数，无需传入额外参数
         p_encoder=config['model']['student']['p_encoder'],
-        p_classifier=config['model']['student']['p_classifier']
+        p_classifier=config['model']['student']['p_classifier'],
+        use_teacher=use_teacher
     ).to(device)
     
     if rank == 0:
         # 打印模型参数量
         student_params = sum(p.numel() for p in model.student.parameters())
-        teacher_params = sum(p.numel() for p in model.teacher.parameters())
+        teacher_params = sum(p.numel() for p in model.teacher.parameters()) if model.teacher is not None else 0
         trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
         logger.info(f'Student params: {student_params:,} ({student_params/1e6:.2f}M)')
         logger.info(f'Teacher params: {teacher_params:,} ({teacher_params/1e6:.2f}M)')
