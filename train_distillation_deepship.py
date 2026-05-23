@@ -548,7 +548,14 @@ def main_worker(rank: int, world_size: int, config: dict, gpu_ids: list):
         distill_type=config['distillation'].get('distill_type', 'kl'),
         # seq_len=config['model'].get('stu_seq_len', 250),
         seq_len=config['model'].get('stu_seq_len', 16),
-        use_dynamic = config['distillation'].get('USE_DYNAMIC_DISTILL_WEIGHT', False)
+        use_dynamic = config['distillation'].get('USE_DYNAMIC_DISTILL_WEIGHT', False),
+        beta=config['distillation'].get('beta', 0.5),
+        learnable_beta=config['distillation'].get('learnable_beta', True),
+        mtskd_weight=config['distillation'].get('mtskd_weight', 0.5),
+        learnable_mtskd_weight=config['distillation'].get('learnable_mtskd_weight', True),
+        memkd_short_weight=config['distillation'].get('memkd_short_weight', 0.5),
+        memkd_long_weight=config['distillation'].get('memkd_long_weight', 1.0),
+        z_random_range=config['distillation'].get('z_random_range', 'half')
         # yaml写了就用yaml的值，没写就使用这里默认的值
     ).to(device)
     

@@ -21,6 +21,13 @@ distillation:
   # distill_type: 'MemKD'
   weight_type: 'uniform'
   USE_DYNAMIC_DISTILL_WEIGHT: false
+  beta: 0.5
+  learnable_beta: true
+  mtskd_weight: 0.5
+  learnable_mtskd_weight: true
+  memkd_short_weight: 0.5
+  memkd_long_weight: 1.0
+  z_random_range: 'half'
 
 # 模型配置
 model:

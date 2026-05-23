@@ -21,6 +21,13 @@ distillation:
   # distill_type: 'mse'
   distill_type: 'MTSKD_Temp'
   weight_type: 'uniform'
+  beta: 0.5
+  learnable_beta: true
+  mtskd_weight: 0.5
+  learnable_mtskd_weight: true
+  memkd_short_weight: 0.5
+  memkd_long_weight: 1.0
+  z_random_range: 'half'
 
 # 模型配置
 model:

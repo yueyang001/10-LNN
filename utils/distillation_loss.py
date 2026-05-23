@@ -7,7 +7,9 @@ import random
 class DistillationLoss(nn.Module):
     """知识蒸馏损失函数 - 支持 KL 和 MSE 两种模式"""
     def __init__(self, temperature=4.0, alpha=0.5, learnable_alpha=True, 
-                 seq_len=16, weight_type='uniform', distill_type='base', use_dynamic=False, num_classes=4):
+                 seq_len=16, weight_type='uniform', distill_type='base', use_dynamic=False, num_classes=4,
+                 beta=0.5, learnable_beta=True, mtskd_weight=0.5, learnable_mtskd_weight=True,
+                 memkd_short_weight=0.5, memkd_long_weight=1.0, z_random_range='half'):
         """
         Args:
             distill_type: 'kl' 或 'mse'或 'MemKD' 或 'MTSKD' 或 'MTSKD_Temp'
@@ -24,10 +26,22 @@ class DistillationLoss(nn.Module):
         self.ce_loss = nn.CrossEntropyLoss()
         self.mse_loss = nn.MSELoss()
 
-        self.beta = nn.Parameter(torch.tensor(0.0)) # 0.5
+        if learnable_beta:
+            self.beta = nn.Parameter(torch.tensor(0.0))
+        else:
+            self.register_buffer('beta', torch.tensor(float(beta)))
         
         # MTSKD 可学习权重 (只在MTSKD模式时使用)
-        self.mtskd_weight = nn.Parameter(torch.tensor(0.0))
+        if learnable_mtskd_weight:
+            self.mtskd_weight = nn.Parameter(torch.tensor(0.0))
+        else:
+            self.register_buffer('mtskd_weight', torch.tensor(float(mtskd_weight)))
+
+        # MemKD 长短期记忆权重与远程偏移采样范围
+        self.learnable_mtskd_weight = learnable_mtskd_weight
+        self.memkd_short_weight = float(memkd_short_weight)
+        self.memkd_long_weight = float(memkd_long_weight)
+        self.z_random_range = z_random_range
 
         weights = self._create_weights(seq_len, weight_type) # weight: torch.Size([16])
         self.register_buffer('time_weights', weights)
@@ -139,6 +153,34 @@ class DistillationLoss(nn.Module):
         # 使用 Smooth L1 Loss
         loss = F.smooth_l1_loss(mag_s, mag_t)
         return loss
+
+    def _sample_long_z(self, T_max):
+        """按配置采样远程记忆偏移量。"""
+        if T_max <= 3:
+            return 1
+
+        if self.z_random_range in ('quarter', 'short_to_quarter'):
+            low, high = 2, max(2, T_max // 4)
+        elif self.z_random_range in ('upper_half', 'quarter_to_half'):
+            low, high = max(2, T_max // 4), max(2, T_max // 2)
+        elif self.z_random_range in ('half', 'short_to_half'):
+            low, high = 2, max(2, T_max // 2)
+        else:
+            raise ValueError(f"Unknown z_random_range: {self.z_random_range}")
+
+        if low > high:
+            low, high = high, low
+        return random.randint(low, high)
+
+    def _mix_mtskd_loss(self, memkd_loss, kl_loss, device):
+        """融合 MemKD 与 KL_Temp，支持固定权重或可学习权重。"""
+        if self.learnable_mtskd_weight:
+            memkd_weight = torch.sigmoid(self.mtskd_weight)
+        else:
+            memkd_weight = self.mtskd_weight.to(device)
+        kl_weight = 1.0 - memkd_weight
+        soft_loss = memkd_weight * memkd_loss + kl_weight * kl_loss
+        return soft_loss, memkd_weight
     
     def _logit_standardization(self, logits, dim=-1):
         """Logit Standardization (Z-score) 预处理"""
@@ -246,11 +288,11 @@ class DistillationLoss(nn.Module):
             
             # 2. 计算远程内存差异损失 (z 随机)
             T_max = x_encoder.size(1)
-            z_random = random.randint(2, T_max // 2)
+            z_random = self._sample_long_z(T_max)
             loss_long = self._compute_memkd_loss(x_encoder, output_cnn_features, z=z_random)
             
             # 3. 组合损失
-            soft_loss = 0.5 * loss_short + 1.0 * loss_long
+            soft_loss = self.memkd_short_weight * loss_short + self.memkd_long_weight * loss_long
             # 赋值memkd_weight（默认0，也可自定义）
             memkd_weight = torch.tensor(0.0, device=device)
 
@@ -290,9 +332,9 @@ class DistillationLoss(nn.Module):
             # ---- MemKD 部分 ----
             memkd_loss_short = self._compute_memkd_loss(x_encoder, output_cnn_features, z=1)
             T_max = x_encoder.size(1)
-            z_random = random.randint(2, T_max // 2)
+            z_random = self._sample_long_z(T_max)
             memkd_loss_long = self._compute_memkd_loss(x_encoder, output_cnn_features, z=z_random)
-            memkd_loss = 0.5 * memkd_loss_short + 1.0 * memkd_loss_long
+            memkd_loss = self.memkd_short_weight * memkd_loss_short + self.memkd_long_weight * memkd_loss_long
             
             # ---- KL 部分 ----
             soft_teacher = F.softmax(teacher_logits / self.temperature, dim=-1)
@@ -309,15 +351,7 @@ class DistillationLoss(nn.Module):
             final_loss = self._compute_kl_loss(student_logits, teacher_logits)
             kl_loss = self.beta * seq_loss + (1 - self.beta) * final_loss
             
-            # ---- MTSKD 融合 ----
-            USE_LEARNABLE_WEIGHT = True
-            if USE_LEARNABLE_WEIGHT:
-                memkd_weight = torch.sigmoid(self.mtskd_weight)  # 关键：赋值memkd_weight
-                kl_weight = 1.0 - memkd_weight
-                soft_loss = memkd_weight * memkd_loss + kl_weight * kl_loss
-            else:
-                soft_loss = 0.5 * memkd_loss + 0.5 * kl_loss
-                memkd_weight = torch.tensor(0.5, device=device)  # 固定权重
+            soft_loss, memkd_weight = self._mix_mtskd_loss(memkd_loss, kl_loss, device)
                 
         elif self.distill_type == 'MTSKD_Temp':
             """MTSKD_Temp (MemKD + KL_Temp) 混合蒸馏"""
@@ -328,9 +362,9 @@ class DistillationLoss(nn.Module):
             # ---- MemKD 部分 ----
             memkd_loss_short = self._compute_memkd_loss(x_encoder, output_cnn_features, z=1)
             T_max = x_encoder.size(1)
-            z_random = random.randint(2, T_max // 2)
+            z_random = self._sample_long_z(T_max)
             memkd_loss_long = self._compute_memkd_loss(x_encoder, output_cnn_features, z=z_random)
-            memkd_loss = 0.5 * memkd_loss_short + 1.0 * memkd_loss_long
+            memkd_loss = self.memkd_short_weight * memkd_loss_short + self.memkd_long_weight * memkd_loss_long
             
             # ---- KL_Temp 部分 (Logit Standardization) ----
             std_teacher_logits = self._logit_standardization(teacher_logits)
@@ -353,15 +387,7 @@ class DistillationLoss(nn.Module):
             )
             kl_loss = self.beta * seq_loss + (1 - self.beta) * final_loss
             
-            # ---- MTSKD 融合 ----
-            USE_LEARNABLE_WEIGHT = True
-            if USE_LEARNABLE_WEIGHT:
-                memkd_weight = torch.sigmoid(self.mtskd_weight)  # 关键：赋值memkd_weight
-                kl_weight = 1.0 - memkd_weight
-                soft_loss = memkd_weight * memkd_loss + kl_weight * kl_loss
-            else:
-                soft_loss = 0.5 * memkd_loss + 0.5 * kl_loss
-                memkd_weight = torch.tensor(0.5, device=device)
+            soft_loss, memkd_weight = self._mix_mtskd_loss(memkd_loss, kl_loss, device)
 
         else:
             raise ValueError(f"Unknown distill_type: {self.distill_type}")

@@ -1,0 +1,31 @@
+level: 04_z_random_range_analysis
+dataset: DeepShip
+base_config: configs/train_distillation_deepship.yaml
+train_script: train_distillation_deepship.py
+default_gpus: "4,5,6,7"
+output:
+  checkpoints: checkpoints/hyperparameter_analysis/04_z_random_range_analysis
+  results_csv: results/hyperparameter_analysis/04_z_random_range_analysis/results.csv
+fixed:
+  training.num_epochs: 200
+  training.batch_size: 16
+  training.lr: 0.0004
+  training.weight_decay: 0.00008
+  model.teacher.freeze: true
+  distillation.distill_type: MTSKD_Temp
+  distillation.USE_DYNAMIC_DISTILL_WEIGHT: false
+  model.student.p_encoder: 0.1
+  model.student.p_classifier: 0.35
+experiments:
+  - id: Z1
+    name: z_2_to_quarter
+    changes:
+      distillation.z_random_range: quarter
+  - id: Z2
+    name: z_2_to_half
+    changes:
+      distillation.z_random_range: half
+  - id: Z3
+    name: z_quarter_to_half
+    changes:
+      distillation.z_random_range: upper_half

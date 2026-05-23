@@ -1,0 +1,64 @@
+level: 03_memkd_weight_analysis
+dataset: DeepShip
+base_config: configs/train_distillation_deepship.yaml
+train_script: train_distillation_deepship.py
+default_gpus: "4,5,6,7"
+output:
+  checkpoints: checkpoints/hyperparameter_analysis/03_memkd_weight_analysis
+  results_csv: results/hyperparameter_analysis/03_memkd_weight_analysis/results.csv
+fixed:
+  training.num_epochs: 200
+  training.batch_size: 16
+  training.lr: 0.0004
+  training.weight_decay: 0.00008
+  model.teacher.freeze: true
+  distillation.distill_type: MTSKD_Temp
+  distillation.USE_DYNAMIC_DISTILL_WEIGHT: false
+  model.student.p_encoder: 0.1
+  model.student.p_classifier: 0.35
+experiments:
+  - id: M1
+    name: short_0_25_long_0_5
+    changes:
+      distillation.memkd_short_weight: 0.25
+      distillation.memkd_long_weight: 0.5
+  - id: M2
+    name: short_0_25_long_1_0
+    changes:
+      distillation.memkd_short_weight: 0.25
+      distillation.memkd_long_weight: 1.0
+  - id: M3
+    name: short_0_25_long_2_0
+    changes:
+      distillation.memkd_short_weight: 0.25
+      distillation.memkd_long_weight: 2.0
+  - id: M4
+    name: short_0_5_long_0_5
+    changes:
+      distillation.memkd_short_weight: 0.5
+      distillation.memkd_long_weight: 0.5
+  - id: M5
+    name: short_0_5_long_1_0
+    changes:
+      distillation.memkd_short_weight: 0.5
+      distillation.memkd_long_weight: 1.0
+  - id: M6
+    name: short_0_5_long_2_0
+    changes:
+      distillation.memkd_short_weight: 0.5
+      distillation.memkd_long_weight: 2.0
+  - id: M7
+    name: short_1_0_long_0_5
+    changes:
+      distillation.memkd_short_weight: 1.0
+      distillation.memkd_long_weight: 0.5
+  - id: M8
+    name: short_1_0_long_1_0
+    changes:
+      distillation.memkd_short_weight: 1.0
+      distillation.memkd_long_weight: 1.0
+  - id: M9
+    name: short_1_0_long_2_0
+    changes:
+      distillation.memkd_short_weight: 1.0
+      distillation.memkd_long_weight: 2.0

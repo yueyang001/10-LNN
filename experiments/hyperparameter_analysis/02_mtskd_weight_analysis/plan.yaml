@@ -1,0 +1,38 @@
+level: 02_mtskd_weight_analysis
+dataset: DeepShip
+base_config: configs/train_distillation_deepship.yaml
+train_script: train_distillation_deepship.py
+default_gpus: "4,5,6,7"
+output:
+  checkpoints: checkpoints/hyperparameter_analysis/02_mtskd_weight_analysis
+  results_csv: results/hyperparameter_analysis/02_mtskd_weight_analysis/results.csv
+fixed:
+  training.num_epochs: 200
+  training.batch_size: 16
+  training.lr: 0.0004
+  training.weight_decay: 0.00008
+  model.teacher.freeze: true
+  distillation.distill_type: MTSKD_Temp
+  distillation.USE_DYNAMIC_DISTILL_WEIGHT: false
+  model.student.p_encoder: 0.1
+  model.student.p_classifier: 0.35
+experiments:
+  - id: W1
+    name: memkd_0_2_kltemp_0_8
+    changes:
+      distillation.learnable_mtskd_weight: false
+      distillation.mtskd_weight: 0.2
+  - id: W2
+    name: memkd_0_5_kltemp_0_5
+    changes:
+      distillation.learnable_mtskd_weight: false
+      distillation.mtskd_weight: 0.5
+  - id: W3
+    name: memkd_0_8_kltemp_0_2
+    changes:
+      distillation.learnable_mtskd_weight: false
+      distillation.mtskd_weight: 0.8
+  - id: W4
+    name: fusion_learnable
+    changes:
+      distillation.learnable_mtskd_weight: true
