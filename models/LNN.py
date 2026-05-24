@@ -772,20 +772,27 @@ class AttentiveStatisticsPooling(nn.Module):
 
 # 双分辨率池化 (Dual-Resolution Pooling, DRASP)
 class DRASP(nn.Module):
-    def __init__(self, input_dim, segment_len=5):
+    def __init__(self, input_dim, segment_len=5, mode="full", global_bottleneck_dim=32, local_bottleneck_dim=16):
         super().__init__()
         self.input_dim = input_dim
         self.segment_len = segment_len
+        allowed_modes = ["full", "global", "local"]
+        if mode not in allowed_modes:
+            raise ValueError(f"Unknown DRASP mode '{mode}', valid options are {allowed_modes}")
+        self.mode = mode
+        self.output_dim = 4 * input_dim if mode == "full" else 2 * input_dim
         # Global Branch: Focus on overall acoustic features 全局加权均值+全局加权标准差
-        self.global_asp = AttentiveStatisticsPooling(input_dim)
+        self.global_asp = AttentiveStatisticsPooling(input_dim, bottleneck_dim=global_bottleneck_dim)
         # Local Branch: Focus on transient events 局部加权均值+局部加权标准差
-        self.local_asp = AttentiveStatisticsPooling(input_dim, bottleneck_dim=16)
+        self.local_asp = AttentiveStatisticsPooling(input_dim, bottleneck_dim=local_bottleneck_dim)
 
     # Input: (B, C, T) / Output: (B, 4*C)
     def forward(self, x):
         B, C, T = x.shape
         # Global Stats (B, 2C) 全局特征提取
         global_stats = self.global_asp(x)
+        if self.mode == "global":
+            return global_stats
         # Local Stats (B, 2C)
         pad_len = (self.segment_len - (T % self.segment_len)) % self.segment_len
         x_pad = F.pad(x, (0, pad_len)) if pad_len > 0 else x
@@ -797,27 +804,41 @@ class DRASP(nn.Module):
         local_stats_view = local_stats_all.view(B, -1, 2 * C)
         # Max Pooling: Extract the most prominent segment features (highlight moments)
         local_stats_max, _ = torch.max(local_stats_view, dim=1) # 再通过 Max Pooling 提取最突出片段的特征，按照第2个维度选取最佳值(B, 2C)
+        if self.mode == "local":
+            return local_stats_max
         return torch.cat([global_stats, local_stats_max], dim=1)
 
 
 # 双向并行交叉切片CfC (Bidirectional Parallel Cross-Slice CfC, BPCSCfC)
 class BiParallelCrossSliceCfC(nn.Module):
-    def __init__(self, input_size, wiring_units, output_size, seq_len, window_size):
+    def __init__(self, input_size, wiring_units, output_size, seq_len, window_size, branch_mode="full", sparsity_level=0.5):
         super(BiParallelCrossSliceCfC, self).__init__()
         self.seq_len = seq_len
         self.window_size = window_size
+        if seq_len % window_size != 0:
+            raise ValueError(f"seq_len ({seq_len}) must be divisible by window_size ({window_size})")
         self.num_windows = seq_len // window_size
+        branch_presets = {
+            "full": ["fl", "fg", "bl", "bg"],
+            "only_fl": ["fl"],
+            "fl_fg": ["fl", "fg"],
+            "fl_bl": ["fl", "bl"],
+        }
+        if branch_mode not in branch_presets:
+            raise ValueError(f"Unknown branch_mode '{branch_mode}', valid options are {list(branch_presets)}")
+        self.active_branches = branch_presets[branch_mode]
+        self.branch_mode = branch_mode
         # AutoNCP: automatically generate sparse connections
-        self.fwd_local_wiring = AutoNCP(wiring_units, output_size)
+        self.fwd_local_wiring = AutoNCP(wiring_units, output_size, sparsity_level=sparsity_level)
         self.fwd_local_cfc = CfC(input_size, self.fwd_local_wiring, return_sequences=True, batch_first=True)
-        self.fwd_global_wiring = AutoNCP(wiring_units, output_size)
+        self.fwd_global_wiring = AutoNCP(wiring_units, output_size, sparsity_level=sparsity_level)
         self.fwd_global_cfc = CfC(input_size, self.fwd_global_wiring, return_sequences=True, batch_first=True)
-        self.bwd_local_wiring = AutoNCP(wiring_units, output_size)
+        self.bwd_local_wiring = AutoNCP(wiring_units, output_size, sparsity_level=sparsity_level)
         self.bwd_local_cfc = CfC(input_size, self.bwd_local_wiring, return_sequences=True, batch_first=True)
-        self.bwd_global_wiring = AutoNCP(wiring_units, output_size)
+        self.bwd_global_wiring = AutoNCP(wiring_units, output_size, sparsity_level=sparsity_level)
         self.bwd_global_cfc = CfC(input_size, self.bwd_global_wiring, return_sequences=True, batch_first=True)
         # Temporal fusion: [forward local, forward global, backward local, backward global]
-        self.fusion = nn.Linear(output_size * 4, output_size) # output_size = 64
+        self.fusion = nn.Linear(output_size * len(self.active_branches), output_size) # output_size = 64
         self.layer_norm = nn.LayerNorm(output_size)
         self.act = nn.GELU()
 
@@ -844,7 +865,14 @@ class BiParallelCrossSliceCfC(nn.Module):
         bwd_global = torch.flip(bwd_global_flipped, [1])
         # print(f"backword_local.shape: {bwd_local.shape}") # [B, 16, 64]
         # print(f"backword_global.shape: {bwd_global.shape}") # [B, 16, 64]
-        merged = torch.cat([fwd_local, fwd_global, bwd_local, bwd_global], dim=-1) # (B, 16, 256)
+        branch_outputs = {
+            "fl": fwd_local,
+            "fg": fwd_global,
+            "bl": bwd_local,
+            "bg": bwd_global,
+        }
+        # 消融时只融合启用分支，返回值保持不变以兼容训练流程。
+        merged = torch.cat([branch_outputs[name] for name in self.active_branches], dim=-1) # (B, 16, output_size * N)
         # print(f"merged.shape: {merged.shape}")
         fused = self.act(self.layer_norm(self.fusion(merged)))   
         # 同时返回融合结果 + 四个原始特征 
@@ -853,7 +881,23 @@ class BiParallelCrossSliceCfC(nn.Module):
 
 # Audio Student
 class AudioCfC(nn.Module):
-    def __init__(self, num_classes=5,  p_encoder=0.2, p_classifier=0.3):
+    def __init__(
+        self,
+        num_classes=5,
+        p_encoder=0.2,
+        p_classifier=0.3,
+        seq_len=16,
+        window_size=4,
+        wiring_units=None,
+        cfc_output_size=64,
+        cfc_branch_mode="full",
+        cfc_sparsity_level=0.5,
+        drasp_mode="full",
+        drasp_segment_len=None,
+        drasp_global_bottleneck_dim=32,
+        drasp_local_bottleneck_dim=16,
+        classifier_hidden_dim=64,
+    ):
         super(AudioCfC, self).__init__()
         self.audio_encoder = nn.Sequential(
             nn.BatchNorm1d(num_features=1),#(B,1,48000)->(B,1,48000),通道的数量为1
@@ -869,8 +913,10 @@ class AudioCfC(nn.Module):
             nn.BatchNorm1d(64), nn.LeakyReLU(0.1, True))
         
         self.encoder_out_dim = 64
-        self.seq_len=16
-        self.window_size=4
+        self.seq_len=seq_len
+        self.window_size=window_size
+        self.cfc_output_size = cfc_output_size
+        self.drasp_segment_len = drasp_segment_len if drasp_segment_len is not None else window_size
         self.p_encoder = p_encoder
         self.p_classifier = p_classifier
         # self.p_encoder=0.5
@@ -883,19 +929,27 @@ class AudioCfC(nn.Module):
         # Bidirectional Parallel Cross-Slice CfC 双向-并行-交叉切片
         self.bi_parallel_cfc = BiParallelCrossSliceCfC(
             input_size=self.encoder_out_dim,# 64
-            wiring_units=self.encoder_out_dim * 2,# 128
-            output_size=self.encoder_out_dim,# 64
+            wiring_units=wiring_units if wiring_units is not None else self.encoder_out_dim * 2,# 128
+            output_size=self.cfc_output_size,# 64
             seq_len=self.seq_len,# 16
-            window_size=self.window_size# 4
+            window_size=self.window_size,# 4
+            branch_mode=cfc_branch_mode,
+            sparsity_level=cfc_sparsity_level,
         )
         
         # Dual-Resolution Pooling 双-分辨率-池化
-        self.drasp = DRASP(input_dim=self.encoder_out_dim, segment_len=self.window_size)
+        self.drasp = DRASP(
+            input_dim=self.cfc_output_size,
+            segment_len=self.drasp_segment_len,
+            mode=drasp_mode,
+            global_bottleneck_dim=drasp_global_bottleneck_dim,
+            local_bottleneck_dim=drasp_local_bottleneck_dim,
+        )
         
         self.classifier = nn.Sequential(
-            nn.Linear(self.encoder_out_dim * 4, 64),
-            nn.LayerNorm(64), nn.GELU(), nn.Dropout(self.p_classifier),
-            nn.Linear(64, num_classes))
+            nn.Linear(self.drasp.output_dim, classifier_hidden_dim),
+            nn.LayerNorm(classifier_hidden_dim), nn.GELU(), nn.Dropout(self.p_classifier),
+            nn.Linear(classifier_hidden_dim, num_classes))
 
     def forward(self, x):
         # x: (B, 1, 48000)

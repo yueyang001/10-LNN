@@ -1,0 +1,39 @@
+level: 07_student_cfc_capacity
+dataset: DeepShip
+default_gpus: "4,5,6,7"
+output:
+  checkpoints: checkpoints/hyperparameter_analysis/07_student_cfc_capacity
+  results_csv: results/hyperparameter_analysis/07_student_cfc_capacity/results.csv
+fixed:
+  training.num_epochs: 200
+  model.teacher.freeze: true
+  distillation.distill_type: MTSKD_Temp
+  distillation.USE_DYNAMIC_DISTILL_WEIGHT: false
+  model.student.seq_len: 16
+  model.student.window_size: 4
+  model.student.drasp_segment_len: 4
+  model.student.cfc_output_size: 64
+  model.student.cfc_branch_mode: full
+  model.student.cfc_sparsity_level: 0.5
+  model.student.drasp_mode: full
+experiments:
+  - id: CP1
+    name: wiring_units_64
+    changes:
+      model.student.wiring_units: 64
+  - id: CP2
+    name: wiring_units_96
+    changes:
+      model.student.wiring_units: 96
+  - id: CP3
+    name: wiring_units_128
+    changes:
+      model.student.wiring_units: 128
+  - id: CP4
+    name: wiring_units_160
+    changes:
+      model.student.wiring_units: 160
+  - id: CP5
+    name: wiring_units_192
+    changes:
+      model.student.wiring_units: 192
