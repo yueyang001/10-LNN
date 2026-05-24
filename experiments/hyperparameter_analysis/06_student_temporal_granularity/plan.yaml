@@ -1,0 +1,43 @@
+level: 06_student_temporal_granularity
+dataset: DeepShip
+default_gpus: "4,5,6,7"
+output:
+  checkpoints: checkpoints/hyperparameter_analysis/06_student_temporal_granularity
+  results_csv: results/hyperparameter_analysis/06_student_temporal_granularity/results.csv
+fixed:
+  training.num_epochs: 200
+  model.teacher.freeze: true
+  distillation.distill_type: MTSKD_Temp
+  distillation.USE_DYNAMIC_DISTILL_WEIGHT: false
+  model.student.seq_len: 16
+  model.student.wiring_units: 128
+  model.student.cfc_output_size: 64
+  model.student.cfc_branch_mode: full
+  model.student.cfc_sparsity_level: 0.5
+  model.student.drasp_mode: full
+experiments:
+  - id: TG1
+    name: window_1_segment_1
+    changes:
+      model.student.window_size: 1
+      model.student.drasp_segment_len: 1
+  - id: TG2
+    name: window_2_segment_2
+    changes:
+      model.student.window_size: 2
+      model.student.drasp_segment_len: 2
+  - id: TG3
+    name: window_4_segment_4
+    changes:
+      model.student.window_size: 4
+      model.student.drasp_segment_len: 4
+  - id: TG4
+    name: window_8_segment_8
+    changes:
+      model.student.window_size: 8
+      model.student.drasp_segment_len: 8
+  - id: TG5
+    name: window_16_segment_16
+    changes:
+      model.student.window_size: 16
+      model.student.drasp_segment_len: 16
