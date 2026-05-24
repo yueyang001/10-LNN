@@ -1,39 +1,75 @@
 #!/bin/bash
 
-# 1. 定义会话名称
-SESSION_NAME="multi_exp"
+set -e
 
-# 2. 检查会话是否存在，不存在则创建
-tmux has-session -t $SESSION_NAME 2>/dev/null
-if [ $? != 0 ]; then
-    tmux new-session -d -s $SESSION_NAME -n dummy
-fi
+# 按 README 并行启动四组超参数分析实验。
+# 示例：
+#   bash run_custom_exp.sh
+#   DATASET=shipsear bash run_custom_exp.sh
+#   DRY_RUN=1 bash run_custom_exp.sh
 
-# 3. 在这里写下你 8 个实验各自的专属命令
-# 你可以随意更换脚本名、参数、甚至是指定不同的显卡 (CUDA_VISIBLE_DEVICES)
-COMMANDS=(
-    "conda activate UATR && CUDA_VISIBLE_DEVICES=0 python train_alex.py --data dataset1 --lr 0.01"
-    "conda activate UATR && CUDA_VISIBLE_DEVICES=1 python train_bert.py --data dataset1 --lr 0.005 --epochs 50"
-    "conda activate env2 && CUDA_VISIBLE_DEVICES=2 python run_resnet.py --data dataset1 --batch 64"
-    "conda activate env2 && CUDA_VISIBLE_DEVICES=3 python run_resnet.py --data dataset1 --batch 128"
-    "CUDA_VISIBLE_DEVICES=0 python custom_mod.py --data dataset2 --dropout 0.3"
-    "CUDA_VISIBLE_DEVICES=1 python custom_mod.py --data dataset2 --dropout 0.5"
-    "python evaluate_baseline.py --data dataset2 --metric accuracy"
-    "python evaluate_baseline.py --data dataset2 --metric f1"
+SESSION_NAME="${SESSION_NAME:-hyperparameter_analysis}"
+CONDA_ENV="${CONDA_ENV:-UATR}"
+PYTHON_BIN="${PYTHON_BIN:-python}"
+DATASET="${DATASET:-}"
+DRY_RUN="${DRY_RUN:-0}"
+
+GPU_BETA="${GPU_BETA:-4,5,6,7}"
+GPU_MTSKD="${GPU_MTSKD:-4,5,6,7}"
+GPU_MEMKD="${GPU_MEMKD:-4,5,6,7}"
+GPU_Z_RANDOM="${GPU_Z_RANDOM:-4,5,6,7}"
+
+PLAN_ROOT="experiments/hyperparameter_analysis"
+
+PLANS=(
+    "${PLAN_ROOT}/01_beta_analysis/plan.yaml"
+    "${PLAN_ROOT}/02_mtskd_weight_analysis/plan.yaml"
+    "${PLAN_ROOT}/03_memkd_weight_analysis/plan.yaml"
+    "${PLAN_ROOT}/04_z_random_range_analysis/plan.yaml"
 )
 
-# 4. 自动遍历数组，为每条命令创建一个独立窗口
-for i in "${!COMMANDS[@]}"; do
-    # 窗口命名为 exp_0, exp_1, exp_2 ...
-    WINDOW_NAME="exp_${i}"
-    
-    # 创建新窗口
-    tmux new-window -t $SESSION_NAME -n "$WINDOW_NAME"
-    
-    # 把对应的命令发送到该窗口并回车执行
-    tmux send-keys -t "$SESSION_NAME:$WINDOW_NAME" "${COMMANDS[$i]}" C-m
+WINDOWS=(
+    "01_beta"
+    "02_mtskd_weight"
+    "03_memkd_weight"
+    "04_z_random_range"
+)
+
+GPUS=(
+    "${GPU_BETA}"
+    "${GPU_MTSKD}"
+    "${GPU_MEMKD}"
+    "${GPU_Z_RANDOM}"
+)
+
+build_command() {
+    local plan_path="$1"
+    local gpu_ids="$2"
+    local cmd="source \"\$(conda info --base)/etc/profile.d/conda.sh\" && conda activate ${CONDA_ENV} && ${PYTHON_BIN} ${PLAN_ROOT}/run_plan.py --plan ${plan_path} --gpus ${gpu_ids}"
+
+    if [ -n "${DATASET}" ]; then
+        cmd="${cmd} --dataset ${DATASET}"
+    fi
+
+    if [ "${DRY_RUN}" = "1" ]; then
+        cmd="${cmd} --dry-run"
+    fi
+
+    echo "${cmd}"
+}
+
+tmux has-session -t "${SESSION_NAME}" 2>/dev/null || tmux new-session -d -s "${SESSION_NAME}" -n dummy
+
+for i in "${!PLANS[@]}"; do
+    window_name="${WINDOWS[$i]}"
+    command="$(build_command "${PLANS[$i]}" "${GPUS[$i]}")"
+
+    tmux new-window -t "${SESSION_NAME}" -n "${window_name}"
+    tmux send-keys -t "${SESSION_NAME}:${window_name}" "${command}" C-m
 done
 
-# 5. 收尾工作：删掉初始的 dummy 窗口并挂载会话
-tmux kill-window -t $SESSION_NAME:dummy
-tmux attach-session -t $SESSION_NAME
+if tmux list-windows -t "${SESSION_NAME}" -F "#{window_name}" | grep -qx "dummy"; then
+    tmux kill-window -t "${SESSION_NAME}:dummy"
+fi
+
+tmux attach-session -t "${SESSION_NAME}"
