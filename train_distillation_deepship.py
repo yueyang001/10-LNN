@@ -516,6 +516,25 @@ def main_worker(rank: int, world_size: int, config: dict, gpu_ids: list):
     distill_type = config['distillation'].get('distill_type', 'kl')
     use_teacher = distill_type != 'none'
     # 这里传入的是教师模型和学生模型的参数
+    student_structure_keys = [
+        'seq_len',
+        'window_size',
+        'wiring_units',
+        'cfc_output_size',
+        'cfc_branch_mode',
+        'cfc_sparsity_level',
+        'drasp_mode',
+        'drasp_segment_len',
+        'drasp_global_bottleneck_dim',
+        'drasp_local_bottleneck_dim',
+        'classifier_hidden_dim',
+    ]
+    # 只透传学生结构消融参数，避免和已有 dropout 参数重复。
+    student_config = {
+        key: config['model']['student'][key]
+        for key in student_structure_keys
+        if key in config['model']['student']
+    }
     model = AudioDistillationModel(
         num_classes=debug_num_classes,
         teacher_pretrained=config['model']['teacher']['pretrained'],
@@ -524,7 +543,8 @@ def main_worker(rank: int, world_size: int, config: dict, gpu_ids: list):
         # LNN AudioCfC使用默认参数，无需传入额外参数
         p_encoder=config['model']['student']['p_encoder'],
         p_classifier=config['model']['student']['p_classifier'],
-        use_teacher=use_teacher
+        use_teacher=use_teacher,
+        student_config=student_config
     ).to(device)
     
     if rank == 0:

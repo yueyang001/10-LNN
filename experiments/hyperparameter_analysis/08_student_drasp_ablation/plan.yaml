@@ -1,0 +1,31 @@
+level: 08_student_drasp_ablation
+dataset: DeepShip
+default_gpus: "4,5,6,7"
+output:
+  checkpoints: checkpoints/hyperparameter_analysis/08_student_drasp_ablation
+  results_csv: results/hyperparameter_analysis/08_student_drasp_ablation/results.csv
+fixed:
+  training.num_epochs: 200
+  model.teacher.freeze: true
+  distillation.distill_type: MTSKD_Temp
+  distillation.USE_DYNAMIC_DISTILL_WEIGHT: false
+  model.student.seq_len: 16
+  model.student.window_size: 4
+  model.student.drasp_segment_len: 4
+  model.student.wiring_units: 128
+  model.student.cfc_output_size: 64
+  model.student.cfc_branch_mode: full
+  model.student.cfc_sparsity_level: 0.5
+experiments:
+  - id: DP1
+    name: global_asp_only
+    changes:
+      model.student.drasp_mode: global
+  - id: DP2
+    name: local_asp_only
+    changes:
+      model.student.drasp_mode: local
+  - id: DP3
+    name: drasp_full
+    changes:
+      model.student.drasp_mode: full

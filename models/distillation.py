@@ -25,6 +25,7 @@ class AudioDistillationModel(nn.Module):
         cfc_hidden_size=64,
         pooling='last',
         use_teacher=True,
+        student_config=None,
     ):
         super().__init__()
         # 无蒸馏基线不构建教师模型，避免占用显存。
@@ -44,10 +45,13 @@ class AudioDistillationModel(nn.Module):
             self.teacher.eval()
         
                 # 学生网络 (LNN AudioCfC)
+        student_config = student_config or {}
+        cfc_hidden_size = student_config.get("cfc_output_size", cfc_hidden_size)
         self.student = AudioCfC(
             num_classes=num_classes,
             p_encoder=p_encoder,
-            p_classifier=p_classifier
+            p_classifier=p_classifier,
+            **student_config
             )
         # 确保学生网络输出维度匹配
         # self.student.head = nn.Linear(cfc_output_size, num_classes)
