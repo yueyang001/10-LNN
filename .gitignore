@@ -10,6 +10,7 @@ checkpoints/**/*.bin
 results/
 # 屏蔽特定文件夹
 backup/
+Manuscript/
 # checkpoints/
 models/wav2vec2-large-robust-12-ft-emotion-msp-dim/
 
