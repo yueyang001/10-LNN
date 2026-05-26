@@ -2,16 +2,27 @@
 
 set -e
 
-# 同时启动 DeepShip 和 ShipSEAR 的学生网络消融实验。
+# 启动指定数据集的四组学生网络消融实验。
 # 示例：
-#   bash run_student_ablation_exp.sh
-#   DRY_RUN=1 bash run_student_ablation_exp.sh
+#   DATASET=deepship bash run_student_ablation_exp.sh
+#   DATASET=shipsear bash run_student_ablation_exp.sh
+#   DATASET=shipsear DRY_RUN=1 bash run_student_ablation_exp.sh
 
-SESSION_NAME="${SESSION_NAME:-student_network_ablation}"
 CONDA_ENV="${CONDA_ENV:-UATR}"
 PYTHON_BIN="${PYTHON_BIN:-python}"
+DATASET="${DATASET:-deepship}"
 DRY_RUN="${DRY_RUN:-0}"
 
+case "${DATASET}" in
+    deepship|shipsear)
+        ;;
+    *)
+        echo "Unsupported DATASET: ${DATASET}. Use deepship or shipsear."
+        exit 1
+        ;;
+esac
+
+SESSION_NAME="${SESSION_NAME:-student_network_ablation_${DATASET}}"
 PLAN_ROOT="experiments/hyperparameter_analysis"
 
 PLANS=(
@@ -28,18 +39,11 @@ WINDOWS=(
     "08_drasp"
 )
 
-DEEPSHIP_GPUS=(
-    "${GPU_DEEPSHIP_BRANCH:-4,5,6,7}"
-    "${GPU_DEEPSHIP_TEMPORAL:-4,5,6,7}"
-    "${GPU_DEEPSHIP_CAPACITY:-4,5,6,7}"
-    "${GPU_DEEPSHIP_DRASP:-4,5,6,7}"
-)
-
-SHIPSEAR_GPUS=(
-    "${GPU_SHIPSEAR_BRANCH:-4,5,6,7}"
-    "${GPU_SHIPSEAR_TEMPORAL:-4,5,6,7}"
-    "${GPU_SHIPSEAR_CAPACITY:-4,5,6,7}"
-    "${GPU_SHIPSEAR_DRASP:-4,5,6,7}"
+GPUS=(
+    "${GPU_BRANCH:-4,5,6,7}"
+    "${GPU_TEMPORAL:-4,5,6,7}"
+    "${GPU_CAPACITY:-4,5,6,7}"
+    "${GPU_DRASP:-4,5,6,7}"
 )
 
 build_command() {
@@ -55,19 +59,26 @@ build_command() {
     echo "${cmd}"
 }
 
+create_window_and_run() {
+    local window_name="$1"
+    local command="$2"
+    local window_id
+
+    # 使用稳定的 window_id，避免窗口标题被 shell 自动改名后无法定位。
+    window_id="$(tmux new-window -d -P -F '#{window_id}' -t "${SESSION_NAME}" -n "${window_name}")"
+    tmux set-window-option -t "${window_id}" automatic-rename off >/dev/null
+    tmux set-window-option -t "${window_id}" allow-rename off >/dev/null
+    tmux send-keys -t "${window_id}" "${command}" C-m
+}
+
 tmux has-session -t "${SESSION_NAME}" 2>/dev/null || tmux new-session -d -s "${SESSION_NAME}" -n dummy
 
 for i in "${!PLANS[@]}"; do
     plan_path="${PLANS[$i]}"
     base_window="${WINDOWS[$i]}"
 
-    deepship_command="$(build_command "${plan_path}" "deepship" "${DEEPSHIP_GPUS[$i]}")"
-    tmux new-window -t "${SESSION_NAME}" -n "ds_${base_window}"
-    tmux send-keys -t "${SESSION_NAME}:ds_${base_window}" "${deepship_command}" C-m
-
-    shipsear_command="$(build_command "${plan_path}" "shipsear" "${SHIPSEAR_GPUS[$i]}")"
-    tmux new-window -t "${SESSION_NAME}" -n "se_${base_window}"
-    tmux send-keys -t "${SESSION_NAME}:se_${base_window}" "${shipsear_command}" C-m
+    command="$(build_command "${plan_path}" "${DATASET}" "${GPUS[$i]}")"
+    create_window_and_run "${base_window}" "${command}"
 done
 
 if tmux list-windows -t "${SESSION_NAME}" -F "#{window_name}" | grep -qx "dummy"; then
