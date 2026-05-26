@@ -18,9 +18,9 @@ fixed:
   model.student.drasp_mode: full
 experiments:
   - id: CP1
-    name: wiring_units_64
+    name: wiring_units_80
     changes:
-      model.student.wiring_units: 64
+      model.student.wiring_units: 80
   - id: CP2
     name: wiring_units_96
     changes:

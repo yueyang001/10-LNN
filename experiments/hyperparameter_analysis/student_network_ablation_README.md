@@ -8,7 +8,7 @@
 |---|---|
 | `05_student_cfc_branch_ablation` | 四个 CfC 分支消融：完整四分支、Only FL、FL+FG、FL+BL |
 | `06_student_temporal_granularity` | 时间切片粒度分析：`window_size` 与 `drasp_segment_len` 同步取 `1/2/4/8/16` |
-| `07_student_cfc_capacity` | CfC 容量分析：`wiring_units` 取 `64/96/128/160/192` |
+| `07_student_cfc_capacity` | CfC 容量分析：`wiring_units` 取 `80/96/128/160/192` |
 | `08_student_drasp_ablation` | DRASP 池化消融：只用 global ASP、只用 local ASP、完整 DRASP |
 
 ## 单个实验运行
@@ -41,21 +41,26 @@ python experiments/hyperparameter_analysis/run_plan.py \
   --gpus 4,5,6,7
 ```
 
-## 同时运行两个数据集
+## 按数据集运行四组实验
 
-使用仓库根目录下的脚本：
+使用仓库根目录下的脚本，每次启动一个数据集的四组实验：
 
 ```bash
-bash run_student_ablation_exp.sh
+DATASET=deepship bash run_student_ablation_exp.sh
+DATASET=shipsear bash run_student_ablation_exp.sh
 ```
 
 常用环境变量：
 
 ```bash
-DRY_RUN=1 bash run_student_ablation_exp.sh
-CONDA_ENV=UATR bash run_student_ablation_exp.sh
-GPU_DEEPSHIP_BRANCH=4,5,6,7 GPU_SHIPSEAR_BRANCH=0,1,2,3 bash run_student_ablation_exp.sh
+DATASET=shipsear DRY_RUN=1 bash run_student_ablation_exp.sh
+DATASET=deepship CONDA_ENV=UATR bash run_student_ablation_exp.sh
+DATASET=shipsear GPU_BRANCH=4,5,6,7 GPU_TEMPORAL=4,5,6,7 bash run_student_ablation_exp.sh
 ```
+
+脚本默认创建 `student_network_ablation_deepship` 或
+`student_network_ablation_shipsear` 会话，因此两个数据集可以分时启动，
+也可以在 GPU 资源足够时分别挂在不同会话中运行。
 
 ## 输出位置
 
