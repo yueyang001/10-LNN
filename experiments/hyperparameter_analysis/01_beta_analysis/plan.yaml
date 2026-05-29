@@ -18,31 +18,60 @@ fixed:
   model.student.p_classifier: 0.35
 experiments:
   - id: B1
-    name: beta_0_1
-    changes:
-      distillation.learnable_beta: false
-      distillation.beta: 0.1
-  - id: B2
-    name: beta_0_3
-    changes:
-      distillation.learnable_beta: false
-      distillation.beta: 0.3
-  - id: B3
-    name: beta_0_5
-    changes:
-      distillation.learnable_beta: false
-      distillation.beta: 0.5
-  - id: B4
-    name: beta_0_7
-    changes:
-      distillation.learnable_beta: false
-      distillation.beta: 0.7
-  - id: B5
-    name: beta_0_9
-    changes:
-      distillation.learnable_beta: false
-      distillation.beta: 0.9
-  - id: B6
-    name: beta_learnable
+    name: learnable_beta_init_0_1
     changes:
       distillation.learnable_beta: true
+      distillation.beta: 0.1
+  - id: B2
+    name: learnable_beta_init_0_3
+    changes:
+      distillation.learnable_beta: true
+      distillation.beta: 0.3
+  - id: B3
+    name: learnable_beta_init_0_5
+    changes:
+      distillation.learnable_beta: true
+      distillation.beta: 0.5
+  - id: B4
+    name: learnable_beta_init_0_7
+    changes:
+      distillation.learnable_beta: true
+      distillation.beta: 0.7
+  - id: B5
+    name: learnable_beta_init_0_9
+    changes:
+      distillation.learnable_beta: true
+      distillation.beta: 0.9
+
+# 旧版实验定义备份：固定 beta 扫描 + 单独可学习 beta。
+# 按师兄会议意见，当前不再启用；保留在这里方便回退和对照。
+# experiments:
+#   - id: B1
+#     name: beta_0_1
+#     changes:
+#       distillation.learnable_beta: false
+#       distillation.beta: 0.1
+#   - id: B2
+#     name: beta_0_3
+#     changes:
+#       distillation.learnable_beta: false
+#       distillation.beta: 0.3
+#   - id: B3
+#     name: beta_0_5
+#     changes:
+#       distillation.learnable_beta: false
+#       distillation.beta: 0.5
+#   - id: B4
+#     name: beta_0_7
+#     changes:
+#       distillation.learnable_beta: false
+#       distillation.beta: 0.7
+#   - id: B5
+#     name: beta_0_9
+#     changes:
+#       distillation.learnable_beta: false
+#       distillation.beta: 0.9
+#   - id: B6
+#     name: beta_learnable
+#     changes:
+#       distillation.learnable_beta: true
