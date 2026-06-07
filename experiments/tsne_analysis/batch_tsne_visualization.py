@@ -41,6 +41,16 @@ class MethodSpec:
 
 
 FEATURE_CHOICES = ("logits", "seq_features", "encoder", "pooled_seq")
+DEFAULT_CLASS_NAMES = {
+    "shipsear": [
+        "Vessel A (Fishing/Trawlers/Tug/Dredger)",
+        "Vessel D (Ocean Liner/Ro-Ro)",
+        "Vessel C (Passenger Ferry)",
+        "Vessel B (Motorboat/Pilot/Sailboat)",
+        "Background Noise",
+    ],
+    "deepship": ["Passenger Ship", "Tanker", "Cargo Ship", "Tug"],
+}
 
 
 def setup_seed(seed: int) -> None:
@@ -239,12 +249,47 @@ def class_colors(num_classes: int):
     return plt.cm.hsv(np.linspace(0, 1, num_classes))
 
 
+def infer_dataset_key(config: dict) -> Optional[str]:
+    dataset_cfg = config.get("dataset", {})
+    text = " ".join(
+        str(value)
+        for value in (
+            config.get("dataset_name"),
+            dataset_cfg.get("name"),
+            dataset_cfg.get("data_dir"),
+            config.get("output_dir"),
+        )
+        if value
+    ).lower()
+    if "shipsear" in text or "shipear" in text:
+        return "shipsear"
+    if "deepship" in text:
+        return "deepship"
+    return None
+
+
+def get_class_names(config: dict, num_classes: int) -> List[str]:
+    class_names = config.get("class_names")
+    if class_names is None:
+        class_names = config.get("plot", {}).get("class_names")
+    if class_names is None:
+        dataset_key = infer_dataset_key(config)
+        if dataset_key and len(DEFAULT_CLASS_NAMES[dataset_key]) == num_classes:
+            return DEFAULT_CLASS_NAMES[dataset_key]
+        return [f"Class {idx}" for idx in range(num_classes)]
+    if len(class_names) != num_classes:
+        raise ValueError(f"class_names must contain {num_classes} names, got {len(class_names)}")
+    return [str(name) for name in class_names]
+
+
 def plot_four_methods(
     tsne_by_method: Dict[str, np.ndarray],
     labels: np.ndarray,
     num_classes: int,
     feature_layer: str,
     output_path: str,
+    class_names: List[str],
+    legend_fontsize: int = 16,
 ) -> None:
     fig, axes = plt.subplots(2, 2, figsize=(13, 11))
     axes = axes.flatten()
@@ -258,7 +303,7 @@ def plot_four_methods(
                     points[mask, 0],
                     points[mask, 1],
                     c=[colors[cls]],
-                    label=f"Class {cls}",
+                    label=class_names[cls],
                     s=18,
                     alpha=0.72,
                     linewidths=0.25,
@@ -274,11 +319,15 @@ def plot_four_methods(
         handles,
         legend_labels,
         loc="lower center",
-        ncol=min(num_classes, 6),
-        fontsize=9,
+        ncol=min(num_classes, 3),
+        fontsize=legend_fontsize,
+        markerscale=1.8,
+        borderpad=0.6,
+        labelspacing=0.6,
+        handletextpad=0.5,
     )
     # fig.suptitle(f"Four-Method t-SNE Comparison ({feature_layer})", fontsize=16, fontweight="bold")
-    plt.tight_layout(rect=[0, 0.04, 1, 0.96])
+    plt.tight_layout(rect=[0, 0.08, 1, 0.96])
     plt.savefig(output_path, dpi=300, bbox_inches="tight")
     plt.close()
 
@@ -289,6 +338,8 @@ def plot_single_method(
     labels: np.ndarray,
     num_classes: int,
     output_path: str,
+    class_names: List[str],
+    legend_fontsize: int = 15,
 ) -> None:
     plt.figure(figsize=(9, 8))
     colors = class_colors(num_classes)
@@ -299,7 +350,7 @@ def plot_single_method(
                 points[mask, 0],
                 points[mask, 1],
                 c=[colors[cls]],
-                label=f"Class {cls}",
+                label=class_names[cls],
                 s=20,
                 alpha=0.72,
                 linewidths=0.25,
@@ -308,7 +359,7 @@ def plot_single_method(
     plt.title(method_name, fontsize=14, fontweight="bold")
     plt.xlabel("t-SNE dim 1")
     plt.ylabel("t-SNE dim 2")
-    plt.legend(fontsize=9, loc="best", ncol=2)
+    plt.legend(fontsize=legend_fontsize, loc="best", ncol=1, markerscale=1.6)
     plt.grid(True, linestyle="--", alpha=0.25)
     plt.tight_layout()
     plt.savefig(output_path, dpi=300, bbox_inches="tight")
@@ -375,6 +426,8 @@ def main() -> int:
 
     loader = make_loader(config, max_samples, seed, batch_size)
     num_classes = int(config["model"]["num_classes"])
+    class_names = get_class_names(config, num_classes)
+    legend_fontsize = int(config.get("plot", {}).get("legend_fontsize", 16))
 
     labels_ref = None
     tsne_by_method: Dict[str, np.ndarray] = {}
@@ -404,7 +457,15 @@ def main() -> int:
 
     labels_ref = labels_ref if labels_ref is not None else np.array([])
     comparison_path = os.path.join(output_dir, f"tsne_four_methods_{feature_layer}.png")
-    plot_four_methods(tsne_by_method, labels_ref, num_classes, feature_layer, comparison_path)
+    plot_four_methods(
+        tsne_by_method,
+        labels_ref,
+        num_classes,
+        feature_layer,
+        comparison_path,
+        class_names,
+        legend_fontsize,
+    )
 
     for method_name, points in tsne_by_method.items():
         plot_single_method(
@@ -413,6 +474,8 @@ def main() -> int:
             labels_ref,
             num_classes,
             os.path.join(output_dir, f"tsne_{safe_name(method_name)}_{feature_layer}.png"),
+            class_names,
+            max(legend_fontsize - 1, 10),
         )
 
     np.savez(

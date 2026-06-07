@@ -18,6 +18,15 @@ batch_size: 32
 seed: 42
 n_iter: 1000
 
+plot:
+  legend_fontsize: 18
+
+class_names:
+  - Passenger Ship
+  - Tanker
+  - Cargo Ship
+  - Tug
+
 dataset:
   data_dir: /path/to/DeepShip_622
   split: validation

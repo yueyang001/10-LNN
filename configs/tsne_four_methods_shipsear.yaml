@@ -9,6 +9,17 @@ batch_size: 32
 seed: 42
 n_iter: 1000
 
+plot:
+  legend_fontsize: 18
+
+# 顺序需与 AudioDataset 中 ShipsEar 的标签编号保持一致：A, D, C, B, E。
+class_names:
+  - Vessel A (Fishing/Trawlers/Tug/Dredger)
+  - Vessel D (Ocean Liner/Ro-Ro)
+  - Vessel C (Passenger Ferry)
+  - Vessel B (Motorboat/Pilot/Sailboat)
+  - Background Noise
+
 dataset:
   data_dir: /media/hdd1/chuxiaohui/AI4Ocean_UATR/ShipsEar_622
   split: validation
