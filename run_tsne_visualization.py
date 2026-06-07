@@ -20,6 +20,7 @@ n_iter: 1000
 
 plot:
   legend_fontsize: 18
+  filename_suffix: v1
 
 class_names:
   - Passenger Ship

@@ -370,14 +370,25 @@ def safe_name(name: str) -> str:
     return "".join(c.lower() if c.isalnum() else "_" for c in name).strip("_")
 
 
+def get_filename_suffix(config: dict) -> str:
+    suffix = config.get("filename_suffix")
+    if suffix is None:
+        suffix = config.get("plot", {}).get("filename_suffix")
+    if suffix is None or str(suffix).strip() == "":
+        return ""
+    return f"_{safe_name(str(suffix))}"
+
+
 def save_manifest(
     output_dir: str,
     methods: List[MethodSpec],
     feature_layer: str,
     labels: np.ndarray,
     feature_shapes: Dict[str, Tuple[int, ...]],
+    filename_suffix: str = "",
 ) -> None:
-    with open(os.path.join(output_dir, "tsne_run_summary.csv"), "w", newline="", encoding="utf-8") as f:
+    manifest_name = f"tsne_run_summary{filename_suffix}.csv"
+    with open(os.path.join(output_dir, manifest_name), "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(["method", "checkpoint", "feature_layer", "feature_shape", "num_samples"])
         for method in methods:
@@ -428,6 +439,7 @@ def main() -> int:
     num_classes = int(config["model"]["num_classes"])
     class_names = get_class_names(config, num_classes)
     legend_fontsize = int(config.get("plot", {}).get("legend_fontsize", 16))
+    filename_suffix = get_filename_suffix(config)
 
     labels_ref = None
     tsne_by_method: Dict[str, np.ndarray] = {}
@@ -456,7 +468,7 @@ def main() -> int:
             torch.cuda.empty_cache()
 
     labels_ref = labels_ref if labels_ref is not None else np.array([])
-    comparison_path = os.path.join(output_dir, f"tsne_four_methods_{feature_layer}.png")
+    comparison_path = os.path.join(output_dir, f"tsne_four_methods_{feature_layer}{filename_suffix}.png")
     plot_four_methods(
         tsne_by_method,
         labels_ref,
@@ -473,21 +485,21 @@ def main() -> int:
             points,
             labels_ref,
             num_classes,
-            os.path.join(output_dir, f"tsne_{safe_name(method_name)}_{feature_layer}.png"),
+            os.path.join(output_dir, f"tsne_{safe_name(method_name)}_{feature_layer}{filename_suffix}.png"),
             class_names,
             max(legend_fontsize - 1, 10),
         )
 
     np.savez(
-        os.path.join(output_dir, f"tsne_four_methods_{feature_layer}.npz"),
+        os.path.join(output_dir, f"tsne_four_methods_{feature_layer}{filename_suffix}.npz"),
         labels=labels_ref,
         **{safe_name(name): points for name, points in tsne_by_method.items()},
     )
-    save_manifest(output_dir, methods, feature_layer, labels_ref, feature_shapes)
+    save_manifest(output_dir, methods, feature_layer, labels_ref, feature_shapes, filename_suffix)
 
     print("\nDone.")
     print(f"Comparison figure: {comparison_path}")
-    print(f"Summary CSV: {os.path.join(output_dir, 'tsne_run_summary.csv')}")
+    print(f"Summary CSV: {os.path.join(output_dir, f'tsne_run_summary{filename_suffix}.csv')}")
     return 0
 
 
