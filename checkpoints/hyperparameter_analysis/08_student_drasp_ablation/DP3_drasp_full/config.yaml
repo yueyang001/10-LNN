@@ -1,0 +1,55 @@
+dataset:
+  data_dir: /media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip_622
+  data_type: wav_s@wav_t
+  num_workers: 4
+distillation:
+  USE_DYNAMIC_DISTILL_WEIGHT: false
+  alpha: 0.3
+  beta: 0.5
+  distill_type: MTSKD_Temp
+  learnable_alpha: true
+  learnable_beta: true
+  learnable_mtskd_weight: true
+  memkd_long_weight: 1.0
+  memkd_short_weight: 0.5
+  mtskd_weight: 0.5
+  temperature: 2.0
+  weight_type: uniform
+  z_random_range: half
+distributed:
+  backend: nccl
+  gpu_ids:
+  - 4
+  - 5
+  - 6
+  - 7
+  master_addr: localhost
+  master_port: '23615'
+model:
+  num_classes: 4
+  student:
+    cfc_branch_mode: full
+    cfc_output_size: 64
+    cfc_sparsity_level: 0.5
+    drasp_mode: full
+    drasp_segment_len: 4
+    p_classifier: 0.35
+    p_encoder: 0.1
+    seq_len: 16
+    stu_seq_len: 16
+    window_size: 4
+    wiring_units: 128
+  teacher:
+    checkpoint_path: /media/hdd1/fubohan/Code/UATR/models/Audio_Teacher_DeepShip_622/checkpoints/Student.pth
+    freeze: true
+    pretrained: true
+save:
+  save_dir: /media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/08_student_drasp_ablation/DP3_drasp_full
+  save_interval: 10
+training:
+  batch_size: 16
+  log_interval: 20
+  lr: 0.0004
+  num_epochs: 200
+  seed: 42
+  weight_decay: 8.0e-05

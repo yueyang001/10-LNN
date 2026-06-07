@@ -1,0 +1,26 @@
+2026-05-28 15:14:28,400 - INFO - ==================================================
+2026-05-28 15:14:28,400 - INFO - Distillation Training Configuration
+2026-05-28 15:14:28,400 - INFO - ==================================================
+2026-05-28 15:14:28,400 - INFO - GPUs: [4, 5, 6, 7]
+2026-05-28 15:14:28,400 - INFO - World size: 4
+2026-05-28 15:14:28,400 - INFO - Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/ShipsEar_622
+2026-05-28 15:14:28,400 - INFO - Data type: wav_s@wav_t
+2026-05-28 15:14:28,400 - INFO - Batch size: 20
+2026-05-28 15:14:28,400 - INFO - Epochs: 200
+2026-05-28 15:14:28,400 - INFO - Learning rate: 0.0005
+2026-05-28 15:14:28,400 - INFO - Temperature: 2.0
+2026-05-28 15:14:28,400 - INFO - Alpha: 0.3
+2026-05-28 15:14:28,400 - INFO - Save dir: /media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/shipsear/03_memkd_weight_analysis/M1_short_0_25_long_0_5
+2026-05-28 15:14:28,401 - INFO - ==================================================
+2026-05-28 15:14:28,431 - INFO - Train dataset size: 2240
+2026-05-28 15:14:28,432 - INFO - Validation dataset size: 749
+2026-05-28 15:14:32,460 - INFO - Student params: 316,299 (0.32M)
+2026-05-28 15:14:32,460 - INFO - Teacher params: 164,415,877 (164.42M)
+2026-05-28 15:14:32,460 - INFO - Trainable params: 271,372 (0.27M)
+2026-05-28 15:14:33,956 - INFO - Start training...
+2026-05-28 15:14:33,956 - INFO - 🔥 Resume from: /media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/shipsear/03_memkd_weight_analysis/M1_short_0_25_long_0_5/checkpoint_epoch_200.pth
+2026-05-28 15:14:34,193 - INFO - Resume epoch: 201
+2026-05-28 15:14:34,194 - INFO - Best acc: 89.49468085106383
+2026-05-28 15:14:34,194 - INFO - ==================================================
+2026-05-28 15:14:34,194 - INFO - Training finished! Best accuracy: 89.49%
+2026-05-28 15:14:34,194 - INFO - ==================================================

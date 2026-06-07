@@ -1,0 +1,26 @@
+2026-06-05 18:48:08,641 - INFO - ==================================================
+2026-06-05 18:48:08,641 - INFO - Distillation Training Configuration
+2026-06-05 18:48:08,641 - INFO - ==================================================
+2026-06-05 18:48:08,641 - INFO - GPUs: [4, 5, 6, 7]
+2026-06-05 18:48:08,641 - INFO - World size: 4
+2026-06-05 18:48:08,641 - INFO - Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip_622
+2026-06-05 18:48:08,642 - INFO - Data type: wav_s@wav_t
+2026-06-05 18:48:08,642 - INFO - Batch size: 16
+2026-06-05 18:48:08,642 - INFO - Epochs: 200
+2026-06-05 18:48:08,642 - INFO - Learning rate: 0.0004
+2026-06-05 18:48:08,642 - INFO - Temperature: 2.0
+2026-06-05 18:48:08,642 - INFO - Alpha: 0.3
+2026-06-05 18:48:08,642 - INFO - Save dir: /media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/01_beta_analysis/B3_learnable_beta_init_0_5
+2026-06-05 18:48:08,642 - INFO - ==================================================
+2026-06-05 18:48:09,041 - INFO - Train dataset size: 31892
+2026-06-05 18:48:09,041 - INFO - Validation dataset size: 10631
+2026-06-05 18:48:10,512 - INFO - Student params: 316,234 (0.32M)
+2026-06-05 18:48:10,513 - INFO - Teacher params: 164,415,748 (164.42M)
+2026-06-05 18:48:10,513 - INFO - Trainable params: 271,242 (0.27M)
+2026-06-05 18:48:11,537 - INFO - Start training...
+2026-06-05 18:48:11,538 - INFO - 🔥 Resume from: /media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/01_beta_analysis/B3_learnable_beta_init_0_5/checkpoint_epoch_200.pth
+2026-06-05 18:48:11,791 - INFO - Resume epoch: 201
+2026-06-05 18:48:11,791 - INFO - Best acc: 93.5665914221219
+2026-06-05 18:48:11,791 - INFO - ==================================================
+2026-06-05 18:48:11,791 - INFO - Training finished! Best accuracy: 93.57%
+2026-06-05 18:48:11,792 - INFO - ==================================================

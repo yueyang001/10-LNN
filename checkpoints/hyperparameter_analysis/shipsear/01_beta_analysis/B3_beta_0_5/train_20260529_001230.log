@@ -1,0 +1,25 @@
+2026-05-29 00:12:30,805 - INFO - ==================================================
+2026-05-29 00:12:30,805 - INFO - Distillation Training Configuration
+2026-05-29 00:12:30,805 - INFO - ==================================================
+2026-05-29 00:12:30,805 - INFO - GPUs: [4, 5, 6, 7]
+2026-05-29 00:12:30,806 - INFO - World size: 4
+2026-05-29 00:12:30,806 - INFO - Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/ShipsEar_622
+2026-05-29 00:12:30,806 - INFO - Data type: wav_s@wav_t
+2026-05-29 00:12:30,806 - INFO - Batch size: 20
+2026-05-29 00:12:30,806 - INFO - Epochs: 200
+2026-05-29 00:12:30,806 - INFO - Learning rate: 0.0005
+2026-05-29 00:12:30,806 - INFO - Temperature: 2.0
+2026-05-29 00:12:30,806 - INFO - Alpha: 0.3
+2026-05-29 00:12:30,806 - INFO - Save dir: /media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/shipsear/01_beta_analysis/B3_beta_0_5
+2026-05-29 00:12:30,806 - INFO - ==================================================
+2026-05-29 00:12:30,839 - INFO - Train dataset size: 2240
+2026-05-29 00:12:30,839 - INFO - Validation dataset size: 749
+2026-05-29 00:12:33,084 - INFO - Student params: 316,299 (0.32M)
+2026-05-29 00:12:33,084 - INFO - Teacher params: 164,415,877 (164.42M)
+2026-05-29 00:12:33,084 - INFO - Trainable params: 271,372 (0.27M)
+2026-05-29 00:12:33,920 - INFO - Start training...
+2026-05-29 00:12:33,920 - INFO - No checkpoint found, start from scratch
+2026-05-29 00:12:59,622 - INFO - Epoch [1] Batch [0/28]                     Loss: 2.2038, Hard: 1.7078, Soft: 0.4961                     Acc: 10.00% LR: 0.000500                     Alpha: 0.5744425058364868                     Beta: 0.5                     MemKD: 0.5
+2026-05-29 00:13:05,086 - INFO - Epoch [1] Batch [20/28]                     Loss: 1.4726, Hard: 1.2478, Soft: 0.2248                     Acc: 38.10% LR: 0.000500                     Alpha: 0.5744425058364868                     Beta: 0.5                     MemKD: 0.5023748278617859
+2026-05-29 00:13:34,387 - INFO - Epoch [1/200] Train Loss: 1.7413, Train Acc: 40.00%, Val Loss: 1.4877, Val Acc: 40.29%, Val AUC: 0.6907, Val F1: 0.2463
+2026-05-29 00:13:34,388 - INFO - Best model saved with accuracy: 40.29%, AUC: 0.6907, F1: 0.2463

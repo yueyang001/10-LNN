@@ -1,0 +1,55 @@
+dataset:
+  data_dir: /media/hdd1/chuxiaohui/AI4Ocean_UATR/ShipsEar_622
+  data_type: wav_s@wav_t
+  num_workers: 4
+distillation:
+  USE_DYNAMIC_DISTILL_WEIGHT: false
+  alpha: 0.3
+  beta: 0.5
+  distill_type: MTSKD_Temp
+  learnable_alpha: false
+  learnable_beta: true
+  learnable_mtskd_weight: true
+  memkd_long_weight: 1.0
+  memkd_short_weight: 0.5
+  mtskd_weight: 0.5
+  temperature: 2.0
+  weight_type: uniform
+  z_random_range: half
+distributed:
+  backend: nccl
+  gpu_ids:
+  - 4
+  - 5
+  - 6
+  - 7
+  master_addr: localhost
+  master_port: '44617'
+model:
+  num_classes: 5
+  student:
+    cfc_branch_mode: only_fl
+    cfc_output_size: 64
+    cfc_sparsity_level: 0.5
+    drasp_mode: full
+    drasp_segment_len: 4
+    p_classifier: 0.255
+    p_encoder: 0.355
+    seq_len: 16
+    stu_seq_len: 16
+    window_size: 4
+    wiring_units: 128
+  teacher:
+    checkpoint_path: /media/hdd1/fubohan/Code/UATR/models/Audio_Teacher_ShipsEar_622/checkpoints/Student.pth
+    freeze: true
+    pretrained: true
+save:
+  save_dir: /media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/shipsear/05_student_cfc_branch_ablation/BR2_only_fl
+  save_interval: 10
+training:
+  batch_size: 20
+  log_interval: 20
+  lr: 0.0005
+  num_epochs: 200
+  seed: 42
+  weight_decay: 0.0001

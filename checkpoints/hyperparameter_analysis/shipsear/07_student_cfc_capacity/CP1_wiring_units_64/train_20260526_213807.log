@@ -1,0 +1,16 @@
+2026-05-26 21:38:07,881 - INFO - ==================================================
+2026-05-26 21:38:07,881 - INFO - Distillation Training Configuration
+2026-05-26 21:38:07,881 - INFO - ==================================================
+2026-05-26 21:38:07,881 - INFO - GPUs: [0, 1, 2, 3]
+2026-05-26 21:38:07,881 - INFO - World size: 4
+2026-05-26 21:38:07,882 - INFO - Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/ShipsEar_622
+2026-05-26 21:38:07,882 - INFO - Data type: wav_s@wav_t
+2026-05-26 21:38:07,882 - INFO - Batch size: 20
+2026-05-26 21:38:07,882 - INFO - Epochs: 200
+2026-05-26 21:38:07,882 - INFO - Learning rate: 0.0005
+2026-05-26 21:38:07,882 - INFO - Temperature: 2.0
+2026-05-26 21:38:07,882 - INFO - Alpha: 0.3
+2026-05-26 21:38:07,882 - INFO - Save dir: /media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/shipsear/07_student_cfc_capacity/CP1_wiring_units_64
+2026-05-26 21:38:07,882 - INFO - ==================================================
+2026-05-26 21:38:07,940 - INFO - Train dataset size: 2240
+2026-05-26 21:38:07,940 - INFO - Validation dataset size: 749

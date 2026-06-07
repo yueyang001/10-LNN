@@ -1,7 +1,7 @@
 # Four-method t-SNE comparison for ShipsEar.
 # Replace the checkpoint paths with the four trained models you want to compare.
 
-output_dir: results/tsne_four_methods_shipsear
+output_dir: results/tsne_four_methods_shipsear_v1
 feature_layer: logits       # logits | seq_features | encoder | pooled_seq
 max_samples: 2000
 perplexity: 30

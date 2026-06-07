@@ -1,0 +1,21 @@
+2026-05-28 19:52:19,074 - INFO - ==================================================
+2026-05-28 19:52:19,074 - INFO - Distillation Training Configuration
+2026-05-28 19:52:19,074 - INFO - ==================================================
+2026-05-28 19:52:19,075 - INFO - GPUs: [0, 1, 2, 3]
+2026-05-28 19:52:19,075 - INFO - World size: 4
+2026-05-28 19:52:19,075 - INFO - Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/ShipsEar_622
+2026-05-28 19:52:19,075 - INFO - Data type: wav_s@wav_t
+2026-05-28 19:52:19,075 - INFO - Batch size: 20
+2026-05-28 19:52:19,075 - INFO - Epochs: 200
+2026-05-28 19:52:19,075 - INFO - Learning rate: 0.0005
+2026-05-28 19:52:19,075 - INFO - Temperature: 2.0
+2026-05-28 19:52:19,075 - INFO - Alpha: 0.3
+2026-05-28 19:52:19,075 - INFO - Save dir: /media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/shipsear/02_mtskd_weight_analysis/W2_memkd_0_5_kltemp_0_5
+2026-05-28 19:52:19,076 - INFO - ==================================================
+2026-05-28 19:52:19,117 - INFO - Train dataset size: 2240
+2026-05-28 19:52:19,117 - INFO - Validation dataset size: 749
+2026-05-28 19:52:22,762 - INFO - Student params: 316,299 (0.32M)
+2026-05-28 19:52:22,762 - INFO - Teacher params: 164,415,877 (164.42M)
+2026-05-28 19:52:22,762 - INFO - Trainable params: 271,372 (0.27M)
+2026-05-28 19:52:24,739 - INFO - Start training...
+2026-05-28 19:52:24,740 - INFO - No checkpoint found, start from scratch

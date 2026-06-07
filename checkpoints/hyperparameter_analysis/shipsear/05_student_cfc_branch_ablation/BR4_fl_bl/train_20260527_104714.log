@@ -1,0 +1,23 @@
+2026-05-27 10:47:14,830 - INFO - ==================================================
+2026-05-27 10:47:14,831 - INFO - Distillation Training Configuration
+2026-05-27 10:47:14,831 - INFO - ==================================================
+2026-05-27 10:47:14,831 - INFO - GPUs: [4, 5, 6, 7]
+2026-05-27 10:47:14,831 - INFO - World size: 4
+2026-05-27 10:47:14,831 - INFO - Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/ShipsEar_622
+2026-05-27 10:47:14,831 - INFO - Data type: wav_s@wav_t
+2026-05-27 10:47:14,831 - INFO - Batch size: 20
+2026-05-27 10:47:14,831 - INFO - Epochs: 200
+2026-05-27 10:47:14,831 - INFO - Learning rate: 0.0005
+2026-05-27 10:47:14,831 - INFO - Temperature: 2.0
+2026-05-27 10:47:14,831 - INFO - Alpha: 0.3
+2026-05-27 10:47:14,831 - INFO - Save dir: /media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/shipsear/05_student_cfc_branch_ablation/BR4_fl_bl
+2026-05-27 10:47:14,831 - INFO - ==================================================
+2026-05-27 10:47:14,855 - INFO - Train dataset size: 2240
+2026-05-27 10:47:14,855 - INFO - Validation dataset size: 749
+2026-05-27 10:47:17,470 - INFO - Student params: 308,107 (0.31M)
+2026-05-27 10:47:17,470 - INFO - Teacher params: 164,415,877 (164.42M)
+2026-05-27 10:47:17,471 - INFO - Trainable params: 263,180 (0.26M)
+2026-05-27 10:47:19,743 - INFO - Start training...
+2026-05-27 10:47:19,744 - INFO - No checkpoint found, start from scratch
+2026-05-27 10:47:48,535 - INFO - Epoch [1] Batch [0/28]                     Loss: 1.9762, Hard: 1.5826, Soft: 0.3936                     Acc: 20.00% LR: 0.000500                     Alpha: 0.5744425058364868                     Beta: 0.0                     MemKD: 0.5
+2026-05-27 10:47:53,637 - INFO - Epoch [1] Batch [20/28]                     Loss: 1.6064, Hard: 1.3703, Soft: 0.2360                     Acc: 38.57% LR: 0.000500                     Alpha: 0.5744425058364868                     Beta: -0.008987920358777046                     MemKD: 0.502409040927887

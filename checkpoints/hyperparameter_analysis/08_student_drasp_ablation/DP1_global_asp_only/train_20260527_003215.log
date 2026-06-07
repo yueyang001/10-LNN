@@ -1,0 +1,16 @@
+2026-05-27 00:32:15,056 - INFO - ==================================================
+2026-05-27 00:32:15,056 - INFO - Distillation Training Configuration
+2026-05-27 00:32:15,056 - INFO - ==================================================
+2026-05-27 00:32:15,056 - INFO - GPUs: [4, 5, 6, 7]
+2026-05-27 00:32:15,056 - INFO - World size: 4
+2026-05-27 00:32:15,056 - INFO - Dataset: /media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip_622
+2026-05-27 00:32:15,057 - INFO - Data type: wav_s@wav_t
+2026-05-27 00:32:15,057 - INFO - Batch size: 16
+2026-05-27 00:32:15,057 - INFO - Epochs: 200
+2026-05-27 00:32:15,057 - INFO - Learning rate: 0.0004
+2026-05-27 00:32:15,057 - INFO - Temperature: 2.0
+2026-05-27 00:32:15,057 - INFO - Alpha: 0.3
+2026-05-27 00:32:15,057 - INFO - Save dir: /media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/08_student_drasp_ablation/DP1_global_asp_only
+2026-05-27 00:32:15,057 - INFO - ==================================================
+2026-05-27 00:32:15,627 - INFO - Train dataset size: 31892
+2026-05-27 00:32:15,627 - INFO - Validation dataset size: 10631
