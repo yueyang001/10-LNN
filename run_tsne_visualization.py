@@ -21,6 +21,8 @@ n_iter: 1000
 plot:
   legend_fontsize: 18
   filename_suffix: v1
+  xlabel: t-SNE 1
+  ylabel: t-SNE 2
 
 class_names:
   - Passenger Ship

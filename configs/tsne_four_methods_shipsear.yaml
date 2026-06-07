@@ -12,6 +12,8 @@ n_iter: 1000
 plot:
   legend_fontsize: 18
   filename_suffix: v1
+  xlabel: t-SNE Component 1
+  ylabel: t-SNE Component 2
 
 # 顺序需与 AudioDataset 中 ShipsEar 的标签编号保持一致：A, D, C, B, E。
 class_names:
