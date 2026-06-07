@@ -14,6 +14,8 @@ plot:
   filename_suffix: v1
   xlabel: t-SNE Component 1
   ylabel: t-SNE Component 2
+  show_legend: false
+  save_comparison: false
 
 class_names:
   - Passenger Ship
@@ -34,10 +36,10 @@ model:
     p_classifier: 0.255
 
 methods:
-  - name: Student Baseline
+  - name: Baseline
     checkpoint: checkpoints/ablation_deepship_0/num_epochs200_weight_decay8e-05_batch_size16_lr0.0004_freezeTrue_USE_DYNAMIC_DISTILL_WEIGHTFalse_p_encoder0.1_p_classifier0.35/checkpoint_epoch_190.pth
 
-  - name: Proposed Distillation
+  - name: Best
     checkpoint: checkpoints/ablation_deepship/num_epochs200_weight_decay8e-05_batch_size16_lr0.0004_distill_typeMTSKD_Temp_freezeTrue_USE_DYNAMIC_DISTILL_WEIGHTFalse_p_encoder0.1_p_classifier0.35/best_student.pth
     checkpoint_key: student_state_dict
 

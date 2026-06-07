@@ -14,13 +14,15 @@ plot:
   filename_suffix: v1
   xlabel: t-SNE Component 1
   ylabel: t-SNE Component 2
+  show_legend: false
+  save_comparison: false
 
 # 顺序需与 AudioDataset 中 ShipsEar 的标签编号保持一致：A, D, C, B, E。
 class_names:
-  - Vessel A (Fishing/Trawlers/Tug/Dredger)
-  - Vessel D (Ocean Liner/Ro-Ro)
-  - Vessel C (Passenger Ferry)
-  - Vessel B (Motorboat/Pilot/Sailboat)
+  - Vessel A
+  - Vessel D
+  - Vessel C
+  - Vessel B
   - Background Noise
 
 dataset:
@@ -36,10 +38,10 @@ model:
     p_classifier: 0.255
 
 methods:
-  - name: Student Baseline
+  - name: Baseline
     checkpoint: checkpoints/ablation_shipsear/num_epochs200_weight_decay0.0001_batch_size20_lr0.0005_freezeTrue_USE_DYNAMIC_DISTILL_WEIGHTFalse_p_encoder0.355_p_classifier0.255/checkpoint_epoch_112.pth
 
-  - name: Proposed Distillation
+  - name: Best
     checkpoint: checkpoints/ablation_shipsear/num_epochs200_weight_decay0.0001_batch_size20_lr0.0005_distill_typeMTSKD_Temp_freezeTrue_USE_DYNAMIC_DISTILL_WEIGHTFalse_p_encoder0.355_p_classifier0.255/best_student.pth
     checkpoint_key: student_state_dict
 

@@ -42,14 +42,7 @@ class MethodSpec:
 
 FEATURE_CHOICES = ("logits", "seq_features", "encoder", "pooled_seq")
 DEFAULT_CLASS_NAMES = {
-    # "shipsear": [
-    #     "Vessel A (Fishing/Trawlers/Tug/Dredger)",
-    #     "Vessel D (Ocean Liner/Ro-Ro)",
-    #     "Vessel C (Passenger Ferry)",
-    #     "Vessel B (Motorboat/Pilot/Sailboat)",
-    #     "Background Noise",
-    # ],
-    "shipsear": ["Vessel A","Vessel D ","Vessel C","Vessel B","Background Noise","Background Noise",],
+    "shipsear": ["Vessel A", "Vessel D", "Vessel C", "Vessel B", "Background Noise"],
     "deepship": ["Passenger Ship", "Tanker", "Cargo Ship", "Tug"],
 }
 
@@ -289,6 +282,15 @@ def legend_columns(class_names: List[str], max_columns: int) -> int:
     return min(max_columns, len(class_names))
 
 
+def config_bool(config: dict, key: str, default: bool) -> bool:
+    value = config.get(key, default)
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        return value.strip().lower() in {"1", "true", "yes", "y", "on"}
+    return bool(value)
+
+
 def plot_four_methods(
     tsne_by_method: Dict[str, np.ndarray],
     labels: np.ndarray,
@@ -299,6 +301,7 @@ def plot_four_methods(
     legend_fontsize: int = 16,
     xlabel: str = "t-SNE 1",
     ylabel: str = "t-SNE 2",
+    show_legend: bool = True,
 ) -> None:
     fig, axes = plt.subplots(2, 2, figsize=(13, 12.5))
     axes = axes.flatten()
@@ -312,7 +315,7 @@ def plot_four_methods(
                     points[mask, 0],
                     points[mask, 1],
                     c=[colors[cls]],
-                    label=class_names[cls],
+                    label=class_names[cls] if show_legend else None,
                     s=18,
                     alpha=0.72,
                     linewidths=0.25,
@@ -323,21 +326,24 @@ def plot_four_methods(
         ax.set_ylabel(ylabel)
         ax.grid(True, linestyle="--", alpha=0.25)
 
-    handles, legend_labels = axes[0].get_legend_handles_labels()
-    fig.legend(
-        handles,
-        legend_labels,
-        loc="lower center",
-        bbox_to_anchor=(0.5, 0.02),
-        ncol=legend_columns(class_names, 3),
-        fontsize=legend_fontsize,
-        markerscale=1.8,
-        borderpad=0.6,
-        labelspacing=0.6,
-        handletextpad=0.5,
-    )
+    bottom = 0.08
+    if show_legend:
+        handles, legend_labels = axes[0].get_legend_handles_labels()
+        fig.legend(
+            handles,
+            legend_labels,
+            loc="lower center",
+            bbox_to_anchor=(0.5, 0.02),
+            ncol=legend_columns(class_names, 3),
+            fontsize=legend_fontsize,
+            markerscale=1.8,
+            borderpad=0.6,
+            labelspacing=0.6,
+            handletextpad=0.5,
+        )
+        bottom = 0.18
     # fig.suptitle(f"Four-Method t-SNE Comparison ({feature_layer})", fontsize=16, fontweight="bold")
-    plt.tight_layout(rect=[0, 0.18, 1, 0.96])
+    plt.tight_layout(rect=[0, bottom, 1, 0.96])
     plt.savefig(output_path, dpi=300, bbox_inches="tight")
     plt.close()
 
@@ -352,6 +358,7 @@ def plot_single_method(
     legend_fontsize: int = 15,
     xlabel: str = "t-SNE 1",
     ylabel: str = "t-SNE 2",
+    show_legend: bool = False,
 ) -> None:
     fig, ax = plt.subplots(figsize=(9, 8))
     colors = class_colors(num_classes)
@@ -362,7 +369,7 @@ def plot_single_method(
                 points[mask, 0],
                 points[mask, 1],
                 c=[colors[cls]],
-                label=class_names[cls],
+                label=class_names[cls] if show_legend else None,
                 s=20,
                 alpha=0.72,
                 linewidths=0.25,
@@ -371,15 +378,16 @@ def plot_single_method(
     ax.set_title(method_name, fontsize=14, fontweight="bold")
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
-    ax.legend(
-        fontsize=legend_fontsize,
-        loc="center left",
-        bbox_to_anchor=(1.02, 0.5),
-        ncol=1,
-        markerscale=1.6,
-        borderpad=0.6,
-        labelspacing=0.6,
-    )
+    if show_legend:
+        ax.legend(
+            fontsize=legend_fontsize,
+            loc="center left",
+            bbox_to_anchor=(1.02, 0.5),
+            ncol=1,
+            markerscale=1.6,
+            borderpad=0.6,
+            labelspacing=0.6,
+        )
     ax.grid(True, linestyle="--", alpha=0.25)
     fig.tight_layout()
     fig.savefig(output_path, dpi=300, bbox_inches="tight")
@@ -462,6 +470,8 @@ def main() -> int:
     legend_fontsize = int(plot_cfg.get("legend_fontsize", 16))
     xlabel = str(plot_cfg.get("xlabel", "t-SNE 1"))
     ylabel = str(plot_cfg.get("ylabel", "t-SNE 2"))
+    show_legend = config_bool(plot_cfg, "show_legend", False)
+    save_comparison = config_bool(plot_cfg, "save_comparison", False)
     filename_suffix = get_filename_suffix(config)
 
     labels_ref = None
@@ -492,17 +502,19 @@ def main() -> int:
 
     labels_ref = labels_ref if labels_ref is not None else np.array([])
     comparison_path = os.path.join(output_dir, f"tsne_four_methods_{feature_layer}{filename_suffix}.png")
-    plot_four_methods(
-        tsne_by_method,
-        labels_ref,
-        num_classes,
-        feature_layer,
-        comparison_path,
-        class_names,
-        legend_fontsize,
-        xlabel,
-        ylabel,
-    )
+    if save_comparison:
+        plot_four_methods(
+            tsne_by_method,
+            labels_ref,
+            num_classes,
+            feature_layer,
+            comparison_path,
+            class_names,
+            legend_fontsize,
+            xlabel,
+            ylabel,
+            show_legend,
+        )
 
     for method_name, points in tsne_by_method.items():
         plot_single_method(
@@ -515,6 +527,7 @@ def main() -> int:
             max(legend_fontsize - 1, 10),
             xlabel,
             ylabel,
+            show_legend,
         )
 
     np.savez(
@@ -525,7 +538,8 @@ def main() -> int:
     save_manifest(output_dir, methods, feature_layer, labels_ref, feature_shapes, filename_suffix)
 
     print("\nDone.")
-    print(f"Comparison figure: {comparison_path}")
+    if save_comparison:
+        print(f"Comparison figure: {comparison_path}")
     print(f"Summary CSV: {os.path.join(output_dir, f'tsne_run_summary{filename_suffix}.csv')}")
     return 0
 

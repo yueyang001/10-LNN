@@ -23,6 +23,8 @@ plot:
   filename_suffix: v1
   xlabel: t-SNE 1
   ylabel: t-SNE 2
+  show_legend: false
+  save_comparison: false
 
 class_names:
   - Passenger Ship
@@ -43,11 +45,11 @@ model:
     p_classifier: 0.255
 
 methods:
-  - name: Student Baseline
+  - name: Baseline
     checkpoint: checkpoints/DeepShip/LNN_xxx/best_model.pth
     checkpoint_key: model_state_dict
 
-  - name: Proposed Distillation
+  - name: Best
     checkpoint: checkpoints/DeepShip/proposed_xxx/best_student.pth
     checkpoint_key: student_state_dict
 
