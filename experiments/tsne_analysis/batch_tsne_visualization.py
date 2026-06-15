@@ -291,6 +291,17 @@ def config_bool(config: dict, key: str, default: bool) -> bool:
     return bool(value)
 
 
+def config_figsize(plot_cfg: dict, default: Tuple[float, float]) -> Tuple[float, float]:
+    value = plot_cfg.get("comparison_figsize", default)
+    if isinstance(value, str):
+        parts = [part.strip() for part in value.split(",")]
+    else:
+        parts = value
+    if len(parts) != 2:
+        raise ValueError("comparison_figsize must contain width and height.")
+    return float(parts[0]), float(parts[1])
+
+
 def plot_four_methods(
     tsne_by_method: Dict[str, np.ndarray],
     labels: np.ndarray,
@@ -302,10 +313,20 @@ def plot_four_methods(
     xlabel: str = "t-SNE 1",
     ylabel: str = "t-SNE 2",
     show_legend: bool = True,
+    plot_cfg: Optional[dict] = None,
 ) -> None:
-    fig, axes = plt.subplots(2, 2, figsize=(13, 12.5))
+    plot_cfg = plot_cfg or {}
+    compact_layout = config_bool(plot_cfg, "compact_layout", False)
+    fig, axes = plt.subplots(2, 2, figsize=config_figsize(plot_cfg, (13, 12.5)))
     axes = axes.flatten()
     colors = class_colors(num_classes)
+    title_fontsize = float(plot_cfg.get("title_fontsize", 13))
+    point_size = float(plot_cfg.get("point_size", 18))
+    point_alpha = float(plot_cfg.get("point_alpha", 0.72))
+    edge_linewidth = float(plot_cfg.get("edge_linewidth", 0.25))
+    show_grid = config_bool(plot_cfg, "show_grid", True)
+    hide_ticks = config_bool(plot_cfg, "hide_ticks", False)
+    show_axis_labels = config_bool(plot_cfg, "show_axis_labels", True)
 
     for ax, (method_name, points) in zip(axes, tsne_by_method.items()):
         for cls in range(num_classes):
@@ -316,15 +337,23 @@ def plot_four_methods(
                     points[mask, 1],
                     c=[colors[cls]],
                     label=class_names[cls] if show_legend else None,
-                    s=18,
-                    alpha=0.72,
-                    linewidths=0.25,
+                    s=point_size,
+                    alpha=point_alpha,
+                    linewidths=edge_linewidth,
                     edgecolors="black",
                 )
-        ax.set_title(method_name, fontsize=13, fontweight="bold")
-        ax.set_xlabel(xlabel)
-        ax.set_ylabel(ylabel)
-        ax.grid(True, linestyle="--", alpha=0.25)
+        ax.set_title(method_name, fontsize=title_fontsize, fontweight="normal" if compact_layout else "bold", pad=2)
+        if show_axis_labels:
+            ax.set_xlabel(xlabel)
+            ax.set_ylabel(ylabel)
+        if hide_ticks:
+            ax.set_xticks([])
+            ax.set_yticks([])
+            ax.tick_params(length=0)
+        ax.grid(show_grid, linestyle="--", alpha=0.25)
+        if compact_layout:
+            for spine in ax.spines.values():
+                spine.set_linewidth(0.8)
 
     bottom = 0.08
     if show_legend:
@@ -343,8 +372,18 @@ def plot_four_methods(
         )
         bottom = 0.18
     # fig.suptitle(f"Four-Method t-SNE Comparison ({feature_layer})", fontsize=16, fontweight="bold")
-    plt.tight_layout(rect=[0, bottom, 1, 0.96])
-    plt.savefig(output_path, dpi=300, bbox_inches="tight")
+    if compact_layout:
+        fig.subplots_adjust(
+            left=float(plot_cfg.get("left", 0.02)),
+            right=float(plot_cfg.get("right", 0.99)),
+            bottom=float(plot_cfg.get("bottom", 0.02)),
+            top=float(plot_cfg.get("top", 0.94)),
+            wspace=float(plot_cfg.get("wspace", 0.03)),
+            hspace=float(plot_cfg.get("hspace", 0.18)),
+        )
+    else:
+        plt.tight_layout(rect=[0, bottom, 1, 0.96])
+    plt.savefig(output_path, dpi=int(plot_cfg.get("dpi", 300)), bbox_inches="tight", pad_inches=float(plot_cfg.get("pad_inches", 0.02)))
     plt.close()
 
 
@@ -514,6 +553,7 @@ def main() -> int:
             xlabel,
             ylabel,
             show_legend,
+            plot_cfg,
         )
 
     for method_name, points in tsne_by_method.items():
