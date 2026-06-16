@@ -1,7 +1,7 @@
 # Four-method t-SNE comparison for DeepShip.
 # Replace the checkpoint paths with the four trained models you want to compare.
 
-output_dir: results/tsne_four_methods_deepship_v1
+output_dir: results/tsne_four_methods_deepship_v2
 feature_layer: logits       # logits | seq_features | encoder | pooled_seq
 max_samples: 2000
 perplexity: 30
