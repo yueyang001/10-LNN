@@ -411,6 +411,8 @@ def plot_single_method(
     show_grid = config_bool(plot_cfg, "show_grid", False)
     hide_ticks = config_bool(plot_cfg, "hide_ticks", True)
     show_axis_labels = config_bool(plot_cfg, "show_axis_labels", False)
+    show_title = config_bool(plot_cfg, "show_title", True)
+    show_spines = config_bool(plot_cfg, "show_spines", True)
     for cls in range(num_classes):
         mask = labels == cls
         if np.any(mask):
@@ -424,7 +426,8 @@ def plot_single_method(
                 linewidths=edge_linewidth,
                 edgecolors="black",
             )
-    ax.set_title(method_name, fontsize=title_fontsize, fontweight="normal" if compact_layout else "bold", pad=2)
+    if show_title:
+        ax.set_title(method_name, fontsize=title_fontsize, fontweight="normal" if compact_layout else "bold", pad=2)
     if show_axis_labels:
         ax.set_xlabel(xlabel)
         ax.set_ylabel(ylabel)
@@ -445,7 +448,9 @@ def plot_single_method(
     ax.grid(show_grid, linestyle="--", alpha=0.25)
     if compact_layout:
         for spine in ax.spines.values():
-            spine.set_linewidth(0.8)
+            spine.set_visible(show_spines)
+            if show_spines:
+                spine.set_linewidth(0.8)
         fig.subplots_adjust(
             left=float(plot_cfg.get("single_left", 0.02)),
             right=float(plot_cfg.get("single_right", 0.99)),

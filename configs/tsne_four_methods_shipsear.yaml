@@ -21,6 +21,8 @@ plot:
   show_grid: false
   show_axis_labels: false
   hide_ticks: true
+  show_title: false
+  show_spines: false
   show_legend: false
   save_comparison: false
   dpi: 600
@@ -30,7 +32,7 @@ plot:
   single_left: 0.02
   single_right: 0.99
   single_bottom: 0.02
-  single_top: 0.86
+  single_top: 0.99
 
 # 顺序需与 AudioDataset 中 ShipsEar 的标签编号保持一致：A, D, C, B, E。
 class_names:
