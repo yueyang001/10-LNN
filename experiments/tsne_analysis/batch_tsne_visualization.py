@@ -291,8 +291,8 @@ def config_bool(config: dict, key: str, default: bool) -> bool:
     return bool(value)
 
 
-def config_figsize(plot_cfg: dict, default: Tuple[float, float]) -> Tuple[float, float]:
-    value = plot_cfg.get("comparison_figsize", default)
+def config_figsize(plot_cfg: dict, default: Tuple[float, float], key: str = "comparison_figsize") -> Tuple[float, float]:
+    value = plot_cfg.get(key, default)
     if isinstance(value, str):
         parts = [part.strip() for part in value.split(",")]
     else:
@@ -398,9 +398,19 @@ def plot_single_method(
     xlabel: str = "t-SNE 1",
     ylabel: str = "t-SNE 2",
     show_legend: bool = False,
+    plot_cfg: Optional[dict] = None,
 ) -> None:
-    fig, ax = plt.subplots(figsize=(9, 8))
+    plot_cfg = plot_cfg or {}
+    compact_layout = config_bool(plot_cfg, "compact_layout", False)
+    fig, ax = plt.subplots(figsize=config_figsize(plot_cfg, (2.0, 1.75), "single_figsize"))
     colors = class_colors(num_classes)
+    title_fontsize = float(plot_cfg.get("title_fontsize", 9))
+    point_size = float(plot_cfg.get("point_size", 3))
+    point_alpha = float(plot_cfg.get("point_alpha", 0.85))
+    edge_linewidth = float(plot_cfg.get("edge_linewidth", 0))
+    show_grid = config_bool(plot_cfg, "show_grid", False)
+    hide_ticks = config_bool(plot_cfg, "hide_ticks", True)
+    show_axis_labels = config_bool(plot_cfg, "show_axis_labels", False)
     for cls in range(num_classes):
         mask = labels == cls
         if np.any(mask):
@@ -409,14 +419,19 @@ def plot_single_method(
                 points[mask, 1],
                 c=[colors[cls]],
                 label=class_names[cls] if show_legend else None,
-                s=20,
-                alpha=0.72,
-                linewidths=0.25,
+                s=point_size,
+                alpha=point_alpha,
+                linewidths=edge_linewidth,
                 edgecolors="black",
             )
-    ax.set_title(method_name, fontsize=14, fontweight="bold")
-    ax.set_xlabel(xlabel)
-    ax.set_ylabel(ylabel)
+    ax.set_title(method_name, fontsize=title_fontsize, fontweight="normal" if compact_layout else "bold", pad=2)
+    if show_axis_labels:
+        ax.set_xlabel(xlabel)
+        ax.set_ylabel(ylabel)
+    if hide_ticks:
+        ax.set_xticks([])
+        ax.set_yticks([])
+        ax.tick_params(length=0)
     if show_legend:
         ax.legend(
             fontsize=legend_fontsize,
@@ -427,9 +442,19 @@ def plot_single_method(
             borderpad=0.6,
             labelspacing=0.6,
         )
-    ax.grid(True, linestyle="--", alpha=0.25)
-    fig.tight_layout()
-    fig.savefig(output_path, dpi=300, bbox_inches="tight")
+    ax.grid(show_grid, linestyle="--", alpha=0.25)
+    if compact_layout:
+        for spine in ax.spines.values():
+            spine.set_linewidth(0.8)
+        fig.subplots_adjust(
+            left=float(plot_cfg.get("single_left", 0.02)),
+            right=float(plot_cfg.get("single_right", 0.99)),
+            bottom=float(plot_cfg.get("single_bottom", 0.02)),
+            top=float(plot_cfg.get("single_top", 0.88)),
+        )
+    else:
+        fig.tight_layout()
+    fig.savefig(output_path, dpi=int(plot_cfg.get("dpi", 600)), bbox_inches="tight", pad_inches=float(plot_cfg.get("pad_inches", 0.01)))
     plt.close(fig)
 
 
@@ -568,6 +593,7 @@ def main() -> int:
             xlabel,
             ylabel,
             show_legend,
+            plot_cfg,
         )
 
     np.savez(
