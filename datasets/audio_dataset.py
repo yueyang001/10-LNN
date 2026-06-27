@@ -136,4 +136,95 @@ class AudioDataset(Dataset):
         return len(self.sample_paths)
 
 
+if __name__ == '__main__':
+    # 你的数据集根目录
+    data_dir = r'/media/hdd1/chuxiaohui/AI4Ocean_UATR/DeepShip_622'
 
+    # 测试 train / validation / test
+    data_flag = 'train'
+
+    # 这里只测试学生模型 wav 输入
+    data_type = 'wav_s'
+
+    # 创建数据集
+    dataset = AudioDataset(
+        data_dir=data_dir,
+        data_flag=data_flag,
+        data_type=data_type,
+        transform=validation_test_transform
+    )
+
+    print('=' * 80)
+    print('Dataset 基本信息')
+    print('=' * 80)
+    print('样本总数:', len(dataset))
+    print('类别列表:', dataset.category_names)
+    print('类别数量:', len(dataset.category_names))
+    print('data_type:', dataset.data_type)
+
+    # 取第 0 个样本
+    index = 0
+
+    wav_data_path, mel_data_path, cqt_data_path, label = dataset.sample_paths[index]
+
+    print('\n' + '=' * 80)
+    print('第 0 个样本路径信息')
+    print('=' * 80)
+    print('wav_data_path:', wav_data_path)
+    print('mel_data_path:', mel_data_path)
+    print('cqt_data_path:', cqt_data_path)
+    print('label:', label)
+
+    # 手动模拟 __getitem__ 里面 wav_s 的流程
+    print('\n' + '=' * 80)
+    print('手动测试 wav_s 读取流程')
+    print('=' * 80)
+
+    wav_data, sr = torchaudio.load(wav_data_path)
+
+    print('1. torchaudio.load 后：')
+    print('wav_data type:', type(wav_data))
+    print('wav_data dtype:', wav_data.dtype)
+    print('wav_data shape:', wav_data.shape)
+    print('原始采样率 sr:', sr)
+
+    print('\n解释：')
+    print('wav_data.shape[0] 表示通道数:', wav_data.shape[0])
+    print('wav_data.shape[1] 表示采样点数:', wav_data.shape[1])
+    print('原始音频时长 秒:', wav_data.shape[1] / sr)
+
+    resampler = torchaudio.transforms.Resample(sr, dataset.sr)
+    wav_data_student = resampler(wav_data)
+
+    print('\n2. 重采样后：')
+    print('目标采样率 dataset.sr:', dataset.sr)
+    print('wav_data_student type:', type(wav_data_student))
+    print('wav_data_student dtype:', wav_data_student.dtype)
+    print('wav_data_student shape:', wav_data_student.shape)
+
+    print('\n解释：')
+    print('wav_data_student.shape[0] 表示通道数:', wav_data_student.shape[0])
+    print('wav_data_student.shape[1] 表示重采样后的采样点数:', wav_data_student.shape[1])
+    print('重采样后音频时长 秒:', wav_data_student.shape[1] / dataset.sr)
+
+    input_data = []
+    input_data.append(wav_data_student)
+
+    print('\n3. append 到 input_data 后：')
+    print('input_data 类型:', type(input_data))
+    print('input_data 长度:', len(input_data))
+    print('input_data[0] shape:', input_data[0].shape)
+
+    # 再测试真正调用 dataset[index]
+    print('\n' + '=' * 80)
+    print('直接调用 dataset[index]')
+    print('=' * 80)
+
+    input_data_from_dataset, label_from_dataset = dataset[index]
+
+    print('返回的 input_data 类型:', type(input_data_from_dataset))
+    print('返回的 input_data 长度:', len(input_data_from_dataset))
+    print('返回的 input_data[0] shape:', input_data_from_dataset[0].shape)
+    print('返回的 label:', label_from_dataset)
+    print('返回的 label type:', type(label_from_dataset))
+    print('返回的 label dtype:', label_from_dataset.dtype)
