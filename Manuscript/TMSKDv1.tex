@@ -25,23 +25,23 @@
 
 \begin{document}
 
-\title{TMSKD: Temporal--Memory Structure-Aware Knowledge Distillation for Liquid Neural Network-based Underwater Acoustic Target Recognition}
+\title{TMSKD: Temporal--Memory Structure-Aware Knowledge Distillation for BiTAL-based Underwater Acoustic Target Recognition}
 
 \author{Author Name(s) Omitted for Review}
 
 \markboth{IEEE Journal of Oceanic Engineering}%
-{TMSKD for Liquid Neural Network-based Underwater Acoustic Target Recognition}
+{TMSKD for BiTAL-based Underwater Acoustic Target Recognition}
 
 \maketitle
 
 \begin{abstract}
 \bfseries
-Deep learning has substantially advanced underwater acoustic target recognition (UATR), yet deploying complex deep models on resource-constrained underwater platforms remains challenging. Knowledge distillation (KD) alleviates this issue by transferring knowledge from a high-performance teacher model to a lightweight student model. However, existing KD methods for UATR often neglect the intrinsic multi-scale temporal structure of acoustic signals, limiting temporal modeling capability and recognition performance. To address this problem, this paper proposes a Temporal--Memory Structure-Aware Knowledge Distillation (TMSKD) framework based on Liquid Neural Networks (LNNs). The framework adopts an LNN as the student model to provide strong neural dynamic modeling capability and integrates two complementary distillation strategies: Temporal Separation with Learnable Temperature Knowledge Distillation (TS-T), which enhances time-step-wise semantic distribution alignment, and Memory-Discrepancy Knowledge Distillation (MemKD), which enforces memory-aware alignment to preserve robust discriminative information across time scales. Extensive experiments on two real-world ocean acoustic data sets demonstrate that TMSKD outperforms existing KD methods, achieving 92.39\% accuracy (ACC) on ShipsEar, which improves over the competitive baseline result of 90.03\% by 2.36 percentage points. Notably, TMSKD significantly improves the recognition accuracy of the LNN student model by 9.67 percentage points.
+Deep learning has substantially advanced underwater acoustic target recognition (UATR), yet deploying complex deep models on resource-constrained underwater platforms remains challenging. Knowledge distillation (KD) alleviates this issue by transferring knowledge from a high-performance teacher model to a lightweight student model. However, existing KD methods for UATR often neglect the intrinsic multi-scale temporal structure of acoustic signals, limiting temporal modeling capability and recognition performance. To address this problem, this paper proposes a Temporal--Memory Structure-Aware Knowledge Distillation (TMSKD) framework with a Bidirectional Temporal-Aware Liquid Network (BiTAL) as its student model. BiTAL provides strong neural dynamic modeling capability and integrates two complementary distillation strategies: Temporal Separation with Learnable Temperature Knowledge Distillation (TS-T), which enhances time-step-wise semantic distribution alignment, and Memory-Discrepancy Knowledge Distillation (MemKD), which enforces memory-aware alignment to preserve robust discriminative information across time scales. Extensive experiments on two real-world ocean acoustic data sets demonstrate that TMSKD outperforms existing KD methods, achieving 92.39\% accuracy (ACC) on ShipsEar, which improves over the competitive baseline result of 90.03\% by 2.36 percentage points. Notably, TMSKD significantly improves the recognition accuracy of the BiTAL student model by 9.67 percentage points.
 \end{abstract}
 
 \begin{IEEEkeywords}
 \bfseries
-Underwater acoustic target recognition, knowledge distillation, liquid neural networks, temporal modeling, model compression.
+Underwater acoustic target recognition, knowledge distillation, bidirectional temporal-aware liquid network, temporal modeling, model compression.
 \end{IEEEkeywords}
 
 \section{Introduction}
@@ -50,22 +50,22 @@ Underwater acoustic target recognition, knowledge distillation, liquid neural ne
     \centering
     \includegraphics[width=1\linewidth]{figures/Cover_Image.png}
     \caption{
-    (a) Accuracy comparison of the original student model, the best-performing logit-based KD method, the best-performing feature-based KD method, and TMSKD on the DeepShip and ShipsEar datasets. TMSKD achieves the highest recognition accuracy on both datasets. (b) Conceptual illustration of TMSKD. The teacher transfers temporal logit knowledge through temporal separation and feature-level dynamic knowledge through memory-discrepancy modeling, jointly guiding the liquid neural network-based student. The resulting student maintains a compact architecture with only 0.32M parameters, a model size of 1.21 MB, 58.97M FLOPs, and an inference latency of 12.16 ms.
+    (a) Accuracy comparison of the original student model, the best-performing logit-based KD method, the best-performing feature-based KD method, and TMSKD on the DeepShip and ShipsEar datasets. TMSKD achieves the highest recognition accuracy on both datasets. (b) Conceptual illustration of TMSKD. The teacher transfers temporal logit knowledge through temporal separation and feature-level dynamic knowledge through memory-discrepancy modeling, jointly guiding the BiTAL student. The resulting student maintains a compact architecture with only 0.32M parameters, a model size of 1.21 MB, 58.97M FLOPs, and an inference latency of 12.16 ms.
     }
     \label{fig:placeholder}
 \end{figure}
 To address the dual challenges of data scarcity and lightweight deployment, existing studies mainly adopt pretrained model fine-tuning or model compression techniques~\cite{Kong2020PANNs,Gou2021KDSurvey}. Unlike speech or general acoustic signals, however, underwater acoustic signals lack explicit semantic information and phoneme structures. Directly transferring lightweight pretrained models from the general audio domain therefore often fails to capture the physical characteristics of underwater signals, resulting in limited fine-tuning performance~\cite{Baevski2020Wav2Vec2,Kong2020PANNs,Urick1983,Jensen2011,Medwin2005}. Knowledge distillation has consequently become a promising direction, in which a teacher network guides a lightweight student network to improve performance without increasing inference cost~\cite{Bucila2006Compression,Hinton2015Distilling,Romero2015FitNets}. Although prior studies have made progress in applying KD to underwater acoustics, most lightweight student networks still rely on two-dimensional time-frequency features, such as Mel-spectrograms, as input. This strategy exploits visual texture patterns in spectrograms, but introduces costly preprocessing and weakens the end-to-end lightweight design objective. In contrast, lightweight models that directly process one-dimensional raw waveforms often have weaker feature extraction capability than spectrogram-based methods, making it difficult to obtain competitive recognition accuracy under distillation~\cite{Oord2016WaveNet,Bai2018TCN}.
 
-This raises a natural question: can an architecture directly process raw underwater acoustic waveforms while maintaining feature extraction capability comparable to spectrogram-based methods? We answer this question by introducing Liquid Neural Networks (LNNs) into the UATR student model. LNNs are biologically inspired continuous-time recurrent neural networks that model neural dynamics with ordinary differential equations (ODEs)~\cite{Chen2018NeuralODE,Hasani2021LTC,Hasani2022CfC}. Their temporal causality modeling and robustness make them suitable for non-stationary one-dimensional underwater acoustic signals.
+This raises a natural question: can an architecture directly process raw underwater acoustic waveforms while maintaining feature extraction capability comparable to spectrogram-based methods? We answer this question by introducing liquid neural networks into UATR and developing the Bidirectional Temporal-Aware Liquid Network (BiTAL) as the student model. Liquid neural networks are biologically inspired continuous-time recurrent neural networks that model neural dynamics with ordinary differential equations (ODEs)~\cite{Chen2018NeuralODE,Hasani2021LTC,Hasani2022CfC}. Their temporal causality modeling and robustness make them suitable for non-stationary one-dimensional underwater acoustic signals.
 
-To fully exploit the potential of LNNs in UATR and address knowledge transfer between heterogeneous teacher and student architectures, this paper proposes a Memory-Discrepancy Knowledge Distillation (MemKD) module. In conventional feature distillation, direct feature-map alignment can be difficult because teacher and student networks may differ substantially in parameter scale and architecture~\cite{Yim2017FSP,Zagoruyko2017AT,Ahn2019VID}. Such hard alignment may lead to unstable convergence or suboptimal features. MemKD instead transfers the temporal evolution trend of teacher features in an explicit manner. In other words, the student learns not only the teacher's final prediction, but also the dynamic pattern by which the teacher processes acoustic features over time, thereby alleviating the alignment difficulty caused by architectural heterogeneity.
+To fully exploit the potential of BiTAL in UATR and address knowledge transfer between heterogeneous teacher and student architectures, this paper proposes a Memory-Discrepancy Knowledge Distillation (MemKD) module. In conventional feature distillation, direct feature-map alignment can be difficult because teacher and student networks may differ substantially in parameter scale and architecture~\cite{Yim2017FSP,Zagoruyko2017AT,Ahn2019VID}. Such hard alignment may lead to unstable convergence or suboptimal features. MemKD instead transfers the temporal evolution trend of teacher features in an explicit manner. In other words, the student learns not only the teacher's final prediction, but also the dynamic pattern by which the teacher processes acoustic features over time, thereby alleviating the alignment difficulty caused by architectural heterogeneity.
 
 In addition, underwater acoustic signals contain transient characteristics, where specific key frequencies or short-time events may directly determine the target category. These discriminative cues are unevenly distributed along the temporal axis and are easily weakened by conventional logit-based distillation, which usually aligns only the final output distributions. To address this issue, we introduce Temporal Separation with Adaptive Temperature Knowledge Distillation (TS-T), which constrains the semantic distribution consistency between teacher and student along the time dimension. Specifically, the teacher logits are broadcast to each student time step and aligned with the student time-step logits, enabling the student to capture when critical acoustic changes occur. Moreover, TS-T adopts Z-score-normalized logits, where the logit standard deviation serves as a parameter-free adaptive temperature to dynamically adjust distribution smoothness~\cite{Sun2024LSKD}. A learnable fusion coefficient further balances the time-step sequential distillation loss and the final-logit distillation loss, allowing the student to learn both fine-grained temporal cues and stable final decision knowledge.
 
 The main contributions of this paper are summarized as follows:
 \begin{enumerate}
     \item We propose a novel KD framework, termed Temporal--Memory Structure-Aware Knowledge Distillation (TMSKD), specifically designed for UATR. TMSKD integrates logits-based Temporal Separation with Adaptive Temperature Knowledge Distillation (TS-T) and feature-based Memory-Discrepancy Knowledge Distillation (MemKD), enabling the student to capture both instantaneous inter-class relationships and long-term temporal memory patterns in underwater acoustic signals.
-    \item We design a lightweight and efficient student architecture based on LNNs. The student consists of a five-layer CNN encoder, a Bidirectional Parallel Cross-Slice CfC (BPCSCfC) module with neural circuits automatically generated by AutoNCP, and a Dual-Resolution Attentive Statistics Pooling (DRASP) module. DRASP jointly models global stationary information and local transient cues, improving discriminative sequence representation.
+    \item We design BiTAL, a lightweight and efficient student architecture. BiTAL consists of a five-layer CNN encoder, a Bidirectional Parallel Cross-Slice CfC (BPCSCfC) module with neural circuits automatically generated by AutoNCP, and a Dual-Resolution Attentive Statistics Pooling (DRASP) module. DRASP jointly models global stationary information and local transient cues, improving discriminative sequence representation.
     \item Extensive experiments on two real-world ocean acoustic data sets, ShipsEar and DeepShip, show that the proposed TMSKD significantly outperforms state-of-the-art KD methods while maintaining very low computational complexity and parameter overhead. The results validate its effectiveness and practicality for resource-constrained underwater deployment.
 \end{enumerate}
 
@@ -78,9 +78,9 @@ Early methods mainly relied on handcrafted time-domain, frequency-domain, and ti
 Convolutional, recurrent, and Transformer-based deep networks have been widely applied to underwater acoustic recognition, learning discriminative features from time-frequency representations or self-supervised embeddings~\cite{Chen2021LOFAR,TFTokenViT,MHTUATR}. Nevertheless, these models usually use discrete-time modeling and therefore have difficulty capturing continuous-time dynamic characteristics. Meanwhile, transfer learning based on pretrained speech and general-audio models~\cite{Baevski2020Wav2Vec2,Kong2020PANNs} has also been introduced to underwater acoustics to exploit general acoustic representation capability~\cite{ALSIUATR,CAFJTUATR}. Despite these advances, existing methods still face model redundancy, insufficient dynamic modeling, and deployment inefficiency in complex marine environments. Constructing parameter-efficient models with continuous-time dynamic modeling capability is therefore an important research direction.
 
 \subsection{Liquid Neural Networks}
-Liquid Neural Networks are continuous-time neural computation models inspired by the dynamics of small biological nervous systems~\cite{Hasani2021LTC}. Their core idea is to describe the state evolution of neurons over time through linear or nonlinear ODEs, thereby modeling temporal signals in a more natural way~\cite{Chen2018NeuralODE}. Unlike conventional networks built from stacked discrete layers, LNNs update hidden states continuously at each time step, which gives them stronger dynamic adaptability and interpretability. Closed-form continuous-time formulations further reduce the cost of numerical ODE solvers while preserving expressive power~\cite{Hasani2022CfC}. Moreover, structured sparse connection strategies, such as automatic neural circuit generation, allow LNNs to achieve efficient dynamic modeling with a small number of parameters~\cite{Lechner2020NCP}.
+Liquid Neural Networks are continuous-time neural computation models inspired by the dynamics of small biological nervous systems~\cite{Hasani2021LTC}. Their core idea is to describe the state evolution of neurons over time through linear or nonlinear ODEs, thereby modeling temporal signals in a more natural way~\cite{Chen2018NeuralODE}. Unlike conventional networks built from stacked discrete layers, liquid neural networks update hidden states continuously at each time step, which gives them stronger dynamic adaptability and interpretability. Closed-form continuous-time formulations further reduce the cost of numerical ODE solvers while preserving expressive power~\cite{Hasani2022CfC}. Moreover, structured sparse connection strategies, such as automatic neural circuit generation, allow these networks to achieve efficient dynamic modeling with a small number of parameters~\cite{Lechner2020NCP}.
 
-LNNs have shown strong performance in time-series prediction, robot control, and low-power embedded systems~\cite{Lechner2020NCP,Hasani2021LTC,Hasani2022CfC}. However, their use in UATR remains limited. Introducing LNNs into underwater acoustic recognition can enhance the model's dynamic response to non-stationary signals while satisfying lightweight deployment requirements.
+Liquid neural networks have shown strong performance in time-series prediction, robot control, and low-power embedded systems~\cite{Lechner2020NCP,Hasani2021LTC,Hasani2022CfC}. However, their use in UATR remains limited. Introducing this network family into underwater acoustic recognition can enhance the model's dynamic response to non-stationary signals while satisfying lightweight deployment requirements.
 
 \subsection{Knowledge Distillation}
 Knowledge distillation is an effective model compression and performance transfer technique based on a teacher--student framework~\cite{Bucila2006Compression,Hinton2015Distilling,Gou2021KDSurvey}. It uses soft labels or intermediate representations learned by a stronger teacher model to guide the training of a smaller student model, allowing the student to achieve higher recognition accuracy while maintaining low computational complexity. Classical KD aligns softened output distributions using Kullback--Leibler (KL) divergence and a temperature coefficient. Later studies extended KD to feature, attention, and relational distillation, improving generalization by constraining intermediate features or sample relations~\cite{Romero2015FitNets,Zagoruyko2017AT,Park2019RKD}.
@@ -88,12 +88,12 @@ Knowledge distillation is an effective model compression and performance transfe
 For temporal tasks, distillation based only on final-output alignment cannot fully exploit dynamic information along the time dimension. Time-aware distillation strategies have therefore been developed to align predictions or hidden states at each time step~\cite{Farhadi2019TKD,Wang2023TSKD}. Temperature adjustment and soft-label reweighting can further reduce optimization difficulty caused by teacher--student distribution mismatch~\cite{Sun2024LSKD,Zhou2021WSLD}. In UATR, where the input signal contains strong temporal dependence and dynamic variation, combining KD with temporal modeling is beneficial for transferring the discriminative ability of large pretrained models to lightweight dynamic networks.
 
 \section{Methodology}
-This section first introduces the LNN-based underwater acoustic recognition structure, and then describes the proposed TMSKD framework, which combines TS-T and MemKD.
+This section first introduces the BiTAL-based underwater acoustic recognition structure, and then describes the proposed TMSKD framework, which combines TS-T and MemKD.
 
 \begin{figure*}[!t]
     \centering
     \includegraphics[width=0.92\textwidth]{figures/model_structure_v2.0.png}
-    \caption{The overall architecture of the proposed knowledge distillation framework. A frozen pretrained wav2vec 2.0 acts as the teacher model to guide the training of the lightweight LNN student network via Memory-Discrepancy Knowledge Distillation (MemKD) and Temporal Separation with Adaptive Temperature Knowledge Distillation (TS-T). The detailed internal structure of the student network is shown in Fig.~\ref{fig:student_architecture}.}
+    \caption{The overall architecture of the proposed knowledge distillation framework. A frozen pretrained wav2vec 2.0 acts as the teacher model to guide the training of the lightweight BiTAL student network via Memory-Discrepancy Knowledge Distillation (MemKD) and Temporal Separation with Adaptive Temperature Knowledge Distillation (TS-T). The detailed internal structure of the student network is shown in Fig.~\ref{fig:student_architecture}.}
     \label{fig:structure}
 \end{figure*}
 
@@ -126,19 +126,19 @@ where $\sigma(\cdot)$ is the sigmoid gating function, $\odot$ denotes element-wi
 \paragraph{Neural Circuit Policy}
 In UATR, input signals often contain redundant background components and non-stationary noise. To improve robustness and parameter efficiency, liquid neurons are not fully connected. Instead, Auto Neural Circuit Policy (AutoNCP) is used to construct a structured sparse topology~\cite{Lechner2020NCP}. AutoNCP adopts a hierarchical architecture with sensory neurons, interneurons, command neurons, and motor neurons. Sensory neurons correspond to the input feature dimension, while inter, command, and motor neurons form three learnable internal processing layers through sparse random connections. Recurrent connections in the command neuron layer enhance the dependence on historical hidden states. The liquid neuron cells based on (\ref{eq:cfc_update}) evolve on the connection graph defined by AutoNCP, reducing parameter scale while preserving dynamic modeling capability.
 
-\subsection{Student Network for Underwater Acoustic Recognition}
+\subsection{BiTAL Student Network for Underwater Acoustic Recognition}
 \label{subsec:student}
 For a single-channel raw underwater acoustic signal $\mathbf{s} \in \mathbb{R}^{L}$, the student network first uses a one-dimensional CNN encoder to map the raw waveform into high-dimensional temporal features $\mathbf{H}_S \in \mathbb{R}^{B \times T_S \times C}$, where $B$ is the batch size, $T_S$ is the number of time steps, and $C$ is the feature dimension~\cite{Oord2016WaveNet,Bai2018TCN}. To jointly capture fine-grained local transients and long-range temporal dependencies in $\mathbf{H}_S$, we feed it into the BPCSCfC module. The BPCSCfC module divides the sequence along the temporal dimension into non-overlapping windows and constructs parallel information streams to capture both short-range and long-range temporal dependencies. As illustrated in Fig.~\ref{fig:student_architecture}, the resulting multi-scale temporal representation is aggregated by DRASP through complementary global and segment-wise attentive statistics pooling before classification. The complete forward procedure of the student network is summarized in Algorithm~\ref{alg:student_network}. The encoder feature $\mathbf{H}_S$ is used by MemKD, while the fused feature $\mathbf{F}_S^t$ is linearly projected into the time-step logits $\mathbf{Z}_S^t$ used by TS-T.
 
 \begin{figure*}[!t]
     \centering
     \includegraphics[width=\textwidth]{figures/Detailed Architecture of the Proposed Liquid Neural Student Network.png}
-    \caption{Detailed architecture of the proposed liquid neural student network for underwater acoustic target recognition. A one-dimensional CNN encoder transforms the raw waveform into a temporal feature sequence, which is processed by the bidirectional parallel cross-slicing CfC (BPCSCfC) module with AutoNCP-wired CfC cells. The dual-resolution attentive statistics pooling (DRASP) module then combines global attentive statistics with segment-wise local attentive statistics to form the utterance-level representation used by the classifier.}
+    \caption{Detailed architecture of the proposed BiTAL student network for underwater acoustic target recognition. A one-dimensional CNN encoder transforms the raw waveform into a temporal feature sequence, which is processed by the bidirectional parallel cross-slicing CfC (BPCSCfC) module with AutoNCP-wired CfC cells. The dual-resolution attentive statistics pooling (DRASP) module then combines global attentive statistics with segment-wise local attentive statistics to form the utterance-level representation used by the classifier.}
     \label{fig:student_architecture}
 \end{figure*}
 
 \begin{algorithm}[!t]
-\caption{Student Network for Underwater Acoustic Recognition}
+\caption{BiTAL Student Network for Underwater Acoustic Recognition}
 \label{alg:student_network}
 \begin{algorithmic}[1]
 \Require $\mathbf{s}\in\mathbb{R}^{B\times 1\times L}$; window length $W$ with $W\mid T_S$; class count $K$
@@ -214,7 +214,7 @@ The local branch divides the input sequence into multiple short segments and app
 
 \subsection{Memory-Discrepancy Knowledge Distillation}
 \label{subsec:memkd}
-The intermediate sequence features of the student model are continuous hidden-state trajectories over time. For underwater acoustic signals with strong temporal correlation, directly aligning teacher and student feature maps is difficult because the two networks may have inconsistent feature distributions and dimensions. MemKD instead focuses on dynamic trajectory fitting. Short-term memory discrepancy captures instantaneous physical changes in acoustic signals, while long-term memory discrepancy mitigates the tendency to forget long-range dependencies. Thus, MemKD guides the LNN student to learn the teacher's temporal reasoning pattern across architectural differences.
+The intermediate sequence features of the student model are continuous hidden-state trajectories over time. For underwater acoustic signals with strong temporal correlation, directly aligning teacher and student feature maps is difficult because the two networks may have inconsistent feature distributions and dimensions. MemKD instead focuses on dynamic trajectory fitting. Short-term memory discrepancy captures instantaneous physical changes in acoustic signals, while long-term memory discrepancy mitigates the tendency to forget long-range dependencies. Thus, MemKD guides the BiTAL student to learn the teacher's temporal reasoning pattern across architectural differences.
 
 The inputs of MemKD are intermediate features from the student and teacher models. Let $\mathbf{H}_S$ denote the student hidden state and $\mathbf{H}_T \in \mathbb{R}^{B \times T_t \times D_t}$ denote the corresponding teacher feature, where usually $T_t > T_S$ and $D_t \gg C$. We first use one-dimensional linear interpolation to align the teacher sequence length with the student:
 \begin{equation}
@@ -322,10 +322,7 @@ where $\beta$ is a learnable fusion coefficient. TS-T mainly constrains distribu
 
 \subsection{Overall Training Loss}
 \label{subsec:total_loss}
-The overall framework in Fig.~\ref{fig:structure} follows the teacher--student paradigm. The student is based on the 
-% closed-form-time
-closed-form continuous-time LNN
-LNN structure and performs downstream classification. The total training objective is
+The overall framework in Fig.~\ref{fig:structure} follows the teacher--student paradigm. The BiTAL student uses a closed-form continuous-time liquid architecture and performs downstream classification. The total training objective is
 \begin{equation}
 \mathcal{L}_{\mathrm{total}}
 = \mathcal{L}_{\mathrm{CE}}
@@ -394,7 +391,7 @@ $\uparrow\uparrow$ denotes the improvement of TMSKD over the student model.}
 \midrule
 \multirow{2}{*}{\makecell{Baseline \\ (No KD)}}
 & Teacher (wav2vec 2.0) & 98.56 & 98.56 & 99.93 & 94.66 & 94.66 & 99.63 \\
-& Student (LNN) & 83.74 & 87.72 & 97.70 & 86.44 & 87.99 & 97.83 \\
+& Student (BiTAL) & 83.74 & 87.72 & 97.70 & 86.44 & 87.99 & 97.83 \\
 \midrule
 \multirow{6}{*}{Logits}
 & KD~\cite{Hinton2015Distilling}  & 91.86 & 91.83 & 99.03 & \textcolor{blue}{90.03} & \textcolor{blue}{89.38} & 98.27 \\
@@ -438,7 +435,7 @@ $\uparrow\uparrow$ denotes the improvement of TMSKD over the student model.}
 
 
 \subsubsection{Comparison With State-of-the-Art UATR Methods}
-Table~\ref{tab:comparison with Different UATR Methods} compares the recognition accuracy and model complexity of the proposed method with representative UATR methods. Among the three newly included visual backbones, MobileViT-XXS achieved the highest DeepShip ACC of 96.61\% with CQT input. This result exceeded the 93.41\% obtained by the TMSKD-distilled LNN-3 by 3.20 percentage points. On ShipsEar, T-F Token ViT achieved the highest overall ACC of 98.15\%. Among the three visual backbones, MobileOne S0 achieved the best ShipsEar ACC of 96.26\% with Mel-spectrogram input, exceeding LNN-3 by 3.87 percentage points. Thus, the spectrogram-based models retained an accuracy advantage, whereas LNN-3 achieved 93.41\% and 92.39\% ACC by directly processing raw waveforms.
+Table~\ref{tab:comparison with Different UATR Methods} compares the recognition accuracy and model complexity of the proposed method with representative UATR methods. Among the three newly included visual backbones, MobileViT-XXS achieved the highest DeepShip ACC of 96.61\% with CQT input. This result exceeded the 93.41\% obtained by the TMSKD-distilled BiTAL by 3.20 percentage points. On ShipsEar, T-F Token ViT achieved the highest overall ACC of 98.15\%. Among the three visual backbones, MobileOne S0 achieved the best ShipsEar ACC of 96.26\% with Mel-spectrogram input, exceeding BiTAL by 3.87 percentage points. Thus, the spectrogram-based models retained an accuracy advantage, whereas BiTAL achieved 93.41\% and 92.39\% ACC by directly processing raw waveforms.
 
 \begin{table*}[!htbp]
 \centering
@@ -464,13 +461,13 @@ T-F Token ViT~\cite{TFTokenViT} & 24.78 & 95.54 & 2819.86 & 7.18 & 84.25 & \text
 MobileOne S0~\cite{Vasu2023MobileOne} & 5.2929 & -- & 1085.15 & 30.43 & 95.15 / 95.90 & 96.26 / 95.99 \\
 GhostNet V2 1$\times$~\cite{Tang2022GhostNetV2} & 4.8810 & -- & 180.97 & 22.81 & 93.68 / 94.17 & 95.06 / 95.86 \\
 MobileViT-XXS~\cite{Mehta2022MobileViT} & 1.0128 & -- & 1383.35 & 14.18 & 95.55 / \textbf{96.61} & 94.66 / 93.72 \\
-\textbf{LNN (w/ KD)} & \textbf{0.32} & \textbf{1.21} & \textbf{58.97} & 12.16 & 93.41 & 92.39 \\
+\textbf{BiTAL (w/ KD)} & \textbf{0.32} & \textbf{1.21} & \textbf{58.97} & 12.16 & 93.41 & 92.39 \\
 \bottomrule
 \end{tabular}
 % \vspace{2mm}
 \end{table*}
 
-LNN-3 showed a clear advantage in model complexity. It required only 0.32 M parameters and 58.97 MFLOPS, the lowest values among all compared methods. Relative to MobileViT-XXS, the smallest of the three visual backbones, LNN-3 reduced the parameter count and FLOPs by 68.40\% and 95.74\%, respectively. It also reduced inference latency from 14.18 ms to 12.16 ms. Even compared with GhostNet V2 1$\times$, which had the lowest computational cost among the three visual backbones, LNN-3 used 67.41\% fewer FLOPs. Moreover, LNN-3 accepted raw waveforms without Mel-spectrogram or CQT conversion. Because the table reports model FLOPs only, the computational cost of this spectral preprocessing is not included in the comparison. The model sizes of the three visual backbones were unavailable in the source comparison and are therefore denoted by ``--''. These results identify LNN-3 as a lower-complexity alternative when a moderate accuracy reduction is acceptable for raw-waveform and resource-constrained deployment.
+BiTAL showed a clear advantage in model complexity. It required only 0.32 M parameters and 58.97 MFLOPS, the lowest values among all compared methods. Relative to MobileViT-XXS, the smallest of the three visual backbones, BiTAL reduced the parameter count and FLOPs by 68.40\% and 95.74\%, respectively. It also reduced inference latency from 14.18 ms to 12.16 ms. Even compared with GhostNet V2 1$\times$, which had the lowest computational cost among the three visual backbones, BiTAL used 67.41\% fewer FLOPs. Moreover, BiTAL accepted raw waveforms without Mel-spectrogram or CQT conversion. Because the table reports model FLOPs only, the computational cost of this spectral preprocessing is not included in the comparison. The model sizes of the three visual backbones were unavailable in the source comparison and are therefore denoted by ``--''. These results identify BiTAL as a lower-complexity alternative when a moderate accuracy reduction is acceptable for raw-waveform and resource-constrained deployment.
 
 % =========================================================
 % Overall Ablation Study（表4）
@@ -777,7 +774,7 @@ correspond to different sampling ranges within the sequence.
 % 05. BPCSCfC Branch Ablation（表8）
 % default: cfc_branch_mode=full
 % =========================================================
-Table~\ref{tab:cfc_branch_analysis} verifies the contribution of different BPCSCfC branches. Using only the forward local branch provides a reasonable baseline, and adding the forward global branch further improves ShipsEar performance. However, the full branch configuration achieves the highest DeepShip ACC and the complete TMSKD result on ShipsEar. This confirms that bidirectional temporal modeling and the combination of local and global information improve the representation capability of the LNN student.
+Table~\ref{tab:cfc_branch_analysis} verifies the contribution of different BPCSCfC branches. Using only the forward local branch provides a reasonable baseline, and adding the forward global branch further improves ShipsEar performance. However, the full branch configuration achieves the highest DeepShip ACC and the complete TMSKD result on ShipsEar. This confirms that bidirectional temporal modeling and the combination of local and global information improve the representation capability of the BiTAL student.
 
 \begin{table}[htbp]
 \centering
@@ -868,7 +865,7 @@ Table~\ref{tab:cfc_capacity_analysis} evaluates the capacity of the CfC wiring. 
 \bottomrule
 \end{tabular}
 \vspace{0.5ex}
-\par\footnotesize Wiring units denote the number of CfC neurons generated by AutoNCP wiring, corresponding to the hidden-state capacity of the LNN student; the gray row is the default setting.
+\par\footnotesize Wiring units denote the number of CfC neurons generated by AutoNCP wiring, corresponding to the hidden-state capacity of the BiTAL student; the gray row is the default setting.
 \end{table}
 % ==================== Fig 4：ShipsEar (单栏 2x2 结构) ====================
 \begin{figure}[!t]
@@ -973,7 +970,7 @@ Furthermore, Fig.~\ref{fig:tsne_four_methods_logits_deepship} presents the t-SNE
 
 \section{Conclusion}
 
-This paper proposed TMSKD, a Temporal--Memory Structure-Aware Knowledge Distillation framework for UATR. TMSKD integrates TS-T for logits-based time-step distribution alignment and MemKD for feature-based temporal memory transfer, enabling efficient knowledge distillation from a complex teacher model to a lightweight LNN student. The student model uses an LNN backbone, BPCSCfC for temporal modeling, and DRASP for multi-scale feature aggregation. Extensive experiments on ShipsEar and DeepShip show that TMSKD improves recognition performance while addressing the computational constraints of underwater platforms and improving generalization in noisy marine environments. Future work will explore real-time edge deployment and adaptation to multimodal marine data.
+This paper proposed TMSKD, a Temporal--Memory Structure-Aware Knowledge Distillation framework for UATR. TMSKD integrates TS-T for logits-based time-step distribution alignment and MemKD for feature-based temporal memory transfer, enabling efficient knowledge distillation from a complex teacher model to the lightweight BiTAL student. BiTAL uses BPCSCfC for temporal modeling and DRASP for multi-scale feature aggregation. Extensive experiments on ShipsEar and DeepShip show that TMSKD improves recognition performance while addressing the computational constraints of underwater platforms and improving generalization in noisy marine environments. Future work will explore real-time edge deployment and adaptation to multimodal marine data.
 
 \newpage
 \bibliographystyle{IEEEtran}

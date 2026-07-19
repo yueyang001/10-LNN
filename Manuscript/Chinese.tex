@@ -23,7 +23,7 @@
 \usepackage{amssymb}
 \newtheorem{theorem}[Theorem]
 
-\title{TMSKD: Temporal--Memory Structure-Aware Knowledge Distillation for Liquid Neural Network-based Underwater Acoustic Target Recognition}
+\title{TMSKD: Temporal--Memory Structure-Aware Knowledge Distillation for BiTAL-based Underwater Acoustic Target Recognition}
 % \author{}
 \date{}   
 
@@ -34,20 +34,20 @@
 \begin{abstract}
 深度学习已显著推动了水下声学目标识别（UATR）的发展，然而，在资源受限的水下平台上部署复杂的深度模型仍是一项巨大的挑战。知识蒸馏（KD）技术通过将知识从高性能的教师模型转移到轻量级的学生模型中，有效缓解了这一难题。
 然而，现有的水下声学目标识别知识蒸馏方法往往忽视了声学信号固有的多尺度时序结构，从而限制了学生模型对复杂时序依赖关系的建模能力。
-为了解决这一问题，本文提出了一种基于液态神经网络（LNNs）的时序-记忆结构感知知识蒸馏（TMSKD）框架。该框架采用液态神经网络作为学生模型以提供强大的神经动力学建模能力，并集成了两种互补的蒸馏策略：一是自适应温度的时序分离（TS-T）蒸馏，用以提升逐时间步语义分布对齐能力；二是记忆差异知识蒸馏（MemKD），通过实施记忆感知对齐，以保留跨时间尺度下鲁棒的判别性信息。在两个真实海洋数据集上的广泛实验证实，TMSKD 相比现有的知识蒸馏方法展现出更优异的性能，在 ShipsEar 上实现了 92.39\% 的识别准确率（ACC），相比竞争性基线结果 90.03\% 提升了 2.36 个百分点。值得注意的是，TMSKD 使液态神经网络（LNNs）学生模型的识别准确率显著提升了 4.14 个百分点。
+为了解决这一问题，本文提出了一种时序-记忆结构感知知识蒸馏（TMSKD）框架，并采用双向时序感知液态神经网络（Bidirectional Temporal-Aware Liquid Network, BiTAL）作为学生模型。BiTAL 提供强大的神经动力学建模能力，并集成了两种互补的蒸馏策略：一是自适应温度的时序分离（TS-T）蒸馏，用以提升逐时间步语义分布对齐能力；二是记忆差异知识蒸馏（MemKD），通过实施记忆感知对齐，以保留跨时间尺度下鲁棒的判别性信息。在两个真实海洋数据集上的广泛实验证实，TMSKD 相比现有的知识蒸馏方法展现出更优异的性能，在 ShipsEar 上实现了 92.39\% 的识别准确率（ACC），相比竞争性基线结果 90.03\% 提升了 2.36 个百分点。值得注意的是，TMSKD 使 BiTAL 学生模型的识别准确率显著提升了 4.14 个百分点。
 % 水声目标识别（Underwater Acoustic Target Recognition, UATR）在深度学习技术的推动下取得了显著进展。然而，受限于水下平台有限的计算与存储资源，复杂深度模型在实际部署中仍面临较大挑战。知识蒸馏（Knowledge Distillation, KD）通过将高性能教师模型中的知识迁移至轻量化学生模型，为提升模型实用性提供了一种有效途径。然而，现有面向 UATR 的蒸馏方法往往忽视水声信号固有的多尺度时间结构特性，导致轻量模型在时序建模能力和识别性能方面存在不足。
 
-% 针对上述问题，受生物神经元中自适应连续动力学启发，本文提出了一种基于液态神经网络（Liquid Neural Network, LNN）的多时间结构感知知识蒸馏方法（Temporal–Memory Structure-Aware Knowledge Distillation ,TMSKD），用于构建高效且精确的水声目标识别模型。本文选用预训练的 wav2vec 2.0 作为教师网络，以充分挖掘水声信号中的高层时序语义信息；同时，引入LNN作为学生网络，以满足神经元动态建模能力和低计算复杂度的需求。TMSKD融合了两种互补的蒸馏策略：时间语义增强表示蒸馏（Temporal Semantic Enhanced Representation Distillation, TSER） 与 基于记忆差异的知识蒸馏（Memory-Discrepancy Knowledge Distillation, MemKD）。其中，TSER 引导学生网络学习教师模型中具有判别力的时间语义结构，增强其对长时依赖关系的建模能力；MemKD 则通过记忆感知的特征对齐机制，在不同时间尺度上保留稳定且鲁棒的判别信息。
+% 针对上述问题，受生物神经元中自适应连续动力学启发，本文提出了一种采用双向时序感知液态神经网络（Bidirectional Temporal-Aware Liquid Network, BiTAL）的多时间结构感知知识蒸馏方法（Temporal–Memory Structure-Aware Knowledge Distillation, TMSKD），用于构建高效且精确的水声目标识别模型。本文选用预训练的 wav2vec 2.0 作为教师网络，以充分挖掘水声信号中的高层时序语义信息；同时，引入 BiTAL 作为学生网络，以满足神经元动态建模能力和低计算复杂度的需求。TMSKD融合了两种互补的蒸馏策略：时间语义增强表示蒸馏（Temporal Semantic Enhanced Representation Distillation, TSER） 与 基于记忆差异的知识蒸馏（Memory-Discrepancy Knowledge Distillation, MemKD）。其中，TSER 引导学生网络学习教师模型中具有判别力的时间语义结构，增强其对长时依赖关系的建模能力；MemKD 则通过记忆感知的特征对齐机制，在不同时间尺度上保留稳定且鲁棒的判别信息。
 
-% 在真实海洋水声数据集上的大量实验结果表明，所提出的基于LNN的TMSKD方法在识别精度上显著优于现有知识蒸馏方法。尤其是在保持模型轻量化和低计算开销的前提下，基于 LNN 的学生模型获得了明显的性能提升，充分验证了该方法在实际 UATR 场景中的有效性与应用潜力。
+% 在真实海洋水声数据集上的大量实验结果表明，采用 BiTAL 的 TMSKD 方法在识别精度上显著优于现有知识蒸馏方法。尤其是在保持模型轻量化和低计算开销的前提下，BiTAL 学生模型获得了明显的性能提升，充分验证了该方法在实际 UATR 场景中的有效性与应用潜力。
 
-\textbf{关键词：} 水声目标识别；知识蒸馏；液态神经网络；时序建模
+\textbf{关键词：} 水声目标识别；知识蒸馏；双向时序感知液态神经网络；时序建模
 \end{abstract}
 \section{Introduction}
 \begin{figure}
     \centering
     \includegraphics[width=1\linewidth]{figures/Cover_Image.png}
-    \caption{(a)TMSKD 在保持极低资源消耗的同时，实现了显著的性能优势。(b) 给定一段水下声学波形，所提出的 TMSKD 框架首先利用 MemKD 对齐异构网络之间的记忆动态轨迹。通过区别于传统的刚性硬对齐，并引入 TS-T 进行基于自适应温度的逐时间步时序对齐，TMSKD 有效地捕捉了长程演变逻辑与细粒度的时序模式。这些提炼出的知识被整合到轻量级 LNN 学生网络中，从而产生准确且高效的目标类别预测。}
+    \caption{(a)TMSKD 在保持极低资源消耗的同时，实现了显著的性能优势。(b) 给定一段水下声学波形，所提出的 TMSKD 框架首先利用 MemKD 对齐异构网络之间的记忆动态轨迹。通过区别于传统的刚性硬对齐，并引入 TS-T 进行基于自适应温度的逐时间步时序对齐，TMSKD 有效地捕捉了长程演变逻辑与细粒度的时序模式。这些提炼出的知识被整合到轻量级 BiTAL 学生网络中，从而产生准确且高效的目标类别预测。}
     \label{fig:placeholder}
 \end{figure}
 水声目标识别（Underwater Acoustic Target Recognition, UATR）作为海洋监测与防御系统的核心技术，在海洋资源勘探、水下安防以及生态环境监测等领域发挥着不可替代的作用~\cite{Urick1983,Jensen2011}。然而，与陆地声学环境相比，水下声道具有极其复杂的时变、多径效应及环境噪声干扰~\cite{Wenz1962,Medwin2005}，这些复杂的信道特性使得水声信号表现出高度的非平稳性与非线性，极大地增加了从原始信号中提取鲁棒性鉴别特征的难度~\cite{Urick1983,Jensen2011}。更为重要的是，实际的水声识别系统通常部署于水下机器人（AUV）、浮标或传感器节点等边缘设备上，受限于设备的硬件规格，模型的存储空间占用与计算能耗面临严格约束~\cite{Cai2020MobileAUV,Han2016DeepCompression}。因此，如何在有限的计算资源下构建轻量化的识别模型，成为了该领域亟待解决的关键问题。
@@ -55,9 +55,9 @@
 针对数据稀缺与轻量化部署的双重矛盾，现有的研究主要采取预训练模型微调或模型压缩技术~\cite{Kong2020PANNs,Gou2021KDSurvey}。然而，不同于语音或自然声学信号，水声信号缺乏明确的语义信息（Semantic Information）和音素结构，这导致直接迁移通用音频领域的轻量化预训练模型往往难以捕捉水声信号特有的物理特征，微调效果受限~\cite{Baevski2020Wav2Vec2,Kong2020PANNs,Urick1983,Jensen2011,Medwin2005}。因此，越来越多的研究者将目光转向知识蒸馏（Knowledge Distillation, KD），旨在通过教师网络（Teacher Network）指导轻量化的学生网络（Student Network），以在不增加推理成本的前提下提升模型性能~\cite{Bucila2006Compression,Hinton2015Distilling,Romero2015FitNets}。尽管已有工作在水声领域的蒸馏研究中取得了进展，但我们观察到，目前的轻量化学生网络大多仍依赖于梅尔谱图（Mel-spectrogram）等二维时频特征作为输入。这种做法虽然利用了谱图的视觉纹理特征，但引入了繁琐的预处理计算，违背了端到端（End-to-End）轻量化的初衷。遗憾的是，目前直接使用一维原始波形（Raw Waveform）作为输入的轻量化模型，在特征提取能力上往往显著弱于基于谱图的方法，难以在蒸馏中取得有竞争力的识别精度~\cite{Oord2016WaveNet,Bai2018TCN}。
 
 是否存在一种架构，既能抛弃复杂的谱图转换直接处理原始水声信号，又能具备与谱图输入方法相媲美的特征提取能力？
-鉴于此，本文将目光转向了液态神经网络（Liquid Neural Networks, LNNs）。作为一种受生物启发的连续时间递归神经网络，LNN 通过常微分方程（ODEs）对神经元动力学进行建模~\cite{Chen2018NeuralODE,Hasani2021LTC,Hasani2022CfC}，展现出了卓越的时序因果捕捉能力与鲁棒性，使其成为处理一维非平稳水声信号的理想选择。
+鉴于此，本文将目光转向液态神经网络。作为一种受生物启发的连续时间递归神经网络，该类网络通过常微分方程（ODEs）对神经元动力学进行建模~\cite{Chen2018NeuralODE,Hasani2021LTC,Hasani2022CfC}，展现出较强的时序因果捕捉能力与鲁棒性。基于这一网络范式，本文设计了双向时序感知液态神经网络（Bidirectional Temporal-Aware Liquid Network, BiTAL），用于处理一维非平稳水声信号。
 
-为了充分挖掘 LNN 在水声识别中的潜力，并解决异构网络间知识传递的难题，本文受到时序网络蒸馏思想的启发，提出了一种全新的 MemKD 模块。在传统的蒸馏框架中，由于教师网络与学生网络在参数量级和模型架构上的巨大差异，直接对特征图进行“硬对齐”往往导致学生网络难以收敛或学习到次优特征~\cite{Yim2017FSP,Zagoruyko2017AT,Ahn2019VID}。MemKD 模块则另辟蹊径，它不强求特征数值的逐点逼近，而是旨在将教师网络特征提取器输出的时序演变趋势（Temporal Evolution Trend）以显式的方式传递给学生网络。换言之，我们将教师网络处理音频特征的“思路”与“动态变化规律”传授给学生网络，从而有效规避了因架构差异导致的对齐困难问题。
+为了充分挖掘 BiTAL 在水声识别中的潜力，并解决异构网络间知识传递的难题，本文受到时序网络蒸馏思想的启发，提出了一种全新的 MemKD 模块。在传统的蒸馏框架中，由于教师网络与学生网络在参数量级和模型架构上的巨大差异，直接对特征图进行“硬对齐”往往导致学生网络难以收敛或学习到次优特征~\cite{Yim2017FSP,Zagoruyko2017AT,Ahn2019VID}。MemKD 模块则另辟蹊径，它不强求特征数值的逐点逼近，而是旨在将教师网络特征提取器输出的时序演变趋势（Temporal Evolution Trend）以显式的方式传递给学生网络。换言之，我们将教师网络处理音频特征的“思路”与“动态变化规律”传授给学生网络，从而有效规避了因架构差异导致的对齐困难问题。
 
 % 此外，水声信号具有显著的瞬态特性，往往存在特定的“关键频率”或短时特征，这些关键信息在时间轴上的分布是不均匀的，却直接决定了目标的类别判定。传统的基于 Logits 的蒸馏方法通常是对整段音频进行全局池化后的概率分布进行拟合，这种“投票式”的预测方式容易淹没局部关键特征。针对这一问题，我们摒弃了粗粒度的 Logits 蒸馏，转而采用逐时间步（Time-step Wise）的对齐策略。通过强制学生网络在每一个时间步上与教师网络保持一致，模型能够更充分地捕捉并学习不同时刻产生的关键频率特征。
 % 这种细粒度的蒸馏范式确保了学生网络不仅学到了“是什么”，更学到了“在哪一时刻”发生了关键变化，从而有效提升了模型对水声目标的判别能力。
@@ -68,7 +68,7 @@
 
 \begin{enumerate}[label=\arabic*)]
     \item 我们提出了一种新型知识蒸馏框架，称为时序-记忆结构感知知识蒸馏（Temporal–Memory Structure-Aware Knowledge Distillation, TMSKD），专为水声目标识别（UATR）任务设计。TMSKD融合了基于logits的自适应温度时序分离知识蒸馏（Temporal Separation with Adaptive Temperature Knowledge Distillation, TS-T）与基于特征的记忆差异知识蒸馏（Memory-Discrepancy Knowledge Distillation, MemKD），使学生模型能够同时有效捕捉水声信号中瞬时的类别间关系以及长期的时序记忆模式。
-    \item 我们设计了一种基于液态神经网络的轻量且高效的学生网络架构，该架构包含五层CNN编码器、由AutoNCP自动生成神经回路的双向并行交叉切片CfC（BPCSCfC）模块，以及双分辨率注意力统计池化（Dual-Resolution Attentive Statistics Pooling, DRASP）机制。DRASP通过全局和局部注意力统计池化，从全局平稳信息和局部瞬态尖峰两个尺度共同建模声学序列，避免依赖单一尺度的注意力统计池化，从而显著提升了时频特征的判别性表示能力。
+    \item 我们设计了轻量且高效的 BiTAL 学生网络架构，该架构包含五层 CNN 编码器、由 AutoNCP 自动生成神经回路的双向并行交叉切片 CfC（BPCSCfC）模块，以及双分辨率注意力统计池化（Dual-Resolution Attentive Statistics Pooling, DRASP）机制。DRASP 通过全局和局部注意力统计池化，从全局平稳信息和局部瞬态尖峰两个尺度共同建模声学序列，避免依赖单一尺度的注意力统计池化，从而显著提升时频特征的判别性表示能力。
     \item 在两个真实海洋数据集（ShipsEar 5类和DeepShip 4类）上的大量实验表明，所提出的TMSKD显著优于现有的最先进（SOTA）知识蒸馏方法。该框架在保持极低计算复杂度和参数量的同时，实现了准确率的显著提升。特别地，TMSKD为轻量级学生模型带来了可观的性能增益，充分验证了其在资源受限的水下部署场景中的有效性和实用性。
 \end{enumerate}
 
@@ -87,7 +87,7 @@
 
 \subsection{液态神经网络}
 
-液态神经网络（Liquid Neural Networks, LNN）是一类受小型生物神经系统动力学机制启发的连续时间神经计算模型~\cite{Hasani2021LTC}。其核心思想是通过线性或非线性常微分方程（Ordinary Differential Equations, ODE）描述神经元状态随时间的连续演化过程，从而在理论上更自然地建模时间信号的动态变化~\cite{Chen2018NeuralODE}。
+液态神经网络（Liquid Neural Networks）是一类受小型生物神经系统动力学机制启发的连续时间神经计算模型~\cite{Hasani2021LTC}。其核心思想是通过线性或非线性常微分方程（Ordinary Differential Equations, ODE）描述神经元状态随时间的连续演化过程，从而在理论上更自然地建模时间信号的动态变化~\cite{Chen2018NeuralODE}。
 
 与传统离散层堆叠式网络不同，液态神经网络在每个时间步对隐藏状态进行连续时间更新，使网络具备更强的动态适应能力和可解释性。部分研究提出闭式连续时间（Closed-form Continuous-time）表达形式，使得网络在保证表达能力的同时降低数值求解复杂度~\cite{Hasani2022CfC}。此外，通过构建结构化稀疏连接策略（如自动神经回路生成策略），液态神经网络可以在较低参数规模下实现高效动态建模，具备良好的轻量化潜力~\cite{Lechner2020NCP}。
 
@@ -104,12 +104,12 @@
 在水声目标识别场景中，由于输入信号具有显著的时序依赖性与动态变化特征，将知识蒸馏与时序建模机制相结合，有助于将大规模预训练模型的判别能力迁移至轻量化动态网络结构中。因此，围绕时序结构感知与动态权重调节的蒸馏策略，成为提升轻量化水声识别模型性能的重要研究方向。
 
 \section{Methodology}
-本节首先介绍基于液态神经网络的水声识别结构，随后，我们详细介绍被提出的\textbf{TMSKD}框架，该框架包括融合两种\textbf{KD}：\textbf{TS-T}和\textbf{MemKD}。
+本节首先介绍基于 BiTAL 的水声识别结构，随后详细介绍所提出的\textbf{TMSKD}框架，该框架融合两种\textbf{KD}方法：\textbf{TS-T}和\textbf{MemKD}。
 % 修改一下大小
 \begin{figure}[htp]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/model_structure_v2.0.png}
-    \caption{所提出的水下声学目标识别知识蒸馏框架整体架构。冻结的预训练 wav2vec 2.0 作为教师模型，通过记忆差异知识蒸馏（MemKD）和自适应温度时序分离知识蒸馏（TS-T）指导轻量级 LNN 学生网络的训练。学生网络的详细内部结构如图~\ref{fig:student_architecture}所示。}
+    \caption{所提出的水下声学目标识别知识蒸馏框架整体架构。冻结的预训练 wav2vec 2.0 作为教师模型，通过记忆差异知识蒸馏（MemKD）和自适应温度时序分离知识蒸馏（TS-T）指导轻量级 BiTAL 学生网络的训练。学生网络的详细内部结构如图~\ref{fig:student_architecture}所示。}
     \label{fig:structure}
 \end{figure}
 
@@ -147,21 +147,21 @@ AutoNCP 采用四类神经元的层级架构，包括感觉神经元、中间神
 基于公式~(\ref{eq:cfc_update})的液态神经元细胞单元在AutoNCP所定义的连接图上进行状态演化，
 使得网络在保持建模能力的同时显著减少参数规模，
 并增强对非平稳时序信号的泛化能力。
-% \subsection{Student Network: LNN Architecture Implementation for Underwater Acoustic Recognition}
-\subsection{学生网络：面向水声识别的液态神经网络架构实现}
-为了有效捕捉水下声学信号中的时序动态并兼顾计算效率，基于公式~(\ref{eq:cfc_update})我们设计了一个基于液态神经网络的学生网络，提升了学生模型对复杂海洋环境的适应性，并便于与知识蒸馏框架集成。
+% \subsection{Student Network: BiTAL Architecture Implementation for Underwater Acoustic Recognition}
+\subsection{学生网络：面向水声识别的 BiTAL 架构实现}
+为了有效捕捉水下声学信号中的时序动态并兼顾计算效率，基于公式~(\ref{eq:cfc_update})，我们设计了 BiTAL 学生网络，以提升学生模型对复杂海洋环境的适应性，并便于与知识蒸馏框架集成。
 
 对于给定输入的单通道原始水声信号$\mathbf{s} \in \mathbb{R}^{L}$，学生网络首先采用一维卷积编码器将原始时域信号映射为高维时序特征，记为$\mathbf{H}_S\in \mathbb{R}^{B \times T_S \times C}$，其中$B$表示批次大小，$T_S$为时间步，$C$为每个时间步的特征维度~\cite{Oord2016WaveNet,Bai2018TCN}。为同时捕捉$\mathbf{H}_S$中的局部瞬态和长程时序依赖，我们将其输入 BPCSCfC 模块。该模块沿时间维度将序列划分为非重叠窗口，并构建并行信息流以捕捉短程和长程依赖。如图~\ref{fig:student_architecture}所示，所得多尺度时序表示进一步通过 DRASP 的全局与分段局部注意力统计池化进行聚合，并用于最终分类。学生网络的完整前向过程如算法~\ref{alg:student_network}所示。编码器特征$\mathbf{H}_S$用于 MemKD，融合特征$\mathbf{F}_S^t$经线性投影得到供 TS-T 使用的逐时间步 logits $\mathbf{Z}_S^t$。
 
 \begin{figure*}[!t]
     \centering
     \includegraphics[width=\textwidth]{figures/Detailed Architecture of the Proposed Liquid Neural Student Network.png}
-    \caption{所提出的面向水下声学目标识别的液态神经学生网络详细架构。一维 CNN 编码器首先将原始波形转换为时序特征序列，随后由采用 AutoNCP 神经回路连接的 CfC 单元构成的双向并行交叉切片 CfC（BPCSCfC）模块进行建模。双分辨率注意力统计池化（DRASP）模块进一步融合全局注意力统计量与分段局部注意力统计量，形成供分类器使用的语句级表示。}
+    \caption{所提出的面向水下声学目标识别的 BiTAL 学生网络详细架构。一维 CNN 编码器首先将原始波形转换为时序特征序列，随后由采用 AutoNCP 神经回路连接的 CfC 单元构成的双向并行交叉切片 CfC（BPCSCfC）模块进行建模。双分辨率注意力统计池化（DRASP）模块进一步融合全局注意力统计量与分段局部注意力统计量，形成供分类器使用的语句级表示。}
     \label{fig:student_architecture}
 \end{figure*}
 
 \begin{algorithm}[!t]
-\caption{面向水声目标识别的学生网络}
+\caption{面向水声目标识别的 BiTAL 学生网络}
 \label{alg:student_network}
 \begin{algorithmic}[1]
 \Require $\mathbf{s}\in\mathbb{R}^{B\times 1\times L}$；窗口长度 $W$，且 $W\mid T_S$；类别数 $K$
@@ -426,7 +426,7 @@ TS-T蒸馏目标损失为：
 
 整体框架如图~\ref{fig:structure}采用教师–学生范式，
 % 其中教师模型选用预训练的 wav2vec~2.0，并在训练过程中保持参数冻结；
-对于学生模型，我们采用基于闭式时间液态神经网络结构，用于完成最终的下游任务预测。
+对于学生模型，我们采用基于闭式连续时间液态结构的 BiTAL，用于完成最终的下游任务预测。
 总结来说，整体训练目标定义为：
 \begin{equation}
 \mathcal{L}_{\text{total}} = \mathcal{L}_{\text{CE}} + \lambda_m \, \mathcal{L}_{\text{M}} + (1 - \lambda_m) \, \mathcal{L}_{\text{TS-T}}
@@ -516,7 +516,7 @@ $\uparrow\uparrow$ denotes the improvement of TMSKD over the student model.}
 
 \multirow{2}{*}{\makecell{Baseline \\ (No KD)}}
 & Teacher (Wav2vec 2.0) & 98.56 & 98.56 & 99.93 & 94.66 & 94.66 & 99.63 \\
-& Student (LNN) & 83.74 & 87.72 & 97.70 & 86.44 & 87.99 & 97.83 \\
+& Student (BiTAL) & 83.74 & 87.72 & 97.70 & 86.44 & 87.99 & 97.83 \\
 
 \midrule
 
@@ -595,17 +595,17 @@ $\uparrow\uparrow$ denotes the improvement of TMSKD over the student model.}
 % GhostNet-V1  &  &  &  &  &  &  \\
 % RegNet-200MF  &  &  &  &  &  &  \\
 % CA\_MobileNetV2  &  &  &  &  &  &  \\
-% LNN (w/o KD) & 0.32 & 1.21 & 58.97 & 15.86 &  &  \\
-% LNN (w/ KD) & 0.32 & 1.21 & 58.97 & 15.86 &  &  \\
+% BiTAL (w/o KD) & 0.32 & 1.21 & 58.97 & 15.86 &  &  \\
+% BiTAL (w/ KD) & 0.32 & 1.21 & 58.97 & 15.86 &  &  \\
 
 % \bottomrule
 % \end{tabular}
 % }
 % \end{table*}
 \subsubsection{Comparison With the SOTA UATR Methods}
-表~\ref{tab:comparison with Different UATR Methods} 比较了本文方法与代表性 UATR 方法的识别精度和模型复杂度。在新增的三种视觉骨干网络中，MobileViT-XXS 使用 CQT 输入时在 DeepShip 上取得最高的 96.61\% ACC，比经过 TMSKD 蒸馏的 LNN-3 高 3.20 个百分点。在 ShipsEar 上，T-F Token ViT 以 98.15\% ACC 取得总体最优结果；在新增的三种视觉骨干网络中，MobileOne S0 使用 Mel 谱图输入时取得最高的 96.26\% ACC，比 LNN-3 高 3.87 个百分点。因此，基于谱图的模型在识别精度上仍具有优势，而直接处理原始波形的 LNN-3 在 DeepShip 和 ShipsEar 上分别取得了 93.41\% 和 92.39\% ACC。
+表~\ref{tab:comparison with Different UATR Methods} 比较了本文方法与代表性 UATR 方法的识别精度和模型复杂度。在新增的三种视觉骨干网络中，MobileViT-XXS 使用 CQT 输入时在 DeepShip 上取得最高的 96.61\% ACC，比经过 TMSKD 蒸馏的 BiTAL 高 3.20 个百分点。在 ShipsEar 上，T-F Token ViT 以 98.15\% ACC 取得总体最优结果；在新增的三种视觉骨干网络中，MobileOne S0 使用 Mel 谱图输入时取得最高的 96.26\% ACC，比 BiTAL 高 3.87 个百分点。因此，基于谱图的模型在识别精度上仍具有优势，而直接处理原始波形的 BiTAL 在 DeepShip 和 ShipsEar 上分别取得了 93.41\% 和 92.39\% ACC。
 
-在模型复杂度方面，LNN-3 表现出明显优势，其参数量仅为 0.32 M，计算量仅为 58.97 MFLOPS，均为所有对比方法中的最低值。与新增视觉骨干网络中参数量最小的 MobileViT-XXS 相比，LNN-3 的参数量和 FLOPs 分别减少 68.40\% 和 95.74\%，推理延迟也由 14.18 ms 降低至 12.16 ms。即使与三种视觉骨干网络中计算量最低的 GhostNet V2 1$\times$ 相比，LNN-3 的 FLOPs 仍减少 67.41\%。此外，LNN-3 可直接接收原始波形，无需进行 Mel 谱图或 CQT 转换。需要说明的是，表中仅统计模型本身的 FLOPs，并未计入谱图预处理的计算开销。原始对比未报告三种视觉骨干网络的模型大小，因此相应位置以“--”表示。上述结果表明，在允许一定精度损失的前提下，LNN-3 为原始波形输入和资源受限部署提供了一种复杂度更低的选择。
+在模型复杂度方面，BiTAL 表现出明显优势，其参数量仅为 0.32 M，计算量仅为 58.97 MFLOPS，均为所有对比方法中的最低值。与新增视觉骨干网络中参数量最小的 MobileViT-XXS 相比，BiTAL 的参数量和 FLOPs 分别减少 68.40\% 和 95.74\%，推理延迟也由 14.18 ms 降低至 12.16 ms。即使与三种视觉骨干网络中计算量最低的 GhostNet V2 1$\times$ 相比，BiTAL 的 FLOPs 仍减少 67.41\%。此外，BiTAL 可直接接收原始波形，无需进行 Mel 谱图或 CQT 转换。需要说明的是，表中仅统计模型本身的 FLOPs，并未计入谱图预处理的计算开销。原始对比未报告三种视觉骨干网络的模型大小，因此相应位置以“--”表示。上述结果表明，在允许一定精度损失的前提下，BiTAL 为原始波形输入和资源受限部署提供了一种复杂度更低的选择。
 
 \begin{table*}[!htbp]
 \centering
@@ -634,7 +634,7 @@ T-F Token ViT~\cite{TFTokenViT} & 24.78 & 95.54 & 2819.86 & 7.18 & 84.25 & \text
 MobileOne S0~\cite{Vasu2023MobileOne} & 5.2929 & -- & 1085.15 & 30.43 & 95.15 / 95.90 & 96.26 / 95.99 \\
 GhostNet V2 1$\times$~\cite{Tang2022GhostNetV2} & 4.8810 & -- & 180.97 & 22.81 & 93.68 / 94.17 & 95.06 / 95.86 \\
 MobileViT-XXS~\cite{Mehta2022MobileViT} & 1.0128 & -- & 1383.35 & 14.18 & 95.55 / \textbf{96.61} & 94.66 / 93.72 \\
-\textbf{LNN (w/ KD)} & \textbf{0.32} & \textbf{1.21} & \textbf{58.97} & 12.16 & 93.41 & 92.39 \\
+\textbf{BiTAL (w/ KD)} & \textbf{0.32} & \textbf{1.21} & \textbf{58.97} & 12.16 & 93.41 & 92.39 \\
 
 \bottomrule
 \end{tabular}
@@ -659,7 +659,7 @@ MobileViT-XXS~\cite{Mehta2022MobileViT} & 1.0128 & -- & 1383.35 & 14.18 & 95.55 
 
 表~\ref{tab:z_random_range_analysis}展示了 MemKD 中长期时序偏移范围 $z$ 的影响。默认的 \texttt{half} 范围在 DeepShip 和 ShipsEar 上均取得最佳结果，分别为 93.41\% 和 92.39\%。相比之下，\texttt{quarter} 范围缩短了用于长期差异建模的时间跨度，而 \texttt{upper\_half} 更偏向采样远距离时间偏移，在 ShipsEar 上带来更明显的性能下降。该趋势说明，适中的偏移范围能够在捕获长程动态和避免弱相关时序噪声之间提供更可靠的折中。
 
-表~\ref{tab:cfc_branch_analysis}给出了 BPCSCfC 分支结构的消融结果。仅使用前向局部分支可以形成合理基线，加入前向全局分支后 ShipsEar 性能进一步提升；而完整四分支结构在 DeepShip 上取得最高 ACC，并在 ShipsEar 上达到完整 TMSKD 结果。这说明双向时序建模以及局部与全局信息的结合能够增强 LNN 学生模型的表示能力。
+表~\ref{tab:cfc_branch_analysis}给出了 BPCSCfC 分支结构的消融结果。仅使用前向局部分支可以形成合理基线，加入前向全局分支后 ShipsEar 性能进一步提升；而完整四分支结构在 DeepShip 上取得最高 ACC，并在 ShipsEar 上达到完整 TMSKD 结果。这说明双向时序建模以及局部与全局信息的结合能够增强 BiTAL 学生模型的表示能力。
 
 表~\ref{tab:temporal_granularity_analysis}分析了时序划分中的窗口长度与分段长度。默认 4/4 设置在 DeepShip 和 ShipsEar 上均取得最佳 ACC，分别为 93.41\% 和 92.39\%。较短粒度（如 1/1 和 2/2）有助于保留局部细节，但序列级聚合能力较弱；较大粒度（如 8/8 和 16/16）则可能降低时间分辨率。该结果表明，4/4 设置能够在局部时间敏感性和稳健序列表示之间取得实用平衡。
 
@@ -901,7 +901,7 @@ FL、FG、BL 和 BG 分别表示 BPCSCfC 中的前向局部、前向全局、后
 \bottomrule
 \end{tabular}
 \vspace{0.5ex}
-\par\footnotesize Wiring Units 表示由 AutoNCP wiring 生成的 CfC 神经元数量，用于控制 LNN 学生模型的隐状态容量；灰色行为默认设置。
+\par\footnotesize Wiring Units 表示由 AutoNCP wiring 生成的 CfC 神经元数量，用于控制 BiTAL 学生模型的隐状态容量；灰色行为默认设置。
 \end{table}
 
 % =========================================================
@@ -1028,8 +1028,8 @@ Local ASP  & 93.06 & 90.03 \\
     \label{fig:tsne_four_methods_logits_deepship}
 \end{figure}
 \section{CONCLUSION}
-本文提出了一种新型的时序-记忆结构感知知识蒸馏（TMSKD）框架，用于水下声目标识别（UATR）。TMSKD 集成了自适应温度时序分离知识蒸馏（TS-T）用于基于 logits 的逐时间步分布对齐，以及基于记忆差异的知识蒸馏（MemKD）用于基于特征的时序记忆转移，从而实现从复杂教师模型到轻量级学生网络的高效知识蒸馏。所构建的学生模型以 LNN 为主干，结合双向并行交叉切片 CfC（BPCSCfC）进行时序建模，并通过双分辨率注意力统计池化（DRASP）完成多尺度特征聚合。
-在 ShipsEar 和 DeepShip 数据集上的大量实验表明，TMSKD 在 DeepShip 上取得 93.41\% 的 ACC，在 ShipsEar 上取得 92.39\% 的 ACC，均优于多数现有知识蒸馏方法；与未蒸馏学生模型相比，TMSKD 分别带来 5.67 和 4.14 个百分点的准确率提升。同时，所构建的 LNN 学生模型仅包含 0.32 M 参数量和 58.97 MFLOPS 计算量，在保持较低模型复杂度的同时获得了具有竞争力的识别性能。消融实验进一步表明，TS-T 与 MemKD 具有互补作用，BPCSCfC 和 DRASP 也分别从时序建模与多尺度特征聚合两个方面提升了模型表现。
+本文提出了一种新型的时序-记忆结构感知知识蒸馏（TMSKD）框架，用于水下声目标识别（UATR）。TMSKD 集成了自适应温度时序分离知识蒸馏（TS-T）用于基于 logits 的逐时间步分布对齐，以及基于记忆差异的知识蒸馏（MemKD）用于基于特征的时序记忆转移，从而实现从复杂教师模型到轻量级 BiTAL 学生网络的高效知识蒸馏。BiTAL 结合双向并行交叉切片 CfC（BPCSCfC）进行时序建模，并通过双分辨率注意力统计池化（DRASP）完成多尺度特征聚合。
+在 ShipsEar 和 DeepShip 数据集上的大量实验表明，TMSKD 在 DeepShip 上取得 93.41\% 的 ACC，在 ShipsEar 上取得 92.39\% 的 ACC，均优于多数现有知识蒸馏方法；与未蒸馏学生模型相比，TMSKD 分别带来 5.67 和 4.14 个百分点的准确率提升。同时，所构建的 BiTAL 学生模型仅包含 0.32 M 参数量和 58.97 MFLOPS 计算量，在保持较低模型复杂度的同时获得了具有竞争力的识别性能。消融实验进一步表明，TS-T 与 MemKD 具有互补作用，BPCSCfC 和 DRASP 也分别从时序建模与多尺度特征聚合两个方面提升了模型表现。
 总体而言，该框架缓解了水下平台的计算限制，并在噪声海洋环境中提升了轻量模型的泛化能力。未来的工作将探索与实时边缘设备的集成，以及对多模态海洋数据的适应。
 % \bibliographystyle{plain}     % 参考文献样式（常见样式：plain, unsrt, alpha, abbrv, IEEEtran 等）
 \bibliographystyle{IEEEtran}
