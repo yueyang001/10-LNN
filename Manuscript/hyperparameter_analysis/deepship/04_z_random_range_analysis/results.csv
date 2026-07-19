@@ -1,0 +1,4 @@
+level,id,name,changes,best_acc,best_auc,best_f1,save_dir
+04_z_random_range_analysis,Z1,z_2_to_quarter,distillation.z_random_range=quarter,93.95221971407074,0.9935286173474654,0.9374787656783597,/media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/04_z_random_range_analysis/Z1_z_2_to_quarter
+04_z_random_range_analysis,Z2,z_2_to_half,distillation.z_random_range=half,93.46313017306245,0.9928958862616039,0.936696946219793,/media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/04_z_random_range_analysis/Z2_z_2_to_half
+04_z_random_range_analysis,Z3,z_quarter_to_half,distillation.z_random_range=upper_half,93.15274642588412,0.9916927485436324,0.9303319313725754,/media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/04_z_random_range_analysis/Z3_z_quarter_to_half

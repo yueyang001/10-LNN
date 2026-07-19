@@ -1,0 +1,9 @@
+method,input_type,parameters_m,flops_mflops,deepship_acc,shipsear_acc
+UATC-DenseNet,Audio signal,0.4182,369.21,82.22,83.31
+1DCT,Audio signal,0.3509,856.99,81.11,84.25
+MSRDN,Audio signal,23.9258,4320.25,88.79,92.92
+LNN (w/ KD),MAudio signal,0.32,58.97,93.41,92.39
+ALSI,Mel,28.34,3344.4,84.14,97.89
+MHT-UATR,Mel,5.52,911,81.75,96.15
+CAF-JT,Mel,14.83,1770.36,83.86,97.65
+T-F Token ViT,Mel,24.78,2819.86,84.25,98.15

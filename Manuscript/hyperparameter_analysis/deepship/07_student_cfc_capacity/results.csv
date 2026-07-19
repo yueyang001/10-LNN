@@ -1,0 +1,6 @@
+level,id,name,changes,best_acc,best_auc,best_f1,save_dir
+07_student_cfc_capacity,CP1,wiring_units_80,model.student.wiring_units=80,91.38449962377727,0.989021867208461,0.9207949609929292,/media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/07_student_cfc_capacity/CP1_wiring_units_80
+07_student_cfc_capacity,CP2,wiring_units_96,model.student.wiring_units=96,91.94883370955606,0.9896751269968298,0.9197537416920007,/media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/07_student_cfc_capacity/CP2_wiring_units_96
+07_student_cfc_capacity,CP3,wiring_units_128,model.student.wiring_units=128,93.29382994732882,0.9928845193400364,0.9404177770148001,/media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/07_student_cfc_capacity/CP3_wiring_units_128
+07_student_cfc_capacity,CP4,wiring_units_160,model.student.wiring_units=160,93.76410835214448,0.9931827931561859,0.9423260162306645,/media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/07_student_cfc_capacity/CP4_wiring_units_160
+07_student_cfc_capacity,CP5,wiring_units_192,model.student.wiring_units=192,93.98984198645599,0.9928189114353898,0.9431058201162785,/media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/07_student_cfc_capacity/CP5_wiring_units_192

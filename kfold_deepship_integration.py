@@ -153,7 +153,12 @@ class DeepShipKFoldTrainer:
         config['distributed']['master_port'] = str(12361 + fold_idx)
 
         # 创建临时配置文件
-        with tempfile.NamedTemporaryFile(mode='w', suffix='.yaml', delete=False) as tmp:
+        # 临时配置统一写入项目目录，避免占用系统盘。
+        project_tmp = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tmp")
+        os.makedirs(project_tmp, exist_ok=True)
+        with tempfile.NamedTemporaryFile(
+            mode='w', suffix='.yaml', delete=False, dir=project_tmp, encoding='utf-8'
+        ) as tmp:
             yaml.dump(config, tmp)
             tmp_config = tmp.name
 

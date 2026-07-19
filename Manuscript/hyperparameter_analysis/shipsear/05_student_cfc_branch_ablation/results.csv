@@ -1,0 +1,5 @@
+level,id,name,changes,best_acc,best_auc,best_f1,save_dir
+05_student_cfc_branch_ablation,BR1,full_fl_fg_bl_bg,model.student.cfc_branch_mode=full,90.55851063829788,0.9833450915918085,0.898782404960134,/media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/shipsear/05_student_cfc_branch_ablation/BR1_full_fl_fg_bl_bg
+05_student_cfc_branch_ablation,BR2,only_fl,model.student.cfc_branch_mode=only_fl,90.55851063829788,0.9830846512857271,0.9146660598475368,/media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/shipsear/05_student_cfc_branch_ablation/BR2_only_fl
+05_student_cfc_branch_ablation,BR3,fl_fg,model.student.cfc_branch_mode=fl_fg,90.69148936170212,0.9826524559368373,0.915461223173989,/media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/shipsear/05_student_cfc_branch_ablation/BR3_fl_fg
+05_student_cfc_branch_ablation,BR4,fl_bl,model.student.cfc_branch_mode=fl_bl,90.29255319148936,0.9863616654005625,0.9042186082974315,/media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/shipsear/05_student_cfc_branch_ablation/BR4_fl_bl

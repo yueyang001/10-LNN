@@ -1,0 +1,6 @@
+level,id,name,changes,best_acc,best_auc,best_f1,save_dir
+07_student_cfc_capacity,CP1,wiring_units_80,model.student.wiring_units=80,89.62765957446808,0.9845623921475417,0.899190032836159,/media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/shipsear/07_student_cfc_capacity/CP1_wiring_units_80
+07_student_cfc_capacity,CP2,wiring_units_96,model.student.wiring_units=96,89.49468085106383,0.9858710134552109,0.900385406704757,/media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/shipsear/07_student_cfc_capacity/CP2_wiring_units_96
+07_student_cfc_capacity,CP3,wiring_units_128,model.student.wiring_units=128,90.95744680851064,0.9889726117018777,0.9206702852393479,/media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/shipsear/07_student_cfc_capacity/CP3_wiring_units_128
+07_student_cfc_capacity,CP4,wiring_units_160,model.student.wiring_units=160,90.15957446808511,0.9858756014810522,0.909735473152216,/media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/shipsear/07_student_cfc_capacity/CP4_wiring_units_160
+07_student_cfc_capacity,CP5,wiring_units_192,model.student.wiring_units=192,91.09042553191489,0.9848382384150991,0.904999950756522,/media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/shipsear/07_student_cfc_capacity/CP5_wiring_units_192

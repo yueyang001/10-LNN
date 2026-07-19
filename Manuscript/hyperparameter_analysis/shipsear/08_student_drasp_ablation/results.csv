@@ -1,0 +1,4 @@
+level,id,name,changes,best_acc,best_auc,best_f1,save_dir
+08_student_drasp_ablation,DP1,global_asp_only,model.student.drasp_mode=global,89.76063829787235,0.9842421777841416,0.8936857354932032,/media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/shipsear/08_student_drasp_ablation/DP1_global_asp_only
+08_student_drasp_ablation,DP2,local_asp_only,model.student.drasp_mode=local,90.02659574468085,0.9885716115951446,0.8947761194029851,/media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/shipsear/08_student_drasp_ablation/DP2_local_asp_only
+08_student_drasp_ablation,DP3,drasp_full,model.student.drasp_mode=full,90.69148936170212,0.9826897843313734,0.9257691203581299,/media/hdd1/fubohan/Code/UATR/checkpoints/hyperparameter_analysis/shipsear/08_student_drasp_ablation/DP3_drasp_full

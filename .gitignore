@@ -10,7 +10,8 @@ checkpoints/**/*.bin
 results/
 # 屏蔽特定文件夹
 backup/
-Manuscript/
+Manuscript/literature/  
+# 屏蔽论文相关文件夹
 # checkpoints/
 models/wav2vec2-large-robust-12-ft-emotion-msp-dim/
 
@@ -20,6 +21,9 @@ __pycache__/
 *.log
 !checkpoints/**/*.log
 .ipynb_checkpoints/
+tmp/
+.cache/
+.pytest_cache/
 
 # 屏蔽其他大文件
 *.zip
