@@ -255,13 +255,14 @@ def build_main_figure(rows: list[dict[str, object]]):
         add_method_label(ax, row)
 
     ax.set_xlim(0.0, 9.0)
-    ax.set_ylim(78.0, 96.5)
+    ax.set_ylim(78.0, 95.0)
     ax.set_xticks(range(0, 10, 1))
     ax.set_yticks([80, 83, 86, 89, 92, 95])
     # x 轴 1 个单位与 y 轴 3 个百分点使用相同显示长度。
     ax.set_aspect(1.0 / 3.0, adjustable="box")
     ax.set_xlabel(r"Log parameter efficiency ($1/\log_{10}(1 + \mathrm{M})$)")
     ax.set_ylabel("DeepShip accuracy (%)")
+    ax.set_title("DeepShip", pad=6, fontsize=10, fontweight="bold")
     ax.grid(which="major", color="#D9DEE3", linewidth=0.6, alpha=0.85)
     ax.set_axisbelow(True)
     for spine in ax.spines.values():
@@ -270,7 +271,6 @@ def build_main_figure(rows: list[dict[str, object]]):
         spine.set_linewidth(1.0)
 
     add_input_legend(ax)
-    fig.suptitle("DeepShip", y=0.910, fontsize=10, fontweight="bold")
     fig.subplots_adjust(left=0.13, right=0.985, bottom=0.17, top=0.86)
     return fig
 

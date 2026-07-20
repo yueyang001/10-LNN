@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-19T19:30:28.476401</dc:date>
+    <dc:date>2026-07-20T11:21:50.746686</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -35,7 +35,7 @@ z
   <g id="legend_1">
    <g id="line2d_1">
     <defs>
-     <path id="me5cf93625c" d="M 0 3.1 
+     <path id="maf1528dc77" d="M 0 3.1 
 C 0.82213 3.1 1.610698 2.773364 2.192031 2.192031 
 C 2.773364 1.610698 3.1 0.82213 3.1 0 
 C 3.1 -0.82213 2.773364 -1.610698 2.192031 -2.192031 
@@ -48,7 +48,7 @@ z
 " style="stroke: #000000; stroke-opacity: 0"/>
     </defs>
     <g>
-     <use xlink:href="#me5cf93625c" x="78.358703" y="51.092797" style="fill: #9aa7b4; stroke: #000000; stroke-opacity: 0"/>
+     <use xlink:href="#maf1528dc77" x="78.358703" y="51.092797" style="fill: #9aa7b4; stroke: #000000; stroke-opacity: 0"/>
     </g>
    </g>
    <g id="text_2">
@@ -56,7 +56,7 @@ z
    </g>
    <g id="line2d_2">
     <defs>
-     <path id="m52f0444e76" d="M 0 3.613331 
+     <path id="me0a6c3c614" d="M 0 3.613331 
 C 0.958267 3.613331 1.877414 3.232608 2.555011 2.555011 
 C 3.232608 1.877414 3.613331 0.958267 3.613331 0 
 C 3.613331 -0.958267 3.232608 -1.877414 2.555011 -2.555011 
@@ -69,7 +69,7 @@ z
 " style="stroke: #000000; stroke-opacity: 0"/>
     </defs>
     <g>
-     <use xlink:href="#m52f0444e76" x="127.322234" y="51.092797" style="fill: #9aa7b4; stroke: #000000; stroke-opacity: 0"/>
+     <use xlink:href="#me0a6c3c614" x="127.322234" y="51.092797" style="fill: #9aa7b4; stroke: #000000; stroke-opacity: 0"/>
     </g>
    </g>
    <g id="text_3">
@@ -77,7 +77,7 @@ z
    </g>
    <g id="line2d_3">
     <defs>
-     <path id="m1b7fb18124" d="M 0 10.281537 
+     <path id="mca9ad246d9" d="M 0 10.281537 
 C 2.726695 10.281537 5.34208 9.198209 7.270144 7.270144 
 C 9.198209 5.34208 10.281537 2.726695 10.281537 0 
 C 10.281537 -2.726695 9.198209 -5.34208 7.270144 -7.270144 
@@ -90,7 +90,7 @@ z
 " style="stroke: #000000; stroke-opacity: 0"/>
     </defs>
     <g>
-     <use xlink:href="#m1b7fb18124" x="176.285766" y="51.092797" style="fill: #9aa7b4; stroke: #000000; stroke-opacity: 0"/>
+     <use xlink:href="#mca9ad246d9" x="176.285766" y="51.092797" style="fill: #9aa7b4; stroke: #000000; stroke-opacity: 0"/>
     </g>
    </g>
    <g id="text_4">
